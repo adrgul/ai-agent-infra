@@ -1,0 +1,11 @@
+{
+  "age": 30,
+  "interests": [
+    "shopping"
+  ],
+  "mobility": "high",
+  "clothing_style": "formal",
+  "dietary_preferences": [
+    "low-carb"
+  ]
+}

@@ -1,0 +1,282 @@
+<mxfile host="app.diagrams.net" modified="2025-12-02T00:00:00.000Z" agent="Draw.io" version="24.0.0">
+  <diagram name="Simple Architecture Diagram" id="simple-arch">
+    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- Title -->
+        <mxCell id="title" value="AI Weather Agent - Simple Architecture Overview" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=18;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="300" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- User -->
+        <mxCell id="user" value="" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="100" y="200" width="60" height="100" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="user-label" value="User" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="310" width="100" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Frontend Box -->
+        <mxCell id="frontend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="260" y="180" width="200" height="160" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="frontend-title" value="FRONTEND" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="260" y="190" width="200" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="frontend-tech" value="React + TypeScript" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="260" y="220" width="200" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="frontend-items" value="• City/Date/Language Input&#xa;• Profile Settings&#xa;• Weather Display&#xa;• History List" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="280" y="250" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Backend Box -->
+        <mxCell id="backend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="540" y="180" width="200" height="160" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="backend-title" value="BACKEND" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="540" y="190" width="200" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="backend-tech" value="FastAPI + Python 3.11" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="540" y="220" width="200" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="backend-items" value="• REST API Endpoints&#xa;• Business Logic&#xa;• User Profile Storage&#xa;• Request History" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="560" y="250" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- LangGraph Agent Box -->
+        <mxCell id="agent-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="820" y="180" width="240" height="160" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent-title" value="AI AGENT" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="820" y="190" width="240" height="30" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent-tech" value="LangGraph + LangChain" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="820" y="220" width="240" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="agent-items" value="• State Machine Orchestration&#xa;• Tool Coordination&#xa;• Memory Management (AgentState)&#xa;• Multi-step Workflow" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="840" y="250" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- External APIs Box -->
+        <mxCell id="external-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="260" y="480" width="800" height="200" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="external-title" value="EXTERNAL APIs &amp; SERVICES" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="260" y="490" width="800" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- API 1: Geocoding -->
+        <mxCell id="api1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="300" y="540" width="180" height="110" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api1-icon" value="🌍" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="300" y="545" width="180" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api1-title" value="Nominatim" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="300" y="590" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api1-desc" value="OpenStreetMap&#xa;Geocoding Service" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="300" y="615" width="180" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- API 2: Weather -->
+        <mxCell id="api2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="510" y="540" width="180" height="110" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api2-icon" value="🌤️" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="510" y="545" width="180" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api2-title" value="Open-Meteo" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="510" y="590" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api2-desc" value="Weather Forecast&#xa;API (7-day range)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="510" y="615" width="180" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- API 3: LLM -->
+        <mxCell id="api3" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9673a6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="720" y="540" width="180" height="110" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api3-icon" value="🤖" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=36;" vertex="1" parent="1">
+          <mxGeometry x="720" y="545" width="180" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api3-title" value="OpenAI" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="720" y="590" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="api3-desc" value="GPT-4o-mini&#xa;AI Briefing Generation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="720" y="615" width="180" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Storage Box -->
+        <mxCell id="storage-box" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="930" y="540" width="100" height="110" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="storage-title" value="DATA&#xa;STORAGE" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="930" y="560" width="100" height="40" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="storage-desc" value="JSON Files&#xa;(Profile,&#xa;History)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="930" y="605" width="100" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows and Data Flow -->
+        <!-- User to Frontend -->
+        <mxCell id="arrow1" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="user" target="frontend-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="450" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow1-label" value="HTTP/Browser" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="arrow1">
+          <mxGeometry x="-0.2" y="1" relative="1" as="geometry">
+            <mxPoint x="5" y="-11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Frontend to Backend -->
+        <mxCell id="arrow2" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;fillColor=#ffe6cc;strokeColor=#d79b00;" edge="1" parent="1" source="frontend-box" target="backend-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="450" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow2-label" value="REST API&#xa;(JSON)" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="arrow2">
+          <mxGeometry x="0.1" y="2" relative="1" as="geometry">
+            <mxPoint x="-7" y="-18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Backend to Agent -->
+        <mxCell id="arrow3" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=3;fillColor=#f8cecc;strokeColor=#b85450;" edge="1" parent="1" source="backend-box" target="agent-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="400" y="400" as="sourcePoint" />
+            <mxPoint x="450" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow3-label" value="Function Call" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=1" vertex="1" connectable="0" parent="arrow3">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint y="-11" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Agent to API 1 -->
+        <mxCell id="arrow4" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;fillColor=#e1d5e7;strokeColor=#9673a6;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="agent-box" target="api1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="450" as="sourcePoint" />
+            <mxPoint x="650" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow4-label" value="1️⃣ Geocode" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;fillColor=#ffffff;" vertex="1" connectable="0" parent="arrow4">
+          <mxGeometry x="-0.3" y="2" relative="1" as="geometry">
+            <mxPoint x="-20" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Agent to API 2 -->
+        <mxCell id="arrow5" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;fillColor=#e1d5e7;strokeColor=#9673a6;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="agent-box" target="api2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="450" as="sourcePoint" />
+            <mxPoint x="650" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow5-label" value="2️⃣ Weather" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;fillColor=#ffffff;" vertex="1" connectable="0" parent="arrow5">
+          <mxGeometry x="-0.3" relative="1" as="geometry">
+            <mxPoint y="10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Agent to API 3 -->
+        <mxCell id="arrow6" value="" style="endArrow=classic;html=1;rounded=0;strokeWidth=2;fillColor=#e1d5e7;strokeColor=#9673a6;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="agent-box" target="api3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="450" as="sourcePoint" />
+            <mxPoint x="650" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow6-label" value="3️⃣ Generate" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;fillColor=#ffffff;" vertex="1" connectable="0" parent="arrow6">
+          <mxGeometry x="-0.3" y="1" relative="1" as="geometry">
+            <mxPoint x="20" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Backend to Storage -->
+        <mxCell id="arrow7" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;strokeWidth=2;fillColor=#d5e8d4;strokeColor=#82b366;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="backend-box" target="storage-box">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="450" as="sourcePoint" />
+            <mxPoint x="650" y="400" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        
+        <mxCell id="arrow7-label" value="Read/Write" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontStyle=1;fillColor=#ffffff;" vertex="1" connectable="0" parent="arrow7">
+          <mxGeometry x="-0.2" y="1" relative="1" as="geometry">
+            <mxPoint x="20" y="-10" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;strokeWidth=2;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="720" width="1120" height="60" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend-title" value="KEY FEATURES:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="60" y="730" width="100" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend1" value="✓ Multilingual (15 languages)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="60" y="750" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend2" value="✓ Personalized User Profiles" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="260" y="750" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend3" value="✓ Real-time Weather (7-day)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="460" y="750" width="180" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend4" value="✓ AI-powered Recommendations" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="660" y="750" width="190" height="20" as="geometry" />
+        </mxCell>
+        
+        <mxCell id="legend5" value="✓ Specific Venue Suggestions" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="870" y="750" width="180" height="20" as="geometry" />
+        </mxCell>
+
+        <!-- Flow Note -->
+        <mxCell id="flow-note" value="Data Flow: User Input → Frontend → Backend → AI Agent → External APIs → Response" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="260" y="400" width="800" height="40" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
