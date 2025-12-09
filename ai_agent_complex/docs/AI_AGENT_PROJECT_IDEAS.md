@@ -222,7 +222,7 @@ Egy AI agent, amely:
 {
   "ticket_id": "TKT-2025-12-09-4567",
   "timestamp": "2025-12-09T14:32:00Z",
-
+  
   "triage": {
     "category": "Billing - Invoice Issue",
     "subcategory": "Duplicate Charge",
@@ -232,14 +232,14 @@ Egy AI agent, amely:
     "sentiment": "frustrated",
     "confidence": 0.92
   },
-
+  
   "answer_draft": {
     "greeting": "Dear John,",
     "body": "Thank you for reaching out regarding the duplicate charge on your invoice. I understand this can be frustrating. [KB-1234]\n\nBased on our records, duplicate charges are typically resolved within 3-5 business days through our automated refund process. [FAQ-910]\n\nTo expedite this, I recommend:\n1. Verifying the charge amount ($49.99)\n2. Confirming the transaction date (Dec 5)\n3. Replying with your transaction ID\n\nOur Finance Team will review and process the refund accordingly. [KB-5678]",
     "closing": "Best regards,\nSupport Team",
     "tone": "empathetic_professional"
   },
-
+  
   "citations": [
     {
       "doc_id": "KB-1234",
@@ -263,7 +263,7 @@ Egy AI agent, amely:
       "url": "https://kb.company.com/policies/sla"
     }
   ],
-
+  
   "policy_check": {
     "refund_promise": false,
     "sla_mentioned": true,
@@ -404,12 +404,12 @@ async def route_domain(query: str) -> str:
     - legal (contracts, compliance, policies)
     - marketing (brand, campaigns, content)
     - general (other)
-
+    
     Query: {query}
-
+    
     Return ONLY the domain name.
     """
-
+    
     response = await llm.ainvoke(prompt)
     return response.content.strip().lower()
 ```
@@ -420,7 +420,7 @@ async def route_domain(query: str) -> str:
 ```python
 async def hr_workflow_node(state: AgentState) -> AgentState:
     """HR-specifikus workflow végrehajtás."""
-
+    
     if "szabadság" in state["query"].lower():
         # Generate HR request JSON
         hr_request = {
@@ -430,17 +430,17 @@ async def hr_workflow_node(state: AgentState) -> AgentState:
             "end_date": extract_date(state["query"], "end"),
             "status": "pending_approval"
         }
-
+        
         # Save to file
         filename = f"hr_request_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         save_json(hr_request, filename)
-
+        
         state["workflow_output"] = {
             "action": "hr_request_created",
             "file": filename,
             "next_step": "Manager approval required"
         }
-
+    
     return state
 ```
 
@@ -448,7 +448,7 @@ async def hr_workflow_node(state: AgentState) -> AgentState:
 ```python
 async def it_workflow_node(state: AgentState) -> AgentState:
     """IT-specifikus workflow végrehajtás."""
-
+    
     if "nem működik" in state["query"].lower():
         # Create Jira ticket draft
         ticket = {
@@ -459,13 +459,13 @@ async def it_workflow_node(state: AgentState) -> AgentState:
             "priority": determine_priority(state["query"]),
             "assignee": "it-team"
         }
-
+        
         state["workflow_output"] = {
             "action": "it_ticket_draft",
             "ticket": ticket,
             "next_step": "Review and submit to Jira"
         }
-
+    
     return state
 ```
 
@@ -527,7 +527,7 @@ async def it_workflow_node(state: AgentState) -> AgentState:
 5. Output:
    {
      "domain": "hr",
-     "answer": "Szabadságkérelmed rögzítésre került október 3-4 időszakra.
+     "answer": "Szabadságkérelmed rögzítésre került október 3-4 időszakra. 
                 A policy szerint minimum 2 héttel előre kell jelezni. [HR-POL-001]
                 Kérlek, add meg a vezetőd jóváhagyását.",
      "citations": [
@@ -556,11 +556,11 @@ async def it_workflow_node(state: AgentState) -> AgentState:
 4. Output:
    {
      "domain": "marketing",
-     "answer": "A legfrissebb brand guideline a v3.2 verzió,
+     "answer": "A legfrissebb brand guideline a v3.2 verzió, 
                 amely 2025 decemberében lett frissítve. [BRAND-v3.2]
                 Link: https://drive.google.com/marketing/brand-v3.2.pdf",
      "citations": [
-       {"doc_id": "BRAND-v3.2", "title": "Brand Guidelines v3.2", "score": 0.97,
+       {"doc_id": "BRAND-v3.2", "title": "Brand Guidelines v3.2", "score": 0.97, 
         "url": "https://drive.google.com/marketing/brand-v3.2.pdf"}
      ],
      "workflow": null
@@ -587,7 +587,7 @@ async def it_workflow_node(state: AgentState) -> AgentState:
                 1. Ellenőrizd, hogy az IT VPN kliens fut-e
                 2. Próbáld újraindítani a VPN szolgáltatást
                 3. Ellenőrizd a hálózati kapcsolatot
-
+                
                 Ha ezek nem segítenek, IT ticket került létrehozásra. [IT-TKT-DRAFT]",
      "citations": [
        {"doc_id": "IT-KB-234", "title": "VPN Troubleshooting Guide", "score": 0.91},
@@ -713,22 +713,22 @@ class ProjectState(TypedDict, total=False):
 
 def build_workflow() -> StateGraph:
     workflow = StateGraph(ProjectState)
-
+    
     # Közös node-ok
     workflow.add_node("intent_detection", intent_detection_node)
     workflow.add_node("retrieval", retrieval_node)
     workflow.add_node("generation", generation_node)
     workflow.add_node("validation", validation_node)
-
+    
     # Entry
     workflow.set_entry_point("intent_detection")
-
+    
     # Edges
     workflow.add_edge("intent_detection", "retrieval")
     workflow.add_edge("retrieval", "generation")
     workflow.add_edge("generation", "validation")
     workflow.add_edge("validation", END)
-
+    
     return workflow.compile()
 ```
 
@@ -789,7 +789,7 @@ services:
       - PINECONE_API_KEY=${PINECONE_API_KEY}
     volumes:
       - ./data:/app/data
-
+  
   frontend:
     build: ./frontend
     ports:
