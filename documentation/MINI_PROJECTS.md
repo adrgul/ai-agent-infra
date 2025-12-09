@@ -24,8 +24,8 @@ Egy AI agent, ami meeting jegyzetből vagy transcript-ből automatikusan:
 - ✅ **Összefoglalót készít** (executive summary)
 - ✅ **Akciópontokat gyűjt ki** (to-do lista tulajdonosokkal)
 - ✅ **Elmenti** JSON formátumban vagy Jira API-n keresztül
-- ✅ **Foglal** Időpontot foglal calendar-ban API-n keresztül
-- ✅ **Email-t küld** Email-t küld a megfelelő személynek a szükséges kéréssel, információval
+- ✅ **Időpontot foglal** calendar-ban API-n keresztül
+- ✅ **Email-t küld** a megfelelő személynek a szükséges kéréssel, információval
 
 ### Előnyök
 
