@@ -1,0 +1,13 @@
+{
+  "name": "knowledgerouter-frontend",
+  "version": "1.0.0",
+  "description": "KnowledgeRouter frontend with Tailwind CSS",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i ./input.css -o ./static/style.css",
+    "dev": "tailwindcss -i ./input.css -o ./static/style.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0"
+  }
+}

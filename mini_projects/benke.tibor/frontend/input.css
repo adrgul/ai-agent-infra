@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .chat-message {
+    @apply px-4 py-3 rounded-lg max-w-2xl;
+  }
+  
+  .user-message {
+    @apply bg-accent text-white ml-auto;
+  }
+  
+  .bot-message {
+    @apply bg-gray-700 text-white mr-auto;
+  }
+  
+  .btn-primary {
+    @apply bg-accent hover:bg-accent/80 text-white font-semibold py-2 px-4 rounded-lg transition;
+  }
+}

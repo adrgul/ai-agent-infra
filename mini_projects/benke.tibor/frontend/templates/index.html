@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hu" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KnowledgeRouter - AI tudásággút és workflow-automata</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <h1>🤖 KnowledgeRouter</h1>
+            <p>Vállalati Tudásirányító & Workflow-Automata</p>
+        </div>
+        
+        <!-- Chat Messages -->
+        <div class="chat-messages" id="chatMessages">
+            <div class="empty-state">
+                <h2>🤖 Üdvözöljük a KnowledgeRouter-ben!</h2>
+                <p>Kérdezz meg bármit az alábbi doménekről. Az AI agent intelligensen felismeri és irányítja a kérdéseket.</p>
+                
+                <div class="example-questions">
+                    <button class="example-btn" onclick="askQuestion('Szeretnék szabadságot igényelni október 3-4-re.')">HR: Szabadság igénylés</button>
+                    <button class="example-btn" onclick="askQuestion('Nem működik a VPN-em, hogyan lehet megoldani?')">IT: VPN probléma</button>
+                    <button class="example-btn" onclick="askQuestion('Mi a cégünk brand guideline-ja?')">Marketing: Brand guide</button>
+                    <button class="example-btn" onclick="askQuestion('Mennyi pénz maradt a költségvetésből?')">Finance: Költségvetés</button>
+                    <button class="example-btn" onclick="askQuestion('Mit kell tudni az alkalmazotti szerződésről?')">Legal: Szerződés</button>
+                    <button class="example-btn" onclick="askQuestion('Milyen általános információk érdekelnek?')">General: Egyéb kérdés</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Input Area -->
+        <div class="chat-input-area">
+            <form class="input-form" id="queryForm">
+                <div class="input-group">
+                    <input type="text" id="userIdInput" placeholder="User ID" class="small-input" value="demo_user">
+                    <input type="text" id="sessionIdInput" placeholder="Session ID" class="small-input" value="demo_session">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="queryInput" placeholder="Írd be a kérdésed..." required>
+                    <button type="submit" id="sendBtn">Küldés</button>
+                    <button type="button" id="resetBtn" title="Új beszélgetés">🔄</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Debug Info Panel -->
+    <div class="debug-info-panel" id="debugPanel">
+        <h4>🐛 Debug Info</h4>
+        <p><span class="debug-label">Session:</span> <span id="debugSession">-</span></p>
+        <p><span class="debug-label">Domain:</span> <span id="debugDomain">-</span></p>
+        <p><span class="debug-label">Citations:</span> <span id="debugCitations">0</span></p>
+        <p><span class="debug-label">Workflow:</span> <span id="debugWorkflow">-</span></p>
+        <p><span class="debug-label">Next:</span> <span id="debugNextStep">-</span></p>
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>

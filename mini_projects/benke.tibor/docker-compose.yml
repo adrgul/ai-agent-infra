@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: knowledgerouter_backend
+    ports:
+      - "8001:8000"
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=dev-secret-key-change-in-production
+      - ALLOWED_HOSTS=localhost,127.0.0.1,backend
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=gpt-4o-mini
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - DJANGO_SETTINGS_MODULE=core.settings
+    volumes:
+      - ./backend/data:/app/data
+    depends_on:
+      - qdrant
+    networks:
+      - knowledge_network
+    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000 --reload
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: knowledgerouter_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8001
+    depends_on:
+      - backend
+    networks:
+      - knowledge_network
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: knowledgerouter_qdrant
+    ports:
+      - "6334:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - knowledge_network
+
+volumes:
+  qdrant_data:
+
+networks:
+  knowledge_network:
+    driver: bridge

@@ -1,0 +1,571 @@
+{
+  "session_id": "demo_session",
+  "messages": [
+    {
+      "role": "user",
+      "content": "hello",
+      "timestamp": "2025-12-10T10:41:04.697004",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Hello! How can I assist you today? If you have any specific questions or need information about HR, IT, Finance, Legal, or Marketing, feel free to ask!",
+      "timestamp": "2025-12-10T10:41:07.325097",
+      "metadata": {
+        "domain": "general",
+        "citations": []
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T10:43:39.707556",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9vel kapcsolatban a [HR-POL-001] Szabads\u00e1g Politika dokumentumban tal\u00e1lhat\u00f3ak a r\u00e9szletek. K\u00e9rlek, n\u00e9zd \u00e1t ezt a dokumentumot, hogy megtudd, milyen l\u00e9p\u00e9seket kell k\u00f6vetned a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez, \u00e9s hogy van-e sz\u00fcks\u00e9g esetlegesen el\u0151zetes j\u00f3v\u00e1hagy\u00e1sra.\n\nHa tov\u00e1bbi k\u00e9rd\u00e9seid lenn\u00e9nek a szabads\u00e1g ig\u00e9nyl\u00e9s folyamat\u00e1r\u00f3l, k\u00e9rlek jelezd!",
+      "timestamp": "2025-12-10T10:43:44.466236",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T10:45:30.458531",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9vel kapcsolatban a [HR-POL-001] Szabads\u00e1g Politika dokumentumban tal\u00e1lhat\u00f3 inform\u00e1ci\u00f3k a k\u00f6vetkez\u0151k lehetnek: \n\n1. A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9t el\u0151re kell jelezni, lehet\u0151leg legal\u00e1bb [X] h\u00e9ttel a k\u00edv\u00e1nt id\u0151pont el\u0151tt. \n2. Ellen\u0151rizd, hogy van-e elegend\u0151 szabads\u00e1gkereted a k\u00e9rt id\u0151szakra.\n3. A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9t \u00e1ltal\u00e1ban \u00edr\u00e1sban kell beny\u00fajtani a felettesednek.\n\nK\u00e9rlek, n\u00e9zd meg a dokumentumot, hogy megtudd a pontos elj\u00e1r\u00e1st \u00e9s a hat\u00e1rid\u0151ket. Ha tov\u00e1bbi k\u00e9rd\u00e9sed van, sz\u00edvesen seg\u00edtek!",
+      "timestamp": "2025-12-10T10:45:38.257751",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T10:48:03.548378",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A \"HR-POL-001\" Szabads\u00e1gpolitik\u00e1nkban tal\u00e1lhat\u00f3 inform\u00e1ci\u00f3k szerint a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez el\u0151sz\u00f6r is sz\u00fcks\u00e9ges \u00e9rtes\u00edtened a k\u00f6zvetlen felettesedet. K\u00e9rlek, ellen\u0151rizd a szabads\u00e1gokkal kapcsolatos el\u0151\u00edr\u00e1sokat \u00e9s a k\u00e9relem beny\u00fajt\u00e1s\u00e1nak m\u00f3dj\u00e1t a dokumentumban. \n\nHa tov\u00e1bbi k\u00e9rd\u00e9seid vannak, vagy seg\u00edts\u00e9gre van sz\u00fcks\u00e9ged a folyamat sor\u00e1n, nyugodtan fordulj hozz\u00e1m!",
+      "timestamp": "2025-12-10T10:48:06.195799",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T11:04:04.494108",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T12:53:19.241494",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T12:53:56.453385",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T13:00:48.761878",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T15:10:21.453591",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T15:11:29.223929",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T15:20:46.941729",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez k\u00e9rlek, n\u00e9zd meg a [HR-POL-001] Szabads\u00e1g Szab\u00e1lyzatot, amely r\u00e9szletes inform\u00e1ci\u00f3kat tartalmaz a szabads\u00e1g ig\u00e9nyl\u00e9s folyamat\u00e1r\u00f3l \u00e9s a sz\u00fcks\u00e9ges l\u00e9p\u00e9sekr\u0151l. Amennyiben k\u00e9rd\u00e9sed van a szabads\u00e1g t\u00edpus\u00e1val vagy a folyamat r\u00e9szleteivel kapcsolatban, sz\u00edvesen seg\u00edtek!",
+      "timestamp": "2025-12-10T15:20:52.073437",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T15:24:13.148618",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez a [HR-POL-001] Szabads\u00e1g Szab\u00e1lyzat tartalmazhat inform\u00e1ci\u00f3t a folyamatokr\u00f3l \u00e9s k\u00f6vetelm\u00e9nyekr\u0151l. K\u00e9rlek, n\u00e9zd meg a szab\u00e1lyzatot, hogy megtudd, hogyan kell hivatalosan beny\u00fajtani a szabads\u00e1gk\u00e9relmet, \u00e9s hogy sz\u00fcks\u00e9g van-e esetleg el\u0151zetes j\u00f3v\u00e1hagy\u00e1sra.\n\nHa tov\u00e1bbi k\u00e9rd\u00e9seid vannak, sz\u00edvesen seg\u00edtek!",
+      "timestamp": "2025-12-10T15:24:21.447974",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re",
+      "timestamp": "2025-12-10T15:24:41.652279",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A k\u00e9rd\u00e9sed alapj\u00e1n szeretn\u00e9l szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re. A relev\u00e1ns inform\u00e1ci\u00f3kat a \"HR-POL-001\" Szabads\u00e1g Szab\u00e1lyzatban tal\u00e1lhatod meg. K\u00e9rlek, n\u00e9zd meg ezt a dokumentumot, hogy megtudd, milyen folyamaton kell v\u00e9gigmenned a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez, \u00e9s van-e sz\u00fcks\u00e9g esetleg el\u0151zetes j\u00f3v\u00e1hagy\u00e1sra. Ha b\u00e1rmilyen tov\u00e1bbi k\u00e9rd\u00e9sed van, sz\u00edvesen seg\u00edtek!",
+      "timestamp": "2025-12-10T15:24:47.460761",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T15:35:21.274643",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A k\u00e9rd\u00e9sed alapj\u00e1n szeretn\u00e9l szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re. A \"HR-POL-001\" Szabads\u00e1g Szab\u00e1lyzatban tal\u00e1lhat\u00f3 inform\u00e1ci\u00f3k seg\u00edthetnek a szabads\u00e1g ig\u00e9nyl\u00e9s folyamat\u00e1ban. Javaslom, hogy ellen\u0151rizd a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9nek menet\u00e9t \u00e9s a sz\u00fcks\u00e9ges l\u00e9p\u00e9seket a szab\u00e1lyzatban.\n\nHa b\u00e1rmilyen tov\u00e1bbi k\u00e9rd\u00e9sed van a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9vel kapcsolatban, vagy ha sz\u00fcks\u00e9ged van seg\u00edts\u00e9gre a folyamatban, k\u00e9rlek jelezd!",
+      "timestamp": "2025-12-10T15:35:25.747846",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "hol a szab\u00e1lyzat?",
+      "timestamp": "2025-12-10T15:36:07.559187",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Sajn\u00e1lom, de a rendelkez\u00e9sre \u00e1ll\u00f3 dokumentumok nem tartalmaznak inform\u00e1ci\u00f3t a szab\u00e1lyzatr\u00f3l. Javaslom, hogy ellen\u0151rizze a v\u00e1llalat intranet oldal\u00e1t, vagy l\u00e9pjen kapcsolatba a HR oszt\u00e1llyal a pontos inform\u00e1ci\u00f3k\u00e9rt.",
+      "timestamp": "2025-12-10T15:36:11.064495",
+      "metadata": {
+        "domain": "legal",
+        "citations": []
+      }
+    },
+    {
+      "role": "user",
+      "content": "Nem m\u0171k\u00f6dik a VPN-em, hogyan lehet megoldani?",
+      "timestamp": "2025-12-10T15:41:22.452657",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Sajn\u00e1lom, de az \u00e1ltalam el\u00e9rhet\u0151 dokumentumok k\u00f6z\u00f6tt nem tal\u00e1lhat\u00f3 konkr\u00e9t inform\u00e1ci\u00f3 a VPN probl\u00e9m\u00e1k megold\u00e1s\u00e1r\u00f3l. Javaslom, hogy tekintse \u00e1t a [IT-KB-234] VPN Hibaelh\u00e1r\u00edt\u00f3 \u00datmutat\u00f3t, amely val\u00f3sz\u00edn\u0171leg tartalmaz hasznos l\u00e9p\u00e9seket a VPN m\u0171k\u00f6d\u00e9s\u00e9nek helyre\u00e1ll\u00edt\u00e1s\u00e1hoz. Ha tov\u00e1bbi seg\u00edts\u00e9gre van sz\u00fcks\u00e9ge, k\u00e9rj\u00fck, l\u00e9pjen kapcsolatba az IT csapatunkkal.",
+      "timestamp": "2025-12-10T15:41:26.811243",
+      "metadata": {
+        "domain": "it",
+        "citations": [
+          {
+            "doc_id": "IT-KB-234",
+            "title": "VPN Troubleshooting Guide",
+            "score": 0.91,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T15:45:10.010588",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez sz\u00fcks\u00e9ges inform\u00e1ci\u00f3kat a [HR-POL-001] Szabads\u00e1g Szab\u00e1lyzat tartalmazza. K\u00e9rlek, n\u00e9zd meg ezt a dokumentumot, hogy megtudd, milyen l\u00e9p\u00e9seket kell k\u00f6vetned a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez, valamint hogy sz\u00fcks\u00e9ges-e el\u0151zetes enged\u00e9lyt k\u00e9rni. Ha tov\u00e1bbi inform\u00e1ci\u00f3ra van sz\u00fcks\u00e9ged, sz\u00edvesen seg\u00edtek!",
+      "timestamp": "2025-12-10T15:45:15.901412",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T15:51:54.883478",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez a [HR-POL-001] Szabads\u00e1g Politika dokumentum tartalmazhat hasznos inform\u00e1ci\u00f3kat a szabads\u00e1g k\u00e9r\u00e9se \u00e9s j\u00f3v\u00e1hagy\u00e1s\u00e1nak folyamat\u00e1r\u00f3l. K\u00e9rlek, n\u00e9zd \u00e1t ezt a dokumentumot, hogy megtudd, milyen l\u00e9p\u00e9seket kell k\u00f6vetned a szabads\u00e1god ig\u00e9nyl\u00e9s\u00e9hez.\n\nHa tov\u00e1bbi k\u00e9rd\u00e9seid lenn\u00e9nek a folyamat sor\u00e1n, nyugodtan keresd meg az HR oszt\u00e1lyt!",
+      "timestamp": "2025-12-10T15:51:58.330464",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Mi a c\u00e9g\u00fcnk brand guideline-ja?",
+      "timestamp": "2025-12-10T15:55:14.757373",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Sajn\u00e1lom, de a megadott dokumentumokban nem tal\u00e1lhat\u00f3 inform\u00e1ci\u00f3 a c\u00e9g brand guideline-j\u00e1r\u00f3l. K\u00e9rlek, n\u00e9zd meg a [BRAND-v3.2] Brand Guidelines v3.2 dokumentumot, amely tartalmazhatja a sz\u00fcks\u00e9ges ir\u00e1nyelveket.",
+      "timestamp": "2025-12-10T15:55:19.616726",
+      "metadata": {
+        "domain": "marketing",
+        "citations": [
+          {
+            "doc_id": "BRAND-v3.2",
+            "title": "Brand Guidelines v3.2",
+            "score": 0.97,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T15:59:54.571622",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A \"HR-POL-001\" Szabads\u00e1g Szab\u00e1lyzat dokumentum alapj\u00e1n a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9nek folyamata a k\u00f6vetkez\u0151k\u00e9ppen zajlik:\n\n1. K\u00e9rlek, t\u00e1j\u00e9koztass a szabads\u00e1g ig\u00e9nyl\u00e9sed id\u0151pontj\u00e1r\u00f3l \u00e9s id\u0151tartam\u00e1r\u00f3l.\n2. Az ig\u00e9nyl\u00e9shez sz\u00fcks\u00e9ges kit\u00f6lteni egy szabads\u00e1gig\u00e9nyl\u0151 \u0171rlapot, amelyet a HR oszt\u00e1lyon kereszt\u00fcl be kell ny\u00fajtani.\n3. A szabads\u00e1got legk\u00e9s\u0151bb a tervezett id\u0151pont el\u0151tt egy h\u00e9ttel kell ig\u00e9nyelni.\n\nMivel okt\u00f3ber 3-4-re szeretn\u00e9l szabads\u00e1got ig\u00e9nyelni, javaslom, hogy min\u00e9l hamarabb ny\u00fajtsd be az ig\u00e9nyl\u00e9sedet, ha m\u00e9g nem tetted meg. \n\nHa tov\u00e1bbi k\u00e9rd\u00e9seid lenn\u00e9nek, k\u00e9rlek, jelezd!",
+      "timestamp": "2025-12-10T16:00:01.560800",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T16:03:03.156792",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez a [HR-POL-001] Szabads\u00e1g Szab\u00e1lyzat tartalmazhat inform\u00e1ci\u00f3kat a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9nek folyamat\u00e1r\u00f3l \u00e9s felt\u00e9teleir\u0151l. K\u00e9rlek, n\u00e9zd meg ezt a dokumentumot, hogy megtudd, milyen l\u00e9p\u00e9seket kell k\u00f6vetned a szabads\u00e1god ig\u00e9nyl\u00e9s\u00e9hez.\n\nHa tov\u00e1bbi k\u00e9rd\u00e9seid lenn\u00e9nek a szabads\u00e1ggal vagy a folyamat r\u00e9szleteivel kapcsolatban, sz\u00edvesen seg\u00edtek!",
+      "timestamp": "2025-12-10T16:03:08.055079",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T16:19:23.602409",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez k\u00e9rlek, hogy n\u00e9zd meg a \"Vacation Policy\" (HR-POL-001) dokumentumot, amely tartalmazza a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9nek folyamat\u00e1t \u00e9s a sz\u00fcks\u00e9ges l\u00e9p\u00e9seket. Ha tov\u00e1bbi k\u00e9rd\u00e9seid vannak a szabads\u00e1goddal vagy a juttat\u00e1sokkal kapcsolatban, k\u00e9rlek, tudasd velem!",
+      "timestamp": "2025-12-10T16:19:29.737174",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T16:34:07.031327",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-10T17:25:57.877293",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9vel kapcsolatban a \"HR-POL-001\" Szabads\u00e1g Szab\u00e1lyzatot \u00e9rdemes \u00e1tn\u00e9zni. Az ott tal\u00e1lhat\u00f3 inform\u00e1ci\u00f3k alapj\u00e1n t\u00e1j\u00e9koz\u00f3dhatsz a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9nek menet\u00e9r\u0151l, a sz\u00fcks\u00e9ges el\u0151zetes bejelent\u00e9sekr\u0151l \u00e9s a j\u00f3v\u00e1hagy\u00e1si folyamatokr\u00f3l.\n\nHa tov\u00e1bbi r\u00e9szletekre van sz\u00fcks\u00e9ged, javaslom, hogy n\u00e9zd \u00e1t ezt a dokumentumot, vagy l\u00e9pj kapcsolatba a HR oszt\u00e1llyal a pontos elj\u00e1r\u00e1sr\u00f3l.",
+      "timestamp": "2025-12-10T17:26:04.062085",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-11T18:33:04.688108",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9vel kapcsolatban a [HR-POL-001] Szabads\u00e1g Politika dokumentumban tal\u00e1lhat\u00f3k a megfelel\u0151 ir\u00e1nyelvek \u00e9s elj\u00e1r\u00e1sok. K\u00e9rlek, n\u00e9zd meg ezt a dokumentumot, hogy megtudd, hogyan kell beny\u00fajtani a szabads\u00e1gig\u00e9nyedet. Ha tov\u00e1bbi k\u00e9rd\u00e9seid vannak, sz\u00edvesen seg\u00edtek!",
+      "timestamp": "2025-12-11T18:33:09.237568",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-11T20:02:43.101992",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9vel kapcsolatban a [HR-POL-001] Szabads\u00e1g Szab\u00e1lyzat tartalmazhat hasznos inform\u00e1ci\u00f3kat. K\u00e9rlek, n\u00e9zd meg a szab\u00e1lyzatot, hogy megtudd, hogyan kell beny\u00fajtani a szabads\u00e1gk\u00e9relmet, \u00e9s hogy van-e sz\u00fcks\u00e9g tov\u00e1bbi j\u00f3v\u00e1hagy\u00e1sokra.\n\nHa b\u00e1rmilyen k\u00e9rd\u00e9sed van a folyamat sor\u00e1n, nyugodtan fordulj hozz\u00e1m!",
+      "timestamp": "2025-12-11T20:02:52.302636",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Szeretn\u00e9k szabads\u00e1got ig\u00e9nyelni okt\u00f3ber 3-4-re.",
+      "timestamp": "2025-12-11T20:06:40.205500",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9hez k\u00e9rlek, hogy n\u00e9zd meg a [HR-POL-001] Szabads\u00e1g Szab\u00e1lyzatot, amely tartalmazza a szabads\u00e1g ig\u00e9nyl\u00e9s\u00e9nek folyamat\u00e1t \u00e9s a sz\u00fcks\u00e9ges l\u00e9p\u00e9seket. Ha tov\u00e1bbi k\u00e9rd\u00e9seid lenn\u00e9nek, vagy seg\u00edts\u00e9gre van sz\u00fcks\u00e9ged a folyamattal kapcsolatban, b\u00e1tran keress meg!",
+      "timestamp": "2025-12-11T20:06:43.860087",
+      "metadata": {
+        "domain": "hr",
+        "citations": [
+          {
+            "doc_id": "HR-POL-001",
+            "title": "Vacation Policy",
+            "score": 0.94,
+            "url": null
+          },
+          {
+            "doc_id": "HR-POL-002",
+            "title": "Benefits Package",
+            "score": 0.88,
+            "url": null
+          }
+        ]
+      }
+    }
+  ],
+  "created_at": "2025-12-10T10:41:04.697762",
+  "updated_at": "2025-12-11T20:06:43.864628"
+}
