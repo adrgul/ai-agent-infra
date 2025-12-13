@@ -1,0 +1,74 @@
+# LLM Configuration
+llm:
+  provider: "openai"  # Options: "openai", "anthropic"
+  model: "gpt-4-turbo-preview"
+  api_key: "${OPENAI_API_KEY}"
+  temperature: 0.3
+  max_tokens: 2000
+  timeout: 30
+
+# Alternative LLM (fallback)
+llm_fallback:
+  provider: "anthropic"
+  model: "claude-3-sonnet-20240229"
+  api_key: "${ANTHROPIC_API_KEY}"
+
+# Input Processing
+input:
+  supported_formats: ["txt", "md", "docx", "srt"]
+  max_file_size_mb: 10
+  default_language: "en"
+  chunk_size: 1000
+  chunk_overlap: 200
+
+# Output Configuration
+output:
+  formats: ["json", "markdown"]
+  save_path: "./data/outputs/"
+  timestamp_format: "%Y%m%d_%H%M%S"
+  pretty_json: true
+
+# Jira Integration
+integrations:
+  jira:
+    enabled: false
+    url: "https://your-domain.atlassian.net"
+    api_token: "${JIRA_API_TOKEN}"
+    user_email: "${JIRA_USER_EMAIL}"
+    project_key: "MEET"
+    issue_type: "Task"
+    default_priority: "Medium"
+
+  # Calendar Integration
+  calendar:
+    enabled: false
+    provider: "google"  # Options: "google", "outlook"
+    credentials_path: "./credentials.json"
+    default_duration_minutes: 30
+    default_reminder_minutes: 15
+
+  # Email Integration
+  email:
+    enabled: false
+    provider: "smtp"  # Options: "smtp", "sendgrid"
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    use_tls: true
+    sender_email: "${EMAIL_ADDRESS}"
+    sender_password: "${EMAIL_PASSWORD}"
+    sender_name: "MeetingAI Bot"
+
+  # Slack Integration
+  slack:
+    enabled: false
+    webhook_url: "${SLACK_WEBHOOK_URL}"
+    default_channel: "#meetings"
+    mention_assignees: true
+
+# Logging
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR
+  file: "./logs/meetingai.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
