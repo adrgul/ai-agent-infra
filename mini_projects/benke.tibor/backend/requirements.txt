@@ -23,6 +23,10 @@ google-api-python-client==2.111.0
 google-auth-httplib2==0.2.0
 google-auth-oauthlib==1.2.0
 
+# Document parsing
+PyPDF2==3.0.1
+python-docx==1.1.0
+
 # Async
 aiofiles==23.2.1
 

@@ -2,12 +2,10 @@
 API views - REST endpoints.
 """
 import logging
-import asyncio
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.request import Request
-from asgiref.sync import sync_to_async
 
 from domain.models import QueryRequest
 
@@ -190,6 +188,81 @@ class GoogleDriveFilesAPIView(APIView):
             )
         except Exception as e:
             logger.error(f"Google Drive API error: {e}", exc_info=True)
+            return Response(
+                {"success": False, "error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class GoogleDriveFileContentAPIView(APIView):
+    """
+    GET /api/google-drive/files/{file_id}/content - Download and parse file content.
+    Returns extracted text from PDF or DOCX files.
+    """
+
+    def get(self, request: Request, file_id: str) -> Response:
+        """Download and parse file content."""
+        try:
+            from infrastructure.google_drive_client import get_drive_client
+            from infrastructure.document_parser import DocumentParser
+            
+            # Get Google Drive client
+            drive_client = get_drive_client()
+            
+            # Authenticate if not already authenticated
+            if not drive_client.service:
+                drive_client.authenticate()
+            
+            # Get file metadata first
+            file_metadata = drive_client.get_file_metadata(file_id)
+            file_name = file_metadata.get('name', 'unknown')
+            mime_type = file_metadata.get('mimeType', '')
+            
+            # Download file content
+            logger.info(f"Downloading file: {file_name} ({mime_type})")
+            content = drive_client.download_file_content(file_id)
+            
+            # Parse content based on MIME type
+            try:
+                text = DocumentParser.parse_document(content, mime_type)
+                metadata = DocumentParser.get_document_metadata(text)
+                
+                return Response(
+                    {
+                        "success": True,
+                        "file_id": file_id,
+                        "file_name": file_name,
+                        "mime_type": mime_type,
+                        "text": text,
+                        "metadata": metadata
+                    },
+                    status=status.HTTP_200_OK
+                )
+            
+            except ValueError as parse_error:
+                # Unsupported file type
+                logger.warning(f"Unsupported file type: {mime_type}")
+                return Response(
+                    {
+                        "success": False,
+                        "error": str(parse_error),
+                        "file_name": file_name,
+                        "mime_type": mime_type
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+        except FileNotFoundError as e:
+            logger.error(f"Google Drive credentials error: {e}")
+            return Response(
+                {
+                    "success": False,
+                    "error": "Google Drive credentials not found. Please add client_secret.json to backend/credentials/"
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
+            logger.error(f"Google Drive file content error: {e}", exc_info=True)
             return Response(
                 {"success": False, "error": str(e)},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
