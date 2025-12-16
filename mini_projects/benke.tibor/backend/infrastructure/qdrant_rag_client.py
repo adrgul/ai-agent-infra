@@ -96,10 +96,15 @@ class QdrantRAGClient(IRAGClient):
             citations = []
             for point in search_results:
                 payload = point.payload
+                # Map payload fields (source_file_id/name from sync script)
+                file_id = payload.get("source_file_id") or payload.get("file_id", "UNKNOWN")
+                file_name = payload.get("source_file_name") or payload.get("file_name", "Unknown Document")
+                chunk_index = payload.get("chunk_index", 0)
+                
                 citations.append(
                     Citation(
-                        doc_id=payload.get("file_id", "UNKNOWN"),
-                        title=payload.get("file_name", "Unknown Document"),
+                        doc_id=f"{file_id}#chunk{chunk_index}",
+                        title=file_name,
                         score=float(point.score),
                         url=None,
                         content=payload.get("text", "")  # Include chunk text for generation

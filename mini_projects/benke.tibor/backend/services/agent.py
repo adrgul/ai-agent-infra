@@ -60,19 +60,38 @@ class QueryAgent:
         """Detect which domain this query belongs to."""
         logger.info("Intent detection node executing")
 
+        # Simple keyword-based pre-classification for better accuracy
+        query_lower = state['query'].lower()
+        
+        # Explicit marketing keywords (expanded with variations)
+        marketing_keywords = [
+            'brand', 'logo', 'color', 'font', 'typography', 'design', 'layout', 
+            'arculat', 'guideline', 'betűtípus', 'betutipus', 'sorhossz', 'színek', 
+            'szinek', 'márka', 'marka', 'spacing', 'térköz', 'terkoz', 'elrendezés', 
+            'elrendezes', 'margin', 'tipográfia', 'tipografia', 'visual', 'vizuális',
+            'vizualis', 'ikonográfia', 'ikonografia'
+        ]
+        if any(kw in query_lower for kw in marketing_keywords):
+            domain = DomainType.MARKETING.value
+            state["domain"] = domain
+            state["messages"] = [HumanMessage(content=state["query"])]
+            logger.info(f"Detected domain (keyword match): {domain}")
+            return state
+        
+        # Otherwise use LLM
         prompt = f"""
-Classify the following query into ONE domain:
-- hr (human resources, vacation, benefits, hiring)
-- it (tech support, VPN, access, software)
-- finance (invoices, expenses, budgets, payments)
-- legal (contracts, compliance, policies)
-- marketing (brand, campaigns, content)
-- general (other queries)
+Classify this query into ONE category:
+
+marketing = brand, logo, visual-design, arculat, guideline
+hr = vacation, employee, szabadság
+it = VPN, computer, software
+finance = invoice, expense, számla
+legal = contract, szerződés
+general = other
 
 Query: "{state['query']}"
 
-Respond with ONLY the domain name (lowercase).
-"""
+Category:"""
         response = await self.llm.ainvoke([HumanMessage(content=prompt)])
         domain = response.content.strip().lower()
 
@@ -110,25 +129,30 @@ Respond with ONLY the domain name (lowercase).
 
         # Build context from citations with content
         context_parts = []
-        for c in state["citations"]:
-            # If chunk content is available, use it; otherwise just show title
+        for i, c in enumerate(state["citations"], 1):
+            # If chunk content is available, use it
             if c.get("content"):
-                context_parts.append(f"[{c['doc_id']}] {c['title']}\n{c['content'][:500]}...")
+                # Use full content for top 3 results, truncate rest to avoid timeout
+                if i <= 3:
+                    context_parts.append(f"[Document {i}: {c['title']}]\n{c['content']}")
+                else:
+                    context_parts.append(f"[Document {i}: {c['title']}]\n{c['content'][:300]}...")
             else:
-                context_parts.append(f"[{c['doc_id']}] {c['title']}")
+                context_parts.append(f"[Document {i}: {c['title']}]")
         
         context = "\n\n".join(context_parts)
 
         prompt = f"""
 You are a helpful HR/IT/Finance/Legal/Marketing assistant.
 
-Retrieved documents:
+Retrieved documents (use ALL relevant information):
 {context}
 
 User query: "{state['query']}"
 
-Provide a helpful answer based on the retrieved documents.
-If the documents don't contain relevant information, say so clearly.
+Provide a comprehensive answer based on the retrieved documents above.
+Combine information from multiple sources when they relate to the same topic.
+If asking about guidelines or rules, include ALL relevant details found in the documents.
 Answer in Hungarian if the query is in Hungarian, otherwise in English.
 """
 

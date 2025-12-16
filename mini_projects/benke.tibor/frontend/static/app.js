@@ -123,7 +123,13 @@ queryForm.addEventListener('submit', async (e) => {
         const raw = await response.json();
         const payload = raw.data ?? raw; // backend wraps in { success, data }
 
-        const citations = payload.citations ? payload.citations.map(c => c.source || 'Unknown') : [];
+        // Extract unique source file names from citations
+        const citations = payload.citations ? 
+            [...new Set(payload.citations
+                .map(c => c.title || c.source || null)
+                .filter(s => s && s !== 'Unknown' && s !== 'Unknown Document')
+            )] 
+            : [];
 
         // Update debug panel
         debugSession.textContent = sessionId;

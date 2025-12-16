@@ -642,8 +642,299 @@
           }
         ]
       }
+    },
+    {
+      "role": "user",
+      "content": "Mi a c\u00e9g\u00fcnk brand guideline-ja?",
+      "timestamp": "2025-12-16T16:43:58.614331",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A c\u00e9g\u00fcnk brand guideline-ja a k\u00f6vetkez\u0151 f\u0151bb elemeket tartalmazza:\n\n1. **M\u00e1rka \u00e1ttekint\u00e9s**\n   - **M\u00e1rkan\u00e9v:** AURORA DIGITAL\n   - **Ipar\u00e1g:** Digit\u00e1lis term\u00e9kek, AI-alap\u00fa szolg\u00e1ltat\u00e1sok\n   - **M\u00e1rka\u00edg\u00e9ret:** \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.\n   - **M\u00e1rkaszem\u00e9lyis\u00e9g:** Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.\n\n2. **M\u00e1rka\u00e9rt\u00e9kek**\n   - **Megb\u00edzhat\u00f3s\u00e1g:** Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.\n   - **\u00c1tl\u00e1that\u00f3s\u00e1g:** Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.\n   - **Integrit\u00e1s:** Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.\n   - **Innov\u00e1ci\u00f3:** Modern megold\u00e1sok.\n\n3. **Log\u00f3haszn\u00e1lat**\n   - A log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k.\n   - Minim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g: a log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.\n   - Tilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.\n   - Prefer\u00e1lt elhelyez\u00e9s: bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.\n\n4. **Sz\u00ednpaletta**\n   - **Els\u0151dleges sz\u00edn:** \u00c9jk\u00e9k (#0B1C2D)\n   - **M\u00e1sodlagos sz\u00edn:** Aurora t\u00fcrkiz (#1FA6A3)\n   - **Kieg\u00e9sz\u00edt\u0151 sz\u00edn:** Vil\u00e1gossz\u00fcrke (#E6E8EB)\n   - **Hiba / figyelmeztet\u00e9s:** Jelz\u0151piros (#C0392B)\n\n5. **Tipogr\u00e1fia**\n   - **Els\u0151dleges bet\u0171t\u00edpus:** Inter (Regular, Medium, SemiBold)\n   - **Alternat\u00edv bet\u0171t\u00edpusok:** Arial, Helvetica, sans-serif\n   - **C\u00edmsorok:** SemiBold\n   - **T\u00f6rzssz\u00f6veg:** Regular\n\n6. **Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z**\n   - Megfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa.\n   - R\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s.\n\nEzek az ir\u00e1nyelvek seg\u00edtenek fenntartani a m\u00e1rka egys\u00e9gess\u00e9g\u00e9t \u00e9s megjelen\u00e9s\u00e9t.",
+      "timestamp": "2025-12-16T16:44:13.072654",
+      "metadata": {
+        "domain": "marketing",
+        "citations": [
+          {
+            "doc_id": "UNKNOWN",
+            "title": "Unknown Document",
+            "score": 0.5294205,
+            "url": null,
+            "content": "Brand Guidelines \u2013 AURORA DIGITAL\n\n1. Brand Overview\n\nBrand name: AURORA DIGITAL\n\nIndustry: Digital products, AI-enabled services\n\nBrand promise: Clarity, reliability, and intelligent simplicity.\n\nBrand personality: Professional, confident, precise, and forward-looking.\n\n2. Brand Values\n\nReliability \u2013 We deliver predictable, stable outcomes.\n\nClarity \u2013 We remove complexity, not add to it.\n\nIntegrity \u2013 Transparent processes and honest communication.\n\nInnovation \u2013 Modern solutions built on proven foundations.\n\n3. Tone of Voice\n\nProfessional and concise.\n\nDirect, factual language.\n\nAvoid hype and buzzwords.\n\nConfident but not arrogant.\n\nPrefer clear statements over marketing fluff.\n\n4. Logo Usage\n\nThe logo must always appear in its original proportions."
+          },
+          {
+            "doc_id": "UNKNOWN",
+            "title": "Unknown Document",
+            "score": 0.51813257,
+            "url": null,
+            "content": "Arculati k\u00e9zik\u00f6nyv \u2013 AURORA DIGITAL\n\n1. M\u00e1rka \u00e1ttekint\u00e9s\n\nM\u00e1rkan\u00e9v: AURORA DIGITAL\n\nIpar\u00e1g: Digit\u00e1lis term\u00e9kek, AI-alap\u00fa szolg\u00e1ltat\u00e1sok\n\nM\u00e1rka\u00edg\u00e9ret: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.\n\nM\u00e1rkaszem\u00e9lyis\u00e9g: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.\n\n2. M\u00e1rka\u00e9rt\u00e9kek\n\nMegb\u00edzhat\u00f3s\u00e1g \u2013 Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.\n\n\u00c1tl\u00e1that\u00f3s\u00e1g \u2013 Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.\n\nIntegrit\u00e1s \u2013 Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.\n\nInnov\u00e1ci\u00f3 \u2013 Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.\n\n3. Hangnem \u00e9s kommunik\u00e1ci\u00f3\n\nForm\u00e1lis, professzion\u00e1lis st\u00edlus.\n\nT\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.\n\nMarketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.\n\nMagabiztos, de nem arrog\u00e1ns hangv\u00e9tel.\n\nEgy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n4. Log\u00f3haszn\u00e1lat\n\nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k."
+          },
+          {
+            "doc_id": "UNKNOWN",
+            "title": "Unknown Document",
+            "score": 0.51488173,
+            "url": null,
+            "content": "--- Page 1 ---\nArculati k\u00e9zik\u00f6nyv \u2013 AURORA DIGITAL  \n1. M\u00e1rka \u00e1ttekint\u00e9s  \nM\u00e1rkan\u00e9v: AURORA DIGITAL  \nIpar\u00e1g: Digit\u00e1lis term\u00e9kek, AI -alap\u00fa szolg\u00e1ltat\u00e1sok  \nM\u00e1rka\u00edg\u00e9ret: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.  \nM\u00e1rkaszem\u00e9lyis\u00e9g: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.  \n2. M\u00e1rka\u00e9rt\u00e9kek  \nMegb\u00edzhat\u00f3s\u00e1g \u2013 Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.  \n\u00c1tl\u00e1that\u00f3s\u00e1g \u2013 Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.  \nIntegrit\u00e1s \u2013 Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.  \nInnov\u00e1ci\u00f3 \u2013 Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.  \n3. Hangnem \u00e9s kommunik\u00e1ci\u00f3  \nForm\u00e1lis, professzion\u00e1lis st\u00edlus.  \nT\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.  \nMarketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.  \nMagabiztos, de nem arrog\u00e1ns hangv\u00e9tel.  \nEgy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \n4. Log\u00f3haszn\u00e1lat"
+          },
+          {
+            "doc_id": "UNKNOWN",
+            "title": "Unknown Document",
+            "score": 0.48649722,
+            "url": null,
+            "content": "Egy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n4. Log\u00f3haszn\u00e1lat\n\nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k.\n\nMinim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g: a log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.\n\nTilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.\n\nPrefer\u00e1lt elhelyez\u00e9s: bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.\n\n5. Sz\u00ednpaletta\n\nEls\u0151dleges sz\u00edn: \u00c9jk\u00e9k (#0B1C2D)\n\nM\u00e1sodlagos sz\u00edn: Aurora t\u00fcrkiz (#1FA6A3)\n\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)\n\nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)\n\nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.\n\n6. Tipogr\u00e1fia\n\nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)\n\nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans-serif\n\nC\u00edmsorok: SemiBold\n\nT\u00f6rzssz\u00f6veg: Regular\n\nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.\n\n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z\n\nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa."
+          },
+          {
+            "doc_id": "UNKNOWN",
+            "title": "Unknown Document",
+            "score": 0.46861488,
+            "url": null,
+            "content": "--- Page 2 ---\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)  \nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)  \nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.  \n6. Tipogr\u00e1fia  \nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)  \nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans -serif  \nC\u00edmsorok: SemiBold  \nT\u00f6rzssz\u00f6veg: Regular  \nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.  \n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z  \nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa.  \nR\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s.  \nF\u00fcgg\u0151leges ritmus el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \nMaxim\u00e1lis sorhossz: 70 \u201380 karakter.  \n8. Ikonhaszn\u00e1lat \u00e9s vizu\u00e1lis st\u00edlus  \nEgyszer\u0171, vonalas ikonok haszn\u00e1lata.  \nEgys\u00e9ges vonalvastags\u00e1g.  \nT\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.  \nA vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat."
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Mi a c\u00e9g\u00fcnk brand guideline-ja?",
+      "timestamp": "2025-12-16T16:50:57.684104",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A c\u00e9g\u00fcnk brand guideline-ja az al\u00e1bbi f\u0151bb elemeket tartalmazza:\n\n### 1. M\u00e1rka \u00e1ttekint\u00e9s\n- **M\u00e1rkan\u00e9v:** AURORA DIGITAL\n- **Ipar\u00e1g:** Digit\u00e1lis term\u00e9kek, AI-alap\u00fa szolg\u00e1ltat\u00e1sok\n- **M\u00e1rka\u00edg\u00e9ret:** \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.\n- **M\u00e1rkaszem\u00e9lyis\u00e9g:** Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.\n\n### 2. M\u00e1rka\u00e9rt\u00e9kek\n- **Megb\u00edzhat\u00f3s\u00e1g:** Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.\n- **\u00c1tl\u00e1that\u00f3s\u00e1g:** Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.\n- **Integrit\u00e1s:** Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.\n- **Innov\u00e1ci\u00f3:** Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.\n\n### 3. Hangnem \u00e9s kommunik\u00e1ci\u00f3\n- Form\u00e1lis, professzion\u00e1lis st\u00edlus.\n- T\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.\n- Marketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.\n- Magabiztos, de nem arrog\u00e1ns hangv\u00e9tel.\n- Egy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n### 4. Log\u00f3haszn\u00e1lat\n- A log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k.\n- Minim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g: a log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.\n- Tilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.\n- Prefer\u00e1lt elhelyez\u00e9s: bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.\n\n### 5. Sz\u00ednpaletta\n- **Els\u0151dleges sz\u00edn:** \u00c9jk\u00e9k (#0B1C2D)\n- **M\u00e1sodlagos sz\u00edn:** Aurora t\u00fcrkiz (#1FA6A3)\n- **Kieg\u00e9sz\u00edt\u0151 sz\u00edn:** Vil\u00e1gossz\u00fcrke (#E6E8EB)\n- **Hiba/figyelmeztet\u00e9s:** Jelz\u0151piros (#C0392B)\n- A sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.\n\n### 6. Tipogr\u00e1fia\n- **Els\u0151dleges bet\u0171t\u00edpus:** Inter (Regular, Medium, SemiBold)\n- **Alternat\u00edv bet\u0171t\u00edpusok:** Arial, Helvetica, sans-serif\n- C\u00edmsorok: SemiBold, T\u00f6rzssz\u00f6veg: Regular\n- Dekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.\n\n### 7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z\n- Megfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa.\n- R\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s.\n- Maxim\u00e1lis sorhossz: 70\u201380 karakter.\n\n### 8. Ikonhaszn\u00e1lat \u00e9s vizu\u00e1lis st\u00edlus\n- Egyszer\u0171, vonalas ikonok haszn\u00e1lata.\n- Egys\u00e9ges vonalvastags\u00e1g.\n- T\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.\n- A vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat.\n\n### 9. Helyes \u00e9s helytelen haszn\u00e1lat\n- **HELYES:** Egys\u00e9ges sz\u00ednhaszn\u00e1lat \u00e9s letisztult megfogalmaz\u00e1s.\n- **HELYTELEN:** Akcentussz\u00ednek t\u00falhaszn\u00e1lata, inform\u00e1lis vagy szleng kifejez\u00e9sek.\n\n### 10. Tulajdonjog \u00e9s felel\u0151ss\u00e9g\n- **M\u00e1rkatulajdonos:** AURORA DIGITAL\n- Az arculati k\u00e9zik\u00f6nyv c\u00e9lja az egys\u00e9ges megjelen\u00e9s biztos\u00edt\u00e1sa minden csatorn\u00e1n.\n\nEzek az ir\u00e1nyelvek seg\u00edtenek fenntartani a m\u00e1rka egys\u00e9ges \u00e9s professzion\u00e1lis megjelen\u00e9s\u00e9t minden kommunik\u00e1ci\u00f3s csatorn\u00e1n.",
+      "timestamp": "2025-12-16T16:51:18.953902",
+      "metadata": {
+        "domain": "marketing",
+        "citations": [
+          {
+            "doc_id": "1ACEdQxgUuAsDHKPBqKyp2kt88DjfXjhv#chunk0",
+            "title": "Aurora_Digital_Brand_Guidelines_eng.docx",
+            "score": 0.5293822,
+            "url": null,
+            "content": "Brand Guidelines \u2013 AURORA DIGITAL\n\n1. Brand Overview\n\nBrand name: AURORA DIGITAL\n\nIndustry: Digital products, AI-enabled services\n\nBrand promise: Clarity, reliability, and intelligent simplicity.\n\nBrand personality: Professional, confident, precise, and forward-looking.\n\n2. Brand Values\n\nReliability \u2013 We deliver predictable, stable outcomes.\n\nClarity \u2013 We remove complexity, not add to it.\n\nIntegrity \u2013 Transparent processes and honest communication.\n\nInnovation \u2013 Modern solutions built on proven foundations.\n\n3. Tone of Voice\n\nProfessional and concise.\n\nDirect, factual language.\n\nAvoid hype and buzzwords.\n\nConfident but not arrogant.\n\nPrefer clear statements over marketing fluff.\n\n4. Logo Usage\n\nThe logo must always appear in its original proportions."
+          },
+          {
+            "doc_id": "1utetoO-ApR4lmOpY1HS63va_gqmjDfsA#chunk0",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.docx",
+            "score": 0.5181008,
+            "url": null,
+            "content": "Arculati k\u00e9zik\u00f6nyv \u2013 AURORA DIGITAL\n\n1. M\u00e1rka \u00e1ttekint\u00e9s\n\nM\u00e1rkan\u00e9v: AURORA DIGITAL\n\nIpar\u00e1g: Digit\u00e1lis term\u00e9kek, AI-alap\u00fa szolg\u00e1ltat\u00e1sok\n\nM\u00e1rka\u00edg\u00e9ret: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.\n\nM\u00e1rkaszem\u00e9lyis\u00e9g: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.\n\n2. M\u00e1rka\u00e9rt\u00e9kek\n\nMegb\u00edzhat\u00f3s\u00e1g \u2013 Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.\n\n\u00c1tl\u00e1that\u00f3s\u00e1g \u2013 Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.\n\nIntegrit\u00e1s \u2013 Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.\n\nInnov\u00e1ci\u00f3 \u2013 Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.\n\n3. Hangnem \u00e9s kommunik\u00e1ci\u00f3\n\nForm\u00e1lis, professzion\u00e1lis st\u00edlus.\n\nT\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.\n\nMarketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.\n\nMagabiztos, de nem arrog\u00e1ns hangv\u00e9tel.\n\nEgy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n4. Log\u00f3haszn\u00e1lat\n\nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk0",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.51487094,
+            "url": null,
+            "content": "--- Page 1 ---\nArculati k\u00e9zik\u00f6nyv \u2013 AURORA DIGITAL  \n1. M\u00e1rka \u00e1ttekint\u00e9s  \nM\u00e1rkan\u00e9v: AURORA DIGITAL  \nIpar\u00e1g: Digit\u00e1lis term\u00e9kek, AI -alap\u00fa szolg\u00e1ltat\u00e1sok  \nM\u00e1rka\u00edg\u00e9ret: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.  \nM\u00e1rkaszem\u00e9lyis\u00e9g: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.  \n2. M\u00e1rka\u00e9rt\u00e9kek  \nMegb\u00edzhat\u00f3s\u00e1g \u2013 Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.  \n\u00c1tl\u00e1that\u00f3s\u00e1g \u2013 Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.  \nIntegrit\u00e1s \u2013 Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.  \nInnov\u00e1ci\u00f3 \u2013 Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.  \n3. Hangnem \u00e9s kommunik\u00e1ci\u00f3  \nForm\u00e1lis, professzion\u00e1lis st\u00edlus.  \nT\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.  \nMarketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.  \nMagabiztos, de nem arrog\u00e1ns hangv\u00e9tel.  \nEgy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \n4. Log\u00f3haszn\u00e1lat"
+          },
+          {
+            "doc_id": "1utetoO-ApR4lmOpY1HS63va_gqmjDfsA#chunk1",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.docx",
+            "score": 0.48648986,
+            "url": null,
+            "content": "Egy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n4. Log\u00f3haszn\u00e1lat\n\nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k.\n\nMinim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g: a log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.\n\nTilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.\n\nPrefer\u00e1lt elhelyez\u00e9s: bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.\n\n5. Sz\u00ednpaletta\n\nEls\u0151dleges sz\u00edn: \u00c9jk\u00e9k (#0B1C2D)\n\nM\u00e1sodlagos sz\u00edn: Aurora t\u00fcrkiz (#1FA6A3)\n\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)\n\nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)\n\nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.\n\n6. Tipogr\u00e1fia\n\nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)\n\nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans-serif\n\nC\u00edmsorok: SemiBold\n\nT\u00f6rzssz\u00f6veg: Regular\n\nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.\n\n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z\n\nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk2",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.4686587,
+            "url": null,
+            "content": "--- Page 2 ---\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)  \nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)  \nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.  \n6. Tipogr\u00e1fia  \nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)  \nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans -serif  \nC\u00edmsorok: SemiBold  \nT\u00f6rzssz\u00f6veg: Regular  \nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.  \n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z  \nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa.  \nR\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s.  \nF\u00fcgg\u0151leges ritmus el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \nMaxim\u00e1lis sorhossz: 70 \u201380 karakter.  \n8. Ikonhaszn\u00e1lat \u00e9s vizu\u00e1lis st\u00edlus  \nEgyszer\u0171, vonalas ikonok haszn\u00e1lata.  \nEgys\u00e9ges vonalvastags\u00e1g.  \nT\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.  \nA vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk1",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.45092046,
+            "url": null,
+            "content": "Egy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \n4. Log\u00f3haszn\u00e1lat  \nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k.  \nMinim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g: a log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.  \nTilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.  \nPrefer\u00e1lt elhelyez\u00e9s: bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.  \n5. Sz\u00ednpaletta  \nEls\u0151dleges sz\u00edn: \u00c9jk\u00e9k (#0B1C2D)  \nM\u00e1sodlagos sz\u00edn: Aurora t\u00fcrkiz (#1FA6A3)"
+          },
+          {
+            "doc_id": "1utetoO-ApR4lmOpY1HS63va_gqmjDfsA#chunk2",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.docx",
+            "score": 0.44190317,
+            "url": null,
+            "content": "7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z\n\nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa.\n\nR\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s.\n\nF\u00fcgg\u0151leges ritmus el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\nMaxim\u00e1lis sorhossz: 70\u201380 karakter.\n\n8. Ikonhaszn\u00e1lat \u00e9s vizu\u00e1lis st\u00edlus\n\nEgyszer\u0171, vonalas ikonok haszn\u00e1lata.\n\nEgys\u00e9ges vonalvastags\u00e1g.\n\nT\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.\n\nA vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat.\n\n9. Helyes \u00e9s helytelen haszn\u00e1lat\n\nHELYES: Egys\u00e9ges sz\u00ednhaszn\u00e1lat.\n\nHELYES: Letisztult megfogalmaz\u00e1s.\n\nHELYTELEN: Akcentussz\u00ednek t\u00falhaszn\u00e1lata.\n\nHELYTELEN: Inform\u00e1lis vagy szleng kifejez\u00e9sek.\n\n10. Tulajdonjog \u00e9s felel\u0151ss\u00e9g\n\nM\u00e1rkatulajdonos: AURORA DIGITAL\n\nAz arculati k\u00e9zik\u00f6nyv c\u00e9lja az egys\u00e9ges megjelen\u00e9s biztos\u00edt\u00e1sa minden csatorn\u00e1n."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk3",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.42881125,
+            "url": null,
+            "content": "T\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.  \nA vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat.  \n9. Helyes \u00e9s helytelen haszn\u00e1lat  \nHELYES: Egys\u00e9ges sz\u00ednhaszn\u00e1lat.  \nHELYES: Letisztult megfogalmaz\u00e1s.  \nHELYTELEN: Akcentussz\u00ednek t\u00falhaszn\u00e1lata.  \nHELYTELEN: Inform\u00e1lis vagy szleng kifejez\u00e9sek.  \n10. Tulajdonjog \u00e9s felel\u0151ss\u00e9g  \nM\u00e1rkatulajdonos: AURORA DIGITAL"
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "sorhosszra mi a javaslat?",
+      "timestamp": "2025-12-16T16:51:27.379260",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A k\u00e9rd\u00e9sedre vonatkoz\u00f3an, a \"sorhosszra\" vonatkoz\u00f3 javaslatokkal kapcsolatban sajnos nem tal\u00e1ltam relev\u00e1ns inform\u00e1ci\u00f3t a rendelkez\u00e9sre \u00e1ll\u00f3 dokumentumokban. Amennyiben m\u00e1s k\u00e9rd\u00e9seid vannak, sz\u00edvesen seg\u00edtek!",
+      "timestamp": "2025-12-16T16:51:31.765745",
+      "metadata": {
+        "domain": "general",
+        "citations": []
+      }
+    },
+    {
+      "role": "user",
+      "content": "Mi a c\u00e9g\u00fcnk brand guideline-ja?",
+      "timestamp": "2025-12-16T17:02:47.881846",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A c\u00e9g\u00fcnk brand guideline-ja a k\u00f6vetkez\u0151 f\u0151bb elemeket tartalmazza:\n\n### 1. M\u00e1rka \u00e1ttekint\u00e9s\n- **M\u00e1rkan\u00e9v:** AURORA DIGITAL\n- **Ipar\u00e1g:** Digit\u00e1lis term\u00e9kek, AI-alap\u00fa szolg\u00e1ltat\u00e1sok\n- **M\u00e1rka\u00edg\u00e9ret:** \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.\n- **M\u00e1rkaszem\u00e9lyis\u00e9g:** Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.\n\n### 2. M\u00e1rka\u00e9rt\u00e9kek\n- **Megb\u00edzhat\u00f3s\u00e1g:** Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.\n- **\u00c1tl\u00e1that\u00f3s\u00e1g:** Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.\n- **Integrit\u00e1s:** Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.\n- **Innov\u00e1ci\u00f3:** Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.\n\n### 3. Hangnem \u00e9s kommunik\u00e1ci\u00f3\n- **St\u00edlus:** Form\u00e1lis, professzion\u00e1lis.\n- **Megfogalmaz\u00e1s:** T\u00f6m\u00f6r, t\u00e9nyszer\u0171, ker\u00fclend\u0151 a marketing t\u00falz\u00e1sokat.\n- **Hangv\u00e9tel:** Magabiztos, de nem arrog\u00e1ns; egy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n### 4. Log\u00f3haszn\u00e1lat\n- A log\u00f3 ar\u00e1nyait nem szabad torz\u00edtani.\n- **Minim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g:** A log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.\n- Tilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.\n- **Prefer\u00e1lt elhelyez\u00e9s:** Bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.\n\n### 5. Sz\u00ednpaletta\n- **Els\u0151dleges sz\u00edn:** (A pontos sz\u00ednk\u00f3d nem szerepel a dokumentumokban, sz\u00fcks\u00e9ges lenne a teljes sz\u00ednpaletta megismer\u00e9s\u00e9hez.)\n- **Kieg\u00e9sz\u00edt\u0151 sz\u00edn:** Vil\u00e1gossz\u00fcrke (#E6E8EB)\n- **Hiba / figyelmeztet\u00e9s:** Jelz\u0151piros (#C0392B)\n- A sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.\n\n### 6. Tipogr\u00e1fia\n- **Els\u0151dleges bet\u0171t\u00edpus:** Inter (Regular, Medium, SemiBold)\n- **Alternat\u00edv bet\u0171t\u00edpusok:** Arial, Helvetica, sans-serif\n\nEzek az ir\u00e1nyelvek seg\u00edtik a m\u00e1rka egys\u00e9ges megjelen\u00e9s\u00e9t \u00e9s kommunik\u00e1ci\u00f3j\u00e1t, biztos\u00edtva a AURORA DIGITAL megb\u00edzhat\u00f3s\u00e1g\u00e1t \u00e9s professzionalizmus\u00e1t.",
+      "timestamp": "2025-12-16T17:03:02.355205",
+      "metadata": {
+        "domain": "marketing",
+        "citations": [
+          {
+            "doc_id": "1ACEdQxgUuAsDHKPBqKyp2kt88DjfXjhv#chunk0",
+            "title": "Aurora_Digital_Brand_Guidelines_eng.docx",
+            "score": 0.5294205,
+            "url": null,
+            "content": "Brand Guidelines \u2013 AURORA DIGITAL\n\n1. Brand Overview\n\nBrand name: AURORA DIGITAL\n\nIndustry: Digital products, AI-enabled services\n\nBrand promise: Clarity, reliability, and intelligent simplicity.\n\nBrand personality: Professional, confident, precise, and forward-looking.\n\n2. Brand Values\n\nReliability \u2013 We deliver predictable, stable outcomes.\n\nClarity \u2013 We remove complexity, not add to it.\n\nIntegrity \u2013 Transparent processes and honest communication.\n\nInnovation \u2013 Modern solutions built on proven foundations.\n\n3. Tone of Voice\n\nProfessional and concise.\n\nDirect, factual language.\n\nAvoid hype and buzzwords.\n\nConfident but not arrogant.\n\nPrefer clear statements over marketing fluff.\n\n4. Logo Usage\n\nThe logo must always appear in its original proportions."
+          },
+          {
+            "doc_id": "1utetoO-ApR4lmOpY1HS63va_gqmjDfsA#chunk0",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.docx",
+            "score": 0.51813257,
+            "url": null,
+            "content": "Arculati k\u00e9zik\u00f6nyv \u2013 AURORA DIGITAL\n\n1. M\u00e1rka \u00e1ttekint\u00e9s\n\nM\u00e1rkan\u00e9v: AURORA DIGITAL\n\nIpar\u00e1g: Digit\u00e1lis term\u00e9kek, AI-alap\u00fa szolg\u00e1ltat\u00e1sok\n\nM\u00e1rka\u00edg\u00e9ret: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.\n\nM\u00e1rkaszem\u00e9lyis\u00e9g: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.\n\n2. M\u00e1rka\u00e9rt\u00e9kek\n\nMegb\u00edzhat\u00f3s\u00e1g \u2013 Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.\n\n\u00c1tl\u00e1that\u00f3s\u00e1g \u2013 Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.\n\nIntegrit\u00e1s \u2013 Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.\n\nInnov\u00e1ci\u00f3 \u2013 Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.\n\n3. Hangnem \u00e9s kommunik\u00e1ci\u00f3\n\nForm\u00e1lis, professzion\u00e1lis st\u00edlus.\n\nT\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.\n\nMarketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.\n\nMagabiztos, de nem arrog\u00e1ns hangv\u00e9tel.\n\nEgy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n4. Log\u00f3haszn\u00e1lat\n\nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk0",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.51488173,
+            "url": null,
+            "content": "--- Page 1 ---\nArculati k\u00e9zik\u00f6nyv \u2013 AURORA DIGITAL  \n1. M\u00e1rka \u00e1ttekint\u00e9s  \nM\u00e1rkan\u00e9v: AURORA DIGITAL  \nIpar\u00e1g: Digit\u00e1lis term\u00e9kek, AI -alap\u00fa szolg\u00e1ltat\u00e1sok  \nM\u00e1rka\u00edg\u00e9ret: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.  \nM\u00e1rkaszem\u00e9lyis\u00e9g: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.  \n2. M\u00e1rka\u00e9rt\u00e9kek  \nMegb\u00edzhat\u00f3s\u00e1g \u2013 Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.  \n\u00c1tl\u00e1that\u00f3s\u00e1g \u2013 Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.  \nIntegrit\u00e1s \u2013 Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.  \nInnov\u00e1ci\u00f3 \u2013 Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.  \n3. Hangnem \u00e9s kommunik\u00e1ci\u00f3  \nForm\u00e1lis, professzion\u00e1lis st\u00edlus.  \nT\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.  \nMarketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.  \nMagabiztos, de nem arrog\u00e1ns hangv\u00e9tel.  \nEgy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \n4. Log\u00f3haszn\u00e1lat"
+          },
+          {
+            "doc_id": "1utetoO-ApR4lmOpY1HS63va_gqmjDfsA#chunk1",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.docx",
+            "score": 0.48649722,
+            "url": null,
+            "content": "Egy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n4. Log\u00f3haszn\u00e1lat\n\nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k.\n\nMinim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g: a log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.\n\nTilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.\n\nPrefer\u00e1lt elhelyez\u00e9s: bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.\n\n5. Sz\u00ednpaletta\n\nEls\u0151dleges sz\u00edn: \u00c9jk\u00e9k (#0B1C2D)\n\nM\u00e1sodlagos sz\u00edn: Aurora t\u00fcrkiz (#1FA6A3)\n\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)\n\nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)\n\nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.\n\n6. Tipogr\u00e1fia\n\nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)\n\nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans-serif\n\nC\u00edmsorok: SemiBold\n\nT\u00f6rzssz\u00f6veg: Regular\n\nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.\n\n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z\n\nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk2",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.46861488,
+            "url": null,
+            "content": "--- Page 2 ---\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)  \nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)  \nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.  \n6. Tipogr\u00e1fia  \nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)  \nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans -serif  \nC\u00edmsorok: SemiBold  \nT\u00f6rzssz\u00f6veg: Regular  \nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.  \n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z  \nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa.  \nR\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s.  \nF\u00fcgg\u0151leges ritmus el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \nMaxim\u00e1lis sorhossz: 70 \u201380 karakter.  \n8. Ikonhaszn\u00e1lat \u00e9s vizu\u00e1lis st\u00edlus  \nEgyszer\u0171, vonalas ikonok haszn\u00e1lata.  \nEgys\u00e9ges vonalvastags\u00e1g.  \nT\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.  \nA vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat."
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "sorhosszra mi a javaslat?",
+      "timestamp": "2025-12-16T17:03:40.486518",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A sorhosszra vonatkoz\u00f3 javaslat a k\u00f6vetkez\u0151:\n\nA dokumentumokban megadott ir\u00e1nyelvek alapj\u00e1n a maxim\u00e1lis sorhossz 70\u201380 karakter. Ez a korl\u00e1toz\u00e1s seg\u00edt a sz\u00f6veg olvashat\u00f3s\u00e1g\u00e1nak jav\u00edt\u00e1s\u00e1ban \u00e9s a vizu\u00e1lis rendez\u00e9s fenntart\u00e1s\u00e1ban. Fontos, hogy a sorhosszt a megfelel\u0151 elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z figyelembev\u00e9tel\u00e9vel alkalmazzuk, ezzel biztos\u00edtva a sz\u00f6veg k\u00f6nny\u0171 befogad\u00e1s\u00e1t \u00e9s a tiszta megjelen\u00e9st. \n\nEzen k\u00edv\u00fcl, a dokumentumok hangs\u00falyozz\u00e1k, hogy a megfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa \u00e9s a r\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s el\u0151nyben r\u00e9szes\u00edt\u00e9se is hozz\u00e1j\u00e1rul a vizu\u00e1lis tartalom hat\u00e9konys\u00e1g\u00e1hoz.",
+      "timestamp": "2025-12-16T17:03:47.042970",
+      "metadata": {
+        "domain": "marketing",
+        "citations": [
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk3",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.374266,
+            "url": null,
+            "content": "T\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.  \nA vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat.  \n9. Helyes \u00e9s helytelen haszn\u00e1lat  \nHELYES: Egys\u00e9ges sz\u00ednhaszn\u00e1lat.  \nHELYES: Letisztult megfogalmaz\u00e1s.  \nHELYTELEN: Akcentussz\u00ednek t\u00falhaszn\u00e1lata.  \nHELYTELEN: Inform\u00e1lis vagy szleng kifejez\u00e9sek.  \n10. Tulajdonjog \u00e9s felel\u0151ss\u00e9g  \nM\u00e1rkatulajdonos: AURORA DIGITAL"
+          },
+          {
+            "doc_id": "1utetoO-ApR4lmOpY1HS63va_gqmjDfsA#chunk1",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.docx",
+            "score": 0.36817437,
+            "url": null,
+            "content": "Egy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n4. Log\u00f3haszn\u00e1lat\n\nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k.\n\nMinim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g: a log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.\n\nTilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.\n\nPrefer\u00e1lt elhelyez\u00e9s: bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.\n\n5. Sz\u00ednpaletta\n\nEls\u0151dleges sz\u00edn: \u00c9jk\u00e9k (#0B1C2D)\n\nM\u00e1sodlagos sz\u00edn: Aurora t\u00fcrkiz (#1FA6A3)\n\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)\n\nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)\n\nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.\n\n6. Tipogr\u00e1fia\n\nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)\n\nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans-serif\n\nC\u00edmsorok: SemiBold\n\nT\u00f6rzssz\u00f6veg: Regular\n\nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.\n\n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z\n\nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa."
+          },
+          {
+            "doc_id": "1utetoO-ApR4lmOpY1HS63va_gqmjDfsA#chunk2",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.docx",
+            "score": 0.35636383,
+            "url": null,
+            "content": "7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z\n\nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa.\n\nR\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s.\n\nF\u00fcgg\u0151leges ritmus el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\nMaxim\u00e1lis sorhossz: 70\u201380 karakter.\n\n8. Ikonhaszn\u00e1lat \u00e9s vizu\u00e1lis st\u00edlus\n\nEgyszer\u0171, vonalas ikonok haszn\u00e1lata.\n\nEgys\u00e9ges vonalvastags\u00e1g.\n\nT\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.\n\nA vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat.\n\n9. Helyes \u00e9s helytelen haszn\u00e1lat\n\nHELYES: Egys\u00e9ges sz\u00ednhaszn\u00e1lat.\n\nHELYES: Letisztult megfogalmaz\u00e1s.\n\nHELYTELEN: Akcentussz\u00ednek t\u00falhaszn\u00e1lata.\n\nHELYTELEN: Inform\u00e1lis vagy szleng kifejez\u00e9sek.\n\n10. Tulajdonjog \u00e9s felel\u0151ss\u00e9g\n\nM\u00e1rkatulajdonos: AURORA DIGITAL\n\nAz arculati k\u00e9zik\u00f6nyv c\u00e9lja az egys\u00e9ges megjelen\u00e9s biztos\u00edt\u00e1sa minden csatorn\u00e1n."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk2",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.34979016,
+            "url": null,
+            "content": "--- Page 2 ---\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)  \nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)  \nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.  \n6. Tipogr\u00e1fia  \nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)  \nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans -serif  \nC\u00edmsorok: SemiBold  \nT\u00f6rzssz\u00f6veg: Regular  \nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.  \n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z  \nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa.  \nR\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s.  \nF\u00fcgg\u0151leges ritmus el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \nMaxim\u00e1lis sorhossz: 70 \u201380 karakter.  \n8. Ikonhaszn\u00e1lat \u00e9s vizu\u00e1lis st\u00edlus  \nEgyszer\u0171, vonalas ikonok haszn\u00e1lata.  \nEgys\u00e9ges vonalvastags\u00e1g.  \nT\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.  \nA vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk0",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.32975405,
+            "url": null,
+            "content": "--- Page 1 ---\nArculati k\u00e9zik\u00f6nyv \u2013 AURORA DIGITAL  \n1. M\u00e1rka \u00e1ttekint\u00e9s  \nM\u00e1rkan\u00e9v: AURORA DIGITAL  \nIpar\u00e1g: Digit\u00e1lis term\u00e9kek, AI -alap\u00fa szolg\u00e1ltat\u00e1sok  \nM\u00e1rka\u00edg\u00e9ret: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.  \nM\u00e1rkaszem\u00e9lyis\u00e9g: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.  \n2. M\u00e1rka\u00e9rt\u00e9kek  \nMegb\u00edzhat\u00f3s\u00e1g \u2013 Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.  \n\u00c1tl\u00e1that\u00f3s\u00e1g \u2013 Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.  \nIntegrit\u00e1s \u2013 Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.  \nInnov\u00e1ci\u00f3 \u2013 Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.  \n3. Hangnem \u00e9s kommunik\u00e1ci\u00f3  \nForm\u00e1lis, professzion\u00e1lis st\u00edlus.  \nT\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.  \nMarketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.  \nMagabiztos, de nem arrog\u00e1ns hangv\u00e9tel.  \nEgy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \n4. Log\u00f3haszn\u00e1lat"
+          }
+        ]
+      }
+    },
+    {
+      "role": "user",
+      "content": "Mi a c\u00e9g\u00fcnk brand guideline-ja?",
+      "timestamp": "2025-12-16T17:10:27.484660",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A c\u00e9g\u00fcnk brand guideline-ja az al\u00e1bbi f\u0151bb ter\u00fcletekre terjed ki:\n\n### 1. M\u00e1rka \u00e1ttekint\u00e9s\n- **M\u00e1rkan\u00e9v**: AURORA DIGITAL\n- **Ipar\u00e1g**: Digit\u00e1lis term\u00e9kek, AI-alap\u00fa szolg\u00e1ltat\u00e1sok\n- **M\u00e1rka\u00edg\u00e9ret**: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.\n- **M\u00e1rkaszem\u00e9lyis\u00e9g**: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.\n\n### 2. M\u00e1rka\u00e9rt\u00e9kek\n- **Megb\u00edzhat\u00f3s\u00e1g**: Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.\n- **\u00c1tl\u00e1that\u00f3s\u00e1g**: Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.\n- **Integrit\u00e1s**: Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.\n- **Innov\u00e1ci\u00f3**: Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.\n\n### 3. Hangnem \u00e9s kommunik\u00e1ci\u00f3\n- **St\u00edlus**: Form\u00e1lis, professzion\u00e1lis.\n- **Megfogalmaz\u00e1s**: T\u00f6m\u00f6r, t\u00e9nyszer\u0171.\n- **Ker\u00fclend\u0151**: Marketing t\u00falz\u00e1sok, hype \u00e9s buzzword-\u00f6k.\n- **Tonality**: Magabiztos, de nem arrog\u00e1ns; egy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n### 4. Log\u00f3haszn\u00e1lat\n- A log\u00f3t mindig az eredeti ar\u00e1nyban kell megjelen\u00edteni.\n- Minim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g: a log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.\n- Tilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.\n- Prefer\u00e1lt elhelyez\u00e9s: bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.\n\n### 5. Sz\u00ednpaletta\n- **Els\u0151dleges sz\u00edn**: (nem specifik\u00e1lva a dokumentumban)\n- **Kieg\u00e9sz\u00edt\u0151 sz\u00edn**: Vil\u00e1gossz\u00fcrke (#E6E8EB)\n- **Hiba / figyelmeztet\u00e9s**: Jelz\u0151piros (#C0392B)\n- A sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.\n\n### 6. Tipogr\u00e1fia\n- **Els\u0151dleges bet\u0171t\u00edpus**: Inter (Regular, Medium, SemiBold)\n- **Alternat\u00edv bet\u0171t\u00edpusok**: Arial, Helvetica, sans-serif\n\nEzek a guideline-ok seg\u00edtenek a m\u00e1rka egys\u00e9ges megjelen\u00e9s\u00e9nek \u00e9s \u00fczenet\u00e9nek fenntart\u00e1s\u00e1ban, amely t\u00fckr\u00f6zi a c\u00e9g \u00e9rt\u00e9keit \u00e9s professzion\u00e1lis im\u00e1zs\u00e1t.",
+      "timestamp": "2025-12-16T17:10:46.646030",
+      "metadata": {
+        "domain": "marketing",
+        "citations": [
+          {
+            "doc_id": "1ACEdQxgUuAsDHKPBqKyp2kt88DjfXjhv#chunk0",
+            "title": "Aurora_Digital_Brand_Guidelines_eng.docx",
+            "score": 0.5294205,
+            "url": null,
+            "content": "Brand Guidelines \u2013 AURORA DIGITAL\n\n1. Brand Overview\n\nBrand name: AURORA DIGITAL\n\nIndustry: Digital products, AI-enabled services\n\nBrand promise: Clarity, reliability, and intelligent simplicity.\n\nBrand personality: Professional, confident, precise, and forward-looking.\n\n2. Brand Values\n\nReliability \u2013 We deliver predictable, stable outcomes.\n\nClarity \u2013 We remove complexity, not add to it.\n\nIntegrity \u2013 Transparent processes and honest communication.\n\nInnovation \u2013 Modern solutions built on proven foundations.\n\n3. Tone of Voice\n\nProfessional and concise.\n\nDirect, factual language.\n\nAvoid hype and buzzwords.\n\nConfident but not arrogant.\n\nPrefer clear statements over marketing fluff.\n\n4. Logo Usage\n\nThe logo must always appear in its original proportions."
+          },
+          {
+            "doc_id": "1utetoO-ApR4lmOpY1HS63va_gqmjDfsA#chunk0",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.docx",
+            "score": 0.51813257,
+            "url": null,
+            "content": "Arculati k\u00e9zik\u00f6nyv \u2013 AURORA DIGITAL\n\n1. M\u00e1rka \u00e1ttekint\u00e9s\n\nM\u00e1rkan\u00e9v: AURORA DIGITAL\n\nIpar\u00e1g: Digit\u00e1lis term\u00e9kek, AI-alap\u00fa szolg\u00e1ltat\u00e1sok\n\nM\u00e1rka\u00edg\u00e9ret: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.\n\nM\u00e1rkaszem\u00e9lyis\u00e9g: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.\n\n2. M\u00e1rka\u00e9rt\u00e9kek\n\nMegb\u00edzhat\u00f3s\u00e1g \u2013 Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.\n\n\u00c1tl\u00e1that\u00f3s\u00e1g \u2013 Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.\n\nIntegrit\u00e1s \u2013 Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.\n\nInnov\u00e1ci\u00f3 \u2013 Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.\n\n3. Hangnem \u00e9s kommunik\u00e1ci\u00f3\n\nForm\u00e1lis, professzion\u00e1lis st\u00edlus.\n\nT\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.\n\nMarketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.\n\nMagabiztos, de nem arrog\u00e1ns hangv\u00e9tel.\n\nEgy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n4. Log\u00f3haszn\u00e1lat\n\nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk0",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.51488173,
+            "url": null,
+            "content": "--- Page 1 ---\nArculati k\u00e9zik\u00f6nyv \u2013 AURORA DIGITAL  \n1. M\u00e1rka \u00e1ttekint\u00e9s  \nM\u00e1rkan\u00e9v: AURORA DIGITAL  \nIpar\u00e1g: Digit\u00e1lis term\u00e9kek, AI -alap\u00fa szolg\u00e1ltat\u00e1sok  \nM\u00e1rka\u00edg\u00e9ret: \u00c1tl\u00e1that\u00f3s\u00e1g, megb\u00edzhat\u00f3s\u00e1g \u00e9s intelligens egyszer\u0171s\u00e9g.  \nM\u00e1rkaszem\u00e9lyis\u00e9g: Professzion\u00e1lis, magabiztos, prec\u00edz \u00e9s j\u00f6v\u0151orient\u00e1lt.  \n2. M\u00e1rka\u00e9rt\u00e9kek  \nMegb\u00edzhat\u00f3s\u00e1g \u2013 Kisz\u00e1m\u00edthat\u00f3, stabil megold\u00e1sokat sz\u00e1ll\u00edtunk.  \n\u00c1tl\u00e1that\u00f3s\u00e1g \u2013 Cs\u00f6kkentj\u00fck a komplexit\u00e1st, nem n\u00f6velj\u00fck.  \nIntegrit\u00e1s \u2013 Ny\u00edlt m\u0171k\u00f6d\u00e9s \u00e9s \u0151szinte kommunik\u00e1ci\u00f3.  \nInnov\u00e1ci\u00f3 \u2013 Modern megold\u00e1sok bev\u00e1lt alapokra \u00e9p\u00edtve.  \n3. Hangnem \u00e9s kommunik\u00e1ci\u00f3  \nForm\u00e1lis, professzion\u00e1lis st\u00edlus.  \nT\u00f6m\u00f6r, t\u00e9nyszer\u0171 megfogalmaz\u00e1s.  \nMarketing t\u00falz\u00e1sok ker\u00fcl\u00e9se.  \nMagabiztos, de nem arrog\u00e1ns hangv\u00e9tel.  \nEgy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \n4. Log\u00f3haszn\u00e1lat"
+          },
+          {
+            "doc_id": "1utetoO-ApR4lmOpY1HS63va_gqmjDfsA#chunk1",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.docx",
+            "score": 0.48649722,
+            "url": null,
+            "content": "Egy\u00e9rtelm\u0171 \u00e1ll\u00edt\u00e1sok el\u0151nyben r\u00e9szes\u00edt\u00e9se.\n\n4. Log\u00f3haszn\u00e1lat\n\nA log\u00f3 ar\u00e1nyai nem torz\u00edthat\u00f3k.\n\nMinim\u00e1lis v\u00e9d\u0151t\u00e1vols\u00e1g: a log\u00f3 'A' bet\u0171j\u00e9nek magass\u00e1ga.\n\nTilos a log\u00f3 \u00e1tsz\u00ednez\u00e9se, forgat\u00e1sa vagy effektez\u00e9se.\n\nPrefer\u00e1lt elhelyez\u00e9s: bal fels\u0151 sarok vagy k\u00f6z\u00e9pre igaz\u00edtva.\n\n5. Sz\u00ednpaletta\n\nEls\u0151dleges sz\u00edn: \u00c9jk\u00e9k (#0B1C2D)\n\nM\u00e1sodlagos sz\u00edn: Aurora t\u00fcrkiz (#1FA6A3)\n\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)\n\nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)\n\nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.\n\n6. Tipogr\u00e1fia\n\nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)\n\nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans-serif\n\nC\u00edmsorok: SemiBold\n\nT\u00f6rzssz\u00f6veg: Regular\n\nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.\n\n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z\n\nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa."
+          },
+          {
+            "doc_id": "150jnsbIl3HreheZyiCDU3fUt9cdL_EFS#chunk2",
+            "title": "Aurora_Digital_Arculati_Kezikonyv_HU.pdf",
+            "score": 0.46861488,
+            "url": null,
+            "content": "--- Page 2 ---\nKieg\u00e9sz\u00edt\u0151 sz\u00edn: Vil\u00e1gossz\u00fcrke (#E6E8EB)  \nHiba / figyelmeztet\u00e9s: Jelz\u0151piros (#C0392B)  \nA sz\u00ednek k\u00f6vetkezetes, visszafogott haszn\u00e1lata k\u00f6telez\u0151.  \n6. Tipogr\u00e1fia  \nEls\u0151dleges bet\u0171t\u00edpus: Inter (Regular, Medium, SemiBold)  \nAlternat\u00edv bet\u0171t\u00edpusok: Arial, Helvetica, sans -serif  \nC\u00edmsorok: SemiBold  \nT\u00f6rzssz\u00f6veg: Regular  \nDekorat\u00edv bet\u0171t\u00edpusok haszn\u00e1lata nem megengedett.  \n7. Elrendez\u00e9s \u00e9s t\u00e9rk\u00f6z  \nMegfelel\u0151 mennyis\u00e9g\u0171 \u00fcres t\u00e9r alkalmaz\u00e1sa.  \nR\u00e1csszerkezethez igaz\u00edtott elrendez\u00e9s.  \nF\u00fcgg\u0151leges ritmus el\u0151nyben r\u00e9szes\u00edt\u00e9se.  \nMaxim\u00e1lis sorhossz: 70 \u201380 karakter.  \n8. Ikonhaszn\u00e1lat \u00e9s vizu\u00e1lis st\u00edlus  \nEgyszer\u0171, vonalas ikonok haszn\u00e1lata.  \nEgys\u00e9ges vonalvastags\u00e1g.  \nT\u00falzottan r\u00e9szletes grafik\u00e1k ker\u00fcl\u00e9se.  \nA vizu\u00e1lis elemek t\u00e1mogass\u00e1k a tartalmat."
+          }
+        ]
+      }
     }
   ],
   "created_at": "2025-12-10T10:41:04.697762",
-  "updated_at": "2025-12-16T16:20:15.186102"
+  "updated_at": "2025-12-16T17:10:46.650214"
 }
