@@ -126,14 +126,24 @@ queryForm.addEventListener('submit', async (e) => {
         const citations = payload.citations ? payload.citations.map(c => c.source || 'Unknown') : [];
 
         // Update debug panel
-        debugSession.textContent = sessionId.substring(0, 8) + '...';
+        debugSession.textContent = sessionId;
         debugDomain.textContent = payload.domain || 'general';
-        debugCitations.textContent = citations.length;
-        if (payload.workflow) {
-            debugWorkflow.textContent = payload.workflow.action || '-';
-            debugNextStep.textContent = payload.workflow.next_step || '-';
+        
+        // Show citation count with average score
+        if (payload.citations && payload.citations.length > 0) {
+            const avgScore = (payload.citations.reduce((sum, c) => sum + (c.score || 0), 0) / payload.citations.length).toFixed(3);
+            debugCitations.textContent = `${payload.citations.length} (avg: ${avgScore})`;
         } else {
-            debugWorkflow.textContent = '-';
+            debugCitations.textContent = '0';
+        }
+        
+        if (payload.workflow) {
+            const action = payload.workflow.action || 'none';
+            const status = payload.workflow.status || '';
+            debugWorkflow.textContent = status ? `${action} (${status})` : action;
+            debugNextStep.textContent = payload.workflow.next_step || payload.workflow.type || '-';
+        } else {
+            debugWorkflow.textContent = 'none';
             debugNextStep.textContent = '-';
         }
 
@@ -178,19 +188,20 @@ if (resetBtn) {
             </div>
         `;
         queryInput.value = '';
+        if (debugSession) debugSession.textContent = sessionIdInput.value;
         if (debugDomain) debugDomain.textContent = '-';
         if (debugCitations) debugCitations.textContent = '0';
-        if (debugWorkflow) debugWorkflow.textContent = '-';
+        if (debugWorkflow) debugWorkflow.textContent = 'none';
         if (debugNextStep) debugNextStep.textContent = '-';
     });
 }
 
 // Initialize debug panel
 if (debugSession && sessionIdInput) {
-    debugSession.textContent = sessionIdInput.value.substring(0, 8) + '...';
+    debugSession.textContent = sessionIdInput.value;
 }
 if (queryInput) {
     queryInput.focus();
 }
-if (debugWorkflow) debugWorkflow.textContent = '-';
+if (debugWorkflow) debugWorkflow.textContent = 'none';
 if (debugNextStep) debugNextStep.textContent = '-';

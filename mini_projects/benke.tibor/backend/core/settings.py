@@ -85,13 +85,15 @@ OPENAI_MODEL = os.getenv('OPENAI_MODEL', 'gpt-4o-mini')
 
 # Vector DB Configuration
 QDRANT_HOST = os.getenv('QDRANT_HOST', 'localhost')
-QDRANT_PORT = int(os.getenv('QDRANT_PORT', 6333))
+QDRANT_PORT = int(os.getenv('QDRANT_PORT', 6334))
+QDRANT_URL = f"http://{QDRANT_HOST}:{QDRANT_PORT}"
+QDRANT_COLLECTION = os.getenv('QDRANT_COLLECTION', 'marketing')  # Default collection
 QDRANT_COLLECTIONS = {
     'hr': os.getenv('QDRANT_COLLECTION_HR', 'hr_knowledge'),
     'it': os.getenv('QDRANT_COLLECTION_IT', 'it_knowledge'),
     'finance': os.getenv('QDRANT_COLLECTION_FINANCE', 'finance_knowledge'),
     'legal': 'legal_knowledge',
-    'marketing': 'marketing_knowledge',
+    'marketing': 'marketing',  # Using existing collection
     'general': 'general_knowledge',
 }
 

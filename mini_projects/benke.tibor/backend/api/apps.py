@@ -24,7 +24,7 @@ class ApiConfig(AppConfig):
                 FileUserRepository,
                 FileConversationRepository,
             )
-            from infrastructure.rag_client import MockQdrantClient
+            from infrastructure.qdrant_rag_client import QdrantRAGClient
             from services.agent import QueryAgent
             from services.chat_service import ChatService
 
@@ -32,8 +32,12 @@ class ApiConfig(AppConfig):
             user_repo = FileUserRepository(data_dir=settings.USERS_DIR)
             conversation_repo = FileConversationRepository(data_dir=settings.SESSIONS_DIR)
 
-            # Initialize RAG client
-            rag_client = MockQdrantClient()
+            # Initialize RAG client (Qdrant-based)
+            rag_client = QdrantRAGClient(
+                qdrant_url=getattr(settings, 'QDRANT_URL', 'http://localhost:6334'),
+                collection_name=getattr(settings, 'QDRANT_COLLECTION', 'marketing'),
+                embedding_model=getattr(settings, 'EMBEDDING_MODEL', 'text-embedding-3-small')
+            )
 
             # Initialize LLM
             llm = ChatOpenAI(

@@ -108,11 +108,16 @@ Respond with ONLY the domain name (lowercase).
         """Generate response using RAG context."""
         logger.info("Generation node executing")
 
-        # Build context from citations
-        context = "\n".join([
-            f"- [{c['doc_id']}] {c['title']}"
-            for c in state["citations"]
-        ])
+        # Build context from citations with content
+        context_parts = []
+        for c in state["citations"]:
+            # If chunk content is available, use it; otherwise just show title
+            if c.get("content"):
+                context_parts.append(f"[{c['doc_id']}] {c['title']}\n{c['content'][:500]}...")
+            else:
+                context_parts.append(f"[{c['doc_id']}] {c['title']}")
+        
+        context = "\n\n".join(context_parts)
 
         prompt = f"""
 You are a helpful HR/IT/Finance/Legal/Marketing assistant.
@@ -124,7 +129,7 @@ User query: "{state['query']}"
 
 Provide a helpful answer based on the retrieved documents.
 If the documents don't contain relevant information, say so clearly.
-Answer in Hungarian if the query is in Hungarian.
+Answer in Hungarian if the query is in Hungarian, otherwise in English.
 """
 
         response = await self.llm.ainvoke([HumanMessage(content=prompt)])
@@ -149,7 +154,8 @@ Answer in Hungarian if the query is in Hungarian.
 
         if domain == DomainType.HR.value:
             # Example: HR vacation request workflow
-            if "szabadság" in state["query"].lower() or "vacation" in state["query"].lower():
+            query_lower = state["query"].lower()
+            if any(kw in query_lower for kw in ["szabadság", "szabadsag", "vacation", "szabis"]):
                 state["workflow"] = {
                     "action": "hr_request_draft",
                     "type": "vacation_request",

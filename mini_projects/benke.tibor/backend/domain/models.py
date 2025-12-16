@@ -31,6 +31,7 @@ class Citation(BaseModel):
     title: str
     score: float  # Retrieval score (0-1)
     url: Optional[str] = None
+    content: Optional[str] = None  # Document/chunk content for RAG context
 
 
 class WorkflowState(BaseModel):
