@@ -548,3 +548,36 @@ main {
             0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
             40% { transform: scale(1); opacity: 1; }
         }
+
+        /* Refresh button - positioned in top-right corner */
+        .message-content {
+            position: relative;
+        }
+
+        .refresh-btn {
+            position: absolute;
+            bottom: 0.5rem;
+            right: 0.5rem;
+            padding: 0.35rem 0.5rem;
+            background: rgba(45, 45, 45, 0.8);
+            color: #10a37f;
+            border: 1px solid #3d3d3d;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(4px);
+            opacity: 0.7;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(61, 61, 61, 0.9);
+            border-color: #10a37f;
+            color: #1ad1a5;
+            opacity: 1;
+            transform: rotate(180deg);
+        }
+
+        .refresh-btn:active {
+            transform: scale(0.9) rotate(180deg);
+        }

@@ -1,20 +1,28 @@
 #!/usr/bin/env python3
 """
-Sync marketing documents from Google Drive to Qdrant vector database.
+Universal document sync script for any domain (HR, IT, Finance, Marketing, etc.).
 
 This script:
-1. Downloads all files from the Google Drive marketing folder
+1. Downloads all files from a specified Google Drive folder
 2. Extracts text content (PDF, DOCX)
 3. Chunks the text into manageable pieces
 4. Generates embeddings using OpenAI
-5. Stores in Qdrant marketing collection
+5. Stores in Qdrant with domain metadata for filtering
 
 Usage:
-    python backend/scripts/sync_marketing_docs.py
+    python backend/scripts/sync_domain_docs.py --domain hr --folder-id FOLDER_ID
+    python backend/scripts/sync_domain_docs.py --domain it --folder-id FOLDER_ID
+    python backend/scripts/sync_domain_docs.py --domain marketing --folder-id 1Jo5doFrRgTscczqR0c6bsS2H0a7pS2ZR
+
+Domain metadata enables:
+- Hybrid search (semantic + lexical)
+- Domain-specific filtering (only search HR docs for HR queries)
+- Multi-domain knowledge base in single Qdrant collection
 """
 import os
 import sys
 import logging
+import argparse
 from pathlib import Path
 from typing import List, Dict
 import hashlib
@@ -24,7 +32,7 @@ from datetime import datetime
 backend_path = Path(__file__).parent.parent
 sys.path.insert(0, str(backend_path))
 
-# Third-party imports (after path modification)
+# Third-party imports
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -42,19 +50,30 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configuration
-MARKETING_FOLDER_ID = "1Jo5doFrRgTscczqR0c6bsS2H0a7pS2ZR"
-COLLECTION_NAME = "marketing"
+COLLECTION_NAME = "multi_domain_kb"  # Single collection for all domains
 CHUNK_SIZE = 800
 CHUNK_OVERLAP = 100
 QDRANT_HOST = os.getenv("QDRANT_HOST", "localhost")
 QDRANT_PORT = int(os.getenv("QDRANT_PORT", "6333"))
 
+# Valid domains
+VALID_DOMAINS = ["hr", "it", "finance", "legal", "marketing", "general"]
 
-class MarketingDocsSync:
-    """Sync marketing documents from Google Drive to Qdrant."""
+
+class DomainDocsSync:
+    """Sync documents from Google Drive to Qdrant with domain metadata."""
     
-    def __init__(self):
-        """Initialize clients - uses centralized OpenAI embeddings."""
+    def __init__(self, domain: str):
+        """
+        Initialize clients.
+        
+        Args:
+            domain: Domain type (hr, it, finance, marketing, etc.)
+        """
+        if domain.lower() not in VALID_DOMAINS:
+            raise ValueError(f"Invalid domain '{domain}'. Valid: {VALID_DOMAINS}")
+        
+        self.domain = domain.lower()
         self.drive_client = get_drive_client()
         self.qdrant_client = QdrantClient(host=QDRANT_HOST, port=QDRANT_PORT)
         # Use centralized embeddings factory
@@ -66,7 +85,7 @@ class MarketingDocsSync:
         )
         
     def ensure_collection_exists(self) -> None:
-        """Create marketing collection if it doesn't exist."""
+        """Create multi-domain collection if it doesn't exist."""
         try:
             collections = self.qdrant_client.get_collections().collections
             collection_names = [c.name for c in collections]
@@ -76,7 +95,7 @@ class MarketingDocsSync:
                 return
             
             # Create collection with OpenAI embedding dimensions
-            logger.info(f"Creating collection '{COLLECTION_NAME}'")
+            logger.info(f"Creating multi-domain collection '{COLLECTION_NAME}'")
             self.qdrant_client.create_collection(
                 collection_name=COLLECTION_NAME,
                 vectors_config=VectorParams(
@@ -84,7 +103,15 @@ class MarketingDocsSync:
                     distance=Distance.COSINE
                 )
             )
-            logger.info(f"✅ Collection '{COLLECTION_NAME}' created")
+            
+            # Create payload index for domain filtering (important for performance!)
+            self.qdrant_client.create_payload_index(
+                collection_name=COLLECTION_NAME,
+                field_name="domain",
+                field_schema="keyword"
+            )
+            
+            logger.info(f"✅ Collection '{COLLECTION_NAME}' created with domain index")
             
         except Exception as e:
             logger.error(f"Failed to create collection: {e}")
@@ -118,7 +145,7 @@ class MarketingDocsSync:
     
     def chunk_text(self, text: str, source_metadata: Dict) -> List[Dict]:
         """
-        Split text into chunks with metadata.
+        Split text into chunks with domain metadata.
         
         Args:
             text: Full text content
@@ -138,13 +165,13 @@ class MarketingDocsSync:
                     "source_file_name": source_metadata["name"],
                     "chunk_index": i,
                     "total_chunks": len(chunks),
-                    "domain": "marketing",
+                    "domain": self.domain,  # Domain metadata for filtering
                     "indexed_at": datetime.utcnow().isoformat()
                 }
             }
             chunk_dicts.append(chunk_dict)
         
-        logger.info(f"✂️  Split into {len(chunks)} chunks")
+        logger.info(f"✂️  Split into {len(chunks)} chunks (domain={self.domain})")
         return chunk_dicts
     
     def generate_embeddings(self, chunks: List[Dict]) -> List[Dict]:
@@ -170,16 +197,16 @@ class MarketingDocsSync:
     
     def upsert_to_qdrant(self, chunks: List[Dict]) -> None:
         """
-        Upload chunks to Qdrant.
+        Upload chunks to Qdrant with domain metadata.
         
         Args:
             chunks: List of chunk dictionaries with embeddings
         """
         points = []
         for chunk in chunks:
-            # Generate unique ID from file + chunk index
+            # Generate unique ID from domain + file + chunk index
             point_id = hashlib.md5(
-                f"{chunk['metadata']['source_file_id']}_{chunk['metadata']['chunk_index']}".encode()
+                f"{self.domain}_{chunk['metadata']['source_file_id']}_{chunk['metadata']['chunk_index']}".encode()
             ).hexdigest()
             
             point = PointStruct(
@@ -187,12 +214,12 @@ class MarketingDocsSync:
                 vector=chunk["embedding"],
                 payload={
                     "text": chunk["text"],
-                    **chunk["metadata"]
+                    **chunk["metadata"]  # Includes domain field
                 }
             )
             points.append(point)
         
-        logger.info(f"⬆️  Uploading {len(points)} points to Qdrant...")
+        logger.info(f"⬆️  Uploading {len(points)} points to Qdrant (domain={self.domain})...")
         self.qdrant_client.upsert(
             collection_name=COLLECTION_NAME,
             points=points
@@ -211,14 +238,14 @@ class MarketingDocsSync:
         mime_type = file_metadata["mimeType"]
         
         logger.info(f"\n{'='*60}")
-        logger.info(f"📁 Processing: {file_name}")
+        logger.info(f"📁 Processing: {file_name} (domain={self.domain})")
         logger.info(f"{'='*60}")
         
         try:
             # Download and parse
             text = self.download_and_parse_file(file_id, file_name, mime_type)
             
-            # Chunk
+            # Chunk with domain metadata
             chunks = self.chunk_text(text, file_metadata)
             
             # Generate embeddings
@@ -233,10 +260,16 @@ class MarketingDocsSync:
             logger.error(f"❌ Failed to sync {file_name}: {e}")
             raise
     
-    def sync_all(self) -> None:
-        """Sync all marketing documents from Google Drive."""
-        logger.info("\n🚀 Starting Marketing Documents Sync")
-        logger.info(f"📂 Google Drive Folder: {MARKETING_FOLDER_ID}")
+    def sync_folder(self, folder_id: str) -> None:
+        """
+        Sync all documents from a Google Drive folder.
+        
+        Args:
+            folder_id: Google Drive folder ID
+        """
+        logger.info(f"\n🚀 Starting Domain Documents Sync")
+        logger.info(f"🏷️  Domain: {self.domain.upper()}")
+        logger.info(f"📂 Google Drive Folder: {folder_id}")
         logger.info(f"🗄️  Qdrant Collection: {COLLECTION_NAME}")
         logger.info(f"📊 Qdrant: {QDRANT_HOST}:{QDRANT_PORT}\n")
         
@@ -250,7 +283,7 @@ class MarketingDocsSync:
         
         # List files
         logger.info("\n📋 Listing files from Google Drive...")
-        files = self.drive_client.list_files_in_folder(MARKETING_FOLDER_ID)
+        files = self.drive_client.list_files_in_folder(folder_id)
         logger.info(f"Found {len(files)} files")
         
         # Filter supported file types
@@ -282,7 +315,7 @@ class MarketingDocsSync:
         
         # Summary
         logger.info(f"\n{'='*60}")
-        logger.info("🎉 Sync Complete!")
+        logger.info(f"🎉 Sync Complete for {self.domain.upper()} Domain!")
         logger.info(f"{'='*60}")
         logger.info(f"✅ Success: {success_count} files")
         logger.info(f"❌ Errors: {error_count} files")
@@ -290,13 +323,46 @@ class MarketingDocsSync:
         # Get collection info
         collection_info = self.qdrant_client.get_collection(COLLECTION_NAME)
         logger.info(f"📊 Total points in collection: {collection_info.points_count}")
+        
+        # Count points for this domain
+        domain_count = self.qdrant_client.count(
+            collection_name=COLLECTION_NAME,
+            count_filter={
+                "must": [
+                    {
+                        "key": "domain",
+                        "match": {"value": self.domain}
+                    }
+                ]
+            }
+        )
+        logger.info(f"📊 Points for {self.domain.upper()} domain: {domain_count.count}")
 
 
 def main():
-    """Main entry point."""
+    """Main entry point with CLI arguments."""
+    parser = argparse.ArgumentParser(
+        description="Sync domain-specific documents from Google Drive to Qdrant"
+    )
+    parser.add_argument(
+        "--domain",
+        type=str,
+        required=True,
+        choices=VALID_DOMAINS,
+        help="Domain type (hr, it, finance, marketing, etc.)"
+    )
+    parser.add_argument(
+        "--folder-id",
+        type=str,
+        required=True,
+        help="Google Drive folder ID containing domain documents"
+    )
+    
+    args = parser.parse_args()
+    
     try:
-        syncer = MarketingDocsSync()
-        syncer.sync_all()
+        syncer = DomainDocsSync(domain=args.domain)
+        syncer.sync_folder(folder_id=args.folder_id)
     except KeyboardInterrupt:
         logger.info("\n⚠️  Interrupted by user")
         sys.exit(1)

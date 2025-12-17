@@ -8,10 +8,9 @@ from rest_framework import status
 from rest_framework.request import Request
 
 from domain.models import QueryRequest
+from infrastructure.error_handling import APICallError, check_token_limit, estimate_tokens
 
 logger = logging.getLogger(__name__)
-
-
 class QueryAPIView(APIView):
     """
     POST /api/query/ - Process user query through agent.
@@ -19,14 +18,39 @@ class QueryAPIView(APIView):
     """
 
     def post(self, request: Request) -> Response:
-        """Handle query request."""
+        """Handle query request with input validation."""
         try:
             # Validate request
             data = request.data
+            query_text = data.get("query", "")
+            
+            # Check if query is empty
+            if not query_text or not query_text.strip():
+                return Response(
+                    {"success": False, "error": "Query cannot be empty"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            
+            # Check token limit for user input (max 10k tokens for safety)
+            # This prevents malicious/accidental huge inputs
+            try:
+                check_token_limit(query_text, max_tokens=10000)
+                estimated = estimate_tokens(query_text)
+                logger.info(f"Query token estimate: {estimated}")
+            except ValueError as token_error:
+                logger.warning(f"Query too long: {token_error}")
+                return Response(
+                    {
+                        "success": False,
+                        "error": "Query is too long. Please shorten your question to under 10,000 tokens (~40,000 characters)."
+                    },
+                    status=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                )
+            
             query_request = QueryRequest(
                 user_id=data.get("user_id", "guest"),
                 session_id=data.get("session_id"),
-                query=data.get("query", ""),
+                query=query_text,
                 organisation=data.get("organisation", "Default Org"),
             )
 
@@ -53,11 +77,28 @@ class QueryAPIView(APIView):
                 status=status.HTTP_200_OK,
             )
 
-        except Exception as e:
-            logger.error(f"Query error: {e}", exc_info=True)
+        except ValueError as e:
+            # Bad request - invalid input
+            logger.warning(f"Invalid query request: {e}")
             return Response(
-                {"success": False, "error": str(e)},
+                {"success": False, "error": f"Invalid request: {e}"},
                 status=status.HTTP_400_BAD_REQUEST,
+            )
+        
+        except APICallError as e:
+            # OpenAI API error (rate limit, timeout, etc.)
+            logger.error(f"API call failed: {e}", exc_info=True)
+            return Response(
+                {"success": False, "error": "Service temporarily unavailable. Please try again."},
+                status=status.HTTP_503_SERVICE_UNAVAILABLE,
+            )
+        
+        except Exception as e:
+            # Unexpected server error
+            logger.error(f"Unexpected query error: {e}", exc_info=True)
+            return Response(
+                {"success": False, "error": "Internal server error. Please contact support."},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
 
@@ -80,11 +121,20 @@ class SessionHistoryAPIView(APIView):
                 {"success": True, "data": history},
                 status=status.HTTP_200_OK,
             )
+        except FileNotFoundError as e:
+            # Session not found
+            logger.warning(f"Session not found: {session_id}")
+            return Response(
+                {"success": False, "error": "Session not found"},
+                status=status.HTTP_404_NOT_FOUND,
+            )
+        
         except Exception as e:
+            # Server error
             logger.error(f"History error: {e}", exc_info=True)
             return Response(
-                {"success": False, "error": str(e)},
-                status=status.HTTP_400_BAD_REQUEST,
+                {"success": False, "error": "Failed to retrieve session history"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
 
@@ -112,11 +162,20 @@ class ResetContextAPIView(APIView):
                 },
                 status=status.HTTP_200_OK,
             )
+        except ValueError as e:
+            # Invalid session ID
+            logger.warning(f"Invalid session ID: {e}")
+            return Response(
+                {"success": False, "error": "Invalid session ID"},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+        
         except Exception as e:
+            # Server error
             logger.error(f"Reset context error: {e}", exc_info=True)
             return Response(
-                {"success": False, "error": str(e)},
-                status=status.HTTP_400_BAD_REQUEST,
+                {"success": False, "error": "Failed to reset context"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
 
@@ -268,3 +327,52 @@ class GoogleDriveFileContentAPIView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
 
+
+class UsageStatsAPIView(APIView):
+    """
+    GET /api/usage-stats/ - Get OpenAI token usage statistics.
+    DELETE /api/usage-stats/ - Reset usage statistics.
+    """
+
+    def get(self, request: Request) -> Response:
+        """Get usage statistics."""
+        try:
+            from infrastructure.openai_clients import OpenAIClientFactory
+            
+            stats = OpenAIClientFactory.get_usage_stats()
+            
+            return Response(
+                {
+                    "success": True,
+                    "data": stats,
+                    "message": "Token usage statistics since last reset"
+                },
+                status=status.HTTP_200_OK,
+            )
+        except Exception as e:
+            logger.error(f"Usage stats error: {e}", exc_info=True)
+            return Response(
+                {"success": False, "error": "Failed to retrieve usage stats"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+    
+    def delete(self, request: Request) -> Response:
+        """Reset usage statistics."""
+        try:
+            from infrastructure.openai_clients import OpenAIClientFactory
+            
+            OpenAIClientFactory.reset_usage_stats()
+            
+            return Response(
+                {
+                    "success": True,
+                    "message": "Usage statistics reset"
+                },
+                status=status.HTTP_200_OK,
+            )
+        except Exception as e:
+            logger.error(f"Reset usage stats error: {e}", exc_info=True)
+            return Response(
+                {"success": False, "error": "Failed to reset usage stats"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )

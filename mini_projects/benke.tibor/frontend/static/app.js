@@ -44,26 +44,27 @@ function hideTyping() {
     typingEl = null;
 }
 
-function addMessage(content, type = 'info', citations = null, debug = null) {
+function addMessage(content, type = 'info', citations = null, originalQuery = null) {
     clearEmptyState();
 
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${type}`;
 
-    let html = `<div class="message-content">${escapeHtml(content)}`;
+    let html = `<div class="message-content">`;
+    
+    // Add refresh button for bot messages (top-right corner)
+    if (type === 'bot' && originalQuery) {
+        html += `<button class="refresh-btn" title="Frissítés" onclick="refreshQuery('${escapeHtml(originalQuery).replace(/'/g, "\\'")}')">🔄</button>`;
+    }
+    
+    html += formatMessage(content);
 
     if (citations && citations.length > 0) {
         html += `<div class="citations">📎 Források: ${citations.join(', ')}</div>`;
     }
 
-    if (debug) {
-        html += `<div class="debug-panel">`;
-        if (debug.domain) html += `<span class="debug-label">Domain:</span> ${debug.domain}<br>`;
-        if (debug.session) html += `<span class="debug-label">Session:</span> ${debug.session.substring(0, 8)}...<br>`;
-        html += `</div>`;
-    }
-
     html += `</div>`;
+    
     messageDiv.innerHTML = html;
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -80,11 +81,41 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, m => map[m]);
 }
 
+function formatMessage(text) {
+    // Escape HTML first
+    let formatted = escapeHtml(text);
+    
+    // Convert Markdown-style headers to HTML
+    formatted = formatted.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    formatted = formatted.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    formatted = formatted.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+    
+    // Convert **bold** to <strong>
+    formatted = formatted.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    
+    // Convert bullet points (- item) to <ul><li>
+    formatted = formatted.replace(/^- (.+)$/gm, '<li>$1</li>');
+    formatted = formatted.replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>');
+    
+    // Convert numbered lists (1. item) to <ol><li>
+    formatted = formatted.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
+    
+    // Convert line breaks to <br>
+    formatted = formatted.replace(/\n/g, '<br>');
+    
+    return formatted;
+}
+
 function askQuestion(question) {
     clearEmptyState();
     queryInput.value = question;
     queryInput.focus();
     // Trigger submit
+    queryForm.dispatchEvent(new Event('submit'));
+}
+
+function refreshQuery(question) {
+    queryInput.value = question;
     queryForm.dispatchEvent(new Event('submit'));
 }
 
@@ -158,10 +189,7 @@ queryForm.addEventListener('submit', async (e) => {
             payload.answer || 'Sajnos nem tudtam válaszolni.',
             'bot',
             citations,
-            {
-                domain: payload.domain || 'general',
-                session: sessionId
-            }
+            query  // Pass original query for refresh button
         );
 
     } catch (error) {

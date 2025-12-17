@@ -19,7 +19,7 @@ class ApiConfig(AppConfig):
         try:
             # Import dependencies
             from pathlib import Path
-            from langchain_openai import ChatOpenAI
+            from infrastructure.openai_clients import OpenAIClientFactory
             from infrastructure.repositories import (
                 FileUserRepository,
                 FileConversationRepository,
@@ -32,18 +32,17 @@ class ApiConfig(AppConfig):
             user_repo = FileUserRepository(data_dir=settings.USERS_DIR)
             conversation_repo = FileConversationRepository(data_dir=settings.SESSIONS_DIR)
 
-            # Initialize RAG client (Qdrant-based)
+            # Initialize RAG client (Qdrant-based) - uses centralized embeddings
             rag_client = QdrantRAGClient(
                 qdrant_url=getattr(settings, 'QDRANT_URL', 'http://localhost:6334'),
-                collection_name=getattr(settings, 'QDRANT_COLLECTION', 'marketing'),
-                embedding_model=getattr(settings, 'EMBEDDING_MODEL', 'text-embedding-3-small')
+                collection_name=getattr(settings, 'QDRANT_COLLECTION', 'multi_domain_kb')
             )
 
-            # Initialize LLM
-            llm = ChatOpenAI(
+            # Initialize LLM from centralized factory
+            llm = OpenAIClientFactory.get_llm(
                 model=settings.OPENAI_MODEL,
                 temperature=settings.LLM_TEMPERATURE,
-                openai_api_key=settings.OPENAI_API_KEY,
+                api_key=settings.OPENAI_API_KEY
             )
 
             # Initialize agent

@@ -7,7 +7,8 @@ from api.views import (
     SessionHistoryAPIView, 
     ResetContextAPIView,
     GoogleDriveFilesAPIView,
-    GoogleDriveFileContentAPIView
+    GoogleDriveFileContentAPIView,
+    UsageStatsAPIView,
 )
 
 urlpatterns = [
@@ -16,4 +17,5 @@ urlpatterns = [
     path('reset-context/', ResetContextAPIView.as_view(), name='reset_context'),
     path('google-drive/files/', GoogleDriveFilesAPIView.as_view(), name='google_drive_files'),
     path('google-drive/files/<str:file_id>/content/', GoogleDriveFileContentAPIView.as_view(), name='google_drive_file_content'),
+    path('usage-stats/', UsageStatsAPIView.as_view(), name='usage_stats'),
 ]

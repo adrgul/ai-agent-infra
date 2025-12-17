@@ -1,0 +1,35 @@
+## ✅ Elkészült Fejlesztések
+
+- [x] Max bemeneti token limit beépítés (10k tokens, HTTP 413)
+- [x] Hibakezelés beépítés (retry logic, exponential backoff, detailed status codes)
+- [x] Multi-domain Qdrant collection (domain filtering, payload index)
+- [x] Centralizált OpenAI kliensek (singleton pattern, error handling)
+- [x] Token tracking és költség kalkuláció (/api/usage-stats/)
+- [x] Input validáció (empty check, token limit)
+- [x] Prompt truncation (100k token limit, auto-truncate)
+- [x] Frontend cleanup (debug panel, markdown formatting, refresh button)
+- [x] Swagger API dokumentáció (docs/API.md)
+- [x] README frissítés (hibakezelés, production features, API endpoints)
+
+## 🚧 Jövőbeli Fejlesztések
+
+### High Priority
+- [ ] **Rerank**: Citation re-ranking semantic relevancia alapján
+- [ ] **Chain of link**: Találati relevancia mérések és tracking
+- [ ] **Multi-query**: Query generation (5 variáció), frequency-based ranking
+- [ ] **Unit tesztek**: Error handling modul coverage (pytest)
+- [ ] **Integration tesztek**: Multi-domain RAG end-to-end
+
+### Medium Priority
+- [ ] **Szenzitív adatok kiszűrése**: PII detection a promptból (email, phone, SSN)
+- [ ] **Redis gyorsítótárazás**: Embedding cache, session cache
+- [ ] **Rate limiting**: Per-user rate limits (100 req/hour)
+- [ ] **Monitoring dashboard**: Prometheus + Grafana metrics
+- [ ] **BM25 sparse vectors**: Lexikális keresés támogatás (márkanevek, kódok)
+
+### Low Priority
+- [ ] **Authentication**: API key vagy JWT token auth
+- [ ] **Audit logging**: Compliance log minden query-hez
+- [ ] **Cost alerting**: Email alert napi/havi költség küszöb túllépésénél
+- [ ] **WebSocket support**: Real-time streaming responses
+- [ ] **Multi-language support**: Automatikus nyelvdetekció és fordítás - top találati azonosítók gyorsítótárazása kérdéssel (leggyakrabban kérdezett + like-oltak)

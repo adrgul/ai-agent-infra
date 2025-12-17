@@ -11,6 +11,7 @@ from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph, END
 
 from domain.models import DomainType, QueryResponse, Citation, Memory, Message
+from infrastructure.error_handling import check_token_limit, estimate_tokens, usage_tracker
 
 logger = logging.getLogger(__name__)
 
@@ -124,7 +125,7 @@ Category:"""
         return state
 
     async def _generation_node(self, state: AgentState) -> AgentState:
-        """Generate response using RAG context."""
+        """Generate response using RAG context with token limit protection."""
         logger.info("Generation node executing")
 
         # Build context from citations with content
@@ -153,8 +154,31 @@ User query: "{state['query']}"
 Provide a comprehensive answer based on the retrieved documents above.
 Combine information from multiple sources when they relate to the same topic.
 If asking about guidelines or rules, include ALL relevant details found in the documents.
+Use proper formatting with line breaks and bullet points for better readability.
 Answer in Hungarian if the query is in Hungarian, otherwise in English.
 """
+
+        # Check token limit before sending to OpenAI
+        try:
+            check_token_limit(prompt, max_tokens=100000)  # gpt-4o-mini 128k context
+            logger.info(f"Prompt size: ~{estimate_tokens(prompt)} tokens")
+        except ValueError as e:
+            logger.error(f"Token limit exceeded: {e}")
+            # Truncate context and retry
+            context_parts = context_parts[:3]  # Only use top 3 docs
+            context = "\n\n".join(context_parts)
+            prompt = f"""
+You are a helpful HR/IT/Finance/Legal/Marketing assistant.
+
+Retrieved documents:
+{context}
+
+User query: "{state['query']}"
+
+Provide an answer based on the retrieved documents above.
+Answer in Hungarian if the query is in Hungarian, otherwise in English.
+"""
+            logger.warning("Prompt truncated to fit token limit")
 
         response = await self.llm.ainvoke([HumanMessage(content=prompt)])
         answer = response.content
