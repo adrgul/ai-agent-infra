@@ -1,0 +1,27 @@
+# Core LangChain and LangGraph dependencies
+langchain
+langchain-openai==0.2.14
+langgraph==0.2.60
+langchain-core==0.3.28
+
+# OpenAI API
+openai==1.59.5
+
+# Data validation and models
+pydantic==2.10.5
+pydantic-settings==2.7.1
+
+# Environment variables
+python-dotenv==1.0.1
+
+# Utilities
+typing-extensions==4.12.2
+
+# Optional: for better date parsing in action items
+python-dateutil==2.9.0.post0
+
+# Development dependencies
+pytest==8.3.4
+pytest-asyncio==0.24.0
+black==24.10.0
+ruff==0.8.4
