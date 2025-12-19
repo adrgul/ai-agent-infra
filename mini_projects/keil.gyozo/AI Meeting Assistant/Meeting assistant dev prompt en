@@ -1,0 +1,970 @@
+# AI Meeting Assistant - Development Prompt
+
+## Project Overview
+
+Develop a **MeetingAI** Python application that automatically processes meeting notes and transcripts to:
+- Generate executive summaries
+- Extract action items (to-do list with owners and deadlines)
+- Produce structured JSON output
+- Optionally create Jira tickets
+- Optionally send emails and schedule calendar events
+
+---
+
+## Technical Requirements
+
+### Environment
+- **Python:** 3.11+
+- **Framework:** LangChain + LangGraph
+- **LLM:** OpenAI GPT-4 or Anthropic Claude
+- **Validation:** Pydantic v2
+- **API:** FastAPI (optional REST endpoint)
+
+### Dependencies
+```
+langchain>=0.1.0
+langgraph>=0.0.20
+langchain-openai>=0.0.5
+langchain-anthropic>=0.1.0
+pydantic>=2.5.0
+python-dotenv>=1.0.0
+fastapi>=0.108.0
+uvicorn>=0.25.0
+jira>=3.5.0  # optional
+```
+
+---
+
+## Project Structure
+
+Create the following folder structure:
+
+```
+meeting_assistant/
+├── src/
+│   ├── __init__.py
+│   ├── main.py              # Main entry point
+│   ├── config.py            # Configuration and environment variables
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── schemas.py       # Pydantic models
+│   ├── nodes/
+│   │   ├── __init__.py
+│   │   ├── parser.py        # Document parsing node
+│   │   ├── summarizer.py    # Summary generation node
+│   │   ├── action_extractor.py  # Action item extraction node
+│   │   └── output_formatter.py  # JSON formatting node
+│   ├── workflow/
+│   │   ├── __init__.py
+│   │   └── graph.py         # LangGraph workflow definition
+│   ├── integrations/
+│   │   ├── __init__.py
+│   │   ├── jira_client.py   # Jira integration
+│   │   └── email_client.py  # Email sending
+│   └── utils/
+│       ├── __init__.py
+│       └── helpers.py       # Helper functions
+├── tests/
+│   ├── __init__.py
+│   ├── test_parser.py
+│   ├── test_summarizer.py
+│   └── test_workflow.py
+├── data/
+│   └── sample_transcripts/  # Test transcripts
+├── outputs/                 # Generated JSON files
+├── .env.example
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## Pydantic Models (schemas.py)
+
+```python
+from pydantic import BaseModel, Field
+from typing import Optional
+from datetime import date, datetime
+from enum import Enum
+
+class Priority(str, Enum):
+    P1 = "P1"
+    P2 = "P2"
+    P3 = "P3"
+
+class TaskStatus(str, Enum):
+    TODO = "to-do"
+    IN_PROGRESS = "in-progress"
+    DONE = "done"
+
+class Task(BaseModel):
+    task_id: str = Field(..., description="Unique task identifier")
+    title: str = Field(..., description="Task title/description")
+    assignee: str = Field(..., description="Responsible person's name")
+    due_date: Optional[date] = Field(None, description="Deadline")
+    priority: Priority = Field(default=Priority.P2)
+    status: TaskStatus = Field(default=TaskStatus.TODO)
+    meeting_reference: str = Field(..., description="Meeting ID reference")
+    description: Optional[str] = Field(None, description="Detailed description")
+
+class MeetingSummary(BaseModel):
+    meeting_id: str = Field(..., description="Unique meeting identifier")
+    title: str = Field(..., description="Meeting title/topic")
+    date: date = Field(..., description="Meeting date")
+    participants: list[str] = Field(default_factory=list, description="List of participants")
+    duration_minutes: Optional[int] = Field(None, description="Meeting duration in minutes")
+    summary: str = Field(..., description="Executive summary")
+    key_decisions: list[str] = Field(default_factory=list, description="Key decisions made")
+    discussion_points: list[str] = Field(default_factory=list, description="Topics discussed")
+    next_steps: list[str] = Field(default_factory=list, description="Next steps")
+
+class MeetingOutput(BaseModel):
+    summary: MeetingSummary
+    tasks: list[Task] = Field(default_factory=list)
+    generated_at: datetime = Field(default_factory=datetime.now)
+    source_file: Optional[str] = Field(None, description="Source file name")
+
+class AgentState(BaseModel):
+    """LangGraph state object"""
+    raw_input: str = Field(..., description="Raw transcript text")
+    parsed_content: Optional[str] = Field(None)
+    summary: Optional[MeetingSummary] = Field(None)
+    tasks: list[Task] = Field(default_factory=list)
+    final_output: Optional[MeetingOutput] = Field(None)
+    error: Optional[str] = Field(None)
+```
+
+---
+
+## LangGraph Workflow (graph.py)
+
+```python
+from langgraph.graph import StateGraph, END
+from typing import Literal
+
+def build_meeting_workflow():
+    """Build the Meeting Assistant LangGraph workflow."""
+    
+    workflow = StateGraph(AgentState)
+    
+    # Add nodes
+    workflow.add_node("parse_document", parse_document_node)
+    workflow.add_node("generate_summary", generate_summary_node)
+    workflow.add_node("extract_actions", extract_actions_node)
+    workflow.add_node("format_output", format_output_node)
+    workflow.add_node("handle_error", handle_error_node)
+    
+    # Entry point
+    workflow.set_entry_point("parse_document")
+    
+    # Conditional edge: continue on success, handle error on failure
+    workflow.add_conditional_edges(
+        "parse_document",
+        check_parsing_success,
+        {
+            "success": "generate_summary",
+            "error": "handle_error"
+        }
+    )
+    
+    # Linear flow on success branch
+    workflow.add_edge("generate_summary", "extract_actions")
+    workflow.add_edge("extract_actions", "format_output")
+    workflow.add_edge("format_output", END)
+    workflow.add_edge("handle_error", END)
+    
+    return workflow.compile()
+
+def check_parsing_success(state: AgentState) -> Literal["success", "error"]:
+    """Check if parsing was successful."""
+    if state.error:
+        return "error"
+    if state.parsed_content and len(state.parsed_content) > 50:
+        return "success"
+    return "error"
+```
+
+### Workflow Diagram
+
+```
+┌─────────────────┐
+│  Document Input │  (TXT/Transcript)
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│   Parse & Clean │  (Normalization)
+└────────┬────────┘
+         │
+    ┌────┴────┐
+    │ Success?│
+    └────┬────┘
+         │
+    ┌────┴────┬──────────────┐
+    │         │              │
+    ▼         │              ▼
+┌────────┐    │      ┌─────────────┐
+│Summarize│   │      │Handle Error │
+└────┬───┘    │      └─────────────┘
+     │        │
+     ▼        │
+┌────────────┐│
+│Extract     ││
+│Actions     ││
+└────┬───────┘│
+     │        │
+     ▼        │
+┌────────────┐│
+│Format JSON ││
+└────┬───────┘│
+     │        │
+     ▼        │
+┌────────────┐│
+│   Output   ││
+└────────────┘│
+```
+
+---
+
+## Node Implementations
+
+### 1. Parser Node (parser.py)
+```python
+import re
+
+def normalize_whitespace(text: str) -> str:
+    """Normalize whitespace in text."""
+    text = re.sub(r'\r\n', '\n', text)
+    text = re.sub(r'[ \t]+', ' ', text)
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text.strip()
+
+def remove_timestamps(text: str) -> str:
+    """Remove common timestamp formats."""
+    # Patterns: [00:00:00], (00:00), 00:00:00, etc.
+    patterns = [
+        r'\[\d{1,2}:\d{2}(:\d{2})?\]',
+        r'\(\d{1,2}:\d{2}(:\d{2})?\)',
+        r'^\d{1,2}:\d{2}(:\d{2})?\s*',
+    ]
+    for pattern in patterns:
+        text = re.sub(pattern, '', text, flags=re.MULTILINE)
+    return text
+
+async def parse_document_node(state: AgentState) -> AgentState:
+    """
+    Process and clean raw transcript.
+    - Whitespace normalization
+    - Timestamp removal (optional)
+    - Speaker label recognition (optional)
+    """
+    try:
+        raw = state.raw_input.strip()
+        
+        if not raw:
+            state.error = "Empty input provided"
+            return state
+        
+        # Basic cleaning
+        cleaned = normalize_whitespace(raw)
+        cleaned = remove_timestamps(cleaned)
+        
+        state.parsed_content = cleaned
+        return state
+        
+    except Exception as e:
+        state.error = f"Parsing error: {str(e)}"
+        return state
+```
+
+### 2. Summarizer Node (summarizer.py)
+```python
+from langchain_openai import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+import json
+
+SUMMARY_PROMPT = """
+You are a professional meeting assistant. Based on the following meeting transcript, create a structured summary.
+
+TRANSCRIPT:
+{transcript}
+
+TASK:
+1. Identify the meeting topic and purpose
+2. List participants (if identifiable from the transcript)
+3. Create a concise executive summary (max 3-4 sentences)
+4. Extract key decisions made
+5. List discussion points
+6. Identify next steps mentioned
+
+Respond in JSON format with the following structure:
+{{
+    "title": "Meeting topic/title",
+    "participants": ["Name1", "Name2"],
+    "summary": "Executive summary...",
+    "key_decisions": ["Decision 1", "Decision 2"],
+    "discussion_points": ["Topic 1", "Topic 2"],
+    "next_steps": ["Step 1", "Step 2"]
+}}
+
+IMPORTANT: Return ONLY valid JSON, no additional text or markdown.
+"""
+
+def parse_json_response(content: str) -> dict:
+    """Parse JSON from LLM response, handling common issues."""
+    # Remove markdown code blocks if present
+    content = content.strip()
+    if content.startswith("```json"):
+        content = content[7:]
+    if content.startswith("```"):
+        content = content[3:]
+    if content.endswith("```"):
+        content = content[:-3]
+    
+    return json.loads(content.strip())
+
+def generate_meeting_id() -> str:
+    """Generate unique meeting ID."""
+    from datetime import datetime
+    return f"MTG-{datetime.now().strftime('%Y-%m-%d-%H%M%S')}"
+
+async def generate_summary_node(state: AgentState) -> AgentState:
+    """Generate summary using LLM."""
+    from src.models.schemas import MeetingSummary
+    from datetime import date
+    
+    try:
+        llm = ChatOpenAI(model="gpt-4o", temperature=0.3)
+        prompt = ChatPromptTemplate.from_template(SUMMARY_PROMPT)
+        
+        chain = prompt | llm
+        
+        response = await chain.ainvoke({"transcript": state.parsed_content})
+        
+        # Parse and validate JSON
+        summary_data = parse_json_response(response.content)
+        
+        state.summary = MeetingSummary(
+            meeting_id=generate_meeting_id(),
+            date=date.today(),
+            **summary_data
+        )
+        
+        return state
+        
+    except json.JSONDecodeError as e:
+        state.error = f"Failed to parse LLM response as JSON: {str(e)}"
+        return state
+    except Exception as e:
+        state.error = f"Summary generation error: {str(e)}"
+        return state
+```
+
+### 3. Action Extractor Node (action_extractor.py)
+```python
+from langchain_openai import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate
+import json
+
+ACTION_EXTRACTION_PROMPT = """
+Based on the following meeting summary and transcript, identify ALL action items/tasks.
+
+SUMMARY:
+{summary}
+
+TRANSCRIPT:
+{transcript}
+
+For each task, identify:
+1. What is the specific task (title)
+2. Who is responsible (assignee) - if unclear, write: "TBD"
+3. What is the deadline (due_date) - in YYYY-MM-DD format, if unclear: null
+4. What is the priority (P1/P2/P3) - default: P2
+5. Brief description if needed
+
+Respond in JSON array format:
+[
+    {{
+        "title": "Task description",
+        "assignee": "Person's name",
+        "due_date": "2025-01-15",
+        "priority": "P1",
+        "description": "Optional details"
+    }}
+]
+
+If there are no specific action items, respond with an empty array: []
+
+IMPORTANT: Return ONLY valid JSON array, no additional text or markdown.
+"""
+
+async def extract_actions_node(state: AgentState) -> AgentState:
+    """Extract action items using LLM."""
+    from src.models.schemas import Task
+    from src.nodes.summarizer import parse_json_response
+    
+    try:
+        llm = ChatOpenAI(model="gpt-4o", temperature=0.2)
+        prompt = ChatPromptTemplate.from_template(ACTION_EXTRACTION_PROMPT)
+        
+        chain = prompt | llm
+        
+        response = await chain.ainvoke({
+            "summary": state.summary.model_dump_json() if state.summary else "",
+            "transcript": state.parsed_content
+        })
+        
+        tasks_data = parse_json_response(response.content)
+        
+        # Handle case where LLM returns empty or invalid data
+        if not isinstance(tasks_data, list):
+            tasks_data = []
+        
+        state.tasks = [
+            Task(
+                task_id=f"TASK-{i+1:03d}",
+                meeting_reference=state.summary.meeting_id if state.summary else "UNKNOWN",
+                title=task.get("title", "Untitled Task"),
+                assignee=task.get("assignee", "TBD"),
+                due_date=task.get("due_date"),
+                priority=task.get("priority", "P2"),
+                description=task.get("description")
+            )
+            for i, task in enumerate(tasks_data)
+        ]
+        
+        return state
+        
+    except Exception as e:
+        state.error = f"Action extraction error: {str(e)}"
+        return state
+```
+
+### 4. Output Formatter Node (output_formatter.py)
+```python
+from datetime import datetime
+
+async def format_output_node(state: AgentState) -> AgentState:
+    """Assemble and validate final output."""
+    from src.models.schemas import MeetingOutput
+    
+    try:
+        state.final_output = MeetingOutput(
+            summary=state.summary,
+            tasks=state.tasks,
+            generated_at=datetime.now(),
+            source_file=getattr(state, 'source_file', None)
+        )
+        
+        return state
+        
+    except Exception as e:
+        state.error = f"Output formatting error: {str(e)}"
+        return state
+```
+
+### 5. Error Handler Node
+```python
+async def handle_error_node(state: AgentState) -> AgentState:
+    """Handle errors gracefully."""
+    if not state.error:
+        state.error = "An unknown error occurred"
+    
+    # Log error (implement proper logging in production)
+    print(f"❌ Error: {state.error}")
+    
+    return state
+```
+
+---
+
+## Main Entry Point (main.py)
+
+```python
+import asyncio
+from pathlib import Path
+from datetime import datetime
+import json
+
+from src.workflow.graph import build_meeting_workflow
+from src.models.schemas import AgentState
+
+async def process_meeting(
+    transcript: str, 
+    output_dir: str = "outputs",
+    save_output: bool = True
+) -> dict:
+    """
+    Process meeting transcript and generate output.
+    
+    Args:
+        transcript: Raw meeting transcript text
+        output_dir: Output directory path
+        save_output: Whether to save output to file
+        
+    Returns:
+        Processed meeting output as dictionary
+    """
+    # Initialize workflow
+    workflow = build_meeting_workflow()
+    
+    # Create initial state
+    initial_state = AgentState(raw_input=transcript)
+    
+    # Run workflow
+    result = await workflow.ainvoke(initial_state)
+    
+    # Check for errors
+    if result.error:
+        return {"error": result.error}
+    
+    # Save output to file
+    if save_output and result.final_output:
+        output_path = Path(output_dir)
+        output_path.mkdir(exist_ok=True)
+        
+        filename = f"meeting_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        filepath = output_path / filename
+        
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(
+                result.final_output.model_dump(), 
+                f, 
+                ensure_ascii=False, 
+                indent=2, 
+                default=str
+            )
+        
+        print(f"✅ Output saved: {filepath}")
+        
+    return result.final_output.model_dump() if result.final_output else {"error": "No output generated"}
+
+async def process_file(file_path: str, output_dir: str = "outputs") -> dict:
+    """Process a transcript file."""
+    path = Path(file_path)
+    
+    if not path.exists():
+        return {"error": f"File not found: {file_path}"}
+    
+    with open(path, 'r', encoding='utf-8') as f:
+        transcript = f.read()
+    
+    return await process_meeting(transcript, output_dir)
+
+async def main():
+    """Example usage."""
+    
+    sample_transcript = """
+    Sprint Planning Meeting - January 15, 2025
+    
+    Participants: John (Tech Lead), Peter (Backend), Anna (Frontend), Mary (PM)
+    
+    John: Welcome everyone. Today we'll discuss Q1 sprint priorities.
+    
+    Mary: Yes, the most important thing is to complete the login feature. This is P1 priority.
+    
+    Peter: I'll take care of the backend API, it will be ready by January 20th.
+    
+    Anna: I'll handle the frontend part, but I'll need the design mockups first.
+    
+    John: Anna, please prepare the UI mockup review by January 17th.
+    Peter, after the backend API, the performance audit is next, we're planning that for end of Q1.
+    
+    Mary: To summarize: login feature is P1, backend by Jan 20, frontend mockup by Jan 17.
+    
+    John: Yes, and let's not forget code reviews. Every PR needs a reviewer.
+    """
+    
+    print("🚀 Processing meeting transcript...\n")
+    
+    result = await process_meeting(sample_transcript)
+    
+    print("\n📋 Result:")
+    print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+---
+
+## Configuration (config.py)
+
+```python
+from pydantic_settings import BaseSettings
+from typing import Optional
+
+class Settings(BaseSettings):
+    """Application settings loaded from environment variables."""
+    
+    # LLM Configuration
+    openai_api_key: Optional[str] = None
+    anthropic_api_key: Optional[str] = None
+    llm_model: str = "gpt-4o"
+    llm_temperature: float = 0.3
+    
+    # Jira Configuration (optional)
+    jira_server: Optional[str] = None
+    jira_email: Optional[str] = None
+    jira_api_token: Optional[str] = None
+    jira_project_key: Optional[str] = None
+    
+    # Email Configuration (optional)
+    smtp_server: Optional[str] = None
+    smtp_port: int = 587
+    smtp_email: Optional[str] = None
+    smtp_password: Optional[str] = None
+    
+    # Application Settings
+    output_dir: str = "outputs"
+    log_level: str = "INFO"
+    
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
+
+settings = Settings()
+```
+
+---
+
+## Environment Variables (.env.example)
+
+```env
+# LLM Provider (choose one)
+OPENAI_API_KEY=sk-...
+ANTHROPIC_API_KEY=sk-ant-...
+
+# LLM Settings
+LLM_MODEL=gpt-4o
+LLM_TEMPERATURE=0.3
+
+# Jira Integration (optional)
+JIRA_SERVER=https://your-domain.atlassian.net
+JIRA_EMAIL=your-email@example.com
+JIRA_API_TOKEN=your-jira-api-token
+JIRA_PROJECT_KEY=PROJ
+
+# Email (optional)
+SMTP_SERVER=smtp.gmail.com
+SMTP_PORT=587
+SMTP_EMAIL=your-email@gmail.com
+SMTP_PASSWORD=app-specific-password
+
+# Application
+OUTPUT_DIR=outputs
+LOG_LEVEL=INFO
+```
+
+---
+
+## Extension Tasks
+
+### 1. Jira Integration (jira_client.py)
+```python
+from jira import JIRA
+from src.models.schemas import Task
+from src.config import settings
+
+class JiraClient:
+    def __init__(self):
+        self.client = JIRA(
+            server=settings.jira_server,
+            basic_auth=(settings.jira_email, settings.jira_api_token)
+        )
+    
+    def create_ticket(self, task: Task) -> str:
+        """Create Jira ticket from Task object."""
+        issue_dict = {
+            'project': {'key': settings.jira_project_key},
+            'summary': task.title,
+            'description': task.description or task.title,
+            'issuetype': {'name': 'Task'},
+            'priority': {'name': self._map_priority(task.priority)},
+        }
+        
+        if task.due_date:
+            issue_dict['duedate'] = task.due_date.isoformat()
+        
+        issue = self.client.create_issue(fields=issue_dict)
+        return f"{settings.jira_server}/browse/{issue.key}"
+    
+    def _map_priority(self, priority: str) -> str:
+        mapping = {"P1": "Highest", "P2": "Medium", "P3": "Low"}
+        return mapping.get(priority, "Medium")
+```
+
+### 2. FastAPI Endpoint (api.py)
+```python
+from fastapi import FastAPI, UploadFile, File, HTTPException
+from src.main import process_meeting
+
+app = FastAPI(title="Meeting Assistant API")
+
+@app.post("/process-meeting")
+async def process_meeting_endpoint(file: UploadFile = File(...)):
+    """Process uploaded meeting transcript."""
+    try:
+        content = await file.read()
+        transcript = content.decode('utf-8')
+        
+        result = await process_meeting(transcript, save_output=True)
+        
+        if "error" in result:
+            raise HTTPException(status_code=400, detail=result["error"])
+        
+        return result
+        
+    except UnicodeDecodeError:
+        raise HTTPException(status_code=400, detail="File must be UTF-8 encoded text")
+
+@app.post("/process-text")
+async def process_text_endpoint(transcript: str):
+    """Process meeting transcript text directly."""
+    result = await process_meeting(transcript, save_output=True)
+    
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    
+    return result
+```
+
+### 3. Multi-format Input Support
+```python
+from pathlib import Path
+import docx  # python-docx
+
+def read_transcript(file_path: str) -> str:
+    """Read transcript from various file formats."""
+    path = Path(file_path)
+    suffix = path.suffix.lower()
+    
+    if suffix in ['.txt', '.md']:
+        with open(path, 'r', encoding='utf-8') as f:
+            return f.read()
+    
+    elif suffix == '.docx':
+        doc = docx.Document(path)
+        return '\n'.join([para.text for para in doc.paragraphs])
+    
+    elif suffix == '.srt':
+        return parse_srt(path)
+    
+    else:
+        raise ValueError(f"Unsupported file format: {suffix}")
+
+def parse_srt(path: Path) -> str:
+    """Parse SRT subtitle file."""
+    with open(path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # Remove timestamps and sequence numbers
+    import re
+    lines = content.split('\n')
+    text_lines = []
+    
+    for line in lines:
+        line = line.strip()
+        # Skip empty lines, numbers, and timestamps
+        if not line or line.isdigit():
+            continue
+        if re.match(r'\d{2}:\d{2}:\d{2}', line):
+            continue
+        text_lines.append(line)
+    
+    return ' '.join(text_lines)
+```
+
+---
+
+## Testing Guide
+
+### Unit Tests (tests/test_workflow.py)
+```python
+import pytest
+from src.workflow.graph import build_meeting_workflow
+from src.models.schemas import AgentState
+
+@pytest.mark.asyncio
+async def test_full_workflow():
+    """Test complete workflow execution."""
+    workflow = build_meeting_workflow()
+    
+    transcript = """
+    Meeting: Project Update
+    Participants: Alice, Bob
+    Alice: We need to finish the report by Friday.
+    Bob: I'll handle the data section.
+    """
+    
+    state = AgentState(raw_input=transcript)
+    result = await workflow.ainvoke(state)
+    
+    assert result.error is None
+    assert result.final_output is not None
+    assert result.summary is not None
+    assert len(result.summary.summary) > 0
+
+@pytest.mark.asyncio
+async def test_empty_input():
+    """Test handling of empty input."""
+    workflow = build_meeting_workflow()
+    
+    state = AgentState(raw_input="")
+    result = await workflow.ainvoke(state)
+    
+    assert result.error is not None
+
+@pytest.mark.asyncio
+async def test_action_extraction():
+    """Test action item extraction."""
+    workflow = build_meeting_workflow()
+    
+    transcript = """
+    John: Alice, please send the report by Monday.
+    Alice: Sure, I'll do that.
+    John: Bob, review the code by Wednesday.
+    """
+    
+    state = AgentState(raw_input=transcript)
+    result = await workflow.ainvoke(state)
+    
+    assert len(result.tasks) >= 2
+```
+
+### Running Tests
+```bash
+# Install test dependencies
+pip install pytest pytest-asyncio
+
+# Run all tests
+pytest tests/ -v
+
+# Run with coverage
+pip install pytest-cov
+pytest tests/ --cov=src --cov-report=html
+```
+
+---
+
+## Expected Output Example
+
+```json
+{
+  "summary": {
+    "meeting_id": "MTG-2025-01-15-143052",
+    "title": "Q1 Sprint Planning",
+    "date": "2025-01-15",
+    "participants": ["John", "Peter", "Anna", "Mary"],
+    "duration_minutes": null,
+    "summary": "The team discussed Q1 sprint priorities. The login feature was assigned P1 priority. Peter will handle the backend API by January 20th, and Anna will prepare the UI mockup review by January 17th.",
+    "key_decisions": [
+      "Login feature is P1 priority",
+      "Every PR requires a code reviewer"
+    ],
+    "discussion_points": [
+      "Q1 sprint priorities",
+      "Login feature development",
+      "Performance audit planning"
+    ],
+    "next_steps": [
+      "Backend API development - Peter - Jan 20",
+      "UI mockup review - Anna - Jan 17",
+      "Performance audit - End of Q1"
+    ]
+  },
+  "tasks": [
+    {
+      "task_id": "TASK-001",
+      "title": "Backend API development - login endpoint",
+      "assignee": "Peter",
+      "due_date": "2025-01-20",
+      "priority": "P1",
+      "status": "to-do",
+      "meeting_reference": "MTG-2025-01-15-143052",
+      "description": "Implement backend API for login feature"
+    },
+    {
+      "task_id": "TASK-002",
+      "title": "UI mockup review preparation",
+      "assignee": "Anna",
+      "due_date": "2025-01-17",
+      "priority": "P1",
+      "status": "to-do",
+      "meeting_reference": "MTG-2025-01-15-143052",
+      "description": "Prepare frontend design mockups for login feature"
+    }
+  ],
+  "generated_at": "2025-01-15T14:30:52",
+  "source_file": null
+}
+```
+
+---
+
+## Development Steps
+
+Follow this order for implementation:
+
+1. **Basic Structure** - Create folder structure and install dependencies
+2. **Pydantic Models** - Complete schemas.py implementation
+3. **Parser Node** - Simple text processing
+4. **Summarizer Node** - LLM integration with prompt
+5. **Action Extractor** - Task extraction from transcript
+6. **Workflow Assembly** - LangGraph graph.py
+7. **Main Entry Point** - main.py with testing
+8. **Unit Tests** - Tests for each node
+9. **Integrations** - Jira, email (optional)
+10. **FastAPI** - REST endpoint (optional)
+
+---
+
+## Tips for VS Code Development
+
+### Recommended Extensions
+- Python (Microsoft)
+- Pylance
+- Python Debugger
+- GitLens
+- Thunder Client (API testing)
+
+### Launch Configuration (.vscode/launch.json)
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Main",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "src.main",
+      "console": "integratedTerminal",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "name": "Run Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["tests/", "-v"],
+      "console": "integratedTerminal"
+    }
+  ]
+}
+```
+
+### Settings (.vscode/settings.json)
+```json
+{
+  "python.analysis.typeCheckingMode": "basic",
+  "python.formatting.provider": "black",
+  "editor.formatOnSave": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
+}
+```
+
+---
+
+**Usage:** Copy this prompt into VS Code with Claude Code or another AI assistant and ask it to implement step by step!
