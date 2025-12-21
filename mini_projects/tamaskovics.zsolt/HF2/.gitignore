@@ -1,0 +1,7 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+
+qdrant_storage/
+qdrant_storage_backup.tgz
