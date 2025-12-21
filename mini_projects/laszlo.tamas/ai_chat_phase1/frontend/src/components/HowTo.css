@@ -1,0 +1,57 @@
+.howto-panel {
+  width: 300px;
+  background-color: #f9f9f9;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.howto-content {
+  padding: 1rem;
+}
+
+.howto-content pre {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+  color: #333;
+}
+
+.howto-content h1 {
+  font-size: 1rem;
+  margin: 0 0 0.75rem 0;
+  color: #343541;
+}
+
+.howto-content h2 {
+  font-size: 0.9rem;
+  margin: 1rem 0 0.5rem 0;
+  color: #565869;
+}
+
+.howto-content h3 {
+  font-size: 0.8rem;
+  margin: 0.75rem 0 0.4rem 0;
+  color: #666;
+}
+
+/* Scrollbar styling */
+.howto-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.howto-panel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.howto-panel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.howto-panel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
