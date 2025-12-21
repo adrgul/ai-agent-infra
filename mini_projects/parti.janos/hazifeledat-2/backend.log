@@ -1,0 +1,20 @@
+INFO:     Started server process [3106]
+INFO:     Waiting for application startup.
+2025-12-21 15:28:31,177 - __main__ - INFO - Initializing KnowledgeRouter backend...
+2025-12-21 15:28:31,177 - __main__ - INFO - OPENAI_API_KEY found.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:53683 - "GET /health HTTP/1.1" 200 OK
+2025-12-21 15:29:14,966 - __main__ - INFO - Received chat request: Hány nappal kell előtte jelezzem ha szabadságra akarok menni?
+2025-12-21 15:29:15,889 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-12-21 15:29:19,001 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-12-21 15:29:20,605 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+DEBUG: Routed to Domain='hr', Intent='query', Tool='none'
+DEBUG: Retrieving for 'Hány nappal kell előtte jelezzem ha szabadságra akarok menni?' in 'hr'...
+DEBUG: Found 3 documents with scores.
+INFO:     127.0.0.1:54167 - "POST /api/chat HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+2025-12-21 15:29:51,190 - __main__ - INFO - KnowledgeRouter backend shutting down...
+INFO:     Application shutdown complete.
+INFO:     Finished server process [3106]
