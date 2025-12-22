@@ -8,17 +8,11 @@ An intelligent full-stack AI agent that generates personalized city briefings wi
 
 ### 1️⃣ Copy Environment File & Add OpenAI API Key
 
-```bash
-cp .env.sample .env
-nano .env
-```
 
 In the Backend library, edit `.env.rename` and add your OpenAI API key, and rename it to .env
 
 In the Frontend library, rename `.env.rename` to .env this is a public API
 
-
-> ℹ️ **Note**: The app works without OpenAI key, but AI-powered briefings require it. Get a key at [platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys)
 
 ### 2️⃣ Run the Application
 
