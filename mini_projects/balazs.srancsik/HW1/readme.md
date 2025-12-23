@@ -1,4 +1,4 @@
-This folder contains a modified version of the AI Chat sample. 
+This folder contains a modified version of the AI Chat sample.  
 A new radio channel related API is implemented: https://fi1.api.radio-browser.info
 The user can interact with this API and ask various questions about the radio stations, such as: 
 🔍 Station Search Questions
