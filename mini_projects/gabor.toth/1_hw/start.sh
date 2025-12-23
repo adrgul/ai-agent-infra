@@ -32,7 +32,11 @@ cleanup() {
     
     # Portok felszabadítása
     echo -e "${YELLOW}Portok felszabadítása...${NC}"
-    sudo lsof -i :3000,:5173 2>/dev/null | awk 'NR!=1 {print $2}' | sort -u | xargs sudo kill -9 2>/dev/null || true
+    if command -v fuser &> /dev/null; then
+        fuser -k 3000/tcp 5173/tcp 2>/dev/null || true
+    else
+        lsof -i :3000,:5173 2>/dev/null | awk 'NR!=1 {print $2}' | sort -u | xargs kill -9 2>/dev/null || true
+    fi
     sleep 1
     
     echo -e "${GREEN}✅ Összes szerver leállítva${NC}"
@@ -51,7 +55,11 @@ echo -e "\n${YELLOW}1️⃣ Portok ellenőrzése...${NC}"
 for port in 3000 5173; do
     if lsof -i :$port 2>/dev/null | grep -q LISTEN; then
         echo -e "${YELLOW}  Port $port már foglalt, felszabadítás...${NC}"
-        sudo lsof -i :$port 2>/dev/null | awk 'NR!=1 {print $2}' | xargs sudo kill -9 2>/dev/null || true
+        if command -v fuser &> /dev/null; then
+            fuser -k $port/tcp 2>/dev/null || true
+        else
+            lsof -i :$port 2>/dev/null | awk 'NR!=1 {print $2}' | xargs kill -9 2>/dev/null || true
+        fi
         sleep 1
     fi
 done
