@@ -17,6 +17,8 @@ services:
       - ./backend/.env
     environment:
       - QDRANT_URL=http://qdrant:6333
+    volumes:
+      - ./backend/knowledge_base:/app/knowledge_base
     depends_on:
       - qdrant
 

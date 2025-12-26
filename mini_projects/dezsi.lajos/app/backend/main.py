@@ -64,20 +64,55 @@ async def reset_context(conversation_id: str, service: ChatService = Depends(get
     await service.clear_history(conversation_id)
     return {"status": "cleared"}
 
+@app.get("/debug/conversations")
+async def list_conversations():
+    """Debug endpoint to list all active conversation IDs in memory."""
+    repo = container.repo
+    # Accessing private attribute for debug purposes
+    if hasattr(repo, "_conversations"):
+         return {"active_conversations": list(repo._conversations.keys())}
+    return {"active_conversations": []}
+
 @app.post("/seed_kb")
 async def seed_kb():
-    """Seed the vector DB with some sample medical policies for RAG demo."""
+    """
+    Seed the vector DB with policies from the knowledge base directory.
+    Generates PDFs if they don't exist, then ingests them.
+    """
     db = container.vector_db
-    policies = [
-        {"text": "For password reset, users must verify identity via SMS code.", "source": "KB-Security-01"},
-        {"text": "If the Submit button is missing on Call Report, check if the report status is 'Planned' or 'Saved'.", "source": "KB-UI-Issues"},
-        {"text": "Tier 1 handles basic login and how-to questions.", "source": "SLA-Definitions"},
-        {"text": "Tier 2 handles data integration and specific application errors.", "source": "SLA-Definitions"},
-        {"text": "Critical system outages are Tier 3.", "source": "SLA-Definitions"},
-    ]
-    for p in policies:
-        await db.upsert(p["text"], {"source": p["source"]})
-    return {"status": "seeded", "count": len(policies)}
+    
+    # 1. Generate KB if needed
+    kb_dir = os.path.join(os.path.dirname(__file__), "knowledge_base")
+    script_path = os.path.join(os.path.dirname(__file__), "scripts", "generate_kb.py")
+    
+    if not os.path.exists(kb_dir) or not os.listdir(kb_dir):
+        print("DEBUG: Generating Knowledge Base PDFs...")
+        import subprocess
+        try:
+            subprocess.run(["python", script_path], check=True)
+        except Exception as e:
+            print(f"ERROR running generation script: {e}")
+            return {"status": "error", "message": "Failed to generate PDFs. Please ensure dependencies are installed."}
+
+    # 2. Ingest
+    ingested_count = 0
+    chunks_count = 0
+    if os.path.exists(kb_dir):
+        files = [f for f in os.listdir(kb_dir) if f.endswith(".pdf") or f.endswith(".txt")]
+        for f in files:
+            path = os.path.join(kb_dir, f)
+            # Default tenant_id for demo. In prod, this would come from an admin API or config.
+            # Using multiple tenants to show capability
+            tenant = "tenant_a" if "Tier_1" in f else "tenant_b" # Just to demo separation
+            
+            # Use 'default' or a specific tenant for general documents
+            tenant = "default" 
+            
+            count = await db.ingest_document(path, tenant_id=tenant)
+            chunks_count += count
+            ingested_count += 1
+            
+    return {"status": "seeded", "files_ingested": ingested_count, "total_chunks": chunks_count}
 
 # Instructions for developer (as requested)
 """
