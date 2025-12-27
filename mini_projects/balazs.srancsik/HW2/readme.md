@@ -5,6 +5,7 @@ Ferenc Molnár's Pál Utcai Fiúk was preloaded from a pdf file and has been pro
 You will find 2 example screenshots how the code is working in this the same folder next to this readme file.
 
 📖 Book Query Features
+
 "Who are the main characters in Pál Utcai Fiúk?"
 "What is the plot of Ferenc Molnár's novel?"
 "Describe the setting of the story"
@@ -29,3 +30,4 @@ You will find 2 example screenshots how the code is working in this the same fol
 "What is the meaning behind the title Pál Utcai Fiúk?"
 "Describe the uniforms of the rival gangs"
 "What role do adults play in the children's world?"
+
