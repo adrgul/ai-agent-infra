@@ -1,0 +1,23 @@
+# FastAPI
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+python-multipart==0.0.6
+
+# OpenAI
+openai==1.54.0
+httpx==0.27.0
+
+# Database
+psycopg2-binary==2.9.9
+qdrant-client==1.7.0
+
+# Document Processing
+PyPDF2==3.0.1
+chardet==5.2.0
+
+# LangChain & LangGraph (also in core, but explicit for clarity)
+langchain-core>=0.1.25,<0.2.0
+langchain-openai==0.0.5
+langchain-text-splitters==0.0.1
+langgraph==0.0.26
