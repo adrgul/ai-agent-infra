@@ -48,3 +48,11 @@ class TicketOutput(BaseModel):
     analysis: Analysis
     triage_decision: TriageDecision
     answer_draft: AnswerDraft
+    ticket_created: Optional[Dict[str, Any]] = None
+
+class TicketCreate(BaseModel):
+    title: str = Field(description="Title of the ticket")
+    description: str = Field(description="Detailed description")
+    priority: Literal["Low", "Medium", "High", "Critical"]
+    category: Optional[str] = Field(None, description="Category e.g., 'Bug', 'Access', 'Question'")
+    tags: List[str] = []

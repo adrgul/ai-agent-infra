@@ -1,0 +1,7 @@
+# HR Department (Human Resources)
+
+The HR department is responsible for managing all aspects of the employee lifecycle and people-related operations within the organization. This includes workforce planning, recruitment, interviewing, hiring, onboarding, role definitions, contracts, compensation, payroll coordination, benefits, time off, and termination processes. HR oversees performance management, feedback cycles, promotions, training, learning and development, and career progression.
+
+HR is also responsible for employee relations and workplace culture. This includes handling interpersonal conflicts, grievances, misconduct, disciplinary actions, harassment reports, burnout, well-being concerns, and mediation between employees or teams. HR ensures compliance with labor laws, internal policies, ethical standards, and company regulations, and is the authority on employment-related rules and procedures.
+
+Any issue involving employees as people rather than system users—such as hiring decisions, role clarity, performance concerns, compensation questions, policy interpretation, workplace behavior, or legal employment matters—belongs to HR. HR does not implement technical systems or make product decisions but focuses on people, fairness, compliance, and organizational health.

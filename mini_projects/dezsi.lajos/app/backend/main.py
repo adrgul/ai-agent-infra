@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 from domain.models import ChatRequest, ChatResponse
 from infrastructure.repositories import InMemConversationRepository
-from infrastructure.tool_clients import GeminiClient, QdrantVectorDB
+from infrastructure.tool_clients import GeminiClient, QdrantVectorDB, RestTicketClient
 from services.agent import TriageAgent
 from services.chat_service import ChatService
 
@@ -30,7 +30,13 @@ class Container:
         self.repo = InMemConversationRepository()
         self.llm_client = GeminiClient()
         self.vector_db = QdrantVectorDB() # Will create local DB
-        self.agent = TriageAgent(self.llm_client, self.vector_db)
+        
+        # Ticket System Config
+        ticket_url = os.getenv("TICKET_SYSTEM_URL", "http://localhost:9000/api")
+        ticket_key = os.getenv("TICKET_SYSTEM_API_KEY", "")
+        self.ticket_client = RestTicketClient(base_url=ticket_url, api_key=ticket_key)
+        
+        self.agent = TriageAgent(self.llm_client, self.vector_db, self.ticket_client)
         self.chat_service = ChatService(self.agent, self.repo)
 
 container = Container()

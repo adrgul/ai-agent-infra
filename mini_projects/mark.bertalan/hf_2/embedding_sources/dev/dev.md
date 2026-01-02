@@ -1,0 +1,7 @@
+# Development Department (Dev / Engineering)
+
+The Development department is responsible for the design, implementation, maintenance, and evolution of all software systems and technical infrastructure. This includes application development, backend and frontend code, APIs, databases, system architecture, integrations, automation, testing, deployment pipelines, and technical documentation. Dev owns the correctness, performance, scalability, security, and reliability of technical solutions.
+
+The Development team handles feature development, bug fixing, refactoring, performance optimization, technical debt reduction, and architectural decisions. It evaluates technical feasibility, selects tools and technologies, and ensures systems meet functional and non-functional requirements. Dev is responsible for diagnosing root causes of technical failures and implementing long-term fixes rather than workarounds.
+
+Any problem involving code behavior, system errors, unexpected outputs, integrations not working, data issues, performance bottlenecks, security concerns, or technical design questions belongs to Development. Dev does not handle user communication, policy decisions, or people management unless the issue directly affects system implementation.

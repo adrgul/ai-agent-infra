@@ -10,3 +10,4 @@ httpx
 fpdf
 pypdf
 langchain-text-splitters
+aiohttp

@@ -3,8 +3,8 @@ from langgraph.graph import StateGraph, END
 from langchain_core.messages import BaseMessage, SystemMessage, HumanMessage, AIMessage
 import json
 
-from domain.models import Analysis, TriageDecision, AnswerDraft, TicketOutput
-from domain.interfaces import ILLMClient, IVectorDBClient
+from domain.models import Analysis, TriageDecision, AnswerDraft, TicketOutput, TicketCreate
+from domain.interfaces import ILLMClient, IVectorDBClient, ITicketClient
 
 class AgentState(TypedDict):
     messages: List[BaseMessage]
@@ -12,12 +12,14 @@ class AgentState(TypedDict):
     triage: Dict[str, Any]
     context: List[str]
     draft: Dict[str, Any]
+    ticket_result: Dict[str, Any]
     final_output: Dict[str, Any]
 
 class TriageAgent:
-    def __init__(self, llm_client: ILLMClient, vector_db: IVectorDBClient):
+    def __init__(self, llm_client: ILLMClient, vector_db: IVectorDBClient, ticket_client: ITicketClient = None):
         self.llm = llm_client
         self.vector_db = vector_db
+        self.ticket_client = ticket_client
         self.graph = self._build_graph()
 
     def _build_graph(self):
@@ -25,6 +27,7 @@ class TriageAgent:
 
         workflow.add_node("analyze_intent", self._analyze_intent)
         workflow.add_node("triage_ticket", self._triage_ticket)
+        workflow.add_node("create_ticket", self._create_ticket) # Replaces simple edge
         workflow.add_node("retrieve_context", self._retrieve_context)
         workflow.add_node("draft_response", self._draft_response)
         workflow.add_node("create_output", self._create_output)
@@ -32,7 +35,8 @@ class TriageAgent:
         workflow.set_entry_point("analyze_intent")
         
         workflow.add_edge("analyze_intent", "triage_ticket")
-        workflow.add_edge("triage_ticket", "retrieve_context")
+        workflow.add_edge("triage_ticket", "create_ticket")
+        workflow.add_edge("create_ticket", "retrieve_context")
         workflow.add_edge("retrieve_context", "draft_response")
         workflow.add_edge("draft_response", "create_output")
         workflow.add_edge("create_output", END)
@@ -59,9 +63,37 @@ class TriageAgent:
         Analysis: {json.dumps(analysis)}
         
         Provide the decision, responsible party, reasoning, and if escalation is needed.
+        
+        IMPORTANT: 
+        - 'escalation_needed' MUST be True if the decision is Tier 2 Support, Tier 3 Support, or Vendor Product Support.
+        - 'escalation_needed' should be False ONLY for Tier 1 Support.
         """
         decision = await self.llm.generate_structured(prompt, TriageDecision)
         return {"triage": decision.model_dump()}
+
+    async def _create_ticket(self, state: AgentState):
+        triage = state["triage"]
+        analysis = state["analysis"]
+        
+        # Check if escalation is needed and client is available
+        if triage.get("escalation_needed") and self.ticket_client:
+            print(f"DEBUG: Escalation needed. Creating ticket via {self.ticket_client.__class__.__name__}")
+            # Map analysis/triage to TicketCreate
+            ticket = TicketCreate(
+                title=f"[{triage['support_tier']}] {analysis['summary']}",
+                description=f"Intent: {analysis['intent']}\n\nReasoning: {triage['reasoning']}\n\nComplexity: {analysis['complexity']}",
+                priority=analysis['complexity'], # Mapping complexity to priority directly for simplicity
+                category=analysis['intent'],
+                tags=[triage['support_tier'], analysis['intent']]
+            )
+            try:
+                result = await self.ticket_client.create_ticket(ticket)
+                return {"ticket_result": result}
+            except Exception as e:
+                print(f"ERROR: Failed to create ticket: {e}")
+                return {"ticket_result": {"error": str(e)}}
+        
+        return {"ticket_result": None}
 
     async def _retrieve_context(self, state: AgentState):
         analysis = state["analysis"]
@@ -76,6 +108,8 @@ class TriageAgent:
         triage = state["triage"]
         user_message = state["messages"][-1].content
         
+        ticket_result = state.get("ticket_result")
+        
         context_str = "\n\n".join(context)
         
         prompt = f"""You are a helpful Medical Support Assistant.
@@ -88,10 +122,14 @@ class TriageAgent:
         
         Triage Info:
         {json.dumps(triage)}
+
+        Ticket Info (if created):
+        {json.dumps(ticket_result) if ticket_result else "No ticket created"}
         
         Analysis:
         {json.dumps(analysis)}
         
+        If a ticket was created, provide the Ticket ID to the user.
         If the issue is escalated (Tier 2/3/Product), inform the user that it has been forwarded to the responsible team.
         Provide citations if available in the context.
         """
@@ -103,7 +141,8 @@ class TriageAgent:
             "final_output": {
                 "analysis": state["analysis"],
                 "triage_decision": state["triage"],
-                "answer_draft": state["draft"]
+                "answer_draft": state["draft"],
+                "ticket_created": state.get("ticket_result")
             }
         }
 
@@ -114,6 +153,7 @@ class TriageAgent:
             "triage": {},
             "context": [],
             "draft": {},
+            "ticket_result": None,
             "final_output": {}
         })
         return result["final_output"]
