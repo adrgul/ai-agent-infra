@@ -1,10 +1,10 @@
-# Meeting Embedding CLI (Homework.02)
+# Meeting Minutes Embedding CLI (Homework.02)
 
-Minimal CLI app that demonstrates creating OpenAI embeddings for meeting prompts, storing them in a local ChromaDB vector store, and performing nearest-neighbor retrieval.
+CLI app 1.0 creating OpenAI embeddings for Company meeting minutes/archives, storing them in a local ChromaDB vector store, and performing nearest-neighbor retrieval.
 
 Quick overview
 - Language: Python 3.11+
-- Vector DB: ChromaDB (duckdb+parquet persistence)
+- Vector DB: ChromaDB (
 - Embeddings: OpenAI Embeddings API (model configurable via `.env`)
 - CLI: interactive terminal loop
 
@@ -17,7 +17,9 @@ Files
 - `requirements.txt` — Python dependencies
 - `.env.example` — example environment variables
 
+
 Getting started
+---------------
 
 1. Copy `.env.example` to `.env` and fill in your OpenAI API key:
 
@@ -46,6 +48,7 @@ docker run -it --env-file .env embedding-demo
 ```
 
 Usage
+-----
 
 Type a free-text prompt and press Enter. The app will:
 1. Create an embedding for your prompt using the configured OpenAI model.
@@ -85,7 +88,9 @@ What did we decide in the last planning meeting?
 
 The hybrid implementation rebuilds an in-memory BM25 index from the stored documents on inserts. For small datasets this is efficient and practical for a demo. For larger datasets consider incremental BM25 updates or a persistent lexical index (Whoosh, Elasticsearch).
 
+
 Testing
+--------------
 
 Unit tests use `pytest`. To run the tests locally:
 
