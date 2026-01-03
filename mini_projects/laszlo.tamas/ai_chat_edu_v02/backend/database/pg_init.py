@@ -108,6 +108,9 @@ def init_postgres_schema():
                     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
                     ended_at TIMESTAMPTZ,
                     processed_for_ltm BOOLEAN NOT NULL DEFAULT FALSE,
+                    title TEXT,
+                    last_message_at TIMESTAMPTZ,
+                    is_deleted BOOLEAN NOT NULL DEFAULT FALSE,
                     CONSTRAINT fk_chat_sessions_tenant
                         FOREIGN KEY (tenant_id)
                         REFERENCES tenants (id)

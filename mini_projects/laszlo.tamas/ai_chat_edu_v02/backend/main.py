@@ -9,6 +9,7 @@ from api.routes import router
 from api.document_endpoints import router as document_router
 from api.session_endpoints import router as session_router
 from api.websocket_endpoints import router as websocket_router
+from api.admin_endpoints import router as admin_router
 from database.pg_init import init_postgres_schema
 
 # Configure logging
@@ -75,6 +76,7 @@ app.add_middleware(
 app.include_router(router, prefix="/api")
 app.include_router(document_router)  # Already has /api/documents prefix
 app.include_router(session_router)  # Already has /api/sessions prefix
+app.include_router(admin_router)  # Already has /api/admin prefix
 app.include_router(websocket_router)  # WebSocket endpoints (no prefix)
 
 

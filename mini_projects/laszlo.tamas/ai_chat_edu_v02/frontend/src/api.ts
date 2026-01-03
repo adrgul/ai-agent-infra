@@ -152,8 +152,8 @@ export async function resetQdrant(): Promise<{ status: string; message: string }
   return response.json();
 }
 
-export async function resetCache(): Promise<{ status: string; database_cache_rows_deleted: number; memory_cache_cleared: boolean; message: string }> {
-  const response = await fetch(`${API_BASE_URL}/debug/reset/cache`, {
+export async function resetCache(): Promise<{ memory_cleared: boolean; db_cleared: number; error?: string }> {
+  const response = await fetch(`${API_BASE_URL}/admin/cache/clear`, {
     method: "POST",
   });
   if (!response.ok) {

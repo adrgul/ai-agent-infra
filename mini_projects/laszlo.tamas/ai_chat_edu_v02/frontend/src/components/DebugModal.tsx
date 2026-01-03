@@ -88,7 +88,7 @@ export function DebugModal({ userId, sessionId, isOpen, onClose, onConversations
 
     try {
       const result = await resetCache();
-      setSuccessMessage(`Cache cleared! DB rows: ${result.database_cache_rows_deleted}, Memory: ${result.memory_cache_cleared ? 'Cleared' : 'Failed'}`);
+      setSuccessMessage(`Cache cleared! DB rows: ${result.db_cleared}, Memory: ${result.memory_cleared ? 'Cleared' : 'Failed'}`);
       setTimeout(() => setSuccessMessage(null), 5000);
     } catch (err: any) {
       console.error("Failed to reset cache:", err);

@@ -730,6 +730,7 @@ Answer:"""
         try:
             query = state["query"]
             tenant_id = state["user_context"]["tenant_id"]
+            user_id = state["user_context"]["user_id"]
             system_prompt = state.get("system_prompt") or APPLICATION_SYSTEM_PROMPT
             user_lang = state["user_context"].get("user_language", "en")
             
@@ -737,10 +738,11 @@ Answer:"""
             query_vector = self.embedding_service.generate_embedding(query)
             logger.info(f"[NODE 4b] Query embedding: {len(query_vector)} dimensions")
             
-            # Step 2: Search Qdrant
+            # Step 2: Search Qdrant (with access control)
             search_results = self.qdrant_service.search_document_chunks(
                 query_vector=query_vector,
                 tenant_id=tenant_id,
+                user_id=user_id,  # For private document access control
                 limit=None,  # Uses system.ini TOP_K_DOCUMENTS
                 score_threshold=None  # Uses system.ini MIN_SCORE_THRESHOLD
             )

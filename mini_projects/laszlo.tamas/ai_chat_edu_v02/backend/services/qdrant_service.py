@@ -24,7 +24,7 @@ QDRANT_USE_HTTPS = QDRANT_USE_HTTPS_STR.lower() == "true"
 
 # Collection names
 COLLECTION_DOCUMENT_CHUNKS = f"{QDRANT_COLLECTION_PREFIX}_document_chunks"
-COLLECTION_LONG_TERM_MEMORIES = f"{QDRANT_COLLECTION_PREFIX}_long_term_memories"
+COLLECTION_LONG_TERM_MEMORIES = f"{QDRANT_COLLECTION_PREFIX}_longterm_chat_memory"
 COLLECTION_PRODUCT_KNOWLEDGE = f"{QDRANT_COLLECTION_PREFIX}_product_knowledge"
 
 
@@ -75,17 +75,25 @@ class QdrantService:
             exists = any(c.name == collection_name for c in collections)
             
             if not exists:
-                logger.info(f"Creating collection: {collection_name}")
-                
-                self.client.create_collection(
-                    collection_name=collection_name,
-                    vectors_config=VectorParams(
-                        size=self.vector_size,
-                        distance=Distance.COSINE
+                # Try to create, but don't fail if API key lacks global access
+                try:
+                    logger.info(f"Creating collection: {collection_name}")
+                    
+                    self.client.create_collection(
+                        collection_name=collection_name,
+                        vectors_config=VectorParams(
+                            size=self.vector_size,
+                            distance=Distance.COSINE
+                        )
                     )
-                )
-                
-                logger.info(f"Collection created: {collection_name}")
+                    
+                    logger.info(f"Collection created: {collection_name}")
+                except Exception as create_error:
+                    logger.warning(
+                        f"Cannot create collection {collection_name}: {create_error}. "
+                        f"Collection might already exist or API key lacks global access. "
+                        f"Continuing..."
+                    )
             else:
                 logger.info(f"Collection exists: {collection_name}")
         
@@ -106,8 +114,8 @@ class QdrantService:
                 - chunk_id: int (PostgreSQL chunk ID)
                 - embedding: List[float] (3072 dim)
                 - tenant_id: int
-                - document_id: int
-                - content: str (for preview in payload)
+                - document_id: int                - user_id: int | None (document owner for private docs)
+                - visibility: str ('private' | 'tenant')                - content: str (for preview in payload)
             batch_size: Number of chunks to upload per batch (default: 50)
         
         Returns:
@@ -149,6 +157,8 @@ class QdrantService:
                         "chunk_id": chunk["chunk_id"],
                         "tenant_id": chunk["tenant_id"],
                         "document_id": chunk["document_id"],
+                        "user_id": chunk.get("user_id"),  # Document owner (None for tenant docs)
+                        "visibility": chunk.get("visibility", "tenant"),  # 'private' or 'tenant'
                         "content_preview": chunk["content"][:200]  # First 200 chars
                     }
                 )
@@ -180,15 +190,21 @@ class QdrantService:
         self,
         query_vector: List[float],
         tenant_id: int,
+        user_id: int,
         limit: int = None,
         score_threshold: float = None
     ) -> List[Dict]:
         """
-        Search for similar document chunks.
+        Search for similar document chunks with access control.
+        
+        Returns only chunks the user has permission to see:
+        - Private documents owned by the user
+        - Tenant-wide documents
         
         Args:
             query_vector: Query embedding (3072 dim)
             tenant_id: Tenant ID filter
+            user_id: User ID (for private document access control)
             limit: Maximum results to return (default from system.ini)
             score_threshold: Minimum similarity score (default from system.ini)
         
@@ -210,6 +226,19 @@ class QdrantService:
                         {
                             "key": "tenant_id",
                             "match": {"value": tenant_id}
+                        },
+                        {
+                            "should": [
+                                # Private doc owned by user
+                                {
+                                    "must": [
+                                        {"key": "visibility", "match": {"value": "private"}},
+                                        {"key": "user_id", "match": {"value": user_id}}
+                                    ]
+                                },
+                                # Tenant-wide doc
+                                {"key": "visibility", "match": {"value": "tenant"}}
+                            ]
                         }
                     ]
                 },

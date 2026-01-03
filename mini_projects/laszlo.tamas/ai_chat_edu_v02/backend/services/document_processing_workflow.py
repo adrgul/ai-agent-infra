@@ -336,6 +336,8 @@ class DocumentProcessingWorkflow:
                         "embedding": embedded_chunk["embedding"],
                         "tenant_id": original["tenant_id"],
                         "document_id": original["document_id"],
+                        "user_id": state.get("user_id"),  # Document owner
+                        "visibility": state.get("visibility", "tenant"),  # Access control
                         "content": original["content"]
                     })
             
