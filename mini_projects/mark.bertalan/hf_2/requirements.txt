@@ -1,0 +1,10 @@
+# Vector Embeddings Demo - Python Dependencies
+
+# HTTP requests for direct API calls (replaces openai library)
+requests>=2.31.0
+
+# ChromaDB for vector storage and similarity search
+chromadb>=0.4.22
+
+# Environment variable management
+python-dotenv>=1.0.0

@@ -45,7 +45,7 @@ ai-meeting-assistant/
 
 ## Prerequisites
 
-- Python 3.11 or higher
+- Python 3.12
 - OpenAI API key (for GPT-4 access)
 
 ## Installation

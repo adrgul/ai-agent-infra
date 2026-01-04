@@ -1,0 +1,140 @@
+.citation-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.citation-modal-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.citation-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.citation-modal-header h3 {
+  margin: 0;
+  font-size: 1.3em;
+  color: #333;
+}
+
+.citation-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #999;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.citation-modal-close:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.citation-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.citation-info {
+  background: #f8f9fa;
+  border-left: 4px solid #667eea;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.citation-field {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: flex-start;
+}
+
+.citation-field:last-child {
+  margin-bottom: 0;
+}
+
+.citation-label {
+  font-weight: 600;
+  color: #555;
+  min-width: 120px;
+  display: inline-block;
+}
+
+.citation-value {
+  color: #333;
+  word-break: break-word;
+}
+
+.citation-content-section {
+  margin-top: 20px;
+}
+
+.citation-content-section h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 0.95em;
+}
+
+.citation-content {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 15px;
+  color: #444;
+  line-height: 1.6;
+  font-size: 0.95em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 300px;
+  overflow-y: auto;
+}

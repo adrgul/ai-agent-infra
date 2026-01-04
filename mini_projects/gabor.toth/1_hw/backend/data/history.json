@@ -1,0 +1,1502 @@
+[
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relev\u00e1ns wikipedia sorok a keresett sz\u00f6veghez, ami: v\u00e1rosn\u00e9zni szeretn\u00e9k",
+        "content": "- Budapest t\u00f6bb UNESCO vil\u00e1g\u00f6r\u00f6ks\u00e9gi helysz\u00edn is tal\u00e1lhat\u00f3, t\u00f6bbek k\u00f6z\u00f6tt a Duna-part l\u00e1tk\u00e9pe, a Budai V\u00e1rnegyed, az Andr\u00e1ssy \u00fat, a H\u0151s\u00f6k tere \u00e9s a Millenniumi F\u00f6ldalatti Vas\u00fat."
+      },
+      {
+        "title": "Relev\u00e1ns wikipedia sorok a keresett sz\u00f6veghez, ami: v\u00e1rosn\u00e9zni szeretn\u00e9k",
+        "content": "- A v\u00e1rosban turisztikailag jelent\u0151sek a Duna-hidak is."
+      },
+      {
+        "title": "Relev\u00e1ns wikipedia sorok a keresett sz\u00f6veghez, ami: v\u00e1rosn\u00e9zni szeretn\u00e9k",
+        "content": "- Budapest \u00e9vente mintegy 12 milli\u00f3 nemzetk\u00f6zi turist\u00e1t vonz, \u00edgy Eur\u00f3pa rendk\u00edv\u00fcl n\u00e9pszer\u0171 \u00fati c\u00e9ljai k\u00f6z\u00e9 tartozik."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves V\u00e1rosn\u00e9z\u0151! Budapest var\u00e1zslatos helysz\u00edneivel v\u00e1r r\u00e1d, hiszen t\u00f6bb UNESCO vil\u00e1g\u00f6r\u00f6ks\u00e9gi ter\u00fclet, mint a Budai V\u00e1rnegyed \u00e9s a H\u0151s\u00f6k tere, mind felfedez\u00e9sre v\u00e1rnak. Ne hagyd ki a Duna-part leny\u0171g\u00f6z\u0151 l\u00e1tk\u00e9p\u00e9t \u00e9s a h\u00edres Duna-hidakat sem, amelyek igazi v\u00e1rosn\u00e9z\u0151 \u00e9lm\u00e9nyt ny\u00fajtanak. \u00c9vente 12 milli\u00f3 turista tapasztalja meg Budapest sz\u00e9ps\u00e9g\u00e9t, csatlakozz te is hozz\u00e1juk, \u00e9s mer\u00fclj el a v\u00e1ros kultur\u00e1lis kincseiben! Fedezd fel Budapestet, ahol minden sarkon \u00faj csoda v\u00e1r!"
+    },
+    "nearby_places": [
+      {
+        "type": "tourism=viewpoint",
+        "name": "City Park",
+        "distance_m": 500,
+        "walking_minutes": 6,
+        "lat": 47.5078789,
+        "lon": 19.0502383
+      },
+      {
+        "type": "tourism=viewpoint",
+        "name": "Central Garden",
+        "distance_m": 1000,
+        "walking_minutes": 12,
+        "lat": 47.51787890000001,
+        "lon": 19.060238299999998
+      },
+      {
+        "type": "tourism=viewpoint",
+        "name": "Green Space",
+        "distance_m": 800,
+        "walking_minutes": 10,
+        "lat": 47.527878900000005,
+        "lon": 19.0702383
+      },
+      {
+        "type": "tourism=viewpoint",
+        "name": "Recreation Area",
+        "distance_m": 1500,
+        "walking_minutes": 18,
+        "lat": 47.5378789,
+        "lon": 19.080238299999998
+      },
+      {
+        "type": "tourism=viewpoint",
+        "name": "Nature Reserve",
+        "distance_m": 2000,
+        "walking_minutes": 25,
+        "lat": 47.5478789,
+        "lon": 19.0902383
+      }
+    ],
+    "fallback_message": "\u26a0\ufe0f  Nem tal\u00e1ltam megfelel\u0151 helyeket, a tesztelhet\u0151s\u00e9g \u00e9rdek\u00e9ben teszt helyeket mutatok (tourism=viewpoint)",
+    "metadata": {
+      "generated_at": "2025-12-22T22:14:43.824996"
+    }
+  },
+  {
+    "city": "v\u00e1c",
+    "coordinates": {
+      "lat": 47.7782873,
+      "lon": 19.1278294
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relev\u00e1ns wikipedia sorok a keresett sz\u00f6veghez, ami: \u00fasz\u00e1s",
+        "content": "- V\u00e1c m\u00e1ra vir\u00e1gz\u00f3 kereskedelmi k\u00f6zpont, valamint a budapesti polg\u00e1rok kedvelt ny\u00e1ri \u00fcd\u00fcl\u0151helye."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves V\u00e1ci Lakosok \u00e9s L\u00e1togat\u00f3k!\n\nV\u00e1c nem csup\u00e1n vir\u00e1gz\u00f3 kereskedelmi k\u00f6zpont, hanem a ny\u00e1ri \u00fcd\u00fcl\u00e9sek ide\u00e1lis helysz\u00edne is a budapesti polg\u00e1rok sz\u00e1m\u00e1ra! A v\u00e1ros csod\u00e1s f\u00fcrd\u0151helyei \u00e9s a Duna kellemes hull\u00e1mai v\u00e1rj\u00e1k a felfriss\u00fclni v\u00e1gy\u00f3 \u00fasz\u00f3kat. Ne habozz, mer\u00fclj el a v\u00edzben, \u00e9s \u00e9lvezd a naps\u00fct\u00e9st a gy\u00f6ny\u00f6r\u0171 v\u00edzparton! Fedezd fel V\u00e1c titkait, \u00e9s tapasztald meg a ny\u00e1ri \u00fasz\u00e1s \u00f6r\u00f6m\u00e9t egy var\u00e1zslatos k\u00f6rnyezetben!"
+    },
+    "nearby_places": [
+      {
+        "type": "swimming_pool",
+        "name": "Swimming Pool #78151007",
+        "distance_m": 257,
+        "walking_minutes": 3,
+        "lat": 47.7759918,
+        "lon": 19.1273386
+      },
+      {
+        "type": "sports_centre",
+        "name": "Sports Centre #183968455",
+        "distance_m": 315,
+        "walking_minutes": 3,
+        "lat": 47.7754567,
+        "lon": 19.1274861
+      },
+      {
+        "type": "swimming_pool",
+        "name": "Swimming Pool #949430043",
+        "distance_m": 325,
+        "walking_minutes": 4,
+        "lat": 47.7753707,
+        "lon": 19.1275129
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T21:22:09.469783"
+    }
+  },
+  {
+    "city": "szolnok",
+    "coordinates": {
+      "lat": 47.1753833,
+      "lon": 20.1946279
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relev\u00e1ns wikipedia sorok a keresett sz\u00f6veghez, ami: v\u00e1s\u00e1rolni szeretn\u00e9k",
+        "content": "- Szolnok fontos k\u00f6zleked\u00e9si csom\u00f3pont, ami megk\u00f6nny\u00edti a v\u00e1s\u00e1rl\u00e1st \u00e9s az \u00e1ruforgalmat."
+      },
+      {
+        "title": "Relev\u00e1ns wikipedia sorok a keresett sz\u00f6veghez, ami: v\u00e1s\u00e1rolni szeretn\u00e9k",
+        "content": "- A v\u00e1rosban \u00e9s k\u00f6rny\u00e9k\u00e9n a fa-, a textil- \u00e9s a vegyipar, valamint a pap\u00edr- \u00e9s a cellul\u00f3zgy\u00e1r fejl\u0151d\u00f6tt legnagyobb m\u00e9rt\u00e9kben, ami k\u00fcl\u00f6nf\u00e9le term\u00e9kek v\u00e1s\u00e1rl\u00e1s\u00e1t teszi lehet\u0151v\u00e9."
+      },
+      {
+        "title": "Relev\u00e1ns wikipedia sorok a keresett sz\u00f6veghez, ami: v\u00e1s\u00e1rolni szeretn\u00e9k",
+        "content": "- Szolnok gy\u00f3gy\u00fcd\u00fcl\u0151ket \u00e9s f\u00fcrd\u0151ket k\u00edn\u00e1l, ami a helyi eg\u00e9szs\u00e9gturizmus r\u00e9szek\u00e9nt vonz\u00f3 lehet a v\u00e1s\u00e1rl\u00f3k sz\u00e1m\u00e1ra."
+      }
+    ],
+    "briefing": {
+      "paragraph": "**Szolnoki Napi T\u00e1j\u00e9koztat\u00f3 \u2013 V\u00e1s\u00e1rl\u00e1si Lehet\u0151s\u00e9gek**\n\nKedves V\u00e1s\u00e1rl\u00f3ink! Szolnok nemcsak egy fontos k\u00f6zleked\u00e9si csom\u00f3pont, de egy igazi v\u00e1s\u00e1rl\u00e1si paradicsom is! A v\u00e1rosban tal\u00e1lhat\u00f3 fa-, textil- \u00e9s vegyipari term\u00e9kek sz\u00e9les v\u00e1laszt\u00e9ka v\u00e1rja \u00d6nt, \u00edgy garant\u00e1ltan megtal\u00e1lja a keresett term\u00e9keket. Ne feledkezzen meg a helyi gy\u00f3gy\u00fcd\u00fcl\u0151kr\u0151l \u00e9s f\u00fcrd\u0151kr\u0151l sem, amelyek nemcsak a pihen\u00e9s, hanem a v\u00e1s\u00e1rl\u00e1s ut\u00e1n is remek lehet\u0151s\u00e9get k\u00edn\u00e1lnak a felfriss\u00fcl\u00e9sre. Fedezze fel Szolnokot, \u00e9s tapasztalja meg a v\u00e1ros ny\u00fajtotta lehet\u0151s\u00e9geket!"
+    },
+    "nearby_places": [
+      {
+        "type": "place",
+        "name": "Spar",
+        "distance_m": 302,
+        "walking_minutes": 3,
+        "lat": 47.1778375,
+        "lon": 20.1929095
+      },
+      {
+        "type": "place",
+        "name": "Spar",
+        "distance_m": 327,
+        "walking_minutes": 4,
+        "lat": 47.1781832,
+        "lon": 20.1959837
+      },
+      {
+        "type": "place",
+        "name": "ALDI",
+        "distance_m": 416,
+        "walking_minutes": 5,
+        "lat": 47.1768628,
+        "lon": 20.1996932
+      },
+      {
+        "type": "place",
+        "name": "Spar",
+        "distance_m": 1031,
+        "walking_minutes": 12,
+        "lat": 47.1800762,
+        "lon": 20.1828544
+      },
+      {
+        "type": "place",
+        "name": "Place #330925097",
+        "distance_m": 1043,
+        "walking_minutes": 13,
+        "lat": 47.1774875,
+        "lon": 20.1811751
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T21:16:48.238500"
+    }
+  },
+  {
+    "city": "sz\u00e9kesfeh\u00e9rv\u00e1r",
+    "coordinates": {
+      "lat": 47.1910169,
+      "lon": 18.410811
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans Szeretn\u00e9k s\u00e9t\u00e1lni egy nagyot-hez",
+        "content": "- Sz\u00e9kesfeh\u00e9rv\u00e1r nemzetk\u00f6zi h\u00edr\u0171 barokk \u00f3v\u00e1ros\u00e1val sz\u00e1mos m\u0171eml\u00e9k\u00e9nek felfedez\u00e9s\u00e9re ad lehet\u0151s\u00e9get, \u00edgy ide\u00e1lis helysz\u00edn s\u00e9t\u00e1khoz."
+      },
+      {
+        "title": "Relevans Szeretn\u00e9k s\u00e9t\u00e1lni egy nagyot-hez",
+        "content": "- A v\u00e1ros ter\u00fclete a kezdetekt\u0151l strat\u00e9giai fontoss\u00e1g\u00fa, \u00e9s sz\u00e1mos t\u00f6rt\u00e9nelmi eml\u00e9ket k\u00edn\u00e1l, amelyek megismer\u00e9s\u00e9re s\u00e9t\u00e1lni \u00e9rdemes."
+      },
+      {
+        "title": "Relevans Szeretn\u00e9k s\u00e9t\u00e1lni egy nagyot-hez",
+        "content": "- A F\u0151 utca rehabilit\u00e1ci\u00f3ja \u00e9s a belv\u00e1ros fejleszt\u00e9se lehet\u0151s\u00e9get biztos\u00edt a kellemes s\u00e9t\u00e1kra a v\u00e1ros sz\u00edv\u00e9ben."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves S\u00e9t\u00e1l\u00f3 Bar\u00e1tunk!\n\nFedezd fel Sz\u00e9kesfeh\u00e9rv\u00e1r var\u00e1zslatos barokk \u00f3v\u00e1ros\u00e1t, ahol a t\u00f6rt\u00e9nelmi eml\u00e9kek \u00e9s m\u0171eml\u00e9kek felfedez\u00e9se k\u00f6zben garant\u00e1ltan elragad\u00f3 \u00e9lm\u00e9nyekben lesz r\u00e9szed! A F\u0151 utca rehabilit\u00e1ci\u00f3j\u00e1nak k\u00f6sz\u00f6nhet\u0151en a belv\u00e1ros sz\u00edv\u00e9ben kellemes s\u00e9t\u00e1kra invit\u00e1lunk, ahol minden l\u00e9p\u00e9s \u00faj titkokat t\u00e1r fel. Ne habozz, indulj el most, \u00e9s \u00e9lvezd a v\u00e1ros csod\u00e1it egy nagy s\u00e9ta keret\u00e9ben!"
+    },
+    "nearby_places": [
+      {
+        "type": "track",
+        "name": "Tanp\u00e1lya",
+        "distance_m": 1172,
+        "walking_minutes": 14,
+        "lat": 47.1917374,
+        "lon": 18.3953322
+      },
+      {
+        "type": "track",
+        "name": "BMX p\u00e1lya",
+        "distance_m": 1174,
+        "walking_minutes": 14,
+        "lat": 47.1905952,
+        "lon": 18.3952854
+      },
+      {
+        "type": "track",
+        "name": "Track #2845646",
+        "distance_m": 1325,
+        "walking_minutes": 16,
+        "lat": 47.2025693,
+        "lon": 18.4151191
+      },
+      {
+        "type": "track",
+        "name": "Track #1280912387",
+        "distance_m": 1741,
+        "walking_minutes": 21,
+        "lat": 47.2038538,
+        "lon": 18.3976175
+      },
+      {
+        "type": "track",
+        "name": "Track #564277548",
+        "distance_m": 1764,
+        "walking_minutes": 22,
+        "lat": 47.2042027,
+        "lon": 18.397826
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T20:58:26.324962"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans vacsor\u00e1zn\u00e9k egy finomat-hez",
+        "content": "- Budapest Magyarorsz\u00e1g f\u0151v\u00e1rosa, amely gazdag kultur\u00e1lis \u00e9s gasztron\u00f3miai hagyom\u00e1nyokkal rendelkezik."
+      },
+      {
+        "title": "Relevans vacsor\u00e1zn\u00e9k egy finomat-hez",
+        "content": "- A v\u00e1rosban t\u00f6bb mint 80 geotermikus forr\u00e1s tal\u00e1lhat\u00f3, \u00e9s Budapest a vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151vel rendelkez\u0151 f\u0151v\u00e1rosa, ami k\u00fcl\u00f6nleges \u00e9lm\u00e9nyeket k\u00edn\u00e1l a l\u00e1togat\u00f3knak."
+      },
+      {
+        "title": "Relevans vacsor\u00e1zn\u00e9k egy finomat-hez",
+        "content": "- Budapest \u00e9vente mintegy 12 milli\u00f3 nemzetk\u00f6zi turist\u00e1t vonz, \u00edgy sz\u00e1mos \u00e9tterem \u00e9s vend\u00e9gl\u00e1t\u00f3hely k\u00edn\u00e1l finom \u00e9teleket a l\u00e1togat\u00f3k sz\u00e1m\u00e1ra."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves L\u00e1togat\u00f3ink!\n\n\u00dcdv\u00f6z\u00f6lj\u00fck Budapest sz\u00edv\u00e9ben, ahol a gasztron\u00f3mia \u00e9s a kult\u00fara tal\u00e1lkozik! A v\u00e1ros gazdag \u00edzekkel \u00e9s t\u00f6bb mint 80 geotermikus forr\u00e1ssal b\u00fcszk\u00e9lkedhet, \u00edgy vacsor\u00e1z\u00e1s ut\u00e1n egy pihentet\u0151 f\u00fcrd\u0151z\u00e9ssel koron\u00e1zhatja meg az est\u00e9t. \u00c9vente 12 milli\u00f3 turista felfedezi a helyi \u00e9ttermek k\u00edn\u00e1lat\u00e1t, ahol a hagyom\u00e1nyos magyar \u00e9telek mellett a nemzetk\u00f6zi konyha remekeit is megtal\u00e1lja. Ne habozzon, tapasztalja meg ezt a kulin\u00e1ris kalandot Budapest leny\u0171g\u00f6z\u0151 atmoszf\u00e9r\u00e1j\u00e1ban!"
+    },
+    "nearby_places": [
+      {
+        "type": "amenity=restaurant",
+        "name": "City Park",
+        "distance_m": 500,
+        "walking_minutes": 6,
+        "lat": 47.5078789,
+        "lon": 19.0502383
+      },
+      {
+        "type": "amenity=restaurant",
+        "name": "Central Garden",
+        "distance_m": 1000,
+        "walking_minutes": 12,
+        "lat": 47.51787890000001,
+        "lon": 19.060238299999998
+      },
+      {
+        "type": "amenity=restaurant",
+        "name": "Green Space",
+        "distance_m": 800,
+        "walking_minutes": 10,
+        "lat": 47.527878900000005,
+        "lon": 19.0702383
+      },
+      {
+        "type": "amenity=restaurant",
+        "name": "Recreation Area",
+        "distance_m": 1500,
+        "walking_minutes": 18,
+        "lat": 47.5378789,
+        "lon": 19.080238299999998
+      },
+      {
+        "type": "amenity=restaurant",
+        "name": "Nature Reserve",
+        "distance_m": 2000,
+        "walking_minutes": 25,
+        "lat": 47.5478789,
+        "lon": 19.0902383
+      }
+    ],
+    "fallback_message": "\u26a0\ufe0f  Nem tal\u00e1ltam megfelel\u0151 helyeket, a tesztelhet\u0151s\u00e9g \u00e9rdek\u00e9ben teszt helyeket mutatok (amenity=restaurant)",
+    "metadata": {
+      "generated_at": "2025-12-22T20:55:27.525835"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans megn\u00e9zn\u00e9m a v\u00e1rat-hez",
+        "content": "- A Budai V\u00e1r \u00e9p\u00edt\u00e9se 1243-ban indult meg a budai V\u00e1rhegyen."
+      },
+      {
+        "title": "Relevans megn\u00e9zn\u00e9m a v\u00e1rat-hez",
+        "content": "- A Budai V\u00e1rnegyed UNESCO vil\u00e1g\u00f6r\u00f6ks\u00e9gi helysz\u00edn."
+      },
+      {
+        "title": "Relevans megn\u00e9zn\u00e9m a v\u00e1rat-hez",
+        "content": "- A V\u00e1rnegyed egy r\u00e9sze teljesen megsemmis\u00fclt a m\u00e1sodik vil\u00e1gh\u00e1bor\u00fa sor\u00e1n."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Fedezd fel a leny\u0171g\u00f6z\u0151 Budai V\u00e1rat, amely 1243 \u00f3ta \u0151rzi a t\u00f6rt\u00e9nelem titkait a gy\u00f6ny\u00f6r\u0171 V\u00e1rhegyen! A V\u00e1rnegyed az UNESCO vil\u00e1g\u00f6r\u00f6ks\u00e9gi helysz\u00ednek\u00e9nt nemcsak \u00e9p\u00edt\u00e9szeti csod\u00e1kat k\u00edn\u00e1l, hanem a m\u00falt eml\u00e9k\u00e9t is, hiszen egy r\u00e9sze a m\u00e1sodik vil\u00e1gh\u00e1bor\u00fa sor\u00e1n sajnos megsemmis\u00fclt. Ne hagyd ki ezt a k\u00fcl\u00f6nleges \u00e9lm\u00e9nyt, hiszen a v\u00e1r felfedez\u00e9se sor\u00e1n egyed\u00fcl\u00e1ll\u00f3 panor\u00e1m\u00e1k v\u00e1rnak r\u00e1d, valamint a magyar t\u00f6rt\u00e9nelem izgalmas t\u00f6rt\u00e9netei! L\u00e9pj be a m\u00faltba, \u00e9s tapasztald meg a Budai V\u00e1r var\u00e1zs\u00e1t!"
+    },
+    "nearby_places": [
+      {
+        "type": "tourism=castle",
+        "name": "City Park",
+        "distance_m": 500,
+        "walking_minutes": 6,
+        "lat": 47.5078789,
+        "lon": 19.0502383
+      },
+      {
+        "type": "tourism=castle",
+        "name": "Central Garden",
+        "distance_m": 1000,
+        "walking_minutes": 12,
+        "lat": 47.51787890000001,
+        "lon": 19.060238299999998
+      },
+      {
+        "type": "tourism=castle",
+        "name": "Green Space",
+        "distance_m": 800,
+        "walking_minutes": 10,
+        "lat": 47.527878900000005,
+        "lon": 19.0702383
+      },
+      {
+        "type": "tourism=castle",
+        "name": "Recreation Area",
+        "distance_m": 1500,
+        "walking_minutes": 18,
+        "lat": 47.5378789,
+        "lon": 19.080238299999998
+      },
+      {
+        "type": "tourism=castle",
+        "name": "Nature Reserve",
+        "distance_m": 2000,
+        "walking_minutes": 25,
+        "lat": 47.5478789,
+        "lon": 19.0902383
+      }
+    ],
+    "fallback_message": "\u26a0\ufe0f  Nem tal\u00e1ltam megfelel\u0151 helyeket, a tesztelhet\u0151s\u00e9g \u00e9rdek\u00e9ben teszt helyeket mutatok (tourism=castle)",
+    "metadata": {
+      "generated_at": "2025-12-22T20:54:10.158379"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans megn\u00e9zn\u00e9m a helyi l\u00e1tv\u00e1nyoss\u00e1gokat-hez",
+        "content": "- Budapest t\u00f6bb UNESCO vil\u00e1g\u00f6r\u00f6ks\u00e9gi helysz\u00ednnel rendelkezik, t\u00f6bbek k\u00f6z\u00f6tt a Duna-part l\u00e1tk\u00e9pe, a Budai V\u00e1rnegyed, az Andr\u00e1ssy \u00fat, a H\u0151s\u00f6k tere \u00e9s a Millenniumi F\u00f6ldalatti Vas\u00fat."
+      },
+      {
+        "title": "Relevans megn\u00e9zn\u00e9m a helyi l\u00e1tv\u00e1nyoss\u00e1gokat-hez",
+        "content": "- A v\u00e1rosban turisztikailag jelent\u0151sek a Duna-hidak is."
+      },
+      {
+        "title": "Relevans megn\u00e9zn\u00e9m a helyi l\u00e1tv\u00e1nyoss\u00e1gokat-hez",
+        "content": "- Budapest a vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151vel rendelkez\u0151 f\u0151v\u00e1rosa, \u00e9s itt tal\u00e1lhat\u00f3 az orsz\u00e1g legnagyobb term\u00e1lvizes barlangrendszere."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves L\u00e1togat\u00f3! Budapest leny\u0171g\u00f6z\u0151 UNESCO vil\u00e1g\u00f6r\u00f6ks\u00e9gi helysz\u00ednek otthona, mint p\u00e9ld\u00e1ul a Budai V\u00e1rnegyed \u00e9s a H\u0151s\u00f6k tere, amelyek felfedez\u00e9se felejthetetlen \u00e9lm\u00e9nyeket k\u00edn\u00e1l. Ne hagyd ki a Duna gy\u00f6ny\u00f6r\u0171 h\u00eddjait sem, amelyek mes\u00e9s panor\u00e1m\u00e1t ny\u00fajtanak! R\u00e1ad\u00e1sul a v\u00e1ros h\u00edres gy\u00f3gyf\u00fcrd\u0151i \u00e9s a term\u00e1lvizes barlangrendszere igazi fel\u00fcd\u00fcl\u00e9st ny\u00fajtanak a v\u00e1rosn\u00e9z\u00e9s ut\u00e1n. Indulj felfedezni Budapest var\u00e1zslatos helysz\u00edneit, \u00e9s mer\u00fclj el a t\u00f6rt\u00e9nelem \u00e9s a kult\u00fara gazdags\u00e1g\u00e1ban!"
+    },
+    "nearby_places": [
+      {
+        "type": "tourism=monument",
+        "name": "City Park",
+        "distance_m": 500,
+        "walking_minutes": 6,
+        "lat": 47.5078789,
+        "lon": 19.0502383
+      },
+      {
+        "type": "tourism=monument",
+        "name": "Central Garden",
+        "distance_m": 1000,
+        "walking_minutes": 12,
+        "lat": 47.51787890000001,
+        "lon": 19.060238299999998
+      },
+      {
+        "type": "tourism=monument",
+        "name": "Green Space",
+        "distance_m": 800,
+        "walking_minutes": 10,
+        "lat": 47.527878900000005,
+        "lon": 19.0702383
+      },
+      {
+        "type": "tourism=monument",
+        "name": "Recreation Area",
+        "distance_m": 1500,
+        "walking_minutes": 18,
+        "lat": 47.5378789,
+        "lon": 19.080238299999998
+      },
+      {
+        "type": "tourism=monument",
+        "name": "Nature Reserve",
+        "distance_m": 2000,
+        "walking_minutes": 25,
+        "lat": 47.5478789,
+        "lon": 19.0902383
+      }
+    ],
+    "fallback_message": "\u26a0\ufe0f  Nem tal\u00e1ltam megfelel\u0151 helyeket, a tesztelhet\u0151s\u00e9g \u00e9rdek\u00e9ben teszt helyeket mutatok (tourism=monument)",
+    "metadata": {
+      "generated_at": "2025-12-22T20:52:42.782055"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans szeretn\u00e9k valahol t\u00e1ncolni a bar\u00e1taimmal-hez",
+        "content": "- Budapest a f\u0151v\u00e1rosa Magyarorsz\u00e1gnak, amely politikai, kultur\u00e1lis, kereskedelmi \u00e9s sz\u00f3rakoztat\u00e1si k\u00f6zpont."
+      },
+      {
+        "title": "Relevans szeretn\u00e9k valahol t\u00e1ncolni a bar\u00e1taimmal-hez",
+        "content": "- A v\u00e1ros \u00e9vente mintegy 12 milli\u00f3 nemzetk\u00f6zi turist\u00e1t vonz, \u00edgy n\u00e9pszer\u0171 \u00fati c\u00e9l a sz\u00f3rakoz\u00e1sra v\u00e1gy\u00f3k sz\u00e1m\u00e1ra."
+      },
+      {
+        "title": "Relevans szeretn\u00e9k valahol t\u00e1ncolni a bar\u00e1taimmal-hez",
+        "content": "- Budapest gazdag \u00e9jszakai \u00e9let\u00e9r\u0151l ismert, sz\u00e1mos klub \u00e9s sz\u00f3rakoz\u00f3hely tal\u00e1lhat\u00f3, ahol t\u00e1ncolni lehet."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Budapest \u00e9jszakai \u00e9lete var\u00e1zslatos \u00e9lm\u00e9nyekkel v\u00e1rja a t\u00e1nc szerelmeseit! A f\u0151v\u00e1rosban sz\u00e1mos sz\u00f3rakoz\u00f3hely \u00e9s klub tal\u00e1lhat\u00f3, ahol bar\u00e1taiddal egy\u00fctt \u00e9lvezhetitek a zen\u00e9t \u00e9s a t\u00e1ncot. \u00c9vente 12 milli\u00f3 turista is felfedezi a v\u00e1ros pezsg\u0151 sz\u00f3rakoz\u00e1si lehet\u0151s\u00e9geit, \u00edgy garant\u00e1ltan felejthetetlen est\u00e9ben lesz r\u00e9szetek! Ne habozzatok, pattanjatok be a legjobb helyekre, \u00e9s \u00e9lj\u00e9tek \u00e1t Budapest \u00e9jszakai var\u00e1zs\u00e1t!"
+    },
+    "nearby_places": [
+      {
+        "type": "bar",
+        "name": "Leo Rooftop",
+        "distance_m": 98,
+        "walking_minutes": 1,
+        "lat": 47.4987627,
+        "lon": 19.040173
+      },
+      {
+        "type": "bar",
+        "name": "Raqpart",
+        "distance_m": 481,
+        "walking_minutes": 6,
+        "lat": 47.4992509,
+        "lon": 19.0463124
+      },
+      {
+        "type": "bar",
+        "name": "Pontoon",
+        "distance_m": 483,
+        "walking_minutes": 6,
+        "lat": 47.4996441,
+        "lon": 19.0461176
+      },
+      {
+        "type": "bar",
+        "name": "Nico Bar",
+        "distance_m": 504,
+        "walking_minutes": 6,
+        "lat": 47.5023966,
+        "lon": 19.0395661
+      },
+      {
+        "type": "bar",
+        "name": "Viadukt b\u00e1r",
+        "distance_m": 547,
+        "walking_minutes": 6,
+        "lat": 47.4971293,
+        "lon": 19.0474364
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T20:49:11.764432"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans enn\u00e9k egy finom vacsor\u00e1t-hez",
+        "content": "- Budapest Magyarorsz\u00e1g f\u0151v\u00e1rosa, amely politikai, kultur\u00e1lis, kereskedelmi \u00e9s gasztron\u00f3miai k\u00f6zpont is."
+      },
+      {
+        "title": "Relevans enn\u00e9k egy finom vacsor\u00e1t-hez",
+        "content": "- A v\u00e1ros \u00e9vente mintegy 12 milli\u00f3 nemzetk\u00f6zi turist\u00e1t vonz, \u00edgy sz\u00e1mos \u00e9tterem \u00e9s vend\u00e9gl\u00e1t\u00f3hely k\u00edn\u00e1lat\u00e1val tal\u00e1lkozhatunk."
+      },
+      {
+        "title": "Relevans enn\u00e9k egy finom vacsor\u00e1t-hez",
+        "content": "- Budapest a vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151vel rendelkez\u0151 f\u0151v\u00e1rosa, ahol a wellness \u00e9s gasztron\u00f3mia egyes\u00fclhet a vacsora \u00e9lm\u00e9ny\u00e9ben."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Fedezd fel Budapest gasztron\u00f3miai csod\u00e1it, ahol a hagyom\u00e1nyos magyar \u00edzek \u00e9s a modern konyha remekei v\u00e1rnak r\u00e1d! A v\u00e1ros, amely \u00e9vente 12 milli\u00f3 turist\u00e1t vonz, k\u00fcl\u00f6nleges \u00e9ttermek sokas\u00e1g\u00e1val b\u00fcszk\u00e9lkedhet, \u00edgy biztosan megtal\u00e1lod a t\u00f6k\u00e9letes helyet egy felejthetetlen vacsor\u00e1hoz. Ne felejtsd el kipr\u00f3b\u00e1lni a helyi borokat \u00e9s desszerteket, mik\u00f6zben a vil\u00e1g egyik legjobb gy\u00f3gyf\u00fcrd\u0151je k\u00f6zel\u00e9ben laz\u00edthatsz. Mer\u00fclj el a budapesti gasztron\u00f3mia var\u00e1zs\u00e1ban, \u00e9s \u00e9lvezd a vacsora \u00e9lm\u00e9ny\u00e9t a v\u00e1ros sz\u00edv\u00e9ben!"
+    },
+    "nearby_places": [
+      {
+        "type": "restaurant",
+        "name": "Kiosk Buda",
+        "distance_m": 87,
+        "walking_minutes": 1,
+        "lat": 47.4986662,
+        "lon": 19.0401726
+      },
+      {
+        "type": "restaurant",
+        "name": "Leon Osteria",
+        "distance_m": 106,
+        "walking_minutes": 1,
+        "lat": 47.4970791,
+        "lon": 19.0410123
+      },
+      {
+        "type": "restaurant",
+        "name": "Marvelosa",
+        "distance_m": 142,
+        "walking_minutes": 1,
+        "lat": 47.4967979,
+        "lon": 19.0412508
+      },
+      {
+        "type": "restaurant",
+        "name": "Pater Marcus",
+        "distance_m": 183,
+        "walking_minutes": 2,
+        "lat": 47.4994953,
+        "lon": 19.0397539
+      },
+      {
+        "type": "restaurant",
+        "name": "Seoul House koreai \u00e9tterem",
+        "distance_m": 184,
+        "walking_minutes": 2,
+        "lat": 47.4995235,
+        "lon": 19.039908
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T20:02:06.277461"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans venn\u00e9k egy kar\u00f3r\u00e1t-hez",
+        "content": "- Budapest Magyarorsz\u00e1g f\u0151v\u00e1rosa, egyben legnagyobb \u00e9s legn\u00e9pesebb telep\u00fcl\u00e9se, ami kedvez\u0151 helysz\u00ednt biztos\u00edt a kereskedelmi tev\u00e9kenys\u00e9gekhez, p\u00e9ld\u00e1ul \u00f3r\u00e1k v\u00e1s\u00e1rl\u00e1s\u00e1hoz."
+      },
+      {
+        "title": "Relevans venn\u00e9k egy kar\u00f3r\u00e1t-hez",
+        "content": "- A v\u00e1ros er\u0151s kereskedelmi k\u00f6zpont, ahol sz\u00e1mos \u00fczlet \u00e9s m\u00e1rkak\u00e9pviselet tal\u00e1lhat\u00f3, \u00edgy sz\u00e9les v\u00e1laszt\u00e9kban lehet kar\u00f3r\u00e1kat v\u00e1s\u00e1rolni."
+      },
+      {
+        "title": "Relevans venn\u00e9k egy kar\u00f3r\u00e1t-hez",
+        "content": "- Budapest \u00e9vente mintegy 12 milli\u00f3 nemzetk\u00f6zi turist\u00e1t vonz, \u00edgy a v\u00e1rosban tal\u00e1lhat\u00f3 boltok \u00e9s \u00fczletek n\u00e9pszer\u0171ek a l\u00e1togat\u00f3k k\u00f6r\u00e9ben is."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves L\u00e1togat\u00f3! Budapest, Magyarorsz\u00e1g f\u0151v\u00e1rosa, a kereskedelmi tev\u00e9kenys\u00e9gek fellegv\u00e1ra, ahol a legjobb helyen j\u00e1rsz, ha kar\u00f3r\u00e1t szeretn\u00e9l v\u00e1s\u00e1rolni! A v\u00e1rosban sz\u00e1mos \u00fczlet \u00e9s m\u00e1rkak\u00e9pviselet k\u00edn\u00e1l sz\u00e9les v\u00e1laszt\u00e9kot, \u00edgy biztosan megtal\u00e1lod a sz\u00e1modra t\u00f6k\u00e9letes darabot. Ne feledd, hogy Budapest \u00e9vente 12 milli\u00f3 turist\u00e1t vonz, \u00edgy a boltjaidban mindig pezsg\u0151 \u00e9let v\u00e1r r\u00e1d! Fedezd fel a f\u0151v\u00e1ros var\u00e1zs\u00e1t, \u00e9s tal\u00e1ld meg \u00e1lmaid kar\u00f3r\u00e1j\u00e1t!"
+    },
+    "nearby_places": [
+      {
+        "type": "shop=clothing",
+        "name": "City Park",
+        "distance_m": 500,
+        "walking_minutes": 6,
+        "lat": 47.5078789,
+        "lon": 19.0502383
+      },
+      {
+        "type": "shop=clothing",
+        "name": "Central Garden",
+        "distance_m": 1000,
+        "walking_minutes": 12,
+        "lat": 47.51787890000001,
+        "lon": 19.060238299999998
+      },
+      {
+        "type": "shop=clothing",
+        "name": "Green Space",
+        "distance_m": 800,
+        "walking_minutes": 10,
+        "lat": 47.527878900000005,
+        "lon": 19.0702383
+      },
+      {
+        "type": "shop=clothing",
+        "name": "Recreation Area",
+        "distance_m": 1500,
+        "walking_minutes": 18,
+        "lat": 47.5378789,
+        "lon": 19.080238299999998
+      },
+      {
+        "type": "shop=clothing",
+        "name": "Nature Reserve",
+        "distance_m": 2000,
+        "walking_minutes": 25,
+        "lat": 47.5478789,
+        "lon": 19.0902383
+      }
+    ],
+    "fallback_message": "\u26a0\ufe0f  Nem tal\u00e1ltam megfelel\u0151 helyeket, a tesztelhet\u0151s\u00e9g \u00e9rdek\u00e9ben teszt helyeket mutatok (shop=clothing)",
+    "metadata": {
+      "generated_at": "2025-12-22T19:56:25.629725"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans szeretn\u00e9k futni a hegyen-hez",
+        "content": "- Budapest ter\u00fclete 525,14 n\u00e9gyzetkilom\u00e9ter, ami lehet\u0151s\u00e9get ad k\u00fcl\u00f6nb\u00f6z\u0151 szabadt\u00e9ri aktivit\u00e1sokra, bele\u00e9rtve a fut\u00e1st is."
+      },
+      {
+        "title": "Relevans szeretn\u00e9k futni a hegyen-hez",
+        "content": "- Budapest B\u00e9ta+ rang\u00fa glob\u00e1lis v\u00e1ros, ami er\u0151s kereskedelmi \u00e9s turisztikai vonzerej\u00e9vel hozz\u00e1j\u00e1rul a szabadid\u0151s tev\u00e9kenys\u00e9gek n\u00e9pszer\u0171s\u00e9g\u00e9hez."
+      },
+      {
+        "title": "Relevans szeretn\u00e9k futni a hegyen-hez",
+        "content": "- Budapest a vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151vel rendelkez\u0151 f\u0151v\u00e1rosa, ami a term\u00e9szet k\u00f6zeli aktivit\u00e1sokat, p\u00e9ld\u00e1ul a fut\u00e1st is vonz\u00f3v\u00e1 teszi a turist\u00e1k \u00e9s a helyiek sz\u00e1m\u00e1ra."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves Fut\u00f3bar\u00e1t!\n\nBudapest leny\u0171g\u00f6z\u0151 525,14 n\u00e9gyzetkilom\u00e9tere fantasztikus lehet\u0151s\u00e9geket k\u00edn\u00e1l a hegyen val\u00f3 fut\u00e1sra, ahol a v\u00e1ros csod\u00e1s panor\u00e1m\u00e1ja \u00e9s a term\u00e9szet k\u00f6zels\u00e9ge egyar\u00e1nt inspir\u00e1l\u00f3. Mint B\u00e9ta+ rang\u00fa glob\u00e1lis v\u00e1ros, Budapest nemcsak a kereskedelmi \u00e9s turisztikai vonzereje miatt figyelemre m\u00e9lt\u00f3, hanem a szabadid\u0151s tev\u00e9kenys\u00e9gek sz\u00e9les sk\u00e1l\u00e1ja miatt is, \u00edgy a hegyi fut\u00e1s t\u00f6k\u00e9letes v\u00e1laszt\u00e1s! Ne feledd, hogy a v\u00e1ros a vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151j\u00e9vel b\u00fcszk\u00e9lkedhet, \u00edgy egy f\u00e1raszt\u00f3 fut\u00e1s ut\u00e1n meg\u00e9rdemelt pihen\u00e9sre is lehet\u0151s\u00e9ged ny\u00edlik. Indulj felfedezni Budapest gy\u00f6ny\u00f6r\u0171 dombjait, \u00e9s tapasztald meg a fut\u00e1s \u00f6r\u00f6m\u00e9t a v\u00e1ros sz\u00edv\u00e9ben!"
+    },
+    "nearby_places": [
+      {
+        "type": "track",
+        "name": "Track #6685925",
+        "distance_m": 850,
+        "walking_minutes": 10,
+        "lat": 47.4906295,
+        "lon": 19.0366282
+      },
+      {
+        "type": "track",
+        "name": "Track #16316153",
+        "distance_m": 1455,
+        "walking_minutes": 18,
+        "lat": 47.4890728,
+        "lon": 19.0259117
+      },
+      {
+        "type": "track",
+        "name": "Track #1213266558",
+        "distance_m": 1524,
+        "walking_minutes": 19,
+        "lat": 47.5108755,
+        "lon": 19.0466933
+      },
+      {
+        "type": "track",
+        "name": "Monspart Sarolta Fut\u00f3k\u00f6r",
+        "distance_m": 1965,
+        "walking_minutes": 24,
+        "lat": 47.5153978,
+        "lon": 19.0436956
+      },
+      {
+        "type": "track",
+        "name": "Track #391444224",
+        "distance_m": 2126,
+        "walking_minutes": 26,
+        "lat": 47.5127612,
+        "lon": 19.0224509
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T19:55:24.802424"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans \u00faszn\u00e9k egy j\u00f3 nagyot-hez",
+        "content": "- Budapest a vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151vel rendelkez\u0151 f\u0151v\u00e1rosa."
+      },
+      {
+        "title": "Relevans \u00faszn\u00e9k egy j\u00f3 nagyot-hez",
+        "content": "- Itt tal\u00e1lhat\u00f3 az orsz\u00e1g legnagyobb term\u00e1lvizes barlangrendszere."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves L\u00e1togat\u00f3! Budapest, a vil\u00e1g leggazdagabb gy\u00f3gyf\u00fcrd\u0151kkel rendelkez\u0151 f\u0151v\u00e1rosa v\u00e1r r\u00e1d, ahol egy j\u00f3 nagy \u00fasz\u00e1s nem csup\u00e1n friss\u00edt\u0151, hanem egy igazi \u00e9lm\u00e9ny is! Fedezd fel az orsz\u00e1g legnagyobb term\u00e1lvizes barlangrendszer\u00e9t, ahol a term\u00e9szet csod\u00e1i \u00e9s a gy\u00f3gy\u00edt\u00f3 v\u00edz egyes\u00fclnek. Ne habozz, mer\u00fclj el a v\u00e1ros var\u00e1zslatos f\u00fcrd\u0151iben, \u00e9s \u00e9lvezd a pihen\u00e9st \u00e9s felt\u00f6lt\u0151d\u00e9st, amit csak Budapest ny\u00fajthat! Indulj el, \u00e9s tapasztald meg a felfriss\u00fcl\u00e9s \u00f6r\u00f6m\u00e9t!"
+    },
+    "nearby_places": [
+      {
+        "type": "sport=swimming",
+        "name": "City Park",
+        "distance_m": 500,
+        "walking_minutes": 6,
+        "lat": 47.5078789,
+        "lon": 19.0502383
+      },
+      {
+        "type": "sport=swimming",
+        "name": "Central Garden",
+        "distance_m": 1000,
+        "walking_minutes": 12,
+        "lat": 47.51787890000001,
+        "lon": 19.060238299999998
+      },
+      {
+        "type": "sport=swimming",
+        "name": "Green Space",
+        "distance_m": 800,
+        "walking_minutes": 10,
+        "lat": 47.527878900000005,
+        "lon": 19.0702383
+      },
+      {
+        "type": "sport=swimming",
+        "name": "Recreation Area",
+        "distance_m": 1500,
+        "walking_minutes": 18,
+        "lat": 47.5378789,
+        "lon": 19.080238299999998
+      },
+      {
+        "type": "sport=swimming",
+        "name": "Nature Reserve",
+        "distance_m": 2000,
+        "walking_minutes": 25,
+        "lat": 47.5478789,
+        "lon": 19.0902383
+      }
+    ],
+    "fallback_message": "\u26a0\ufe0f  Nem tal\u00e1ltam megfelel\u0151 helyeket, a tesztelhet\u0151s\u00e9g \u00e9rdek\u00e9ben teszt helyeket mutatok (sport=swimming)",
+    "metadata": {
+      "generated_at": "2025-12-22T19:53:49.568336"
+    }
+  },
+  {
+    "city": "sz\u00e9kesfeh\u00e9rv\u00e1r",
+    "coordinates": {
+      "lat": 47.1910169,
+      "lon": 18.410811
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans \u00faszn\u00e9k egy j\u00f3t-hez",
+        "content": "- Sz\u00e9kesfeh\u00e9rv\u00e1r k\u00f6zel tal\u00e1lhat\u00f3 a Velencei-t\u00f3hoz, amely n\u00e9pszer\u0171 \u00fasz\u00e1si lehet\u0151s\u00e9geket k\u00edn\u00e1l."
+      },
+      {
+        "title": "Relevans \u00faszn\u00e9k egy j\u00f3t-hez",
+        "content": "- A v\u00e1ros k\u00f6zel van a Balatonhoz, amely szint\u00e9n kiv\u00e1l\u00f3 \u00fasz\u00e1si \u00e9s v\u00edzi sport lehet\u0151s\u00e9geket biztos\u00edt."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves Sz\u00e9kesfeh\u00e9rv\u00e1ri Lakosok \u00e9s L\u00e1togat\u00f3k!\n\nHa egy friss\u00edt\u0151 \u00fasz\u00e1sra v\u00e1gytok, Sz\u00e9kesfeh\u00e9rv\u00e1r t\u00f6k\u00e9letes v\u00e1laszt\u00e1s! A k\u00f6zeli Velencei-t\u00f3 krist\u00e1lytiszta vize \u00e9s a Balaton csod\u00e1s hull\u00e1mai csak arra v\u00e1rnak, hogy felfedezz\u00e9tek \u0151ket. Ne habozzatok, csobbanjatok egyet a term\u00e9szet l\u00e1gy \u00f6l\u00e9n, \u00e9s \u00e9lvezz\u00e9tek a v\u00edzi sportok \u00f6r\u00f6m\u00e9t! Fedezz\u00e9tek fel a k\u00f6rny\u00e9k sz\u00e9ps\u00e9geit, \u00e9s t\u00f6lts\u00e9tek el a napot egy kellemes f\u00fcrd\u00e9ssel!"
+    },
+    "nearby_places": [
+      {
+        "type": "swimming_pool",
+        "name": "Swimming Pool #262652139",
+        "distance_m": 649,
+        "walking_minutes": 8,
+        "lat": 47.1945628,
+        "lon": 18.4039728
+      },
+      {
+        "type": "swimming_pool",
+        "name": "Swimming Pool #216023693",
+        "distance_m": 666,
+        "walking_minutes": 8,
+        "lat": 47.1947057,
+        "lon": 18.4038513
+      },
+      {
+        "type": "swimming_pool",
+        "name": "Swimming Pool #949426329",
+        "distance_m": 676,
+        "walking_minutes": 8,
+        "lat": 47.1945901,
+        "lon": 18.4035693
+      },
+      {
+        "type": "swimming_pool",
+        "name": "Swimming Pool #216023698",
+        "distance_m": 701,
+        "walking_minutes": 8,
+        "lat": 47.1949898,
+        "lon": 18.4036025
+      },
+      {
+        "type": "swimming_pool",
+        "name": "Swimming Pool #740526187",
+        "distance_m": 702,
+        "walking_minutes": 8,
+        "lat": 47.1944348,
+        "lon": 18.4029924
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T19:45:10.224100"
+    }
+  },
+  {
+    "city": "sz\u00e9kesfeh\u00e9rv\u00e1r",
+    "coordinates": {
+      "lat": 47.1910169,
+      "lon": 18.410811
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans \u00faszn\u00e9k egy j\u00f3t-hez",
+        "content": "- Sz\u00e9kesfeh\u00e9rv\u00e1r k\u00f6zel tal\u00e1lhat\u00f3 a Velencei-t\u00f3hoz, amely n\u00e9pszer\u0171 \u00fasz\u00e1si lehet\u0151s\u00e9geket k\u00edn\u00e1l."
+      },
+      {
+        "title": "Relevans \u00faszn\u00e9k egy j\u00f3t-hez",
+        "content": "- A v\u00e1ros ter\u00fclete a Dun\u00e1nt\u00falon fekszik, \u00edgy a k\u00f6rnyez\u0151 v\u00edzfel\u00fcletek, mint a Balaton, szint\u00e9n el\u00e9rhet\u0151k \u00fasz\u00e1s c\u00e9lj\u00e1b\u00f3l."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves Sz\u00e9kesfeh\u00e9rv\u00e1ri Bar\u00e1tunk!\n\nHa \u00faszni szeretn\u00e9l egy j\u00f3t, Sz\u00e9kesfeh\u00e9rv\u00e1r t\u00f6k\u00e9letes kiindul\u00f3pont sz\u00e1modra! Csak egy r\u00f6vid utaz\u00e1s, \u00e9s m\u00e1ris a Velencei-t\u00f3 h\u0171s\u00edt\u0151 v\u00edz\u00e9ben tal\u00e1lhatod magad, ahol a napf\u00e9ny \u00e9s a term\u00e9szet var\u00e1zsa v\u00e1r r\u00e1d. Ne feledd, a Balaton is a k\u00f6zelben van, \u00edgy ak\u00e1r egy eg\u00e9sz napos f\u00fcrd\u0151z\u0151s kalandot is szervezhetsz! Fedezd fel a k\u00f6rnyez\u0151 v\u00edzfel\u00fcleteket, \u00e9s \u00e9lvezd a ny\u00e1ri naps\u00fct\u00e9st!"
+    },
+    "nearby_places": [
+      {
+        "type": "place",
+        "name": "Place #663176746",
+        "distance_m": 451,
+        "walking_minutes": 5,
+        "lat": 47.1950721,
+        "lon": 18.4112041
+      },
+      {
+        "type": "place",
+        "name": "Place #654245242",
+        "distance_m": 645,
+        "walking_minutes": 8,
+        "lat": 47.1852748,
+        "lon": 18.4120811
+      },
+      {
+        "type": "place",
+        "name": "Place #28486624",
+        "distance_m": 1188,
+        "walking_minutes": 14,
+        "lat": 47.187159,
+        "lon": 18.3961402
+      },
+      {
+        "type": "place",
+        "name": "Cs\u00f3nak\u00e1z\u00f3-t\u00f3",
+        "distance_m": 1223,
+        "walking_minutes": 15,
+        "lat": 47.199304,
+        "lon": 18.400168
+      },
+      {
+        "type": "place",
+        "name": "Place #28486622",
+        "distance_m": 1352,
+        "walking_minutes": 16,
+        "lat": 47.1909322,
+        "lon": 18.3929083
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T19:40:26.791555"
+    }
+  },
+  {
+    "city": "sz\u00e9kesfeh\u00e9rv\u00e1r",
+    "coordinates": {
+      "lat": 47.1910169,
+      "lon": 18.410811
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans \u00faszn\u00e9k egy j\u00f3t-hez",
+        "content": "- Sz\u00e9kesfeh\u00e9rv\u00e1r k\u00f6zel van a Velencei-t\u00f3hoz, ami n\u00e9pszer\u0171 \u00fasz\u00e1si lehet\u0151s\u00e9geket k\u00edn\u00e1l."
+      },
+      {
+        "title": "Relevans \u00faszn\u00e9k egy j\u00f3t-hez",
+        "content": "- A v\u00e1ros k\u00f6zel van a Balatonhoz, amely szint\u00e9n kiv\u00e1l\u00f3 hely az \u00fasz\u00e1sra \u00e9s v\u00edzi sportokra."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves \u00daszni v\u00e1gy\u00f3!\n\nSz\u00e9kesfeh\u00e9rv\u00e1r t\u00f6k\u00e9letes kiindul\u00f3pont egy felejthetetlen \u00fasz\u00e1s \u00e9lm\u00e9ny\u00e9hez! Csak egy r\u00f6vid utaz\u00e1sra tal\u00e1lhat\u00f3 a gy\u00f6ny\u00f6r\u0171 Velencei-t\u00f3, ahol krist\u00e1lytiszta v\u00edz v\u00e1rja, hogy felfedezd. Emellett a Balaton is csak egy karny\u00fajt\u00e1snyira van, ahol sz\u00e1mos v\u00edzi sport\u00e1g \u00e9s strand lehet\u0151s\u00e9g v\u00e1r r\u00e1d. Ne habozz, tedd pr\u00f3b\u00e1ra a v\u00edzparti kalandjaidat, \u00e9s \u00e9lvezd a ny\u00e1ri napf\u00e9nyben a felfriss\u00fcl\u00e9st!"
+    },
+    "nearby_places": [
+      {
+        "type": "museum",
+        "name": "\u00d3ram\u00fazeum",
+        "distance_m": 88,
+        "walking_minutes": 1,
+        "lat": 47.1902245,
+        "lon": 18.4109238
+      },
+      {
+        "type": "museum",
+        "name": "Sz\u00e9kesfeh\u00e9rv\u00e1ri Egyh\u00e1zmegyei M\u00fazeum",
+        "distance_m": 114,
+        "walking_minutes": 1,
+        "lat": 47.1914977,
+        "lon": 18.409466
+      },
+      {
+        "type": "museum",
+        "name": "Romkert",
+        "distance_m": 116,
+        "walking_minutes": 1,
+        "lat": 47.191883,
+        "lon": 18.411667
+      },
+      {
+        "type": "museum",
+        "name": "Budenz-h\u00e1z",
+        "distance_m": 127,
+        "walking_minutes": 1,
+        "lat": 47.1899032,
+        "lon": 18.4104022
+      },
+      {
+        "type": "museum",
+        "name": "Hetedh\u00e9t J\u00e1t\u00e9km\u00fazeum",
+        "distance_m": 152,
+        "walking_minutes": 1,
+        "lat": 47.1912655,
+        "lon": 18.4088267
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T19:38:36.287672"
+    }
+  },
+  {
+    "city": "sz\u00e9kesfeh\u00e9rv\u00e1r",
+    "coordinates": {
+      "lat": 47.1910169,
+      "lon": 18.410811
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans \u00faszn\u00e9k egy nagyot-hez",
+        "content": "- Sz\u00e9kesfeh\u00e9rv\u00e1r k\u00f6zel tal\u00e1lhat\u00f3 a Velencei-t\u00f3hoz, ami n\u00e9pszer\u0171 \u00fasz\u00e1si helysz\u00edn lehet."
+      },
+      {
+        "title": "Relevans \u00faszn\u00e9k egy nagyot-hez",
+        "content": "- A v\u00e1ros a Balatonhoz is k\u00f6zel fekszik, ahol szint\u00e9n lehet\u0151s\u00e9g van \u00fasz\u00e1sra."
+      },
+      {
+        "title": "Relevans \u00faszn\u00e9k egy nagyot-hez",
+        "content": "- Sz\u00e9kesfeh\u00e9rv\u00e1r \u00e9l\u00e9nk sport\u00e9lettel rendelkezik, ami utalhat a helyi \u00fasz\u00f3klubokra \u00e9s sportl\u00e9tes\u00edtm\u00e9nyekre."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves Sz\u00e9kesfeh\u00e9rv\u00e1r l\u00e1togat\u00f3ja! Ha \u00faszni szeretn\u00e9l egy nagyot, akkor a Velencei-t\u00f3 \u00e9s a Balaton k\u00f6zels\u00e9ge t\u00f6k\u00e9letes lehet\u0151s\u00e9get k\u00edn\u00e1l sz\u00e1modra. Fedezd fel a v\u00e1ros \u00e9l\u00e9nk sport\u00e9let\u00e9t, ahol helyi \u00fasz\u00f3klubok \u00e9s sportl\u00e9tes\u00edtm\u00e9nyek v\u00e1rnak r\u00e1d! Ne habozz, mer\u00fclj el a v\u00edzben, \u00e9s \u00e9lvezd a friss\u00edt\u0151 pillanatokat Sz\u00e9kesfeh\u00e9rv\u00e1r csod\u00e1s k\u00f6rnyezet\u00e9ben!"
+    },
+    "nearby_places": [
+      {
+        "type": "cafe",
+        "name": "Menta Cafe",
+        "distance_m": 50,
+        "walking_minutes": 1,
+        "lat": 47.1914738,
+        "lon": 18.4108048
+      },
+      {
+        "type": "cafe",
+        "name": "P\u00e1tria K\u00e1v\u00e9h\u00e1z \u00e9s \u00c9tterem",
+        "distance_m": 66,
+        "walking_minutes": 1,
+        "lat": 47.1911529,
+        "lon": 18.4099548
+      },
+      {
+        "type": "cafe",
+        "name": "Bar\u00e1tok K\u00e1v\u00e9z\u00f3 \u00e9s Te\u00e1z\u00f3",
+        "distance_m": 132,
+        "walking_minutes": 1,
+        "lat": 47.1916888,
+        "lon": 18.4093699
+      },
+      {
+        "type": "cafe",
+        "name": "Perte Bistro",
+        "distance_m": 159,
+        "walking_minutes": 1,
+        "lat": 47.1920445,
+        "lon": 18.4093428
+      },
+      {
+        "type": "cafe",
+        "name": "Museum Caf\u00e9",
+        "distance_m": 180,
+        "walking_minutes": 2,
+        "lat": 47.1894673,
+        "lon": 18.4100792
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T19:36:28.311228"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans \u00daszn\u00e9k egy j\u00f3t-hez",
+        "content": "- Budapest a vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151vel rendelkez\u0151 f\u0151v\u00e1rosa."
+      },
+      {
+        "title": "Relevans \u00daszn\u00e9k egy j\u00f3t-hez",
+        "content": "- Itt tal\u00e1lhat\u00f3 az orsz\u00e1g legnagyobb term\u00e1lvizes barlangrendszere."
+      },
+      {
+        "title": "Relevans \u00daszn\u00e9k egy j\u00f3t-hez",
+        "content": "- Budapest \u00e9vente mintegy 12 milli\u00f3 nemzetk\u00f6zi turist\u00e1t vonz, \u00edgy Eur\u00f3pa rendk\u00edv\u00fcl n\u00e9pszer\u0171 \u00fati c\u00e9ljai k\u00f6z\u00e9 tartozik."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Fedezd fel Budapest csod\u00e1latos gy\u00f3gyf\u00fcrd\u0151it, ahol a pihen\u00e9s \u00e9s a wellness \u00e9lm\u00e9nye garant\u00e1lt! A vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151j\u00e9vel rendelkez\u0151 f\u0151v\u00e1rosunkban a term\u00e1lvizes barlangrendszer csod\u00e1it is \u00e9lvezheted, amelyek k\u00fcl\u00f6nleges \u00e9lm\u00e9nyt ny\u00fajtanak. Ne hagyd ki a lehet\u0151s\u00e9get, hogy egy friss\u00edt\u0151 \u00fasz\u00e1s k\u00f6zben felt\u00f6lt\u0151dj a v\u00e1ros var\u00e1zslatos atmoszf\u00e9r\u00e1j\u00e1val! Tedd meg az els\u0151 l\u00e9p\u00e9st a t\u00f6k\u00e9letes kikapcsol\u00f3d\u00e1s fel\u00e9, \u00e9s mer\u00fclj el Budapest gy\u00f3gy\u00edt\u00f3 vizeiben!"
+    },
+    "nearby_places": [
+      {
+        "type": "park",
+        "name": "Park #14455126",
+        "distance_m": 18,
+        "walking_minutes": 1,
+        "lat": 47.4977275,
+        "lon": 19.0403259
+      },
+      {
+        "type": "park",
+        "name": "Park #418982877",
+        "distance_m": 66,
+        "walking_minutes": 1,
+        "lat": 47.4978912,
+        "lon": 19.0411247
+      },
+      {
+        "type": "park",
+        "name": "Ellyps s\u00e9t\u00e1ny",
+        "distance_m": 154,
+        "walking_minutes": 1,
+        "lat": 47.4964878,
+        "lon": 19.0401798
+      },
+      {
+        "type": "park",
+        "name": "Jeruzs\u00e1lem park",
+        "distance_m": 156,
+        "walking_minutes": 1,
+        "lat": 47.4968533,
+        "lon": 19.0416625
+      },
+      {
+        "type": "park",
+        "name": "Park #14455125",
+        "distance_m": 197,
+        "walking_minutes": 2,
+        "lat": 47.4990708,
+        "lon": 19.0382942
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T19:32:50.884818"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans \u00faszn\u00e9k egy nagyot-hez",
+        "content": "- Budapest a vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151vel rendelkez\u0151 f\u0151v\u00e1rosa."
+      },
+      {
+        "title": "Relevans \u00faszn\u00e9k egy nagyot-hez",
+        "content": "- Itt tal\u00e1lhat\u00f3 az orsz\u00e1g legnagyobb term\u00e1lvizes barlangrendszere."
+      },
+      {
+        "title": "Relevans \u00faszn\u00e9k egy nagyot-hez",
+        "content": "- Budapest \u00e9vente mintegy 12 milli\u00f3 nemzetk\u00f6zi turist\u00e1t vonz, \u00edgy Eur\u00f3pa rendk\u00edv\u00fcl n\u00e9pszer\u0171 \u00fati c\u00e9ljai k\u00f6z\u00e9 tartozik."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves L\u00e1togat\u00f3!\n\nBudapest nemcsak a gy\u00f6ny\u00f6r\u0171 l\u00e1tv\u00e1nyoss\u00e1gair\u00f3l h\u00edres, hanem a vil\u00e1g legt\u00f6bb gy\u00f3gyf\u00fcrd\u0151j\u00e9vel is b\u00fcszk\u00e9lkedhet! Mer\u00fclj el a v\u00e1ros legnagyobb term\u00e1lvizes barlangrendszer\u00e9ben, ahol a v\u00edz var\u00e1zslatos hat\u00e1sai felfriss\u00edtenek \u00e9s felt\u00f6ltenek. Ne hagyd ki, hogy egy nagyot \u00fassz a h\u00edres f\u00fcrd\u0151kben, mik\u00f6zben \u00e9lvezed a v\u00e1ros k\u00fcl\u00f6nleges atmoszf\u00e9r\u00e1j\u00e1t! Fedezd fel Budapest csod\u00e1it, \u00e9s engedd, hogy a v\u00edz \u00e9lm\u00e9nye elragadjon!"
+    },
+    "nearby_places": [
+      {
+        "type": "park",
+        "name": "Park #14455126",
+        "distance_m": 18,
+        "walking_minutes": 1,
+        "lat": 47.4977275,
+        "lon": 19.0403259
+      },
+      {
+        "type": "park",
+        "name": "Park #418982877",
+        "distance_m": 66,
+        "walking_minutes": 1,
+        "lat": 47.4978912,
+        "lon": 19.0411247
+      },
+      {
+        "type": "park",
+        "name": "Ellyps s\u00e9t\u00e1ny",
+        "distance_m": 154,
+        "walking_minutes": 1,
+        "lat": 47.4964878,
+        "lon": 19.0401798
+      },
+      {
+        "type": "park",
+        "name": "Jeruzs\u00e1lem park",
+        "distance_m": 156,
+        "walking_minutes": 1,
+        "lat": 47.4968533,
+        "lon": 19.0416625
+      },
+      {
+        "type": "park",
+        "name": "Park #14455125",
+        "distance_m": 197,
+        "walking_minutes": 2,
+        "lat": 47.4990708,
+        "lon": 19.0382942
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T19:31:19.668099"
+    }
+  },
+  {
+    "city": "budapest",
+    "coordinates": {
+      "lat": 47.4978789,
+      "lon": 19.0402383
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans m\u00fazeumokat akarok l\u00e1tni-hez",
+        "content": "- Budapest a politikai, kultur\u00e1lis, kereskedelmi, ipari \u00e9s k\u00f6zleked\u00e9si k\u00f6zpontja Magyarorsz\u00e1gnak, \u00edgy sz\u00e1mos m\u00fazeumnak ad otthont."
+      },
+      {
+        "title": "Relevans m\u00fazeumokat akarok l\u00e1tni-hez",
+        "content": "- A v\u00e1rosban tal\u00e1lhat\u00f3 az Eur\u00f3pai Innov\u00e1ci\u00f3s \u00e9s Technol\u00f3giai Int\u00e9zet, valamint t\u00f6bb f\u0151iskola \u00e9s egyetem, amelyek hozz\u00e1j\u00e1rulnak a kultur\u00e1lis \u00e9lethez."
+      },
+      {
+        "title": "Relevans m\u00fazeumokat akarok l\u00e1tni-hez",
+        "content": "- Budapest \u00e9vente mintegy 12 milli\u00f3 nemzetk\u00f6zi turist\u00e1t vonz, \u00edgy sz\u00e1mos m\u00fazeum \u00e9s kultur\u00e1lis int\u00e9zm\u00e9ny n\u00e9pszer\u0171 \u00fati c\u00e9l."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Fedezd fel Budapest gazdag m\u00fazeumi vil\u00e1g\u00e1t, ahol a politikai, kultur\u00e1lis \u00e9s ipari \u00f6r\u00f6ks\u00e9g tal\u00e1lkozik! A v\u00e1ros nemcsak az Eur\u00f3pai Innov\u00e1ci\u00f3s \u00e9s Technol\u00f3giai Int\u00e9zet otthona, hanem sz\u00e1mos \u00e9rdekes m\u00fazeum is v\u00e1r r\u00e1d, amelyek \u00e9vente t\u00f6bb mint 12 milli\u00f3 nemzetk\u00f6zi l\u00e1togat\u00f3t vonzanak. Ne hagyd ki a lehet\u0151s\u00e9get, hogy elmer\u00fclj a magyar t\u00f6rt\u00e9nelem \u00e9s m\u0171v\u00e9szetek kincseiben! Indulj el egy izgalmas m\u00fazeuml\u00e1togat\u00e1sra, \u00e9s tapasztald meg Budapest kultur\u00e1lis soksz\u00edn\u0171s\u00e9g\u00e9t!"
+    },
+    "nearby_places": [
+      {
+        "type": "museum",
+        "name": "F\u0151\u0151rs\u00e9g ki\u00e1ll\u00edt\u00e1s",
+        "distance_m": 239,
+        "walking_minutes": 2,
+        "lat": 47.4960452,
+        "lon": 19.0385702
+      },
+      {
+        "type": "museum",
+        "name": "V\u00e1rkert Baz\u00e1r - Test\u0151rpalota",
+        "distance_m": 240,
+        "walking_minutes": 3,
+        "lat": 47.495982,
+        "lon": 19.0417829
+      },
+      {
+        "type": "museum",
+        "name": "Budapesti T\u00f6rt\u00e9neti M\u00fazeum",
+        "distance_m": 269,
+        "walking_minutes": 3,
+        "lat": 47.4954582,
+        "lon": 19.0404987
+      },
+      {
+        "type": "museum",
+        "name": "De la Motte-Beer-palota",
+        "distance_m": 366,
+        "walking_minutes": 4,
+        "lat": 47.498997,
+        "lon": 19.035646
+      },
+      {
+        "type": "museum",
+        "name": "Houdini H\u00e1z",
+        "distance_m": 427,
+        "walking_minutes": 5,
+        "lat": 47.4993396,
+        "lon": 19.0349708
+      }
+    ],
+    "fallback_message": null,
+    "metadata": {
+      "generated_at": "2025-12-22T19:30:49.208539"
+    }
+  },
+  {
+    "city": "v\u00e1c",
+    "coordinates": {
+      "lat": 47.7782873,
+      "lon": 19.1278294
+    },
+    "date_context": {
+      "year": 2025,
+      "month": 12,
+      "day": 22,
+      "weekday": "Monday"
+    },
+    "recommended_activities": [],
+    "city_facts": [
+      {
+        "title": "Relevans t\u00e1ncolni szeretn\u00e9k-hez",
+        "content": "- V\u00e1c gazdag kultur\u00e1lis \u00e9lete miatt vonz\u00f3 idegenforgalmi c\u00e9lpont, ahol k\u00fcl\u00f6nb\u00f6z\u0151 kultur\u00e1lis esem\u00e9nyek \u00e9s programok zajlanak."
+      },
+      {
+        "title": "Relevans t\u00e1ncolni szeretn\u00e9k-hez",
+        "content": "- A v\u00e1ros f\u0151tere, a M\u00e1rcius 15. t\u00e9r, fontos tal\u00e1lkoz\u00f3hely, ahol k\u00fcl\u00f6nb\u00f6z\u0151 rendezv\u00e9nyeket, k\u00f6zt\u00fck t\u00e1ncos esem\u00e9nyeket is szervezhetnek."
+      },
+      {
+        "title": "Relevans t\u00e1ncolni szeretn\u00e9k-hez",
+        "content": "- V\u00e1c a budapesti polg\u00e1rok kedvelt ny\u00e1ri \u00fcd\u00fcl\u0151helye, ami lehet\u0151s\u00e9get ad a szabadid\u0151s \u00e9s kultur\u00e1lis tev\u00e9kenys\u00e9gekre, bele\u00e9rtve a t\u00e1ncot is."
+      }
+    ],
+    "briefing": {
+      "paragraph": "Kedves T\u00e1ncolni v\u00e1gy\u00f3 Bar\u00e1tunk!\n\nV\u00e1c gazdag kultur\u00e1lis \u00e9lete \u00e9s vibr\u00e1l\u00f3 k\u00f6z\u00f6ss\u00e9gi esem\u00e9nyei t\u00f6k\u00e9letes h\u00e1tteret biztos\u00edtanak a t\u00e1nc ir\u00e1nti szenved\u00e9lyedhez! A M\u00e1rcius 15. t\u00e9ren t\u00f6bb t\u00e1ncos rendezv\u00e9ny is v\u00e1rja a l\u00e1togat\u00f3kat, ahol tal\u00e1lkozhatsz hasonl\u00f3 \u00e9rdekl\u0151d\u00e9s\u0171 emberekkel. Emellett V\u00e1c, mint a budapesti polg\u00e1rok kedvelt ny\u00e1ri \u00fcd\u00fcl\u0151helye, sz\u00e1mos lehet\u0151s\u00e9get k\u00edn\u00e1l a szabadid\u0151s \u00e9s kultur\u00e1lis programokra, \u00edgy a t\u00e1nc szerelmeseik\u00e9nt garant\u00e1ltan \u00e9lm\u00e9nyekkel teli napokra sz\u00e1m\u00edthatsz! Ne habozz, fedezd fel V\u00e1c t\u00e1ncos vil\u00e1g\u00e1t, \u00e9s \u00e9lvezd a v\u00e1ros var\u00e1zs\u00e1t!"
+    },
+    "nearby_places": [
+      {
+        "type": "t\u00e1ncolni_szeretn\u00e9k",
+        "name": "City Park",
+        "distance_m": 500,
+        "walking_minutes": 6,
+        "lat": 47.7882873,
+        "lon": 19.1378294
+      },
+      {
+        "type": "t\u00e1ncolni_szeretn\u00e9k",
+        "name": "Central Garden",
+        "distance_m": 1000,
+        "walking_minutes": 12,
+        "lat": 47.798287300000005,
+        "lon": 19.1478294
+      },
+      {
+        "type": "t\u00e1ncolni_szeretn\u00e9k",
+        "name": "Green Space",
+        "distance_m": 800,
+        "walking_minutes": 10,
+        "lat": 47.8082873,
+        "lon": 19.1578294
+      },
+      {
+        "type": "t\u00e1ncolni_szeretn\u00e9k",
+        "name": "Recreation Area",
+        "distance_m": 1500,
+        "walking_minutes": 18,
+        "lat": 47.8182873,
+        "lon": 19.1678294
+      },
+      {
+        "type": "t\u00e1ncolni_szeretn\u00e9k",
+        "name": "Nature Reserve",
+        "distance_m": 2000,
+        "walking_minutes": 25,
+        "lat": 47.8282873,
+        "lon": 19.1778294
+      }
+    ],
+    "fallback_message": "\u26a0\ufe0f  Nem tal\u00e1ltam megfelel\u0151 helyeket, a tesztelhet\u0151s\u00e9g \u00e9rdek\u00e9ben teszt helyeket mutatok (t\u00e1ncolni szeretn\u00e9k)",
+    "metadata": {
+      "generated_at": "2025-12-22T19:29:38.543309"
+    }
+  }
+]

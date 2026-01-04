@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  embedding-hf2:
+    build: .
+    image: embedding-hf2
+    container_name: embedding-hf2
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - ./embedding_sources:/app/embedding_sources

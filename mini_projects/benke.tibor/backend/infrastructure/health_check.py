@@ -8,8 +8,7 @@ Inspired by vector_embeddings/app/config.py validation patterns.
 """
 
 import os
-import asyncio
-from typing import Dict, List, Tuple
+from typing import List, Tuple
 from dataclasses import dataclass
 
 
@@ -290,8 +289,8 @@ def validate_startup_config_sync() -> bool:
     
     # Check 2: OpenAI client (basic check)
     try:
-        from infrastructure.openai_clients import OpenAIClientFactory
-        # Don't actually call API, just check import works
+        # Just check that infrastructure module can be imported
+        import infrastructure.openai_clients  # noqa: F401
         results.append(("✅", "OpenAI client importable", True))
     except Exception as e:
         results.append(("❌", f"OpenAI client error: {e}", True))

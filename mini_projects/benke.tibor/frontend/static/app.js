@@ -227,27 +227,32 @@ async function refreshQuery(question, useCache = true) {
         const raw = await response.json();
         const payload = raw.data ?? raw;
         
-        // Extract citations
-        const citations = payload.citations ? 
-            [...new Set(payload.citations
-                .map(c => c.title || c.source || null)
-                .filter(s => s && s !== 'Unknown' && s !== 'Unknown Document')
-            )] 
-            : [];
+        // Deduplicate citation objects by citation_id (or title if no ID)
+        const uniqueCitationObjects = payload.citations ? 
+            Array.from(
+                new Map(
+                    payload.citations.map(c => [c.citation_id || c.title || c.source, c])
+                ).values()
+            ) : [];
+        
+        // Extract unique titles for legacy citations array
+        const citations = uniqueCitationObjects
+            .map(c => c.title || c.source || null)
+            .filter(s => s && s !== 'Unknown' && s !== 'Unknown Document');
         
         // Update debug panel
         debugSession.textContent = sessionId;
         debugDomain.textContent = payload.domain || 'general';
         
         // Chunk count and max score
-        const chunkCount = payload.citations ? payload.citations.length : 0;
+        const chunkCount = uniqueCitationObjects.length;
         debugChunkCount.textContent = chunkCount;
         
         if (payload.telemetry) {
             debugMaxScore.textContent = payload.telemetry.max_similarity_score || '-';
             debugLatency.textContent = payload.telemetry.total_latency_ms ? `${payload.telemetry.total_latency_ms}ms` : '-';
-        } else if (payload.citations && payload.citations.length > 0) {
-            const maxScore = Math.max(...payload.citations.map(c => c.score || 0));
+        } else if (uniqueCitationObjects.length > 0) {
+            const maxScore = Math.max(...uniqueCitationObjects.map(c => c.score || 0));
             debugMaxScore.textContent = maxScore.toFixed(3);
         } else {
             debugMaxScore.textContent = '-';
@@ -304,7 +309,7 @@ async function refreshQuery(question, useCache = true) {
             'bot',
             citations,
             question,
-            payload.citations,
+            uniqueCitationObjects,
             payload.domain,
             sessionId
         );
@@ -353,27 +358,32 @@ queryForm.addEventListener('submit', async (e) => {
         const raw = await response.json();
         const payload = raw.data ?? raw; // backend wraps in { success, data }
 
-        // Extract unique source file names from citations
-        const citations = payload.citations ? 
-            [...new Set(payload.citations
-                .map(c => c.title || c.source || null)
-                .filter(s => s && s !== 'Unknown' && s !== 'Unknown Document')
-            )] 
-            : [];
+        // Deduplicate citation objects by citation_id (or title if no ID)
+        const uniqueCitationObjects = payload.citations ? 
+            Array.from(
+                new Map(
+                    payload.citations.map(c => [c.citation_id || c.title || c.source, c])
+                ).values()
+            ) : [];
+        
+        // Extract unique titles for legacy citations array
+        const citations = uniqueCitationObjects
+            .map(c => c.title || c.source || null)
+            .filter(s => s && s !== 'Unknown' && s !== 'Unknown Document');
 
         // Update debug panel
         debugSession.textContent = sessionId;
         debugDomain.textContent = payload.domain || 'general';
         
         // Chunk count and max score
-        const chunkCount = payload.citations ? payload.citations.length : 0;
+        const chunkCount = uniqueCitationObjects.length;
         debugChunkCount.textContent = chunkCount;
         
         if (payload.telemetry) {
             debugMaxScore.textContent = payload.telemetry.max_similarity_score || '-';
             debugLatency.textContent = payload.telemetry.total_latency_ms ? `${payload.telemetry.total_latency_ms}ms` : '-';
-        } else if (payload.citations && payload.citations.length > 0) {
-            const maxScore = Math.max(...payload.citations.map(c => c.score || 0));
+        } else if (uniqueCitationObjects.length > 0) {
+            const maxScore = Math.max(...uniqueCitationObjects.map(c => c.score || 0));
             debugMaxScore.textContent = maxScore.toFixed(3);
         } else {
             debugMaxScore.textContent = '-';
@@ -423,7 +433,7 @@ queryForm.addEventListener('submit', async (e) => {
             'bot',
             citations,
             query,  // Pass original query for refresh button
-            payload.citations,  // Pass full citation objects
+            uniqueCitationObjects,  // Pass deduplicated citation objects
             payload.domain,  // Pass domain
             sessionId  // Pass session ID
         );

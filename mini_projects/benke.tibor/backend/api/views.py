@@ -6,7 +6,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.request import Request
-from asgiref.sync import async_to_sync
 
 from domain.models import QueryRequest
 from infrastructure.error_handling import APICallError, check_token_limit, estimate_tokens
@@ -160,7 +159,7 @@ class SessionHistoryAPIView(APIView):
                 {"success": True, "data": history},
                 status=status.HTTP_200_OK,
             )
-        except FileNotFoundError as e:
+        except FileNotFoundError:
             # Session not found
             logger.warning(f"Session not found: {session_id}")
             return Response(
@@ -490,14 +489,13 @@ class CitationFeedbackAPIView(APIView):
         """Submit citation feedback."""
         try:
             import json
-            import asyncio
             from domain.models import CitationFeedback, FeedbackType
             from infrastructure.postgres_client import postgres_client
             
             # Parse JSON body manually
             try:
                 data = json.loads(request.body.decode('utf-8'))
-            except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            except (json.JSONDecodeError, UnicodeDecodeError):
                 return Response(
                     {"success": False, "error": "Invalid JSON body"},
                     status=status.HTTP_400_BAD_REQUEST

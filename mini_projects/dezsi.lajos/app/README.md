@@ -17,9 +17,31 @@ A specialized AI agent for medical/pharmaceutical support triage, capable of cat
 
 ## Setup & Running
 
-### 1. Backend Setup
+### 🐳 The Quick Way: Docker Compose (Recommended)
 
-1. Navegate to `backend`:
+Run the entire application (frontend + backend) with a single command:
+
+1. **Configure API Key**: 
+   Ensure `backend/.env` exists and contains your `GOOGLE_API_KEY`.
+   ```bash
+   # From the app directory
+   cp backend/.env.example backend/.env
+   # Edit backend/.env and add your key
+   ```
+
+2. **Run with Compose**:
+   ```bash
+   docker-compose up --build
+   ```
+   - **Frontend**: `http://localhost:80` (or `http://localhost`)
+   - **Backend API**: `http://localhost:8000`
+
+---
+
+### 🛠️ Manual Setup (Development)
+
+#### 1. Backend Setup
+1. Navigate to `backend`:
    ```bash
    cd backend
    ```
@@ -33,19 +55,13 @@ A specialized AI agent for medical/pharmaceutical support triage, capable of cat
    pip install -r requirements.txt
    ```
 4. Configure Environment:
-   Copy `.env.example` to `.env` and add your key:
-   ```bash
-   cp .env.example .env
-   # Edit .env and set GOOGLE_API_KEY
-   ```
+   Copy `.env.example` to `.env` and add your key.
 5. Run Server:
    ```bash
    uvicorn main:app --reload
    ```
-   Server runs at `http://localhost:8000`.
 
-### 2. Frontend Setup
-
+#### 2. Frontend Setup
 1. Navigate to `frontend`:
    ```bash
    cd frontend
@@ -62,16 +78,7 @@ A specialized AI agent for medical/pharmaceutical support triage, capable of cat
 
 ### 3. Usage
 
-1. Open the frontend URL.
-2. Click the "Database" icon in the header to **Seed the Knowledge Base** (loads sample policies into Vector DB).
-3. Type a medical support query (e.g., "I cannot login to the CLM app" or "Submit button missing on Call Report").
-4. Observe the agent's response and the "Debug Panel" showing the Triage Decision and Logic.
-
-### Docker Usage (Backend Only)
-
-Build and run the backend container:
-```bash
-cd backend
-docker build -t medical-ai-agent .
-docker run -p 8000:8000 --env-file .env medical-ai-agent
-```
+1. Open the application URL.
+2. Click the **"Seed Knowledge Base"** button (database icon) to load sample medical policies.
+3. Type a medical support query (e.g., "I cannot login to the CLM app").
+4. Observe the agent's response and the **Debug Panel** with triage decisions.

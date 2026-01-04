@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  sla-advisor:
+    build: .
+    stdin_open: true    # Interaktív input engedélyezése
+    tty: true           # Terminal mód
+    env_file:
+      - .env

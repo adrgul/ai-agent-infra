@@ -3,7 +3,7 @@ Unit tests for telemetry functionality.
 Tests debug panel telemetry data collection and API response structure.
 """
 import pytest
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock
 from domain.models import QueryResponse, Citation, DomainType
 from services.agent import AgentState
 
@@ -63,7 +63,6 @@ class TestTelemetryDataCollection:
         """Test LLM prompt and response are saved during generation."""
         from services.agent import QueryAgent
         from langchain_openai import ChatOpenAI
-        from langchain_core.messages import AIMessage
         
         # Mock LLM
         llm = AsyncMock(spec=ChatOpenAI)

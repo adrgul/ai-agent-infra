@@ -10,7 +10,7 @@ Tests cover:
 """
 import pytest
 import os
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock, patch
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 from infrastructure.openai_clients import OpenAIClientFactory
@@ -228,6 +228,7 @@ class TestClientReset:
         # Create new instance (should call ChatOpenAI again)
         llm2 = OpenAIClientFactory.get_llm()
         
+        assert llm2 == mock_llm  # New instance after reset
         assert mock_chat.call_count == 2  # Called twice
     
     @patch.dict(os.environ, {"OPENAI_API_KEY": "test-key-123"})
@@ -248,6 +249,7 @@ class TestClientReset:
         # Create new instance
         emb2 = OpenAIClientFactory.get_embeddings()
         
+        assert emb2 == mock_emb  # New instance after reset
         assert mock_embeddings.call_count == 2  # Called twice
     
     @patch.dict(os.environ, {"OPENAI_API_KEY": "test-key-123"})

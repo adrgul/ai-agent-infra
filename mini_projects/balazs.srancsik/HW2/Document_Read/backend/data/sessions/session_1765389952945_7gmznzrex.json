@@ -1,0 +1,26 @@
+{
+  "session_id": "session_1765389952945_7gmznzrex",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Show me the most important Hungarian radio stations",
+      "timestamp": "2025-12-10T18:06:12.164336",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Failed to fetch radio stations: [Errno -2] Name or service not known",
+      "timestamp": "2025-12-10T18:06:29.211888",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Sajnálom, úgy tűnik, hogy probléma merült fel az adatlekérés során, és nem tudtam elérni a rádióállomások listáját. Azonban el tudom mondani, hogy Magyarországon számos népszerű és fontos rádióállomás van, köztük:\n\n- Kossuth Rádió: Ez az egyik legismertebb közszolgálati rádió, mely sokféle műsort kínál, többek között híreket, kulturális műsorokat és sportot.\n- Petőfi Rádió: Főként a fiatalabb korosztályt célozza meg, zenei válogatása elsősorban a mai magyar és nemzetközi slágerekből áll.\n- Class FM: Egy népszerű kereskedelmi rádióállomás, mely szintén modern zenéket játszik, de találhatóak benne beszélgetős műsorok is.\n- Klubrádió: Főként társadalmi és politikai műsorokkal foglalkozik, sokak számára fontos beszélgetések és elemzések forrása.\n- Jazzy Rádió: A jazz zenét kedvelőknek ideális választás, de a soul és a funk zenei stílusok is teret kapnak itt.\n\nRemélem, ez a rövid összefoglaló segítségedre lesz! Ha konkrétabb információra van szükséged vagy egy adott rádióállomásról szeretnél többet megtudni, kérlek, jelezd!",
+      "timestamp": "2025-12-10T18:06:29.250898",
+      "metadata": null
+    }
+  ],
+  "summary": null,
+  "created_at": "2025-12-10T18:06:12.151861",
+  "updated_at": "2025-12-10T18:06:29.271026"
+}

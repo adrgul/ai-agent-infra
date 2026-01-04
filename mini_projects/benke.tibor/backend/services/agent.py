@@ -1,17 +1,16 @@
 """
 Services - LangGraph-based agent orchestration.
 """
-import json
 import logging
-from typing import Dict, Any, Sequence, Annotated
+from typing import Dict, Any, Sequence
 from typing_extensions import TypedDict
 
-from langchain_core.messages import BaseMessage, HumanMessage, AIMessage, SystemMessage
+from langchain_core.messages import BaseMessage, HumanMessage, AIMessage
 from langchain_openai import ChatOpenAI
 from langgraph.graph import StateGraph, END
 
-from domain.models import DomainType, QueryResponse, Citation, Memory, Message
-from infrastructure.error_handling import check_token_limit, estimate_tokens, usage_tracker
+from domain.models import DomainType, QueryResponse, Citation
+from infrastructure.error_handling import check_token_limit, estimate_tokens
 
 logger = logging.getLogger(__name__)
 

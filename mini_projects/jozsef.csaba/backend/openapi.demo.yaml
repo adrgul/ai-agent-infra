@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: Streamlit FastAPI FAISS RAG Demo
+  version: 0.1.0
+  description: Demo RAG chatbot backend with FAISS vector store
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Health check endpoint
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+  /ingest:
+    post:
+      tags:
+        - Ingestion
+      summary: Build or rebuild FAISS vector index
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                force_rebuild:
+                  type: boolean
+                  default: false
+                  description: If true, rebuild index even if it already exists
+            example:
+              force_rebuild: false
+      responses:
+        "200":
+          description: Ingested
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  indexed_files:
+                    type: integer
+                    description: Number of markdown files indexed
+                    example: 3
+                  chunk_count:
+                    type: integer
+                    description: Total number of chunks created
+                    example: 42
+                  vectorstore_dir:
+                    type: string
+                    description: Directory where FAISS index is persisted
+                    example: "../.vectorstore/faiss_index"
+                  filenames:
+                    type: array
+                    items:
+                      type: string
+                    description: List of indexed filenames
+                    example: ["a.md", "notes/b.md", "notes/c.md"]
+        "400":
+          description: No markdown files found
+  /chat:
+    post:
+      tags:
+        - Chat
+      summary: Ask a question using RAG
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+              properties:
+                session_id:
+                  type: string
+                  description: Optional session ID for UI correlation
+                message:
+                  type: string
+                  minLength: 1
+                  description: User's question
+                top_k:
+                  type: integer
+                  default: 4
+                  minimum: 1
+                  maximum: 20
+                  description: Number of document chunks to retrieve
+                temperature:
+                  type: number
+                  default: 0.2
+                  minimum: 0
+                  maximum: 1
+                  description: LLM temperature
+            example:
+              session_id: "user-123-session"
+              message: "What does the documentation say about deployment?"
+              top_k: 4
+              temperature: 0.2
+      responses:
+        "200":
+          description: Chat response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                  answer:
+                    type: string
+                  model:
+                    type: string
+                  sources:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        source_id:
+                          type: string
+                        filename:
+                          type: string
+                        snippet:
+                          type: string
+              example:
+                session_id: "user-123-session"
+                answer: "According to the documentation, you can deploy on Cloud Run..."
+                sources:
+                  - source_id: "deployment.md:2"
+                    filename: "deployment.md"
+                    snippet: "To deploy on Cloud Run, use..."
+                model: "gpt-4.1-mini"
+        "409":
+          description: Vector store not found (call /ingest first)
+        "422":
+          description: Validation error

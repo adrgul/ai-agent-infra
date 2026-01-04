@@ -1,0 +1,38 @@
+{
+  "session_id": "session_1765378670633_eu6nsfzq8",
+  "messages": [
+    {
+      "role": "user",
+      "content": "convert 100 EUR to HUF",
+      "timestamp": "2025-12-10T15:03:08.683603",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "1 EUR equals 383.85 HUF (as of 2025-12-09)",
+      "timestamp": "2025-12-10T15:03:18.738450",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "100 euró átváltása magyar forintra a jelenlegi árfolyam alapján, ami 383.85 HUF, összesen 38,385 HUF-t eredményez. Ha bármi másban segíthetek, szívesen állok rendelkezésedre!",
+      "timestamp": "2025-12-10T15:03:18.767051",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Tell the same in Engish",
+      "timestamp": "2025-12-10T15:03:37.068781",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "A 100 euró átváltása magyar forintra, a jelenlegi árfolyam szerint, ami 383.85 HUF, összesen 38,385 HUF-t tesz ki. Ha van még kérdésed vagy kérésed, szívesen segítek.",
+      "timestamp": "2025-12-10T15:03:42.954982",
+      "metadata": null
+    }
+  ],
+  "summary": null,
+  "created_at": "2025-12-10T15:03:08.636605",
+  "updated_at": "2025-12-10T15:03:42.973726"
+}

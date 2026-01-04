@@ -11,8 +11,17 @@
     <div class="chat-container">
         <!-- Header -->
         <div class="chat-header">
-            <h1>🤖 KnowledgeRouter</h1>
-            <p>Vállalati Tudásirányító & Workflow-Automata</p>
+            <div class="header-content">
+                <h4>🤖 KnowledgeRouter</h4>
+                <p>Vállalati Tudásirányító & Workflow-Automata</p>
+            </div>
+            <div class="header-controls">
+                <div class="user-badge">
+                    <span class="user-label">👤</span>
+                    <span id="currentUser">demo_user</span>
+                </div>
+                <button type="button" id="resetBtn" title="Új beszélgetés">🔄</button>
+            </div>
         </div>
         
         <!-- Chat Messages -->
@@ -35,15 +44,14 @@
         <!-- Input Area -->
         <div class="chat-input-area">
             <form class="input-form" id="queryForm">
-                <div class="input-group">
-                    <input type="text" id="userIdInput" placeholder="User ID" class="small-input" value="demo_user">
-                    <input type="text" id="sessionIdInput" placeholder="Session ID" class="small-input" value="demo_session">
-                </div>
-                <div class="input-group">
-                    <input type="text" id="queryInput" placeholder="Írd be a kérdésed..." required>
-                    <button type="submit" id="sendBtn">Küldés</button>
-                    <button type="button" id="resetBtn" title="Új beszélgetés">🔄</button>
-                </div>
+                <input type="hidden" id="userIdInput" value="demo_user">
+                <input type="hidden" id="sessionIdInput" value="demo_session">
+                <input type="text" id="queryInput" placeholder="Írd be a kérdésed..." required>
+                <button type="submit" id="sendBtn" title="Küldés">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                    </svg>
+                </button>
             </form>
         </div>
     </div>
@@ -90,6 +98,6 @@
         </div>
     </div>
     
-    <script src="/static/app.js?v=101"></script>
+    <script src="/static/app.js?v=102"></script>
 </body>
 </html>

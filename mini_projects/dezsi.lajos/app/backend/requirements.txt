@@ -7,3 +7,7 @@ langgraph
 qdrant-client
 python-dotenv
 httpx
+fpdf
+pypdf
+langchain-text-splitters
+aiohttp

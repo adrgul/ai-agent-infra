@@ -3,8 +3,7 @@ Unit tests for infrastructure health check system.
 Tests startup validation and configuration checks.
 """
 import os
-import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from infrastructure.health_check import validate_startup_config_sync
 
 
