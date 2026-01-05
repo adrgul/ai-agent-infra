@@ -1,0 +1,407 @@
+You are GitHub Copilot. Generate a COMPLETE working example application that demonstrates an AI Agent workflow with a Python backend and React frontend.
+
+Goal:
+Build a small but realistic demo app for an AI Agent programming course that visually demonstrates the agent cycle:
+  Prompt → Decision → Tool → Observation → Memory
+with workflow:
+  Agent → Tool → Agent → User
+
+The application MUST:
+- Use Docker for containerization (backend + frontend, runnable via docker-compose).
+- Use LangGraph for the agent orchestration (graph of nodes for agent, tools, etc.).
+- Use OpenAI as the LLM backend (Chat Completions / function calling or similar), with API key provided via environment variable OPENAI_API_KEY.
+- Persist EVERY conversation history (all messages) to JSON files in the filesystem.
+- Persist a separate user profile in JSON on the filesystem as well.
+- Allow conversation history to be deleted via a special “reset context” user message.
+- Never delete the user profile; it can only be created/loaded and updated, but not deleted.
+- Be implemented following SOLID principles and clean architecture as much as reasonably possible in a small example (separation of concerns, clear abstractions, dependency inversion, etc.).
+
+--------------------------------------------------------------------------------
+High-level requirements
+--------------------------------------------------------------------------------
+
+Backend: Python (FastAPI) implementing an AI agent with LangGraph.
+Frontend: React + TypeScript, ChatGPT-like UI.
+Agent capabilities:
+- Receives user prompt + memory (chat history summary and user profile + workflow state).
+- Decides whether to call tools (Gas exported quantity,  JSON search).
+- Calls LangGraph tool nodes for external APIs and internal utilities.
+- Updates memory (conversation, preferences, workflow state).
+- Returns a final answer to the user.
+
+Persistence:
+- Every conversation message (user + assistant + tool/system messages) must be stored in JSON files on disk.
+- A separate user profile JSON must be stored on disk.
+- A special message "reset context" (case-insensitive) must clear the conversation history for that session/user, but MUST NOT delete the user profile.
+
+--------------------------------------------------------------------------------
+Technologies & architecture
+--------------------------------------------------------------------------------
+
+Backend:
+- Language: Python 3.11+
+- Framework: FastAPI
+- Agent orchestration: LangGraph (Python library)
+  - Use LangGraph to define a graph with:
+    - Agent node(s): LLM reasoning and decision-making.
+    - Tool node(s): external API calls, file creation, history search.
+- HTTP client: httpx (async).
+- LLM integration: OpenAI Chat Completions (or equivalent) with function calling / JSON output.
+  - Use env var OPENAI_API_KEY.
+- Data models: Pydantic models for requests, responses, memory, messages, user profiles.
+- Logging: Python logging module for structured logs.
+- ARCHITECTURE & SOLID:
+  - Structure the backend into layers / modules (e.g. api, services, domain, infrastructure).
+  - Define clear interfaces / abstractions for:
+    - tool clients (e.g. Gas exported quantity),
+    - repositories for file-based persistence (conversation history, user profile).
+  - Use dependency inversion where possible (depend on abstractions, not concrete implementations).
+  - Keep controllers (FastAPI routes) thin, delegate logic to service classes.
+  - Ensure single responsibility per class or module where practical.
+
+Frontend:
+- React + TypeScript.
+- Build with Vite or Create React App (either is fine).
+- ChatGPT-like interface:
+  - Scrollable chat history in the center.
+  - User input at the bottom.
+  - New answers appear above the input, similar to ChatGPT.
+- Optional debug / side panel:
+  - Show which tools were called.
+  - Show memory snapshot (preferences, workflow state).
+  - Show minimal logs.
+
+--------------------------------------------------------------------------------
+User & session model, file storage requirements
+--------------------------------------------------------------------------------
+
+Define a clear model for:
+1) User profile
+2) Conversation history (per user/session)
+3) Memory object
+
+User profile:
+- Stored as a JSON file on disk, e.g. data/users/{user_id}.json
+- Contains (at minimum):
+  - user_id: string
+  - language: string (default: "hu")
+  - default_city: string (default: "Budapest")
+  - possibly other preferences (future extension)
+- Behavior:
+  - On first request, if profile doesn’t exist, create it with defaults.
+  - On later requests, load it and allow updates.
+  - The user profile MUST NOT be deleted by any workflow; only updated.
+  - Provide a mechanism for updating preferences via:
+    - API endpoint(s) (e.g. PUT /api/profile), and/or
+    - Agent understanding user instructions like “From now on answer in English.”
+
+Conversation history:
+- Stored as JSON files on disk, e.g. data/sessions/{session_id}.json
+- For each session_id (or user_id if you want them to be equivalent), store:
+  - messages: full chronological list of messages, each including:
+    - role: "user" | "assistant" | "system" | "tool"
+    - content: string
+    - timestamp
+    - optional metadata (e.g. tool_name, tool_args, tool_result summary)
+  - Derived or cached summaries for older parts of the conversation (for LLM context) are allowed, but the raw messages should still be persisted.
+- Every new message (user or assistant) MUST be appended to this file and saved to disk after each interaction.
+
+"Reset context" command:
+- If the user sends the prompt "reset context" (case-insensitive match), the backend MUST:
+  - Detect this as a special command before going through the normal agent flow.
+  - Clear the conversation history for that session (i.e. reset messages list in data/sessions/{session_id}.json).
+  - Keep the user profile file intact (do not delete it).
+  - Re-initialize memory (chat_history, workflow_state) for that session.
+  - Return a friendly confirmation message like: "Context has been reset. We are starting a new conversation, but your preferences are preserved."
+  - Do NOT treat "reset context" itself as a normal conversational message in the new history (it may remain only in logs if desired).
+
+--------------------------------------------------------------------------------
+Backend details: endpoints & behavior
+--------------------------------------------------------------------------------
+
+Create a FastAPI app with at least:
+
+1) POST /api/chat
+Request body:
+- user_id: string (or session_id; you can treat them the same or separate them clearly).
+- message: string (user message).
+
+Behavior:
+1. If message equals "reset context" (case-insensitive):
+   - Load or create user profile JSON under data/users/{user_id}.json.
+   - Clear or recreate the session history JSON file under data/sessions/{user_id or session_id}.json with an empty messages list.
+   - Reset in-memory memory object (empty chat_history, empty workflow_state, but keep preferences from user profile).
+   - Log the reset operation.
+   - Return a response with:
+     - final_answer: e.g. "Context has been reset. Your preferences are preserved."
+     - tools_used: [] (or empty list)
+     - memory_snapshot: new empty memory with preferences.
+   - Skip the LangGraph agent flow for this special command.
+
+2. Normal chat flow:
+   a) Load or initialize user profile from data/users/{user_id}.json.
+   b) Load or initialize conversation history from data/sessions/{session_id}.json.
+   c) Build a Memory object:
+      - chat_history:
+        - last N messages in full for context,
+        - optional summary of earlier messages (using a stored summary field).
+      - preferences:
+        - from user profile (language, default_city, etc.).
+      - workflow_state:
+        - from previous session state (if any).
+   d) Append the incoming user message to the in-memory messages list AND persist it to the session JSON file.
+   e) Construct a LangGraph state object including:
+      - messages
+      - memory (preferences + workflow_state)
+      - tools list
+      - any other agent metadata.
+
+   f) LangGraph graph:
+      - Include at least:
+        - Agent node (LLM reasoning node)
+        - Tool nodes (wrapping each tool function)
+      - The graph should implement the workflow:
+        Agent → Tool → Agent → User
+      - Agent node #1:
+        - Prompt the OpenAI model with:
+          - recent conversation (condensed),
+          - user profile preferences,
+          - workflow_state,
+          - descriptions of available tools and when to use them.
+        - Instruct the model to respond in a structured JSON format (for function calling), such as:
+          - { "action": "final_answer", "answer": "..." }
+          - or { "action": "call_tool", "tool_name": "...", "arguments": {...} }
+      - If model decides to call a tool, LangGraph should route to the appropriate tool node.
+      - Tool node:
+        - Calls the corresponding async Python function (see tools section).
+        - Returns an Observation with structured result.
+        - Adds a system/tool message to messages describing what happened (for human-readable memory).
+        - Updates memory/workflow_state where applicable.
+      - Agent node #2:
+        - Runs again with updated messages and Observation.
+        - Produces final natural language answer; must respect user profile preferences (e.g. language, default_city).
+      - Return final_answer and relevant data back to the FastAPI endpoint.
+
+   g) Persist all changes:
+      - Update the session JSON file with all messages (including tool/system messages) after each step.
+      - Persist updated memory/workflow_state and summary as part of the session or a separate file.
+      - If user profile changes are inferred (e.g. "From now on answer in English" → update language), then update user profile JSON under data/users/{user_id}.json.
+
+   h) Response body:
+      - final_answer: string (assistant’s final reply).
+      - tools_used: simple list of tools called in this request (name, short description).
+      - memory_snapshot:
+        - preferences
+        - workflow_state
+        - maybe last summary of chat.
+      - logs (optional): short text or structured entries related to this request.
+
+2) GET /api/session/{session_id}
+- Returns:
+  - messages (or last N),
+  - summary,
+  - workflow_state,
+  - tools_log.
+
+3) GET /api/profile/{user_id}
+- Returns the stored user profile JSON.
+
+4) PUT /api/profile/{user_id}
+- Request body: partial profile object (e.g. { "language": "en", "default_city": "Szeged" }).
+- Updates and persists the user profile JSON.
+- Does NOT allow deletion of the profile.
+
+5) GET /api/history/search
+- Query param: q (string).
+- Searches across all session JSON files in data/sessions for messages or tool logs containing q.
+- Returns list of matches: session_id, snippet, timestamp.
+- This search functionality should also be exposed as a tool for the agent.
+
+--------------------------------------------------------------------------------
+Tools to implement as LangGraph tool nodes
+--------------------------------------------------------------------------------
+
+Each tool is:
+- An async Python function.
+- Wrapped as a LangGraph tool node.
+- Uses httpx for HTTP calls.
+- Properly logged and error-handled.
+
+Tools have to be separated in a different py file.
+Tools:
+
+1) Gas exported quantity tool (Transparency.host)
+Transparency.host url: https://transparency.entsog.eu/api/v1/
+
+- Input:
+  - pointLabel (e.g. "VIP Bereg"),
+  - from (e.g. "2024-12-01"),
+  - to (e.g. "2025-12-02")
+- listing points:/connectionPoints?extended=1 where pointLabel=VIP Bereg
+- fetching kWh quantities data: /operationaldatas, where parameteres can be from, to, indicator=Physical Flow, pointKey, periodType=day,
+- Output: gas quantity in kWh of HU>UA
+- SystemMessage example:
+  - "The exported quantity between HU>UA was in the last 12 months according to Transparency.host."
+
+2) JSON history search tool
+- Input: query: string.
+- Behavior:
+  - Search across data/sessions for any messages or system/tool logs containing query.
+  - Return a list of hits (session_id, snippet, timestamp).
+- Useful as a tool for the agent to "remember" or reference older sessions.
+
+--------------------------------------------------------------------------------
+Memory model & LangGraph state
+--------------------------------------------------------------------------------
+
+Memory object:
+- chat_history:
+  - last N messages in full for LLM context.
+  - plus an optional "summary" string of earlier conversation.
+- preferences:
+  - loaded from user profile JSON.
+  - examples:
+    - language: "hu"
+    - default_city: "Budapest"
+- workflow_state:
+  - generic dict, for example:
+    - { "flow": "bill_payment", "step": 2, "total_steps": 3 }
+  - For the demo, implement at least one simple multi-step workflow.
+
+LangGraph:
+- Define a graph with:
+  - nodes:
+    - "agent_decide" (Agent node #1)
+    - tool nodes: "Gas exported quantity_tool", "history_search_tool"
+    - "agent_finalize" (Agent node #2)
+  - edges:
+    - agent_decide → (conditional) one of the tool nodes, depending on model decision.
+    - tool node → agent_finalize (or back to agent_decide if you want to support multiple tool steps).
+- The Agent node prompts should:
+  - Describe available tools and when to use them.
+  - Include preferences and workflow_state.
+  - Instruct the LLM to output JSON decisions (for function calling or manual parsing).
+
+--------------------------------------------------------------------------------
+Logging and error handling
+--------------------------------------------------------------------------------
+
+- Use Python logging with INFO level for:
+  - Incoming chat requests (user_id, message).
+  - LangGraph agent decisions.
+  - Tool invocation start/end with parameters.
+  - Memory updates (history saved, profile updated).
+  - "reset context" events.
+- Use WARNING/ERROR for:
+  - Failed tool calls.
+  - JSON parsing issues.
+  - Unexpected exceptions.
+- Error handling:
+  - Tools return structured errors to the agent.
+  - Agent should convert errors into user-friendly messages:
+    - e.g. "I can't reach the gas exported quantity service right now, please try later."
+
+--------------------------------------------------------------------------------
+Frontend behavior and UI (ChatGPT-like)
+--------------------------------------------------------------------------------
+
+Implement a React + TypeScript SPA:
+
+Components:
+- <App />: main layout and state management (user_id, session_id, messages).
+- <ChatWindow />: list of <MessageBubble /> components.
+- <MessageBubble />: displays user/assistant messages with styling.
+- <ChatInput />: text input + "Send" button.
+- <DebugPanel /> (optional): shows tools_used and memory_snapshot.
+
+Behavior:
+- On initial load, generate or fetch a stable user_id and session_id (e.g. from localStorage).
+- Display the chat history from /api/session/{session_id} if desired.
+- When user sends a message:
+  - If message is non-empty:
+    - Append it to local state.
+    - POST /api/chat with { user_id, message }.
+    - Show a loading indicator while waiting.
+    - On success:
+      - Append the assistant's final_answer to messages.
+      - Optionally display tools_used and memory_snapshot in a debug panel.
+  - If message is "reset context":
+    - Just send it as normal; backend will handle clearing session.
+    - Show returned confirmation message.
+
+Styling:
+- Make it visually similar in layout to ChatGPT:
+  - Centered column for chat.
+  - Rounded message bubbles; different colors for user vs assistant.
+  - Fixed input bar at bottom.
+- Use modern CSS (e.g. Tailwind or simple CSS modules) as you prefer.
+
+--------------------------------------------------------------------------------
+Dockerization
+--------------------------------------------------------------------------------
+
+Create:
+
+1) Backend Dockerfile:
+- Based on python:3.11-slim.
+- Copy backend code and requirements.txt.
+- Install dependencies.
+- Expose port 8000.
+- Command: uvicorn main:app --host 0.0.0.0 --port 8000
+
+2) Frontend Dockerfile:
+- Based on node LTS image.
+- Build the React app (npm install && npm run build).
+- Use a lightweight HTTP server (e.g. serve or nginx) to serve built files.
+- Expose port 3000 (or 5173).
+
+3) docker-compose.yml:
+- Services:
+  - backend:
+    - build: ./backend
+    - ports: "8000:8000"
+    - environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+  - frontend:
+    - build: ./frontend
+    - ports: "3000:3000"
+    - environment:
+      - BACKEND_URL=http://backend:8000
+- Configure CORS in backend to allow the frontend origin.
+
+--------------------------------------------------------------------------------
+Documentation
+--------------------------------------------------------------------------------
+
+Include a README.md that explains:
+- What the project does.
+- How the LangGraph agent workflow works:
+  - Prompt → Decision → Tool → Observation → Memory → Response.
+  - Graph nodes (agent, tools).
+- How conversation history is persisted in JSON files.
+- How user profiles are stored and updated (but never deleted).
+- How "reset context" works and what it does.
+- How SOLID principles are applied in the code structure (layers, interfaces, separation of concerns, dependency inversion).
+- How to run locally:
+  - Backend: `pip install -r requirements.txt` then `uvicorn main:app --reload`
+  - Frontend: `npm install && npm run dev`
+- How to run with Docker:
+  - `docker-compose up --build`
+- Example prompts:
+  - "How much was the exported gas quantity to Ukraine in the last 12 months?"
+  - "From now on, answer in English."
+  - "Reset context."
+  - "Search our past conversations for 'gas quantity'."
+
+Now, based on ALL of the above requirements, generate:
+- Backend Python code (FastAPI, LangGraph agent, tools, memory, file storage, logging).
+- Frontend React + TypeScript code (chat UI).
+- Dockerfiles and docker-compose.yml.
+- README.md.
+Use clear, modern, well-structured code, with comments especially around:
+- LangGraph graph definition,
+- Agent decision and tool invocation,
+- Memory and file persistence,
+- "reset context" behavior,
+- User profile handling (no deletion, only updates),
+- Application of SOLID principles in the backend design.

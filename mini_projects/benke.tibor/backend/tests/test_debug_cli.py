@@ -2,7 +2,6 @@
 Unit tests for debug CLI utilities.
 Tests formatting functions for RAG debugging.
 """
-import pytest
 from domain.models import Citation, DomainType
 from utils.debug_cli import DebugCLI
 
@@ -180,8 +179,8 @@ class TestDebugCLIFeedbackStats:
         
         # 100% should have more filled blocks than 50%
         lines = result.split('\n')
-        bar_100 = [l for l in lines if 'doc_100' in l][0]
-        bar_50 = [l for l in lines if 'doc_50' in l][0]
+        bar_100 = [line for line in lines if 'doc_100' in line][0]
+        bar_50 = [line for line in lines if 'doc_50' in line][0]
         
         assert bar_100.count('█') > bar_50.count('█')
 

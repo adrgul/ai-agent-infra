@@ -13,6 +13,7 @@ from api.views import (
     CitationFeedbackAPIView,
     FeedbackStatsAPIView,
     RegenerateAPIView,
+    CreateJiraTicketAPIView,
 )
 
 urlpatterns = [
@@ -26,4 +27,5 @@ urlpatterns = [
     path('cache-stats/', CacheStatsAPIView.as_view(), name='cache_stats'),
     path('feedback/citation/', CitationFeedbackAPIView.as_view(), name='citation_feedback'),
     path('feedback/stats/', FeedbackStatsAPIView.as_view(), name='feedback_stats'),
+    path('jira/ticket/', CreateJiraTicketAPIView.as_view(), name='create_jira_ticket'),
 ]

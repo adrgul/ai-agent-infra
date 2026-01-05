@@ -1,0 +1,7 @@
+# Management Department
+
+The Management department is responsible for strategic leadership, organizational direction, prioritization, and decision-making across the company. This includes defining vision, goals, roadmaps, success metrics, and long-term plans. Management allocates resources, sets priorities between competing initiatives, approves budgets, manages risk, and ensures alignment between business objectives and execution.
+
+Management handles cross-department coordination, ownership decisions, escalation of unresolved issues, and trade-offs that require authority or business judgment. It is responsible for defining responsibilities, approving major changes, resolving conflicts between teams, and making final decisions when multiple valid options exist.
+
+Any issue that requires prioritization, approval, strategic direction, ownership clarification, or business-level decision-making belongs to Management. This includes questions about “what should be done,” “what comes first,” “who decides,” and “whether something aligns with company goals.” Management does not execute technical tasks or handle individual employee cases unless escalation or leadership intervention is required.

@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-slate-900 text-white;
+}
+
+* {
+  @apply antialiased;
+}
+
+/* Input fields text color fix */
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+  @apply text-gray-900;
+}
+
+input::placeholder {
+  @apply text-gray-400;
+}

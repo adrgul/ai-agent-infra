@@ -199,7 +199,6 @@ class TestInterfaceIntegration:
     
     def test_interface_type_hints(self):
         """Test that interfaces can be used for type hints."""
-        from typing import get_type_hints
         
         def process_embeddings(service: IEmbeddingService) -> list:
             return service.get_embedding("test")

@@ -1,0 +1,9 @@
+fastapi==0.115.0
+uvicorn==0.30.6
+langchain==0.2.15
+langgraph==0.2.17
+openai==1.56.0
+httpx==0.27.2
+pydantic==2.9.2
+pydantic-settings==2.6.0
+python-multipart==0.0.9

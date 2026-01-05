@@ -36,6 +36,7 @@ class Citation(BaseModel):
     score: float  # Retrieval score (0-1)
     url: Optional[str] = None
     content: Optional[str] = None  # Document/chunk content for RAG context
+    section_id: Optional[str] = None  # For IT domain: [IT-KB-234] style references
 
 
 class WorkflowState(BaseModel):

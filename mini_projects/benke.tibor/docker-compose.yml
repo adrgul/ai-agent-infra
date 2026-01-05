@@ -24,6 +24,12 @@ services:
       - POSTGRES_USER=kruser
       - POSTGRES_PASSWORD=krpass123
       - DJANGO_SETTINGS_MODULE=core.settings
+      - CONFLUENCE_BASE_URL=${CONFLUENCE_BASE_URL}
+      - CONFLUENCE_API_TOKEN=${CONFLUENCE_API_TOKEN}
+      - CONFLUENCE_EMAIL=${CONFLUENCE_EMAIL}
+      - JIRA_BASE_URL=${JIRA_BASE_URL}
+      - JIRA_API_TOKEN=${JIRA_API_TOKEN}
+      - JIRA_EMAIL=${JIRA_EMAIL}
     volumes:
       - ./backend/data:/app/data
       - ./backend/credentials:/app/credentials

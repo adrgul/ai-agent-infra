@@ -4,17 +4,39 @@ Comprehensive unit and integration tests for the KnowledgeRouter RAG system with
 
 ## 📊 Test Overview
 
-**Current Status (v2.2):**
-- ✅ **121/136 tests passing** (89% success rate)
-- 📊 **49% code coverage** (nearly doubled from 25% baseline!)
-- 🎯 **All new architecture tests passing** (36/36)
-- 🆕 **Health Checks**: 10 tests for startup validation
-- 🆕 **Debug CLI**: 17 tests for formatting utilities
-- 🆕 **Interfaces**: 15 tests for ABC contracts
+**Current Status (v2.4):**
+- ✅ **180/203 tests passing** (89% success rate)
+- 📊 **53% code coverage** (more than doubled from 25% baseline!)
+- 🎯 **27 new RAG optimization tests** (deduplication, IT overlap boost, integration)
+- 🆕 **Deduplication Tests**: 9 unit tests for PDF/DOCX duplicate removal
+- 🆕 **IT Overlap Boost Tests**: 11 unit tests for lexical matching boost
+- 🆕 **RAG Integration Tests**: 6 end-to-end tests for complete pipeline
+- 🚀 **Coverage Highlights**:
+  - `qdrant_rag_client.py`: **18% → 70%**
+  - `openai_clients.py`: **100% coverage** ✅
+  - `atlassian_client.py`: **87% coverage**
+  - `error_handling.py`: **87% coverage**
 
 ### Test Modules
 
-**New Architecture Tests (v2.2 - ✅ ALL PASSING)**
+**RAG Optimization Tests (v2.4 - ✅ ALL PASSING)**
+- ✅ `test_qdrant_deduplication.py` - Content signature deduplication (9/9 passing)
+  - Exact duplicate removal (PDF/DOCX formats)
+  - Content preview-based comparison (80 chars)
+  - Highest-score preservation
+  - Title normalization (.pdf/.docx removal)
+- ✅ `test_qdrant_deduplication.py::TestApplyITOverlapBoost` - IT lexical boost (11/11 passing)
+  - Token matching (≥3 chars, case-insensitive)
+  - Hungarian character support (áéíóöőúüű)
+  - Max 20% boost cap
+  - Re-ranking by boosted scores
+- ✅ `test_qdrant_integration.py` - End-to-end RAG pipeline (6/6 passing)
+  - Deduplication integration
+  - Feedback ranking integration
+  - Cache hit/miss flows
+  - PostgreSQL fallback handling
+
+**Architecture Tests (v2.2 - ✅ ALL PASSING)**
 - ✅ `test_health_check.py` - Startup validation & config checks (10/10 passing)
 - ✅ `test_debug_cli.py` - Citation formatting, feedback stats (17/17 passing)
 - ✅ `test_interfaces.py` - ABC interface contracts (15/15 passing)
@@ -51,6 +73,21 @@ docker-compose exec backend pytest tests/test_integration_feedback.py -v
 ```
 
 ### Test Categories
+
+**RAG Optimization Tests (v2.4)**
+```bash
+# Deduplication tests (9 tests - ✅ ALL PASSING)
+docker-compose exec backend pytest tests/test_qdrant_deduplication.py::TestDeduplicateCitations -v
+
+# IT overlap boost tests (11 tests - ✅ ALL PASSING)
+docker-compose exec backend pytest tests/test_qdrant_deduplication.py::TestApplyITOverlapBoost -v
+
+# Integration pipeline test (1 test - ✅ PASSING)
+docker-compose exec backend pytest tests/test_qdrant_deduplication.py::TestDeduplicationAndBoostIntegration -v
+
+# End-to-end RAG flow (6 tests - ✅ ALL PASSING)
+docker-compose exec backend pytest tests/test_qdrant_integration.py -v
+```
 
 **Feedback Ranking Tests**
 ```bash
@@ -134,6 +171,41 @@ tests/
 ├── pytest.ini                       # Pytest configuration
 ├── README.md                        # This file
 │
+├── test_qdrant_deduplication.py     # ✅ RAG optimizations (21/21 passing)
+│   ├── TestDeduplicateCitations        (9 tests - ✅ ALL PASSING)
+│   │   ├── test_deduplicate_removes_exact_duplicates    # Exact content match
+│   │   ├── test_deduplicate_keeps_different_content     # Different content
+│   │   ├── test_deduplicate_handles_empty_list          # Edge case
+│   │   ├── test_deduplicate_handles_single_citation     # Edge case
+│   │   ├── test_deduplicate_pdf_docx_formats            # Title normalization
+│   │   ├── test_deduplicate_different_titles_same_content
+│   │   ├── test_deduplicate_content_preview_length      # 80-char comparison
+│   │   ├── test_deduplicate_preserves_metadata
+│   │   └── test_deduplicate_multiple_duplicates         # Multiple sets
+│   ├── TestApplyITOverlapBoost         (11 tests - ✅ ALL PASSING)
+│   │   ├── test_overlap_boost_increases_score_on_match  # Basic boost
+│   │   ├── test_overlap_boost_max_20_percent            # Cap at 20%
+│   │   ├── test_overlap_boost_ignores_short_tokens      # ≥3 chars
+│   │   ├── test_overlap_boost_case_insensitive
+│   │   ├── test_overlap_boost_handles_hungarian_chars   # áéíóöőúüű
+│   │   ├── test_overlap_boost_reranks_citations         # Sort by score
+│   │   ├── test_overlap_boost_empty_query               # Edge case
+│   │   ├── test_overlap_boost_empty_citations           # Edge case
+│   │   ├── test_overlap_boost_no_matches
+│   │   ├── test_overlap_boost_partial_match             # 2/3 overlap
+│   │   └── test_overlap_boost_title_and_content         # Title+content
+│   └── TestDeduplicationAndBoostIntegration (1 test - ✅ PASSING)
+│       └── test_deduplicate_then_boost_workflow         # Pipeline test
+│
+├── test_qdrant_integration.py       # ✅ E2E RAG flow (6/6 passing)
+│   └── TestQdrantRAGIntegration        (6 tests - ✅ ALL PASSING)
+│       ├── test_end_to_end_retrieval_with_deduplication # Full pipeline
+│       ├── test_it_domain_with_overlap_boost            # IT domain
+│       ├── test_cache_hit_flow                          # Redis cache
+│       ├── test_postgres_unavailable_fallback           # Fallback logic
+│       ├── test_empty_search_results                    # Edge case
+│       └── test_feedback_ranking_score_adjustment       # Feedback boost
+│
 ├── test_feedback_ranking.py         # ✅ Feedback boost algorithm (4/12 passing, 8 skipped)
 │   ├── TestFeedbackBoostCalculation    (4 tests - ✅ ALL PASSING)
 │   │   ├── test_calculate_feedback_boost_high_tier      # >70% → +30%
@@ -183,7 +255,16 @@ tests/
     └── TestOpenAIClientFactoryIntegration (3 tests)
 ```
 
-**Total: 113 tests (85 passing, 14 skipped, 14 legacy failures)**
+**Total: 203 tests (180 passing, 23 skipped)**
+
+**Coverage by Module:**
+- `openai_clients.py`: **100%** ✅
+- `atlassian_client.py`: **87%** 
+- `error_handling.py`: **87%**
+- `qdrant_rag_client.py`: **70%** (up from 18%)
+- `redis_client.py`: **58%**
+- `health_check.py`: **44%**
+- `postgres_client.py`: **44%**
 
 ## ✅ Test Categories
 

@@ -10,7 +10,7 @@ Tests cover:
 """
 import pytest
 import time
-from unittest.mock import Mock, patch, MagicMock
+from unittest.mock import Mock
 from openai import (
     RateLimitError,
     APITimeoutError,
@@ -80,15 +80,9 @@ def create_permission_error(message="Permission denied"):
 
 def create_api_error(message="API error", status_code=500):
     """Create generic APIError with proper parameters."""
-    response = create_mock_response(status_code)
     mock_request = Mock()
     error = APIError(message, request=mock_request, body={"error": {"message": message}})
     return error
-
-
-def create_timeout_error(message="Timeout"):
-    """Create APITimeoutError."""
-    return APITimeoutError(message)
 
 
 class TestTokenEstimation:
@@ -376,7 +370,7 @@ class TestRetryDecorator:
         mock_func = Mock(side_effect=error)
         decorated = retry_with_exponential_backoff(max_retries=3)(mock_func)
         
-        with pytest.raises(APICallError) as exc_info:
+        with pytest.raises(APICallError):
             decorated()
         
         assert mock_func.call_count == 1  # No retry for 4xx

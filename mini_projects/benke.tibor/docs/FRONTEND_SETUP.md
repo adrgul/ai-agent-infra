@@ -181,4 +181,222 @@ Tailwind purges unused styles - wrap custom CSS in `@layer` or use `!important` 
 
 ---
 
+## 🎫 Jira Ticket Integration (IT Domain)
+
+### Overview
+Chat-based Jira ticket creation for IT domain queries. When IT domain provides a response, user can type "igen" to create a Jira ticket.
+
+### Frontend Flow
+
+#### 1. State Management
+```javascript
+let lastITContext = null;  // Global variable to store IT domain context
+```
+
+Stores the context from the last IT response that offered Jira ticket creation.
+
+#### 2. "igen" Detection Logic
+```javascript
+// queryForm submit handler (around line 331)
+const query = queryInput.value.trim();
+
+// Check if this is a Jira ticket confirmation
+const isJiraConfirmation = query.toLowerCase() === "igen" || 
+                          (query.toLowerCase().includes("igen") && query.length < 10);
+
+if (isJiraConfirmation && lastITContext) {
+    await createJiraTicket();
+    lastITContext = null;  // Clear context after use
+    queryInput.value = "";
+    return;  // Don't send as regular query
+}
+```
+
+**Detection Rules:**
+- Exact match: "igen" (case-insensitive)
+- Partial match: contains "igen" AND query length < 10 chars
+- Context check: `lastITContext` must be set
+
+#### 3. Context Storage
+```javascript
+// After receiving bot response (around line 447)
+if (message.domain === 'it' && message.content.includes('Szeretnéd')) {
+    lastITContext = {
+        query: message.query,
+        response: message.content,
+        timestamp: Date.now()
+    };
+} else if (message.domain !== 'it') {
+    lastITContext = null;  // Clear context for non-IT responses
+}
+```
+
+**Storage Conditions:**
+- Domain must be "it"
+- Response must contain "Szeretnéd" (Jira offer keyword)
+- Context cleared for non-IT responses
+
+#### 4. Ticket Creation Function
+```javascript
+async function createJiraTicket() {
+    if (!lastITContext) {
+        addMessage('bot', 'Nincs IT kontextus Jira ticket létrehozásához.', 'error');
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8001/api/jira/ticket/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                summary: lastITContext.query,
+                description: lastITContext.response,
+                issue_type: 'Task',
+                priority: 'Medium'
+            })
+        });
+
+        if (!response.ok) throw new Error('Jira API hiba');
+
+        const data = await response.json();
+        const ticketLink = `<a href="${data.ticket_url}" target="_blank" style="color:#10a37f;text-decoration:underline;">
+                           ${data.ticket_key}
+                           </a>`;
+        addMessage('bot', `✅ Jira ticket létrehozva: ${ticketLink}`, 'info');
+    } catch (error) {
+        console.error('Jira ticket error:', error);
+        addMessage('bot', '❌ Hiba a Jira ticket létrehozása során.', 'error');
+    }
+}
+```
+
+**API Contract:**
+- **Endpoint**: `POST /api/jira/ticket/`
+- **Request Body**:
+  ```json
+  {
+    "summary": "VPN problémám van",
+    "description": "IT policy alapján a következő lépések...",
+    "issue_type": "Task",
+    "priority": "Medium"
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "ticket_key": "SCRUM-123",
+    "ticket_url": "https://your-jira.atlassian.net/browse/SCRUM-123"
+  }
+  ```
+
+### User Experience Flow
+
+1. **IT Query Submitted**:
+   ```
+   User: "VPN problémám van, mi a teendő?"
+   ```
+
+2. **IT Response Received**:
+   ```
+   Bot: "VPN hibaelhárítási lépések:
+         1. Ellenőrizd a csatlakozást...
+         2. Próbáld újraindítani...
+         
+         📋 Szeretnéd, hogy létrehozzak egy Jira ticketet...
+         (Válaszolj 'igen'-nel vagy 'nem'-mel)"
+   ```
+   → `lastITContext` stored
+
+3. **User Confirms**:
+   ```
+   User: "igen"
+   ```
+   → Detected as Jira confirmation
+   → `createJiraTicket()` called
+
+4. **Ticket Created**:
+   ```
+   Bot: "✅ Jira ticket létrehozva: SCRUM-123"
+   ```
+   → Context cleared
+   → Link clickable
+
+### Key Changes from Previous Version
+
+#### ❌ Old Approach (UI Buttons)
+```javascript
+// Removed: handleJiraTicketOffer() function
+// Removed: createJiraButtons() function
+// Removed: Button click event listeners
+```
+
+**Problems:**
+- Required separate button handling logic
+- Broke conversation flow
+- Additional UI complexity
+
+#### ✅ New Approach (Chat-Based)
+```javascript
+// Simple: "igen" detection + context storage
+// Natural: Continues chat conversation
+// Clean: No separate button logic
+```
+
+**Benefits:**
+- More natural conversation flow
+- User types response (familiar pattern)
+- Simpler codebase
+- Consistent with chat UX
+
+### Error Handling
+
+**No Context**:
+```javascript
+if (!lastITContext) {
+    addMessage('bot', 'Nincs IT kontextus...', 'error');
+    return;
+}
+```
+
+**API Error**:
+```javascript
+if (!response.ok) throw new Error('Jira API hiba');
+// Caught and displayed as error message
+```
+
+**Network Error**:
+```javascript
+catch (error) {
+    console.error('Jira ticket error:', error);
+    addMessage('bot', '❌ Hiba a Jira ticket létrehozása során.', 'error');
+}
+```
+
+### Configuration
+
+No frontend configuration needed. Jira API endpoint is hardcoded:
+```javascript
+const response = await fetch('http://localhost:8001/api/jira/ticket/', { ... });
+```
+
+Backend handles Jira authentication via environment variables (see IT_DOMAIN_IMPLEMENTATION.md).
+
+### Testing
+
+**Manual Test:**
+1. Submit IT query: "Hogyan állítom be a VPN-t?"
+2. Wait for response with "Szeretnéd..." text
+3. Check `lastITContext` in browser console (should be set)
+4. Type "igen"
+5. Verify ticket creation message appears
+6. Click ticket link → should open Jira
+
+**Debug Logging:**
+```javascript
+console.log('IT Context stored:', lastITContext);
+console.log('Jira confirmation detected:', isJiraConfirmation);
+```
+
+---
+
 **Built with ❤️ using Tailwind CSS**

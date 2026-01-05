@@ -1,0 +1,109 @@
+services:
+  # PostgreSQL - Local database
+  postgres:
+    image: postgres:15-alpine
+    container_name: ai_chat_edu_postgres
+    environment:
+      POSTGRES_DB: ai_chat_edu
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "${POSTGRES_EXTERNAL_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  # Qdrant - Local vector database
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: ai_chat_edu_qdrant
+    ports:
+      - "${QDRANT_HTTP_EXTERNAL_PORT:-6333}:6333"
+      - "${QDRANT_GRPC_EXTERNAL_PORT:-6334}:6334"
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    environment:
+      - QDRANT__SERVICE__HTTP_PORT=6333
+      - QDRANT__SERVICE__GRPC_PORT=6334
+    restart: unless-stopped
+
+  # Backend - FastAPI application
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: ai_chat_edu_backend
+    ports:
+      - "${BACKEND_EXTERNAL_PORT:-8000}:8000"
+    environment:
+      # OpenAI
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL_CHAT=${OPENAI_MODEL_CHAT:-gpt-3.5-turbo}
+      - OPENAI_MODEL_EMBEDDING=${OPENAI_MODEL_EMBEDDING:-text-embedding-3-large}
+      
+      # PostgreSQL (local container)
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=ai_chat_edu
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      
+      # Qdrant (local container)
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - QDRANT_API_KEY=
+      - QDRANT_USE_HTTPS=false
+      - QDRANT_COLLECTION_PREFIX=ai_chat_edu
+      
+      # Application
+      - USE_LANGGRAPH=true
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    volumes:
+      - ./backend:/app
+      - ./docs:/docs:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 2s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  # Frontend - React + Vite with Nginx
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        - VITE_API_URL=http://localhost:${BACKEND_EXTERNAL_PORT:-8000}/api
+    container_name: ai_chat_edu_frontend
+    ports:
+      - "${FRONTEND_EXTERNAL_PORT:-3000}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/postgres
+  qdrant_storage:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data/qdrant

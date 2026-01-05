@@ -47,13 +47,12 @@ class TestRedisCache(unittest.TestCase):
         """Test cache hit for embedding."""
         # Arrange
         text = "test query"
-        model = "text-embedding-3-small"
         embedding = [0.1, 0.2, 0.3] * 512  # 1536 dims
         
         self.mock_redis.get.return_value = json.dumps(embedding).encode('utf-8')
         
         # Act
-        result = self.cache.get_embedding(text, model)
+        result = self.cache.get_embedding(text)
         
         # Assert
         self.assertEqual(result, embedding)
@@ -63,12 +62,11 @@ class TestRedisCache(unittest.TestCase):
         """Test cache miss for embedding."""
         # Arrange
         text = "new query"
-        model = "text-embedding-3-small"
         
         self.mock_redis.get.return_value = None
         
         # Act
-        result = self.cache.get_embedding(text, model)
+        result = self.cache.get_embedding(text)
         
         # Assert
         self.assertIsNone(result)
@@ -78,12 +76,11 @@ class TestRedisCache(unittest.TestCase):
         """Test setting embedding with custom TTL."""
         # Arrange
         text = "test query"
-        model = "text-embedding-3-small"
         embedding = [0.1] * 1536
         ttl = 7200  # 2 hours
         
         # Act
-        self.cache.set_embedding(text, model, embedding, ttl=ttl)
+        self.cache.set_embedding(text, embedding, ttl=ttl)
         
         # Assert
         self.mock_redis.setex.assert_called_once()
@@ -102,33 +99,38 @@ class TestRedisCache(unittest.TestCase):
         }
         
         self.mock_redis.get.return_value = json.dumps(cached_result).encode('utf-8')
+        self.mock_redis.hincrby.return_value = 5  # Mock hit count
         
         # Act
         result = self.cache.get_query_result(query, domain)
         
         # Assert
-        self.assertEqual(result, cached_result)
-        expected_key = f"query:{domain}:{hash(query)}"
+        # Result should include hit_count from hincrby
+        expected = {**cached_result, "hit_count": 5}
+        self.assertEqual(result, expected)
         self.mock_redis.get.assert_called_once()
+        self.mock_redis.hincrby.assert_called_once()
     
     def test_invalidate_domain_cache(self):
         """Test domain-specific cache invalidation."""
         # Arrange
         domain = "marketing"
         
-        # Mock scan to return keys
-        self.mock_redis.scan_iter.return_value = [
+        # Mock keys() to return matching keys
+        self.mock_redis.keys.return_value = [
             b'query:marketing:12345',
             b'query:marketing:67890'
         ]
         
         # Act
-        deleted_count = self.cache.invalidate_query_cache(domain=domain)
+        self.cache.invalidate_query_cache(domain=domain)
         
         # Assert
-        self.mock_redis.scan_iter.assert_called_once_with(match=f"query:{domain}:*")
-        self.assertEqual(self.mock_redis.delete.call_count, 2)
-        self.assertEqual(deleted_count, 2)
+        self.mock_redis.keys.assert_called_once_with(f"query:{domain}:*")
+        # Should call delete with the 2 keys
+        self.mock_redis.delete.assert_called_once()
+        call_args = self.mock_redis.delete.call_args[0]
+        self.assertEqual(len(call_args), 2)
     
     def test_clear_all_cache(self):
         """Test clearing all cache."""
@@ -148,18 +150,20 @@ class TestRedisCache(unittest.TestCase):
             'used_memory': 47185920,  # ~45 MB
             'maxmemory': 536870912,   # 512 MB
             'keyspace_hits': 1234,
-            'keyspace_misses': 566
+            'keyspace_misses': 566,
+            'uptime_in_seconds': 3600
         }
         self.mock_redis.dbsize.return_value = 890
+        self.mock_redis.keys.return_value = []  # Mock keys() calls
         
         # Act
-        stats = self.cache.get_stats()
+        stats = self.cache.get_cache_stats()
         
         # Assert
         self.assertEqual(stats['total_keys'], 890)
         self.assertAlmostEqual(stats['used_memory_mb'], 45.0, delta=1.0)
         self.assertAlmostEqual(stats['hit_rate'], 0.686, delta=0.01)  # 1234/(1234+566)
-        self.assertTrue(stats['is_connected'])
+        self.assertTrue(stats['connected'])
     
     def test_redis_connection_failure(self):
         """Test handling Redis connection failure."""
@@ -190,17 +194,16 @@ class TestRedisCache(unittest.TestCase):
         self.assertNotEqual(key1, key3)  # Different query = different key
     
     def test_embedding_cache_with_different_models(self):
-        """Test that different models have separate cache keys."""
+        """Test that different embedding texts have different cache keys."""
         # Arrange
-        text = "test query"
-        model1 = "text-embedding-3-small"
-        model2 = "text-embedding-3-large"
+        text1 = "test query one"
+        text2 = "test query two"
         embedding1 = [0.1] * 1536
-        embedding2 = [0.2] * 3072
+        embedding2 = [0.2] * 1536
         
         # Act
-        self.cache.set_embedding(text, model1, embedding1)
-        self.cache.set_embedding(text, model2, embedding2)
+        self.cache.set_embedding(text1, embedding1)
+        self.cache.set_embedding(text2, embedding2)
         
         # Assert
         self.assertEqual(self.mock_redis.setex.call_count, 2)
@@ -217,11 +220,16 @@ class TestRedisCache(unittest.TestCase):
         self.mock_redis.info.return_value = {
             'used_memory': 550 * 1024 * 1024,  # 550 MB (over limit)
             'maxmemory': 512 * 1024 * 1024,     # 512 MB max
-            'maxmemory_policy': 'allkeys-lru'
+            'maxmemory_policy': 'allkeys-lru',
+            'keyspace_hits': 100,
+            'keyspace_misses': 50,
+            'uptime_in_seconds': 7200
         }
+        self.mock_redis.dbsize.return_value = 1000
+        self.mock_redis.keys.return_value = []  # Mock keys() calls
         
         # Act
-        stats = self.cache.get_stats()
+        stats = self.cache.get_cache_stats()
         
         # Assert
         self.assertGreater(stats['used_memory_mb'], 512)

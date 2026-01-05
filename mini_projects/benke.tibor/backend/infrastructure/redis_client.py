@@ -70,7 +70,7 @@ class RedisCache:
         try:
             self.client.ping()
             return True
-        except:
+        except Exception:
             return False
     
     @staticmethod

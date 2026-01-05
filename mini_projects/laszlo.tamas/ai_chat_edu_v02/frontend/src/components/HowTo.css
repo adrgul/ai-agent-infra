@@ -1,0 +1,179 @@
+.howto-panel {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.howto-header {
+  padding: 1.25rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-bottom: 1px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.howto-header h2 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.howto-content {
+  padding: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Markdown styling */
+.howto-content h1 {
+  font-size: 1.4rem;
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+  font-weight: 700;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 0.5rem;
+}
+
+.howto-content h2 {
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.75rem 0;
+  color: #2c3e50;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.howto-content h3 {
+  font-size: 0.95rem;
+  margin: 1rem 0 0.5rem 0;
+  color: #34495e;
+  font-weight: 600;
+}
+
+.howto-content h4 {
+  font-size: 0.85rem;
+  margin: 0.75rem 0 0.4rem 0;
+  color: #555;
+  font-weight: 600;
+}
+
+.howto-content p {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+  color: #444;
+}
+
+.howto-content strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.howto-content code {
+  background-color: #f5f5f5;
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  color: #e74c3c;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.howto-content pre {
+  background-color: #2d2d2d;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.75rem 0;
+}
+
+.howto-content pre code {
+  background-color: transparent;
+  color: #a9dc76;
+  padding: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.howto-content ul {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.howto-content li {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin: 0.3rem 0;
+  color: #444;
+}
+
+.howto-content hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 1.5rem 0;
+}
+
+.howto-content blockquote {
+  border-left: 4px solid #667eea;
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: #555;
+  font-style: italic;
+}
+
+.howto-loading {
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin: 0;
+  text-align: center;
+}
+
+.howto-error {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin: 0;
+  padding: 1rem;
+  background-color: #ffe6e6;
+  border-radius: 6px;
+  border-left: 4px solid #e74c3c;
+}
+
+/* Scrollbar styling */
+.howto-panel::-webkit-scrollbar,
+.howto-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.howto-panel::-webkit-scrollbar-track,
+.howto-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.howto-panel::-webkit-scrollbar-thumb,
+.howto-content::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 4px;
+}
+
+.howto-panel::-webkit-scrollbar-thumb:hover,
+.howto-content::-webkit-scrollbar-thumb:hover {
+  background: #5568d3;
+}
+  background: #888;
+  border-radius: 4px;
+}
+
+.howto-panel::-webkit-scrollbar-thumb:hover,
+.howto-accordion::-webkit-scrollbar-thumb:hover,
+.howto-accordion-content::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+

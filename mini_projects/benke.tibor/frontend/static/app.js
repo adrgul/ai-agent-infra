@@ -227,27 +227,32 @@ async function refreshQuery(question, useCache = true) {
         const raw = await response.json();
         const payload = raw.data ?? raw;
         
-        // Extract citations
-        const citations = payload.citations ? 
-            [...new Set(payload.citations
-                .map(c => c.title || c.source || null)
-                .filter(s => s && s !== 'Unknown' && s !== 'Unknown Document')
-            )] 
-            : [];
+        // Deduplicate citation objects by citation_id (or title if no ID)
+        const uniqueCitationObjects = payload.citations ? 
+            Array.from(
+                new Map(
+                    payload.citations.map(c => [c.citation_id || c.title || c.source, c])
+                ).values()
+            ) : [];
+        
+        // Extract unique titles for legacy citations array
+        const citations = uniqueCitationObjects
+            .map(c => c.title || c.source || null)
+            .filter(s => s && s !== 'Unknown' && s !== 'Unknown Document');
         
         // Update debug panel
         debugSession.textContent = sessionId;
         debugDomain.textContent = payload.domain || 'general';
         
         // Chunk count and max score
-        const chunkCount = payload.citations ? payload.citations.length : 0;
+        const chunkCount = uniqueCitationObjects.length;
         debugChunkCount.textContent = chunkCount;
         
         if (payload.telemetry) {
             debugMaxScore.textContent = payload.telemetry.max_similarity_score || '-';
             debugLatency.textContent = payload.telemetry.total_latency_ms ? `${payload.telemetry.total_latency_ms}ms` : '-';
-        } else if (payload.citations && payload.citations.length > 0) {
-            const maxScore = Math.max(...payload.citations.map(c => c.score || 0));
+        } else if (uniqueCitationObjects.length > 0) {
+            const maxScore = Math.max(...uniqueCitationObjects.map(c => c.score || 0));
             debugMaxScore.textContent = maxScore.toFixed(3);
         } else {
             debugMaxScore.textContent = '-';
@@ -304,7 +309,7 @@ async function refreshQuery(question, useCache = true) {
             'bot',
             citations,
             question,
-            payload.citations,
+            uniqueCitationObjects,
             payload.domain,
             sessionId
         );
@@ -318,6 +323,9 @@ async function refreshQuery(question, useCache = true) {
     }
 }
 
+// Track last IT response for Jira ticket context
+let lastITContext = null;
+
 queryForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -326,6 +334,28 @@ queryForm.addEventListener('submit', async (e) => {
     const sessionId = sessionIdInput.value.trim() || 'demo_session';
 
     if (!query) return;
+
+    // Check if user is responding "igen" to Jira ticket offer
+    const normalizedQuery = query.toLowerCase().trim();
+    const isJiraConfirmation = lastITContext && 
+        (normalizedQuery === 'igen' || 
+         normalizedQuery === 'yes' ||
+         normalizedQuery === 'ok' ||
+         normalizedQuery === 'i' ||
+         (normalizedQuery.includes('igen') && query.split(' ').length <= 3));
+    
+    if (isJiraConfirmation) {
+        console.log('🎫 Jira confirmation detected, creating ticket...');
+        addMessage(query, 'user');
+        queryInput.value = '';
+        
+        // Create Jira ticket with stored context
+        await createJiraTicket(lastITContext.query, lastITContext.answer);
+        
+        // Clear context after use
+        lastITContext = null;
+        return;
+    }
 
     addMessage(query, 'user');
     queryInput.value = '';
@@ -353,27 +383,32 @@ queryForm.addEventListener('submit', async (e) => {
         const raw = await response.json();
         const payload = raw.data ?? raw; // backend wraps in { success, data }
 
-        // Extract unique source file names from citations
-        const citations = payload.citations ? 
-            [...new Set(payload.citations
-                .map(c => c.title || c.source || null)
-                .filter(s => s && s !== 'Unknown' && s !== 'Unknown Document')
-            )] 
-            : [];
+        // Deduplicate citation objects by title (so IT Policy appears only once)
+        const uniqueCitationObjects = payload.citations ? 
+            Array.from(
+                new Map(
+                    payload.citations.map(c => [c.title || c.citation_id || c.source, c])
+                ).values()
+            ) : [];
+        
+        // Extract unique titles for legacy citations array
+        const citations = uniqueCitationObjects
+            .map(c => c.title || c.source || null)
+            .filter(s => s && s !== 'Unknown' && s !== 'Unknown Document');
 
         // Update debug panel
         debugSession.textContent = sessionId;
         debugDomain.textContent = payload.domain || 'general';
         
         // Chunk count and max score
-        const chunkCount = payload.citations ? payload.citations.length : 0;
+        const chunkCount = uniqueCitationObjects.length;
         debugChunkCount.textContent = chunkCount;
         
         if (payload.telemetry) {
             debugMaxScore.textContent = payload.telemetry.max_similarity_score || '-';
             debugLatency.textContent = payload.telemetry.total_latency_ms ? `${payload.telemetry.total_latency_ms}ms` : '-';
-        } else if (payload.citations && payload.citations.length > 0) {
-            const maxScore = Math.max(...payload.citations.map(c => c.score || 0));
+        } else if (uniqueCitationObjects.length > 0) {
+            const maxScore = Math.max(...uniqueCitationObjects.map(c => c.score || 0));
             debugMaxScore.textContent = maxScore.toFixed(3);
         } else {
             debugMaxScore.textContent = '-';
@@ -423,10 +458,31 @@ queryForm.addEventListener('submit', async (e) => {
             'bot',
             citations,
             query,  // Pass original query for refresh button
-            payload.citations,  // Pass full citation objects
+            uniqueCitationObjects,  // Pass deduplicated citation objects
             payload.domain,  // Pass domain
             sessionId  // Pass session ID
         );
+        
+        // Store IT context for potential Jira ticket creation
+        if (payload.domain === 'it' && payload.answer) {
+            // Store context if response mentions Jira or contains typical IT offer keywords
+            const hasJiraOffer = payload.answer.toLowerCase().includes('jira') || 
+                                 payload.answer.toLowerCase().includes('ticket') ||
+                                 payload.answer.includes('📋') ||
+                                 payload.answer.toLowerCase().includes('szeretnéd');
+            
+            if (hasJiraOffer) {
+                lastITContext = {
+                    query: query,
+                    answer: payload.answer
+                };
+                console.log('✅ IT context stored for Jira ticket:', lastITContext);
+            } else {
+                lastITContext = null;
+            }
+        } else {
+            lastITContext = null;
+        }
 
     } catch (error) {
         console.error('Fetch error:', error);
@@ -615,4 +671,51 @@ if (debugToggle && debugContent && debugPanel) {
             localStorage.setItem('debugPanelMinimized', 'true');
         }
     });
+}
+
+/**
+ * Create Jira ticket for IT support.
+ * Called when user confirms with "igen" response.
+ */
+async function createJiraTicket(query, answer) {
+    try {
+        addMessage('🎫 Jira ticket létrehozása folyamatban...', 'info');
+        
+        const response = await fetch('http://localhost:8001/api/jira/ticket/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                summary: `IT Support: ${query.substring(0, 80)}`,
+                description: `Kérdés: ${query}\n\nBOT válasz:\n${answer}`,
+                issue_type: 'Task',
+                priority: 'Medium'
+            }),
+        });
+
+        const data = await response.json();
+        
+        if (data.success) {
+            const ticketUrl = data.ticket.url;
+            const ticketKey = data.ticket.key;
+            
+            // Create a custom success message with clickable link
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message success';
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = `✅ Jira ticket sikeresen létrehozva: <a href="${ticketUrl}" target="_blank" style="color: #10a37f; font-weight: bold;">${ticketKey}</a>`;
+            
+            messageDiv.appendChild(contentDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        } else {
+            addMessage(`❌ Hiba a Jira ticket létrehozásakor: ${data.error}`, 'error');
+        }
+    } catch (error) {
+        console.error('Jira ticket creation error:', error);
+        addMessage('❌ Hiba történt a ticket létrehozásakor.', 'error');
+    }
 }

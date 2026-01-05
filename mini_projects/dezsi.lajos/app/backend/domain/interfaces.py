@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional
-from .models import Message
+from .models import Message, TicketCreate
 
 class ILLMClient(ABC):
     @abstractmethod
@@ -31,4 +31,10 @@ class IConversationRepository(ABC):
     
     @abstractmethod
     async def clear_history(self, conversation_id: str):
+        pass
+
+class ITicketClient(ABC):
+    @abstractmethod
+    async def create_ticket(self, ticket: TicketCreate) -> Dict[str, Any]:
+        """Creates a ticket in the external system and returns the response details (e.g. ID, URL)."""
         pass

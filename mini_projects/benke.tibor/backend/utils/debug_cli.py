@@ -6,7 +6,7 @@ Inspired by vector_embeddings/app/cli.py formatting patterns.
 """
 
 import asyncio
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Optional
 from domain.models import Citation
 
 
@@ -182,7 +182,7 @@ class DebugCLI:
         qdrant_url = os.getenv("QDRANT_URL", "http://qdrant:6333")
         rag_client = QdrantRAGClient(qdrant_url=qdrant_url)
         
-        print(f"\n🔍 TESTING RAG SEARCH")
+        print("\n🔍 TESTING RAG SEARCH")
         print(f"Query: \"{query}\"")
         print(f"Domain: {domain}")
         print(f"Top-K: {top_k}\n")
