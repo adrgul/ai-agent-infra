@@ -3,7 +3,7 @@ This folder contains a modified version of the AI Chat sample which I previously
 📰 The newest feature is a Book RAG (Retrieval-Augmented Generation) client using LangChain and FAISS vector database.
 Ferenc Molnár's A Pál Utcai Fiúk was preloaded from a pdf file and has been processed to answer questions about the novel with the help of AI.
 Lingua library is used to detect the language of the question and the appropriate language is used to answer the question.
-    In case of short questions or misspelling, the language detection may fail and the answer will be given in English. To indicate this, the "Tool used" section in the response has been updated to show, the detected language and the language of the answer "❓: EN → 💬: EN".
+    In case of short questions or misspelling, the language detection may fail and the answer will be given in English. To indicate this, the "Tool used" section in the response has been updated to show, the detected language and the language of the answer "❓: EN → 💬: EN". By rephrasing the question in a longer format the proper language will be detected.
 
 📷 You will find 2 example screenshots how the code is working in this the same folder next to this readme file.
 
@@ -37,6 +37,7 @@ Lingua library is used to detect the language of the question and the appropriat
     "What is the meaning behind the title Pál Utcai Fiúk?"
     "Describe the uniforms of the rival gangs"
     "What role do adults play in the children's world?"
+
 
 
 
