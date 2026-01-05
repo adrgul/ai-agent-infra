@@ -14,13 +14,19 @@ KnowledgeRouter egy vállalati belső tudásbázis rendszer, amely:
 ✅ **Hibrid keresés support** szemantikus (dense vectors) + domain filtering (lexikális BM25 ready)  
 ✅ **Intent detection** segítségével felismeri, melyik domain-hez tartozik a kérdés (LangGraph node)  
 ✅ **RAG (Retrieval-Augmented Generation)** használ releváns dokumentumok megtalálásához (LangGraph node)  
-✅ **Google Drive integráció** marketing dokumentumok eléréséhez  
+✅ **Confluence/Jira integráció** IT Policy auto-sync section ID tracking-gel  
+✅ **Google Drive integráció** marketing dokumentumok auto-sync-hez  
+✅ **Redis L1/L2 cache** embedding + query result cache (54% hit rate)  
+✅ **PostgreSQL feedback system** like/dislike rangsoroláshoz  
+✅ **Content deduplication** PDF/DOCX duplikátumok eltávolítása  
+✅ **IT domain overlap boost** lexikális token matching (0-20% boost)  
+✅ **Feedback-weighted ranking** tiered boost system (>70%: +30%, <40%: -20%)  
 ✅ **Workflow-okat** futtat (HR szabadság igénylés, IT ticket, stb.) - LangGraph workflow node  
-✅ **Citációkkal** ellátott válaszokat ad (dokumentum referenciák)  
+✅ **Citációkkal** ellátott válaszokat ad (section ID format: IT-KB-234)  
 ✅ **Konverzáció előzményt** mentesít JSON-ban  
-✅ **Docker-ben** futtatható  
+✅ **Docker Compose** multi-container (backend, frontend, qdrant, redis, postgres)  
 🆕 **SOLID architektúra** ABC interfészekkel  
-🆕 **Health check rendszer** startup validálással  
+🆕 **Health check rendszer** startup validálással (OpenAI, Qdrant, Redis, Postgres)  
 🆕 **Debug CLI** vizuális RAG testing eszközökkel  
 🆕 **Telemetria debug panel** - Pipeline latency, RAG context, LLM prompt/response monitoring
 
