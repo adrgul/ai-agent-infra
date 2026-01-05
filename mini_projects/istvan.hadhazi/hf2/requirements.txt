@@ -1,0 +1,17 @@
+# Core Dependencies
+openai>=1.6.0
+python-dotenv>=1.0.0
+
+# Vector Database
+qdrant-client>=1.7.0
+
+# Document Processing
+langchain>=0.1.0
+langchain-community>=0.0.10
+langchain-text-splitters>=0.0.1
+
+# Utilities
+tiktoken>=0.5.0
+colorama>=0.4.6
+tenacity>=8.2.0
+

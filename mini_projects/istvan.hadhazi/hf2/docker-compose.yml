@@ -1,0 +1,43 @@
+services:
+  # Qdrant Vector Database
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: knowledge-router-qdrant
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - knowledge-network
+
+  # AI Knowledge Router App
+  app:
+    build: .
+    image: knowledge-router-app
+    container_name: knowledge-router-app
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o}
+      - OPENAI_EMBEDDING_MODEL=${OPENAI_EMBEDDING_MODEL:-text-embedding-3-large}
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - QDRANT_COLLECTION=${QDRANT_COLLECTION:-knowledge_base}
+      - CHUNK_SIZE=${CHUNK_SIZE:-500}
+      - CHUNK_OVERLAP=${CHUNK_OVERLAP:-50}
+      - TOP_K_RESULTS=${TOP_K_RESULTS:-5}
+    depends_on:
+      - qdrant
+    networks:
+      - knowledge-network
+    stdin_open: true
+    tty: true
+    # Használd: docker-compose run --rm app
+
+volumes:
+  qdrant_data:
+
+networks:
+  knowledge-network:
+    driver: bridge
+
