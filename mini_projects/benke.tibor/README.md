@@ -1,6 +1,4 @@
-# KnowledgeRouter - AI Agent Demo
-
-**Vállalati Tudásirányító & Workflow-Automata**
+# KnowledgeRouter - Vállalati Tudásirányító & Workflow-Automata
 
 Multi-domain AI agent rendszer Python Django backenddel, LangGraph orchestrációval és modern Tailwind CSS frontenddel (ChatGPT-style UI).
 
@@ -14,13 +12,19 @@ KnowledgeRouter egy vállalati belső tudásbázis rendszer, amely:
 ✅ **Hibrid keresés support** szemantikus (dense vectors) + domain filtering (lexikális BM25 ready)  
 ✅ **Intent detection** segítségével felismeri, melyik domain-hez tartozik a kérdés (LangGraph node)  
 ✅ **RAG (Retrieval-Augmented Generation)** használ releváns dokumentumok megtalálásához (LangGraph node)  
-✅ **Google Drive integráció** marketing dokumentumok eléréséhez  
+✅ **Confluence/Jira integráció** IT Policy auto-sync section ID tracking-gel  
+✅ **Google Drive integráció** marketing dokumentumok auto-sync-hez  
+✅ **Redis L1/L2 cache** embedding + query result cache (54% hit rate)  
+✅ **PostgreSQL feedback system** like/dislike rangsoroláshoz  
+✅ **Content deduplication** PDF/DOCX duplikátumok eltávolítása  
+✅ **IT domain overlap boost** lexikális token matching (0-20% boost)  
+✅ **Feedback-weighted ranking** tiered boost system (>70%: +30%, <40%: -20%)  
 ✅ **Workflow-okat** futtat (HR szabadság igénylés, IT ticket, stb.) - LangGraph workflow node  
-✅ **Citációkkal** ellátott válaszokat ad (dokumentum referenciák)  
+✅ **Citációkkal** ellátott válaszokat ad (section ID format: IT-KB-234)  
 ✅ **Konverzáció előzményt** mentesít JSON-ban  
-✅ **Docker-ben** futtatható  
+✅ **Docker Compose** multi-container (backend, frontend, qdrant, redis, postgres)  
 🆕 **SOLID architektúra** ABC interfészekkel  
-🆕 **Health check rendszer** startup validálással  
+🆕 **Health check rendszer** startup validálással (OpenAI, Qdrant, Redis, Postgres)  
 🆕 **Debug CLI** vizuális RAG testing eszközökkel  
 🆕 **Telemetria debug panel** - Pipeline latency, RAG context, LLM prompt/response monitoring
 
@@ -33,7 +37,14 @@ KnowledgeRouter egy vállalati belső tudásbázis rendszer, amely:
 - **Database**: PostgreSQL 15 (feedback & analytics)
 - **Frontend**: Tailwind CSS + Vanilla JavaScript (ChatGPT-style UI)
 - **Deployment**: Docker Compose
-- **Testing**: pytest (121 tests, 49% coverage)
+- **Testing**: pytest (180 tests, 53% coverage)
+  - **RAG Optimization**: 27 tests (deduplication, IT overlap boost, integration)
+  - **Feedback Ranking**: 15 tests (boost calculation, batch ops)
+  - **Error Handling**: 39 tests (retry, token limits)
+  - **Coverage Highlights**:
+    - `openai_clients.py`: **100%** ✅
+    - `qdrant_rag_client.py`: **70%** (up from 18%)
+    - `atlassian_client.py`: **87%**
 
 ## 🚀 Quick Start (Docker)
 
@@ -61,28 +72,56 @@ docker-compose up --build
 
 **Fontos:** Az alkalmazás **Qdrant-alapú RAG-et** használ multi-domain collection-nel.
 
-**Marketing dokumentumok indexelése (példa):**
+### 4. Dokumentumok Indexelése
+
+#### Marketing/HR/General Domainek (Google Drive)
 ```bash
 cd backend
-python scripts/sync_domain_docs.py --domain marketing --folder-id 1Jo5doFrRgTscczqR0c6bsS2H0a7pS2ZR
-```
 
-**Más domainek indexelése:**
-```bash
+# Marketing dokumentumok indexelése
+python scripts/sync_domain_docs.py --domain marketing --folder-id 1Jo5doFrRgTscczqR0c6bsS2H0a7pS2ZR
+
 # HR dokumentumok
 python scripts/sync_domain_docs.py --domain hr --folder-id YOUR_HR_FOLDER_ID
 
-# IT dokumentumok  
-python scripts/sync_domain_docs.py --domain it --folder-id YOUR_IT_FOLDER_ID
+# Finance/Legal/General
+python scripts/sync_domain_docs.py --domain finance --folder-id YOUR_FINANCE_FOLDER_ID
 ```
+
+#### IT Domain (Confluence + Jira)
+**⚠️ IT domain speciális architektúrával rendelkezik:**
+- **Confluence indexelés** (egy alkalommal vagy periodikusan): Confluence IT Policy → Qdrant semantic search
+- **Jira integráció** (runtime): Chat-based Jira ticket creation ("igen" response)
+
+```bash
+# Confluence IT Policy indexelése Qdrant-ba
+docker-compose exec backend python scripts/sync_confluence_it_policy.py --clear
+
+# Ellenőrzés: Qdrant Dashboard http://localhost:6334/dashboard
+# Collection: multi_domain_kb, Filter: domain="it"
+```
+
+**IT Domain környezeti változók (.env):**
+```bash
+CONFLUENCE_BASE_URL=https://your-company.atlassian.net/wiki
+CONFLUENCE_API_TOKEN=your_confluence_api_token_here
+JIRA_BASE_URL=https://your-company.atlassian.net
+JIRA_API_TOKEN=your_jira_api_token_here
+ATLASSIAN_EMAIL=your-email@company.com
+```
+
+**IT Domain workflow:**
+1. User query: "VPN problémám van" → Intent detection (`domain=it`)
+2. Qdrant retrieval: Semantic search (domain filter `it`)
+3. LLM generation: IT policy alapján válasz + Jira ticket offer
+4. User response: "igen" → Frontend detects confirmation
+5. Jira ticket creation: POST `/api/jira/ticket/` → SCRUM project
+
+Részletek: [docs/IT_DOMAIN_IMPLEMENTATION.md](docs/IT_DOMAIN_IMPLEMENTATION.md)
 
 Részletek: [🧠 RAG & Embedding Rendszer Architektúra](#-rag--embedding-rendszer-architektúra)
 
-```bash
-docker-compose up --build
-```
-
-### 4. Hozzáférés
+### 5. Hozzáférés
 
 - **Frontend**: http://localhost:3000
 - **Backend API**: http://localhost:8001/api/
@@ -108,10 +147,17 @@ Nyisd meg a frontend-et és próbáld ezeket:
 
 ### IT Domain
 ```
-"Nem működik a VPN"
+"VPN problémám van, mi a teendő?"
 "Hogyan telepítsem fel a VPN klienst?"
-"Szoftver támogatás"
+"Jelszó visszaállítás lépései?"
+"Szeretnék Jira ticketet létrehozni" → "igen" (chat-based flow)
 ```
+
+**IT Domain architecture:**
+- **Confluence → Qdrant**: IT Policy indexed via `sync_confluence_it_policy.py`
+- **Semantic search**: Qdrant retrieval with `domain=it` filter (NOT keyword matching)
+- **Jira integration**: Chat-based ticket creation ("igen" response triggers Jira API)
+- Details: [docs/IT_DOMAIN_IMPLEMENTATION.md](docs/IT_DOMAIN_IMPLEMENTATION.md)
 
 ### Marketing Domain
 ```
@@ -130,22 +176,57 @@ benketibor/
 │   │   ├── wsgi.py / asgi.py    # WSGI/ASGI entry
 │   │   └── __init__.py
 │   ├── domain/                  # Business logic models
-│   │   ├── models.py            # Pydantic data models
-│   │   ├── interfaces.py        # Abstract base classes
+│   │   ├── models.py            # Pydantic data models (Citation, QueryResponse, etc.)
+│   │   ├── interfaces.py        # Abstract base classes (IRAGClient, IFeedbackStore)
 │   │   └── __init__.py
-│   ├── infrastructure/          # External integrations
-│   │   ├── repositories.py      # File-based storage (users, sessions)
-│   │   ├── rag_client.py        # Mock Qdrant client
+│   ├── infrastructure/          # External integrations & clients
+│   │   ├── qdrant_rag_client.py    # Qdrant vector DB client (hybrid search, dedup, boost)
+│   │   ├── postgres_client.py      # PostgreSQL feedback storage (lazy init, batch ops)
+│   │   ├── redis_client.py         # Redis L1/L2 cache (embedding + query cache)
+│   │   ├── openai_clients.py       # OpenAI LLM + Embeddings (singleton factory)
+│   │   ├── atlassian_client.py     # Confluence/Jira API (IT Policy sync)
+│   │   ├── google_drive_client.py  # Google Drive API (marketing docs)
+│   │   ├── repositories.py         # File-based storage (users, sessions)
+│   │   ├── error_handling.py       # Retry logic, token limits, cost tracking
+│   │   ├── health_check.py         # Startup validation (OpenAI, Qdrant, Postgres, Redis)
+│   │   ├── rag_client.py           # RAG interface (legacy, use qdrant_rag_client)
+│   │   ├── document_parser.py      # Document parsing utilities
+│   │   ├── schema.sql              # PostgreSQL schema (feedback table)
 │   │   └── __init__.py
 │   ├── services/                # Business logic
-│   │   ├── agent.py             # LangGraph agent (intent → retrieval → response)
+│   │   ├── agent.py             # LangGraph agent (4-node workflow: intent → retrieval → generation → workflow)
 │   │   ├── chat_service.py      # Chat orchestration
 │   │   └── __init__.py
 │   ├── api/                     # API endpoints
-│   │   ├── views.py             # REST views (/api/query/, /api/sessions/)
+│   │   ├── views.py             # REST views (/api/query/, /api/sessions/, /api/feedback/)
 │   │   ├── urls.py              # API URLs
-│   │   ├── apps.py              # App initialization
+│   │   ├── apps.py              # App initialization & health checks
 │   │   └── __init__.py
+│   ├── scripts/                 # Maintenance & indexing scripts
+│   │   ├── sync_confluence_it_policy.py   # Index IT Policy to Qdrant
+│   │   ├── sync_marketing_docs.py         # Index marketing docs from Google Drive
+│   │   ├── sync_domain_docs.py            # Generic domain sync
+│   │   ├── create_collections.py          # Create Qdrant collections
+│   │   ├── migrate_to_multi_domain.py     # Migration utilities
+│   │   ├── authenticate_google_drive.py   # Google Drive OAuth
+│   │   ├── ingest_documents.py            # Bulk document ingestion
+│   │   └── README.md
+│   ├── tests/                   # Unit & integration tests (180 tests, 53% coverage)
+│   │   ├── test_qdrant_deduplication.py   # Deduplication & IT overlap boost (21 tests)
+│   │   ├── test_qdrant_integration.py     # E2E RAG pipeline (6 tests)
+│   │   ├── test_feedback_ranking.py       # Feedback boost calculation (4 tests)
+│   │   ├── test_postgres_client.py        # Lazy init & batch ops (8 tests)
+│   │   ├── test_integration_feedback.py   # Feedback integration (3 tests)
+│   │   ├── test_atlassian_client.py       # Confluence/Jira parsing
+│   │   ├── test_error_handling.py         # Retry & token limits (39 tests)
+│   │   ├── test_openai_clients.py         # Factory pattern (24 tests)
+│   │   ├── test_health_check.py           # Startup validation (10 tests)
+│   │   ├── test_debug_cli.py              # CLI formatting (17 tests)
+│   │   ├── test_interfaces.py             # ABC contracts (15 tests)
+│   │   ├── test_redis_cache.py            # Cache tests (11 tests)
+│   │   ├── test_telemetry.py              # Telemetry tests (9 tests)
+│   │   ├── conftest.py                    # Shared fixtures
+│   │   └── README.md
 │   ├── data/                    # Persistent storage (JSON)
 │   │   ├── users/              # User profiles
 │   │   ├── sessions/           # Conversation histories
@@ -156,16 +237,32 @@ benketibor/
 
 ├── frontend/                    # Tailwind CSS + Vanilla JS
 │   ├── templates/
-│   │   └── index.html          # Chat UI (HTMX)
-│   ├── static/css/
-│   │   └── style.css           # Styles
+│   │   └── index.html          # Chat UI (ChatGPT-style)
+│   ├── static/
+│   │   ├── app.js              # Frontend logic
+│   │   └── css/
+│   │       └── style.css       # Tailwind compiled CSS
+│   ├── input.css               # Tailwind source
+│   ├── tailwind.config.js      # Tailwind configuration
 │   ├── package.json            # Node dependencies
+│   ├── nginx.conf              # Nginx configuration
 │   └── Dockerfile              # Frontend container
 
-├── docker-compose.yml          # Multi-container orchestration
+├── docs/                        # Documentation
+│   ├── README.md               # Architecture overview
+│   ├── FEATURES.md             # Feature list (v2.4)
+│   ├── CHANGELOG_v2.4.md       # v2.4 release notes
+│   ├── IT_DOMAIN_IMPLEMENTATION.md  # IT domain architecture
+│   ├── API.md                  # API documentation
+│   ├── INSTALLATION.md         # Setup guide
+│   ├── FRONTEND_SETUP.md       # Frontend development
+│   ├── GOOGLE_DRIVE_SETUP.md   # Google Drive integration
+│   ├── REDIS_CACHE.md          # Cache architecture
+│   └── INIT_PROMPT.md          # Project initialization
+
+├── docker-compose.yml          # Multi-container orchestration (backend, frontend, qdrant, redis, postgres)
 ├── .env.example                # Environment template
 ├── README.md                   # This file
-├── INSTALLATION.md             # Detailed setup guide
 └── start-dev.sh               # Local dev script (bash)
 ```
 
@@ -1259,32 +1356,50 @@ client: IRAGClient = QdrantRAGClient(...)
 
 ## 🤝 Roadmap
 
-### ✅ Elkészült (v2.2)
-- [x] **LangGraph StateGraph orchestration** (4 nodes: intent → retrieval → generation → workflow) 🆕
-- [x] Multi-domain Qdrant collection (domain filtering)
-- [x] Google Drive API integration (marketing docs)
-- [x] Redis cache (embedding + query result, 54% hit rate)
-- [x] Cache invalidálás (sync_domain_docs.py auto-invalidation)
-- [x] Token tracking & cost calculation
-- [x] Unit tesztek (121 teszt, 49% coverage)
-- [x] Hibakezelés (retry logic, exponential backoff)
-- [x] Multi-domain workflows (HR szabadság, IT ticket) - LangGraph workflow node
-- [x] **SOLID architektúra** (ABC interfaces, DIP compliance) 🆕
-- [x] **Health check rendszer** (startup validation) 🆕
-- [x] **Debug CLI** (visual RAG testing tools) 🆕
-- [x] **PostgreSQL feedback** (like/dislike system backend) 🆕
+### ✅ Elkészült (v2.4)
+- [x] **LangGraph StateGraph orchestration** (4 nodes: intent → retrieval → generation → workflow)
+- [x] **Multi-domain Qdrant collection** (6 domain: HR, IT, Finance, Legal, Marketing, General)
+- [x] **Confluence/Jira API integration** (IT Policy auto-sync, section ID tracking) 🆕
+- [x] **Google Drive API integration** (marketing docs auto-sync)
+- [x] **Redis L1/L2 cache** (embedding + query result, 54% hit rate)
+- [x] **PostgreSQL feedback system** (like/dislike, batch ops, lazy init) 🆕
+- [x] **Content deduplication** (PDF/DOCX signature-based, title normalization) 🆕
+- [x] **IT domain overlap boost** (lexical token matching, 0-20% boost) 🆕
+- [x] **Feedback-weighted ranking** (tiered boost: >70% +30%, <40% -20%) 🆕
+- [x] **Section ID citations** (IT-KB-XXX format, parser inheritance) 🆕
+- [x] **Cache invalidation** (sync scripts auto-clear Redis)
+- [x] **Token tracking & cost calculation** (retry logic, exponential backoff)
+- [x] **Comprehensive testing** (180 tests, 53% coverage) 🆕
+  - Unit tests: deduplication (9), IT boost (11), feedback (4), error handling (39)
+  - Integration tests: RAG pipeline (6), feedback (3), health checks (10)
+  - Coverage highlights: openai_clients 100%, qdrant_rag_client 70%, atlassian_client 87%
+- [x] **Multi-domain workflows** (HR szabadság, IT ticket) - LangGraph workflow node
+- [x] **SOLID architektúra** (ABC interfaces, DIP compliance)
+- [x] **Health check rendszer** (startup validation: OpenAI, Qdrant, Redis, Postgres)
+- [x] **Debug CLI** (visual RAG testing tools, citation formatting)
+- [x] **Telemetry debug panel** (RAG context, LLM prompt/response, pipeline latency)
 
-### 🚧 Tervezett
-- [ ] Frontend feedback UI teljes implementálás (kód kész, tesztelés folyamatban)
-- [ ] Citation re-ranking (feedback-weighted semantic relevance)
-- [ ] Multi-query generation (5 variáció, frequency ranking)
-- [ ] BM25 sparse vectors (lexikális keresés brand nevekhez, kódokhoz)
-- [ ] Monitoring & logging (Prometheus + Grafana)
-- [ ] Integration tesztek (E2E multi-domain RAG)
-- [ ] Slack integration
-- [ ] PII detection (személyes adatok szűrése)
-- [ ] Rate limiting (felhasználónként 100 req/óra)
-- [ ] Frontend React version (optional)
+### 🚧 Következő Sprint (v2.5 - Performance)
+- [ ] **Performance benchmarks** (deduplication overhead, cache hit ratios)
+- [ ] **Coverage improvement** (53% → 60% target)
+  - postgres_client: 44% → 60%
+  - redis_client: 58% → 75%
+- [ ] **BM25 hybrid search** (sparse vectors for exact match on section IDs, brand names)
+- [ ] **Multi-query generation** (query expansion with frequency ranking)
+- [ ] **A/B testing framework** (IT overlap boost tuning: 10% vs 15% vs 20%)
+
+### 🔮 Backlog (Future Releases)
+- [ ] **Frontend feedback UI v2** (thumbs up/down visible, feedback stats dashboard)
+- [ ] **Monitoring & observability** (Prometheus metrics, Grafana dashboards)
+- [ ] **Advanced integration tests** (E2E multi-domain RAG flows)
+- [ ] **Slack integration** (chatbot for Slack workspace)
+- [ ] **PII detection** (automatic masking of sensitive data)
+- [ ] **Rate limiting** (per-user: 100 req/hour, per-org: 10k req/day)
+- [ ] **Advanced caching** (semantic cache with embedding similarity)
+- [ ] **Fuzzy deduplication** (Levenshtein distance for near-duplicates)
+- [ ] **Citation click-through tracking** (implicit feedback collection)
+- [ ] **Auto-reindexing triggers** (feedback threshold-based)
+- [ ] **Frontend React version** (optional SPA migration)
 
 ## 📞 Support
 

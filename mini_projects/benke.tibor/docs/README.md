@@ -1,4 +1,4 @@
-# KnowledgeRouter - AI Agent Demo
+# KnowledgeRouter - AI Agent
 
 **Vállalati Tudásirányító & Workflow-Automata**
 

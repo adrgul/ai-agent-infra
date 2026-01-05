@@ -3,6 +3,7 @@ Infrastructure - Qdrant-based RAG client for production use.
 """
 import logging
 import os
+import re
 from typing import List, Optional
 
 from qdrant_client import QdrantClient
@@ -54,6 +55,74 @@ def calculate_feedback_boost(like_percentage: Optional[float]) -> float:
         return 0.1  # Moderate boost
     else:
         return -0.2  # Quality penalty
+
+
+def _apply_it_overlap_boost(citations: List[Citation], query: str) -> List[Citation]:
+    """Generic IT rerank: boost citations with higher lexical overlap to the query.
+
+    - Counts unique query tokens (len >= 3) present in title/content.
+    - Boost factor: up to +20% based on overlap ratio.
+    - No hardcoded section IDs; works for any IT topic.
+    """
+    query_tokens = {t for t in re.split(r"[^a-zA-Z0-9áéíóöőúüűÁÉÍÓÖŐÚÜŰ]+", query.lower()) if len(t) >= 3}
+    if not query_tokens:
+        return citations
+
+    for c in citations:
+        text = " ".join([c.title or "", c.content or ""]).lower()
+        hits = sum(1 for tok in query_tokens if tok in text)
+        if hits == 0:
+            continue
+        overlap_ratio = hits / max(1, len(query_tokens))
+        boost = 1 + min(0.2, overlap_ratio * 0.4)  # up to +20%
+        c.score *= boost
+
+    citations.sort(key=lambda c: c.score, reverse=True)
+    return citations
+
+
+def _deduplicate_citations(citations: List[Citation]) -> List[Citation]:
+    """Remove duplicate citations based on content similarity.
+    
+    Keeps highest-scoring citation for each unique content.
+    Deduplicates based on:
+    - Exact title match + content prefix (80 chars) similarity
+    - Avoids including multiple formats (PDF, DOCX) of same content
+    
+    Args:
+        citations: List of citations (may contain duplicates)
+        
+    Returns:
+        Deduplicated list, preserving order and top scores
+    """
+    seen = {}  # {content_hash: citation}
+    
+    def _normalize_title(title: str) -> str:
+        """Remove file extensions and normalize title for comparison."""
+        if not title:
+            return "UNKNOWN"
+        # Remove common extensions (pdf, docx, doc, txt, etc.)
+        import re
+        return re.sub(r'\.(pdf|docx|doc|txt|xlsx|pptx)$', '', title, flags=re.IGNORECASE)
+    
+    for citation in citations:
+        # Create content signature: (normalized_title, content[:80])
+        # This catches PDF/DOCX duplicates while keeping distinct sections
+        content_preview = (citation.content or "")[:80].strip()
+        normalized_title = _normalize_title(citation.title)
+        signature = (normalized_title, content_preview)
+        
+        # Keep highest-scoring citation for each signature
+        if signature not in seen or citation.score > seen[signature].score:
+            seen[signature] = citation
+            logger.debug(f"🔄 Dedup: keeping '{citation.title}' (score={citation.score:.3f})")
+        else:
+            logger.debug(f"🔄 Dedup: skipping duplicate '{citation.title}' (score={citation.score:.3f} < {seen[signature].score:.3f})")
+    
+    # Return in original order
+    result = list(seen.values())
+    logger.info(f"✅ Deduplicated {len(citations)} citations → {len(result)} unique")
+    return result
 
 
 class QdrantRAGClient(IRAGClient):
@@ -142,7 +211,7 @@ class QdrantRAGClient(IRAGClient):
             if cached_result and cached_result.get("doc_ids"):
                 # Fetch documents by IDs from Qdrant
                 logger.info(f"🚀 FULL CACHE HIT - Fetching {len(cached_result['doc_ids'])} docs by ID")
-                return await self._fetch_by_qdrant_ids(cached_result["doc_ids"], domain)
+                return await self._fetch_by_qdrant_ids(cached_result["doc_ids"], domain, query)
             
             # Layer 2: Generate/retrieve embedding (partial cache hit)
             cached_embedding = redis_cache.get_embedding(query)
@@ -179,20 +248,41 @@ class QdrantRAGClient(IRAGClient):
             
             for point in search_results:
                 payload = point.payload
-                file_id = payload.get("source_file_id") or payload.get("file_id", "UNKNOWN")
-                file_name = payload.get("source_file_name") or payload.get("file_name", "Unknown Document")
+                file_id = payload.get("source_file_id") or payload.get("file_id") or payload.get("doc_id", "UNKNOWN")
                 chunk_index = payload.get("chunk_index", 0)
+                
+                # Determine title and URL based on domain
+                retrieved_domain = payload.get("domain", "")
+                
+                if retrieved_domain == "it":
+                    # IT domain: Use unified Confluence IT Policy title and URL
+                    file_name = "IT Üzemeltetési és Felhasználói Szabályzat (IT Policy)"
+                    citation_url = "https://benketibor.atlassian.net/wiki/x/AoBg"
+                    section_id = payload.get("section_id")  # Extract section_id for IT domain
+                    if not section_id:
+                        text_for_id = payload.get("text") or payload.get("content", "")
+                        match = re.search(r"([A-Z]+-KB-\d+)", text_for_id)
+                        section_id = match.group(1) if match else None
+                else:
+                    # Other domains: Use individual file/section names
+                    file_name = payload.get("source_file_name") or payload.get("file_name") or payload.get("title") or payload.get("section_title", "Unknown Document")
+                    citation_url = None
+                    section_id = None
                 
                 citations.append(
                     Citation(
                         doc_id=f"{file_id}#chunk{chunk_index}",
                         title=file_name,
                         score=float(point.score),
-                        url=None,
-                        content=payload.get("text", "")
+                        url=citation_url,
+                        content=payload.get("text") or payload.get("content", ""),
+                        section_id=section_id
                     )
                 )
                 doc_ids.append(str(point.id))  # Store Qdrant point ID (UUID string)
+            
+            # **Deduplicate before ranking** - remove duplicate content from multiple formats (PDF, DOCX)
+            citations = _deduplicate_citations(citations)
             
             # Apply feedback-weighted re-ranking (BATCH to avoid connection pool exhaustion)
             if postgres_client.is_available() and citations:
@@ -230,6 +320,10 @@ class QdrantRAGClient(IRAGClient):
                 logger.info(f"✅ Re-ranked {len(citations)} citations by feedback-weighted scores")
             else:
                 logger.warning("⚠️ PostgreSQL unavailable, skipping feedback ranking")
+
+            # Domain-specific heuristic: favor VPN troubleshooting section for VPN queries
+            if domain == DomainType.IT.value:
+                citations = _apply_it_overlap_boost(citations, query)
             
             # Layer 4: Cache query results
             if citations:
@@ -248,7 +342,7 @@ class QdrantRAGClient(IRAGClient):
             logger.error(f"Qdrant retrieval error: {e}", exc_info=True)
             return []
     
-    async def _fetch_by_qdrant_ids(self, point_ids: List[str], domain: str) -> List[Citation]:
+    async def _fetch_by_qdrant_ids(self, point_ids: List[str], domain: str, query: Optional[str] = None) -> List[Citation]:
         """
         Fetch documents directly by Qdrant point IDs (for cache hits).
         
@@ -279,20 +373,44 @@ class QdrantRAGClient(IRAGClient):
                     continue
                 
                 payload = point.payload
-                file_id = payload.get("source_file_id") or payload.get("file_id", "UNKNOWN")
-                file_name = payload.get("source_file_name") or payload.get("file_name", "Unknown Document")
+                file_id = payload.get("source_file_id") or payload.get("file_id") or payload.get("doc_id", "UNKNOWN")
                 chunk_index = payload.get("chunk_index", 0)
+                
+                # Determine title and URL based on domain
+                retrieved_domain = payload.get("domain", "")
+                
+                if retrieved_domain == "it":
+                    # IT domain: Use unified Confluence IT Policy title and URL
+                    file_name = "IT Üzemeltetési és Felhasználói Szabályzat (IT Policy)"
+                    citation_url = "https://benketibor.atlassian.net/wiki/x/AoBg"
+                    section_id = payload.get("section_id")  # Extract section_id for IT domain
+                    if not section_id:
+                        text_for_id = payload.get("text") or payload.get("content", "")
+                        match = re.search(r"([A-Z]+-KB-\d+)", text_for_id)
+                        section_id = match.group(1) if match else None
+                else:
+                    # Other domains: Use individual file/section names
+                    file_name = payload.get("source_file_name") or payload.get("file_name") or payload.get("title") or payload.get("section_title", "Unknown Document")
+                    citation_url = None
+                    section_id = None
                 
                 citations.append(
                     Citation(
                         doc_id=f"{file_id}#chunk{chunk_index}",
                         title=file_name,
                         score=1.0,  # No score from retrieve, use 1.0
-                        url=None,
-                        content=payload.get("text", "")
+                        url=citation_url,
+                        content=payload.get("text") or payload.get("content", ""),
+                        section_id=section_id
                     )
                 )
             
+            # Deduplicate before applying heuristics
+            citations = _deduplicate_citations(citations)
+            
+            if domain == DomainType.IT.value and query:
+                citations = _apply_it_overlap_boost(citations, query)
+
             logger.info(f"✅ Fetched {len(citations)}/{len(point_ids)} cached docs from Qdrant (domain={domain})")
             return citations
             
@@ -323,19 +441,14 @@ class QdrantRAGClient(IRAGClient):
                 ),
             ],
             DomainType.IT: [
+                # IT domain uses Qdrant with indexed Confluence IT Policy
+                # If no data in Qdrant, return empty result
                 Citation(
-                    doc_id="IT-KB-234",
-                    title="VPN Troubleshooting Guide",
-                    score=0.91,
+                    doc_id="IT-NO-DATA",
+                    title="IT Policy Not Indexed",
+                    score=0.0,
                     url=None,
-                    content="VPN problémák: 1. Ellenőrizd a kliens fut-e 2. Újraindítás 3. IT helpdesk"
-                ),
-                Citation(
-                    doc_id="IT-KB-189",
-                    title="VPN Client Installation",
-                    score=0.87,
-                    url=None,
-                    content="VPN kliens telepítés: Cisco AnyConnect letöltése, telepítés, konfiguráció."
+                    content="Nincs releváns IT policy adat a kérdés megválaszolásához. Kérlek, indexeld a Confluence IT Policy-t a sync_confluence_it_policy.py szkripttel."
                 ),
             ],
             DomainType.FINANCE: [

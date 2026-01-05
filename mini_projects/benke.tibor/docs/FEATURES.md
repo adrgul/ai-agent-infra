@@ -1,13 +1,43 @@
 # KnowledgeRouter - Feature List
 
-**Version:** 2.2  
-**Last Updated:** 2025-12-18
+**Version:** 2.4  
+**Last Updated:** 2026-01-05
 
 ---
 
 ## ✅ Implemented Features
 
-### 🏗️ Architecture & Development Tools (NEW in v2.2)
+### 🎫 IT Domain - Qdrant Semantic Search & Jira Integration (NEW in v2.3)
+
+#### Confluence IT Policy Indexing
+- **sync_confluence_it_policy.py**: Indexing script for Confluence pages
+- **Workflow**: Confluence API → HTML parsing (BeautifulSoup) → Chunking (800 chars) → Embedding (OpenAI) → Qdrant upsert
+- **Domain Filtering**: `domain="it"` metadata for precise filtering
+- **Confluence API**: REST API v2, HTML storage format parsing
+- **Section Extraction**: h1/h2/h3 headers with sibling content collection
+- **Metadata**: section_id, section_title, confluence_url, indexed_at
+
+#### Runtime IT Query Flow
+- **Semantic Search**: Qdrant retrieval with domain=`it` filter (NOT keyword matching)
+- **Redis Caching**: Embedding cache + query result cache
+- **LLM Generation**: IT-specific instructions with procedure/responsibility references
+- **Jira Ticket Offer**: Always offered at end of IT responses
+- **Chat-Based Flow**: "igen" response detection → automatic ticket creation
+
+#### Jira Ticket Integration
+- **AtlassianClient**: Singleton for Jira API v3
+- **Ticket Creation**: POST `/rest/api/3/issue` (project: SCRUM)
+- **API Endpoint**: POST `/api/jira/ticket/` (summary, description, issue_type, priority)
+- **Frontend Flow**: `lastITContext` → "igen" detection → `createJiraTicket()` → success message
+- **Response Format**: Ticket key (SCRUM-123) with clickable link
+
+#### Architecture Benefits
+- **Consistent Workflow**: Same as HR/Marketing (Qdrant semantic search)
+- **No Runtime Confluence Calls**: Indexing-time only, performance boost
+- **Scalable**: Multiple Confluence pages can be indexed
+- **Cached**: Redis reduces OpenAI API calls and search latency
+
+### 🏗️ Architecture & Development Tools
 
 #### LangGraph Orchestration (Production)
 - **StateGraph Workflow**: Complete agent workflow using LangGraph StateGraph
@@ -102,10 +132,22 @@
   - `GET /api/feedback/stats/` - Get aggregated statistics
   - `GET /api/feedback/stats/?domain=marketing` - Domain filtering
 
-#### Citation Ranking
+#### Citation Ranking (✅ IMPLEMENTED in v2.4)
 - **Rank Tracking**: Store citation position (1st, 2nd, 3rd result)
 - **Query Context**: Optional embedding storage for context-aware scoring
-- **Future: Re-ranking**: Feedback-weighted result reordering (planned)
+- **✅ Feedback-Weighted Re-ranking**: Live production feature
+  - **Tiered Boost System**: +30% (>70% likes), +10% (40-70%), -20% (<40%)
+  - **Batch PostgreSQL Queries**: Single SQL call for all citation feedback
+  - **Score Formula**: `final_score = semantic_score × (1 + feedback_boost)`
+  - **Adaptive Learning**: Popular content rises, poor quality demoted
+- **✅ Content Deduplication**: Remove PDF/DOCX duplicates before ranking
+  - **Signature-Based**: Title + content preview (80 chars)
+  - **Highest Score Wins**: Keeps best-scoring duplicate
+  - **Marketing Domain**: Solves Aurora Arculat kézikönyv duplicate issue
+- **✅ IT Overlap Boost**: Lexical query-term matching for IT domain
+  - **Generic Algorithm**: No hardcoded section IDs
+  - **0-20% Score Boost**: Based on token overlap ratio
+  - **Query Tokens**: Minimum 3-char tokens from user query
 
 ---
 
@@ -380,13 +422,10 @@ docker-compose exec backend pytest tests/test_feedback_ranking.py -v
 ## 🚧 Planned Features (Roadmap)
 
 ### High Priority
-- [ ] **Frontend Feedback UI**: Fully functional 👍👎 buttons (code ready, needs testing)
-- [ ] **Citation Re-ranking**: Feedback-weighted result ordering
-- [ ] **Query Embedding Context**: Similarity-based feedback scoring
 - [ ] **Multi-Query Generation**: 5 query variations with frequency ranking
+- [ ] **BM25 Sparse Vectors**: Lexical search for brand names, codes
 
 ### Medium Priority
-- [ ] **BM25 Sparse Vectors**: Lexical search for brand names, codes
 - [ ] **PII Detection**: Automatic sensitive data filtering
 - [ ] **Rate Limiting**: Per-user request limits (100/hour)
 - [ ] **Prometheus Metrics**: Advanced monitoring dashboard
@@ -396,6 +435,13 @@ docker-compose exec backend pytest tests/test_feedback_ranking.py -v
 - [ ] **Audit Logging**: Compliance logs for all queries
 - [ ] **WebSocket Support**: Real-time streaming responses
 - [ ] **Multi-Language**: Auto-detect and translate
+
+### ✅ Recently Completed (moved from roadmap)
+- [x] **Feedback-Weighted Re-ranking** (v2.4)
+- [x] **Content Deduplication** (v2.4)
+- [x] **IT Overlap Boost** (v2.4)
+- [x] **Section ID Citations** (v2.3)
+- [x] **Jira Ticket Integration** (v2.3)
 
 ---
 

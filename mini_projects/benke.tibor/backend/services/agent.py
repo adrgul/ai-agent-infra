@@ -2,6 +2,7 @@
 Services - LangGraph-based agent orchestration.
 """
 import logging
+import re
 from typing import Dict, Any, Sequence
 from typing_extensions import TypedDict
 
@@ -11,6 +12,7 @@ from langgraph.graph import StateGraph, END
 
 from domain.models import DomainType, QueryResponse, Citation
 from infrastructure.error_handling import check_token_limit, estimate_tokens
+from infrastructure.atlassian_client import atlassian_client
 
 logger = logging.getLogger(__name__)
 
@@ -124,11 +126,21 @@ Category:"""
         state["citations"] = [c.model_dump() for c in citations]
         state["retrieved_docs"] = citations
         
-        # Build RAG context for telemetry
+        # Build RAG context for telemetry (use section_id for IT domain)
+        is_it_domain = state.get("domain") == DomainType.IT.value
         context_parts = []
         for i, c in enumerate(citations, 1):
             if hasattr(c, 'content') and c.content:
-                context_parts.append(f"[Doc {i}: {c.title}]\n{c.content[:500]}...")
+                # For IT domain, use section_id if available
+                if is_it_domain:
+                    section_id = c.section_id if hasattr(c, 'section_id') else None
+                    if not section_id and c.content:
+                        match = re.search(r"\[([A-Z]+-KB-\d+)\]", c.content)
+                        section_id = match.group(1) if match else None
+                    doc_label = f"[{section_id}]" if section_id else f"[Doc {i}: {c.title}]"
+                else:
+                    doc_label = f"[Doc {i}: {c.title}]"
+                context_parts.append(f"{doc_label}\n{c.content[:500]}...")
             else:
                 context_parts.append(f"[Doc {i}: {c.title}]")
         state["rag_context"] = "\n\n".join(context_parts)
@@ -143,18 +155,50 @@ Category:"""
 
         # Build context from citations with content
         context_parts = []
+        is_it_domain = state.get("domain") == DomainType.IT.value
+        
         for i, c in enumerate(state["citations"], 1):
             # If chunk content is available, use it
             if c.get("content"):
+                # For IT domain, try to use section_id; fallback to IT Policy label to avoid "Document X"
+                if is_it_domain:
+                    section_id = c.get("section_id")
+                    if not section_id:
+                        match = re.search(r"([A-Z]+-KB-\d+)", c["content"])
+                        section_id = match.group(1) if match else None
+                    doc_label = f"[{section_id}]" if section_id else "[IT Policy]"
+                    c["section_id"] = section_id  # propagate inferred id for later use
+                else:
+                    doc_label = f"[Document {i}: {c['title']}]"
+                
                 # Use full content for top 3 results, truncate rest to avoid timeout
                 if i <= 3:
-                    context_parts.append(f"[Document {i}: {c['title']}]\n{c['content']}")
+                    context_parts.append(f"{doc_label}\n{c['content']}")
                 else:
-                    context_parts.append(f"[Document {i}: {c['title']}]\n{c['content'][:300]}...")
+                    context_parts.append(f"{doc_label}\n{c['content'][:300]}...")
             else:
                 context_parts.append(f"[Document {i}: {c['title']}]")
         
         context = "\n\n".join(context_parts)
+
+        # Domain-specific instructions
+        domain_instructions = ""
+        if state.get("domain") == DomainType.IT.value:
+            domain_instructions = """
+IMPORTANT FOR IT QUESTIONS:
+1. Provide clear, step-by-step troubleshooting or guidance based on the retrieved IT Policy documents
+2. **ALWAYS reference the exact section IDs** when cited (e.g., [IT-KB-234], [IT-KB-320])
+   - Use the exact format shown in square brackets at the start of each document (e.g., [IT-KB-267])
+   - Example: "A VPN hibaelhárítási folyamat [IT-KB-267] alapján először ellenőrizd..."
+   - Do NOT use [Document 1], [Document 2] format - use the actual section IDs
+3. Include procedures and responsible parties if mentioned in the documents
+4. At the end of your response, ALWAYS ask if the user wants to create a Jira support ticket
+
+Format your offer like this:
+"📋 Szeretnéd, hogy létrehozzak egy Jira support ticketet ehhez a kérdéshez? (Válaszolj 'igen'-nel vagy 'nem'-mel)"
+
+This question MUST appear at the end of EVERY IT domain response.
+"""
 
         prompt = f"""
 You are a helpful HR/IT/Finance/Legal/Marketing assistant.
@@ -163,6 +207,8 @@ Retrieved documents (use ALL relevant information):
 {context}
 
 User query: "{state['query']}"
+
+{domain_instructions}
 
 Provide a comprehensive answer based on the retrieved documents above.
 Combine information from multiple sources when they relate to the same topic.
@@ -195,6 +241,22 @@ Answer in Hungarian if the query is in Hungarian, otherwise in English.
 
         response = await self.llm.ainvoke([HumanMessage(content=prompt)])
         answer = response.content
+
+        # Ensure IT answers surface section references even if the model forgets
+        if is_it_domain:
+            section_ids = []
+            for citation in state.get("citations", []):
+                section_id = citation.get("section_id")
+                if not section_id and citation.get("content"):
+                    match = re.search(r"([A-Z]+-KB-\d+)", citation["content"])
+                    section_id = match.group(1) if match else None
+                    citation["section_id"] = section_id
+                if section_id and section_id not in section_ids:
+                    section_ids.append(section_id)
+
+            if section_ids and not any(sid in answer for sid in section_ids):
+                refs = ", ".join(f"[{sid}]" for sid in section_ids)
+                answer = f"{answer}\n\nForrás: {refs} – IT Üzemeltetési és Felhasználói Szabályzat"
         
         # Save telemetry data
         state["llm_prompt"] = prompt
@@ -227,15 +289,18 @@ Answer in Hungarian if the query is in Hungarian, otherwise in English.
                     "status": "draft",
                     "next_step": "Review and submit"
                 }
+        
         elif domain == DomainType.IT.value:
-            # Example: IT support ticket workflow
-            if any(kw in state["query"].lower() for kw in ["nem működik", "error", "problem"]):
-                state["workflow"] = {
-                    "action": "it_ticket_draft",
-                    "type": "support_ticket",
-                    "priority": "medium",
-                    "next_step": "Submit to Jira"
-                }
+            # IT domain: Offer Jira ticket creation
+            # (Citations already retrieved from Qdrant by _retrieval_node)
+            logger.info("🔧 IT workflow: Setting up Jira ticket creation offer")
+            
+            state["workflow"] = {
+                "action": "it_support_ready",
+                "type": "it_support",
+                "next_step": "Offer Jira ticket creation",
+                "jira_available": True
+            }
 
         return state
 

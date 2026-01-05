@@ -36,6 +36,7 @@ google-auth-oauthlib==1.2.0
 # Document parsing
 PyPDF2==3.0.1
 python-docx==1.1.0
+beautifulsoup4==4.12.3
 
 # Async
 aiofiles==23.2.1
