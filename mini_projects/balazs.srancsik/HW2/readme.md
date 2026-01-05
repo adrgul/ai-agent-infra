@@ -7,9 +7,7 @@ Lingua library is used to detect the language of the question and the appropriat
 
 📷 You will find 2 example screenshots how the code is working in this the same folder next to this readme file.
 
-🧪 Pytest scripts and test reports have been added to both radio and book tools into Test_Scripts_And_Logs folder: 
-    test_radio.py - test_radio_report.html
-    test_book.py - test_book_report.html
+🧪 Pytest scripts and test reports have been added to both radio and book tools into Test_Scripts_And_Logs folder: test_radio.py -> test_radio_report.html,   test_book.py -> test_book_report.html.
     Screenshot of the test results are also added.
 
 🔬 Try any of the below questions:
@@ -39,3 +37,4 @@ Lingua library is used to detect the language of the question and the appropriat
     "What is the meaning behind the title Pál Utcai Fiúk?"
     "Describe the uniforms of the rival gangs"
     "What role do adults play in the children's world?"
+
