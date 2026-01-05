@@ -1,6 +1,4 @@
-# KnowledgeRouter - AI Agent Demo
-
-**Vállalati Tudásirányító & Workflow-Automata**
+# KnowledgeRouter - Vállalati Tudásirányító & Workflow-Automata
 
 Multi-domain AI agent rendszer Python Django backenddel, LangGraph orchestrációval és modern Tailwind CSS frontenddel (ChatGPT-style UI).
 
