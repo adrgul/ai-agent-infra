@@ -20,7 +20,7 @@ Ez a mappa az **RAG Agent alkalmazás** tesztelésével kapcsolatos fájlokat ta
 
 **Futtatás:**
 ```bash
-cd /Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth/2_hw
+cd /Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth
 python3 TESZTEK/test_activity_logging.py
 ```
 

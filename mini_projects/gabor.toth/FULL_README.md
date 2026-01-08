@@ -17,10 +17,10 @@ Teljes körű magyar nyelvű alkalmazás dokumentumok feltöltéséhez, kategori
 ## 🏗️ Architektúra
 
 ```
-Backend (Python FastAPI):
+Backend (Python FastAPI): backend/
 ├── domain/                      # SOLID interfaces & domain modellek
 │   ├── models.py               # Pydantic DataClasses
-│   ├── interfaces.py           # Abstract base classes (ActivityCallback, etc.)
+│   ├── interfaces.py           # Abstract base classes
 │
 ├── infrastructure/              # Konkrét implementációk
 │   ├── embedding.py            # OpenAI embeddings
@@ -32,13 +32,13 @@ Backend (Python FastAPI):
 │   └── repositories.py         # JSON perzisztencia
 │
 ├── services/                    # Üzleti logika
-│   ├── upload_service.py       # Dokumentum feltöltés & indexelés (ActivityCallback)
-│   ├── rag_agent.py            # LangGraph agent (ActivityCallback)
-│   └── chat_service.py         # Chat koordináció (ActivityCallback)
+│   ├── upload_service.py       # Dokumentum feltöltés & indexelés
+│   ├── rag_agent.py            # LangGraph agent
+│   └── chat_service.py         # Chat koordináció
 │
-└── main.py                     # FastAPI, QueuedActivityCallback, GET /api/activities
+└── main.py                     # FastAPI, QueuedActivityCallback
 
-Frontend (React + TypeScript + Vite):
+Frontend (React + TypeScript + Vite): frontend/
 ├── components/
 │   ├── App.tsx                 # Fő komponens
 │   ├── ActivityLogger.tsx      # Valós idejű aktivitás-napló (1s polling)
@@ -70,7 +70,7 @@ Data:
 ### 1. Helyi Fejlesztés (Ajánlott)
 
 ```bash
-cd /path/to/2_hw
+cd /Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth
 
 # .env fájl beállítása
 cp .env.example .env
@@ -86,7 +86,7 @@ source .env && ./start-dev.sh
 ### 2. Docker Compose
 
 ```bash
-cd /path/to/2_hw
+cd /Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth
 export OPENAI_API_KEY="sk-..."
 docker-compose up --build
 

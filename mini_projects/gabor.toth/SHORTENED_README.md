@@ -181,11 +181,11 @@ curl http://localhost:8000/api/health
 ## 📁 Mappastruktúra
 
 ```
-2_hw/
-├── README.md               # Teljes dokumentáció ← OLVASD EL
-├── QUICKSTART.md          # Demo útmutató ← HASZNÁLD
-├── TEST_RESULTS.md        # Teszt eredmények
-├── HW_SUMMARY.md          # Dolgozat összefoglalása
+gabor.toth/
+├── README.md (FULL_README.md)  # Teljes dokumentáció ← OLVASD EL
+├── QUICKSTART.md               # Demo útmutató ← HASZNÁLD
+├── TEST_RESULTS.md             # Teszt eredmények
+├── HW_SUMMARY.md               # Dolgozat összefoglalása
 │
 ├── backend/               # Python FastAPI
 │   ├── main.py
@@ -214,7 +214,7 @@ curl http://localhost:8000/api/health
 
 ```
 ☐ 1. Git clone
-☐ 2. cd mini_projects/gabor.toth/2_hw
+☐ 2. cd mini_projects/gabor.toth
 ☐ 3. cp .env.example .env
 ☐ 4. Szerkeszd a .env-et (OpenAI API kulcs)
 ☐ 5. docker-compose up --build

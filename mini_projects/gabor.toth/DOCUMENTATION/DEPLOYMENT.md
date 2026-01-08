@@ -5,7 +5,7 @@
 ### 1.1 Gyors Start (Javasolt)
 
 ```bash
-cd /Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth/2_hw
+cd /Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth
 
 # Backend start
 cd backend

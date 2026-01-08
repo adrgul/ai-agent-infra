@@ -280,7 +280,7 @@ npm install && npm run dev
 **Developer**: Gábor Tóth  
 **Organization**: AI Agents Development (Hungarian)  
 **Timeline**: 2025-2026  
-**Repository**: `/Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth/2_hw`
+**Repository**: `/Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth`
 
 ## 16. License & Usage
 

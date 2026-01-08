@@ -14,8 +14,8 @@ Ez az útmutató részletesen leírja, hogyan futtasd az alkalmazást és végez
 ### 1.1 Környezeti Változók Beállítása
 
 ```bash
-# Navigálj a 2_hw mappához
-cd /Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth/2_hw
+# Navigálj a gabor.toth mappához
+cd /Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth
 
 # Ellenőrizd, hogy a .env fájl létezik-e
 ls -la .env
@@ -140,7 +140,7 @@ Az App.tsx a user profilt erre módosította:
    - Válaszd ki: **HR**
 
 2. **Kattints "Fájl Kiválasztása" gombra**
-   - Navigálj ide: `/Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth/2_hw/DEMO_files_for_testing/`
+   - Navigálj ide: `/Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth/DEMO_files_for_testing/`
    - Válaszd ki: **HR_demo_hu.md**
 
 3. **Kattints az "Feltöltés" gombra**
@@ -172,7 +172,7 @@ Az App.tsx a user profilt erre módosította:
    - Válaszd ki: **AI**
 
 2. **Kattints "Fájl Kiválasztása" gombra**
-   - Navigálj ide: `/Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth/2_hw/DEMO_files_for_testing/`
+   - Navigálj ide: `/Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth/DEMO_files_for_testing/`
    - Válaszd ki: **AI_vector_demo_hu.md**
 
 3. **Kattints az "Feltöltés" gombra**

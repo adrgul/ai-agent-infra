@@ -133,7 +133,7 @@ data/
 
 ### Helyi Fejlesztés (Ajánlott)
 ```bash
-cd /path/to/2_hw
+cd /Users/tothgabor/ai-agents-hu/mini_projects/gabor.toth
 
 # Env beállítása
 cp .env.example .env
