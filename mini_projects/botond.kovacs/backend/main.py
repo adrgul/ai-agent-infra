@@ -1,82 +1,188 @@
-from fastapi import FastAPI, HTTPException
-from services.user_profile import UserProfileService, UserProfile
-from services.conversation_history import ConversationHistoryService
-from services.langgraph_workflow import create_langgraph_workflow
+"""
+API layer - FastAPI application with endpoints.
+Following SOLID: 
+- Single Responsibility - Controllers are thin, delegate to services.
+- Dependency Inversion - Controllers depend on service abstractions.
+"""
+import os
 import logging
+from contextlib import asynccontextmanager
+from dotenv import load_dotenv
 
-app = FastAPI()
+# Load environment variables from .env file (check parent directory too)
+load_dotenv()
+load_dotenv("../.env")
+from typing import Dict, Any, List
+
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+from domain.models import ChatRequest, ChatResponse, ProfileUpdateRequest
+from domain.interfaces import IUserRepository, IConversationRepository
+from infrastructure.repositories import FileUserRepository, FileConversationRepository
+from infrastructure.tool_clients import RegulationRAGClient, GasExportClient
+from services.tools import RegulationTool, GasExportTool
+from services.agent import AIAgent
+from services.chat_service import ChatService
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler("backend.log")
-    ]
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# Global service instances
+chat_service: ChatService = None
+user_repo: IUserRepository = None
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Application lifespan manager - initialize services on startup."""
+    global chat_service, user_repo
+    
+    logger.info("Initializing application...")
+    
+    # Get OpenAI API key
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    if not openai_api_key:
+        logger.error("OPENAI_API_KEY environment variable not set!")
+        raise RuntimeError("OPENAI_API_KEY must be set")
+    
+    # Initialize repositories
+    user_repo = FileUserRepository(data_dir="data/users")
+    conversation_repo = FileConversationRepository(data_dir="data/sessions")
+    
+    # Initialize Regulation RAG client
+    import pathlib
+    backend_dir = pathlib.Path(__file__).parent.absolute()
+    docker_pdf_path = pathlib.Path("/app/gaztorveny.pdf")
+    local_pdf_path = backend_dir.parent / "gaztorveny.pdf"
+    regulation_pdf_path = docker_pdf_path if docker_pdf_path.exists() else local_pdf_path
+
+    regulation_client = RegulationRAGClient(
+        pdf_path=str(regulation_pdf_path),
+        openai_api_key=openai_api_key,
+        persist_directory=str(backend_dir / "data" / "regulation_vectordb")
+    )
+    gas_export_client = GasExportClient()
+
+    # Initialize tools
+    regulation_tool = RegulationTool(regulation_client)
+    gas_export_tool = GasExportTool(gas_export_client)
+
+    # Initialize agent
+    agent = AIAgent(
+        openai_api_key=openai_api_key,
+        regulation_tool=regulation_tool,
+        gas_export_tool=gas_export_tool
+    )
+
+    # Initialize chat service
+    chat_service = ChatService(
+        user_repository=user_repo,
+        conversation_repository=conversation_repo,
+        agent=agent
+    )
+    
+    logger.info("Application initialized successfully")
+    
+    yield
+    
+    logger.info("Application shutting down...")
+
+
+# Create FastAPI app
+app = FastAPI(
+    title="AI Agent Demo (Regulation RAG + Radio tools)",
+    description="LangGraph-based AI Agent with tools and memory, including RAG-based regulation Q&A",
+    version="1.1.0",
+    lifespan=lifespan
 )
 
-# Initialize user profile service
-user_profile_service = UserProfileService()
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://localhost:5173", "http://frontend:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Initialize conversation history service
-conversation_history_service = ConversationHistoryService()
-
-# Initialize LangGraph workflow
-langgraph_workflow = create_langgraph_workflow()
-
-@app.middleware("http")
-async def log_requests(request, call_next):
-    logging.info(f"Incoming request: {request.method} {request.url}")
-    response = await call_next(request)
-    logging.info(f"Response status: {response.status_code}")
-    return response
 
 @app.get("/")
-def read_root():
-    return {"message": "Backend is running!"}
+async def root():
+    """Health check endpoint."""
+    return {"status": "ok", "message": "AI Agent API is running"}
 
-@app.get("/api/profile/{user_id}")
-def get_user_profile(user_id: str):
+
+@app.post("/api/chat", response_model=ChatResponse)
+async def chat(request: ChatRequest):
+    """
+    Process chat message.
+    
+    Handles:
+    - Normal chat messages
+    - Special 'reset context' command
+    - Tool invocations via agent
+    - Memory persistence
+    """
     try:
-        profile = user_profile_service.load_or_create_user_profile(user_id)
-        return profile.dict()
+        logger.info(f"Chat request from user {request.user_id}")
+        response = await chat_service.process_message(request)
+        return response
     except Exception as e:
+        logger.error(f"Chat error: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.put("/api/profile/{user_id}")
-def update_user_profile(user_id: str, updates: dict):
-    try:
-        profile = user_profile_service.update_user_profile(user_id, updates)
-        return profile.dict()
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/session/{session_id}")
-def get_session_history(session_id: str, limit: int = None):
+async def get_session(session_id: str):
+    """Get conversation history for a session."""
     try:
-        messages = conversation_history_service.get_messages(session_id, limit)
-        return {"session_id": session_id, "messages": messages}
+        history = await chat_service.get_session_history(session_id)
+        return history
     except Exception as e:
+        logger.error(f"Get session error: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/api/chat")
-def chat(user_id: str, message: str):
+
+@app.get("/api/profile/{user_id}")
+async def get_profile(user_id: str):
+    """Get user profile."""
     try:
-        if message.strip().lower() == "reset context":
-            # Reset context
-            conversation_history_service.save_session(user_id, {"messages": []})
-            user_profile = user_profile_service.load_or_create_user_profile(user_id)
-            return {
-                "final_answer": "Context has been reset. Your preferences are preserved.",
-                "tools_used": [],
-                "memory_snapshot": {
-                    "preferences": user_profile.dict(),
-                    "workflow_state": {}
-                }
-            }
-        else:
-            # Normal chat flow (to be implemented later)
-            return {"message": "Chat functionality is under construction."}
+        profile = await user_repo.get_profile(user_id)
+        return profile.model_dump(mode='json')
     except Exception as e:
+        logger.error(f"Get profile error: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.put("/api/profile/{user_id}")
+async def update_profile(user_id: str, request: ProfileUpdateRequest):
+    """Update user profile."""
+    try:
+        updates = request.model_dump(exclude_none=True)
+        profile = await user_repo.update_profile(user_id, updates)
+        return profile.model_dump(mode='json')
+    except Exception as e:
+        logger.error(f"Update profile error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/history/search")
+async def search_history(q: str):
+    """Search across all conversation histories."""
+    try:
+        results = await chat_service.search_history(q)
+        return {"results": results, "count": len(results)}
+    except Exception as e:
+        logger.error(f"Search history error: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
