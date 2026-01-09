@@ -1,8 +1,10 @@
+
 # AI Agent Demo - LangGraph + FastAPI + React
 
 A complete working example demonstrating an AI Agent workflow with a Python backend (FastAPI + LangGraph) and React frontend.
 
 - **Regulation Tool**: Provides RAG (Retrieval-Augmented Generation) capabilities for querying regulatory content, currently featuring the 2008. évi LX. Gáztörvény
+- **GasExportTool**: Lets you query exported gas quantities (kWh) for a given point and date range using Transparency.host API
 
 ## 🎯 Overview
 
@@ -18,9 +20,11 @@ The agent uses **LangGraph** for orchestration, **OpenAI** for LLM capabilities,
 
 ## ✨ Key Features
 
+
 ### Agent Capabilities
 - **LangGraph-based orchestration**: Graph of nodes for agent reasoning and tool execution
 - **Regulation RAG**: Query the 2008. évi LX. Gáztörvény using FAISS vector database
+- **Gas Export Tool**: Query exported gas quantities for specific points and date ranges
 - **Memory management**: Maintains user preferences, conversation history, and workflow state
 - **Multi-language support**: Responds in user's preferred language (Hungarian/English)
 
@@ -39,6 +43,7 @@ The agent uses **LangGraph** for orchestration, **OpenAI** for LLM capabilities,
 
 ## 🏛️ Architecture
 
+
 ### Backend Structure
 
 ```
@@ -48,13 +53,75 @@ backend/
 │   └── interfaces.py      # Abstract interfaces (IUserRepository, IToolClient, etc.)
 ├── infrastructure/        # Infrastructure layer - External implementations
 │   ├── repositories.py    # File-based persistence (user profiles, conversations)
-│   └── tool_clients.py    # RegulationRAGClient only
+│   └── tool_clients.py    # Tool API clients (RegulationRAGClient, GasExportClient)
 ├── services/              # Service layer - Business logic
 │   ├── agent.py           # LangGraph agent implementation
-│   ├── tools.py           # RegulationTool only
+│   ├── tools.py           # Tool wrappers (RegulationTool, GasExportTool)
 │   └── chat_service.py    # Chat workflow orchestration
 └── main.py               # API layer - FastAPI endpoints
 ```
+
+
+## 🛠️ Tool Implementations
+
+### RegulationTool
+Provides RAG (Retrieval-Augmented Generation) Q&A for the 2008. évi LX. Gáztörvény. Allows users to ask questions about the regulation, get relevant passages, and receive answers with sources.
+
+**Main actions:**
+- `query`: Ask a question about the regulation
+- `info`: Get metadata about the regulation
+
+**Parameters:**
+- `action`: 'query' or 'info'
+- `question`: The user's question (for 'query')
+- `top_k`: Number of relevant passages to retrieve (default: 5)
+
+**Example output:**
+```
+📚 **Answer from 'gaztorveny':**
+
+A Magyar Energetikai és Közmű-szabályozási Hivatal (MEKH) felhatalmazásai a 2008. évi XL. törvény alapján ...
+
+**Sources:**
+[Page 146]: ...
+[Page 145]: ...
+```
+
+---
+
+### GasExportTool
+Allows querying exported gas quantity (kWh) for a given point and date range using the Transparency.host API.
+
+**Purpose:**
+- Get daily and total exported gas quantities for a specific cross-border point and period.
+
+**Parameters:**
+- `pointLabel` (string, required): Name of the export point (e.g. 'VIP Bereg')
+- `from` or `periodFrom` (string, required): Start date (YYYY-MM-DD)
+- `to` or `periodTo` (string, required): End date (YYYY-MM-DD)
+
+**How it works:**
+- Calls the Transparency.host API for the given point and date range
+- Returns daily values and the total for the period
+
+**Example output:**
+```
+⛽ **Gas Exported Quantity for 'VIP Bereg':**
+
+Period: 2025-12-01 to 2025-12-07
+Total: 12,345,678 kWh
+
+**Details:**
+- Date: 2025-12-01 | Value: 1,234,567 kWh | Indicator: Export | Operator: FGSZ | Status: Confirmed
+- Date: 2025-12-02 | Value: 1,234,567 kWh | Indicator: Export | Operator: FGSZ | Status: Confirmed
+...
+```
+
+**Error handling:**
+- If required parameters are missing, returns an error message
+- If the API call fails, returns the error
+
+---
 
 ### LangGraph Workflow
 
