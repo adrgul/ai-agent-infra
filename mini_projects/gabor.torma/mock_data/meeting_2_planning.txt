@@ -1,0 +1,16 @@
+Meeting Date: 2023-10-27
+Topic: Q3 Roadmap Planning
+Attendees: Sarah (VP Eng), Mike (Product Lead), Jenny (Senior Dev)
+
+Sarah: Let's dive into the Q3 priorities. We have a few big rocks to move. First is the mobile app launch.
+Mike: Agreed. The beta feedback has been promising, but we need to address the push notification reliability. It's the number one complaint.
+Jenny: The notification service infrastructure needs a refactor to handle the scale we're expecting. I estimate that's a 2-week effort for two backend engineers.
+Sarah: Okay, let's resource that. What about the analytics dashboard features?
+Mike: Customers are asking for export capabilities. PDF and CSV.
+Jenny: CSV is straightforward. PDF is trickier with the current charting library. We might need to look into a server-side rendering solution for reports.
+Sarah: Let's prioritize CSV for now as a quick win. We can push PDF to late Q3 or Q4 if it's high effort.
+Mike: Makes sense. Another item is the integration with Slack.
+Sarah: Is that critical for launch?
+Mike: Not critical, but a "nice to have" delighter.
+Jenny: We can probably fit that in during the polish phase if the notification work goes smoothly.
+Sarah: Alright, let's put it as a stretch goal. I'll update the roadmap document.

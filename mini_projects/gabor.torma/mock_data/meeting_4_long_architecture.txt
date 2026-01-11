@@ -1,0 +1,90 @@
+Meeting Date: 2023-11-15
+Topic: Legacy Monolith Migration & Microservices Architecture Review
+Attendees: Sarah (VP Eng), James (Principal Architect), Chen (Lead Backend), Maria (DevOps Lead), David (Product Manager), Alex (Frontend Lead)
+
+Sarah: Alright everyone, let's get started. This is a critical session. We've been talking about decomposing the ' Titan' monolith for six months now. Today, I want to move from high-level "we should do this" to a concrete architectural plan. James, you have the floor.
+
+James: Thanks Sarah. So, as most of you know, Titan is currently a 5GB WAR file running on Tomcat. It takes 40 minutes to deploy. It shares a single massive Oracle database. The coupling is extreme. If we touch the user session logic, we risk breaking the inventory system.
+
+Chen: Tell me about it. Last week's outage was exactly that. A change in the `UserPreferences` class caused a circular dependency in the `OrderProcessing` bean. It took down checkout for 2 hours.
+
+James: Exactly. So, the proposal is to domain-driven design (DDD) our way out of this. I've identified four primary domains to start with: Identity (AuthN/AuthZ), Catalog (Product info), Cart/Checkout, and Order Management.
+
+Maria: Question on the infrastructure side. Are we talking about Kubernetes? Because right now our team is 100% on bare metal and VMs. We'd need significant training or hiring if we go full K8s immediately.
+
+James: That's a good point. I don't want to conflate "microservices" with "Kubernetes" necessarily, but containerization is a must. Whether we use ECS, EKS, or just Docker Compose on VMs for the first phase is up for debate.
+
+Maria: I'd vote for a managed service like ECS or EKS. Managing a control plane ourselves is a nightmare we don't need right now.
+
+Sarah: Let's pin the hosting discussion for a moment. I want to focus on the data. How are we unpicking the database? That's always the hardest part.
+
+Chen: Right. The Oracle DB has 400 tables. There are foreign keys essentially linking everything to everything. The `Users` table is referenced by 150 other tables.
+
+James: My strategy is "Strangler Fig". We don't do a big bang. We carve out the Identity service first. We create a new PostgreSQL database for Identity. We implement a sync mechanism where writes still go to Oracle, but get replicated to Postgres. Once we trust the read path from the new service, we switch the master.
+
+David: From a product perspective, what does this mean for feature velocity? I have a roadmap to deliver. If we spend 6 months just refactoring Auth, the stakeholders will scream.
+
+Sarah: Valid concern, David. The idea is that once a domain is decoupled, feature velocity *increases* for that domain. But yes, there is an initial tax.
+
+David: Can we pick a domain that gives us immediate business value? The Catalog search is slow. Customers complain they can't filter by "availability in store" fast enough.
+
+James: That's a great candidate. The Catalog is mostly read-heavy. We could spin up a Catalog Service backed by Elasticsearch or OpenSearch, fed by an event stream from the monolith. That would solve the performance issue and start the decoupling.
+
+Alex: I like starting with Catalog. The frontend team is rewriting the PLP (Product Listing Page) in Next.js anyway. If we could hit a clean JSON API instead of the old JSP-embedded logic, that would speed us up.
+
+Chen: I agree. Catalog is safer than Checkout to start with. If Catalog is slightly stale, it's annoying. If Checkout fails, we lose money directly.
+
+James: Okay, let's pivot the plan. Phase 1: Catalog Service.
+Architecture:
+- Source of Truth: Still the Oracle Monolith (for now).
+- Sync Mechanism: CDC (Change Data Capture) using Debezium on the Oracle logs, pushing to Kafka.
+- Consumer: New Catalog Service (Go or Java?) consuming Kafka and indexing into Elasticsearch.
+- API: GraphQL gateway in front of it?
+
+Alex: Please GraphQL. The frontend needs to fetch different variations of product data depending on the device context.
+
+Chen: I'm comfortable with Go for the new service. It's fast and the team is eager to learn it.
+
+Maria: Kafka... we don't have a Kafka cluster. That’s another piece of heavy infrastructure.
+
+James: We can use a managed Kafka (Confluent Cloud or MSK). I don't want us managing Zookeeper.
+
+Maria: Okay, if it's managed, I'm okay with it. But we need to cost this out. Data egress fees can be nasty.
+
+Sarah: James, can you sketch up the rough architecture diagram for this "Catalog First" approach and get it to me by Friday? I need to present the budget request next Monday.
+
+James: Will do.
+
+Chen: One detail - what about inventory? Catalog says "this shirt exists", but Inventory says "we have 5 in stock". Is Inventory part of Catalog?
+
+James: Good distinction. Usually, I'd separate them. Catalog is "static" data (titles, descriptions, images). Inventory is highly dynamic. For Phase 1, maybe the Catalog Service just has a "cached" inventory count that is eventually consistent, and the real check happens at "Add to Cart"?
+
+David: That works. We can show "Low Stock" if the cached number is low. We don't need perfect accuracy on the listing page, just on the checkout.
+
+Alex: As long as the API has a field for `inventory_status` I'm happy.
+
+James: Okay. So, action items:
+1. James: Diagram for Catalog-First migration.
+2. Maria: Cost estimate for Managed Kafka and an EKS cluster (small dev/prod envs).
+3. Chen: Audit the `Product` tables in Oracle to see how entangled they are.
+4. David: Define the precise search requirements for the new PLP.
+
+Sarah: Sounds like a plan. Let's aim to have a POC of the CDC pipeline running in 2 weeks.
+
+Chen: That's aggressive. Getting Debezium to talk to our ancient Oracle version might be tricky.
+
+James: I'll help you with that. I've done it before. It involves some specific grants on the transaction logs.
+
+Sarah: Okay, 2 weeks for a "Hello World" POC - just seeing a raw database change appear in a Kafka topic. Not the whole service.
+
+Chen: meaningful knowing nod. Okay, that's doable.
+
+Sarah: Great. Anything else?
+
+David: Just one thing - the holiday freeze is coming up Dec 15th. We can't deploy major infra changes then.
+
+Sarah: Noted. We are in design and POC phase now. Production rollout won't be until Q1.
+
+James: Perfect. Gives us time to get the load testing right.
+
+Sarah: Thanks everyone. Break.

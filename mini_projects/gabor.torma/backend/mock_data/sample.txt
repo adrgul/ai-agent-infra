@@ -1,0 +1,7 @@
+Date: 2024-05-20
+Project Alpha Kickoff.
+Alice: Let's discuss the timeline.
+Bob: We need to deliver by Q4.
+Alice: Agreed. I will assign the tasks.
+Bob: Can you also check the budget?
+Alice: Yes, I will update the sheet today.

@@ -1,0 +1,14 @@
+langgraph
+langchain
+langchain_core
+langchain_openai
+pydantic
+python-dotenv
+fastapi
+uvicorn
+python-multipart
+python-docx
+requests
+chromadb
+langchain-chroma
+langchain-community

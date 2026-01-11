@@ -1,0 +1,11 @@
+Meeting Date: 2023-10-26
+Attendees: Alice (PM), Bob (Frontend), Charlie (Backend)
+
+Alice: Good morning everyone. Let's do a quick round for the standup. Bob, you go first.
+Bob: Morning. Yesterday I finished the user profile component. It's now responsive and matches the Figma designs. Today I'm going to start working on the settings page layout. No blockers.
+Alice: Great. Charlie?
+Charlie: I resolved the database connection timeout issue we were seeing in staging. I also started working on the new API endpoint for user preferences. Today I plan to finish that endpoint and write some unit tests. I might need some clarification on the exact JSON structure we agreed on, I'll ping you Bob.
+Bob: Sure, happy to sync up after this.
+Alice: Perfect. For me, I'll be reviewing the Q4 roadmap drafts and meeting with the design team to finalize the icons. Just a reminder that we have the all-hands meeting tomorrow afternoon.
+Charlie: Sounds good.
+Alice: Okay, thanks everyone!
