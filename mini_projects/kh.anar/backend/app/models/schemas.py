@@ -23,7 +23,9 @@ class DebugInfo(BaseModel):
     user_id: str
     session_id: str
     user_query: str
-    rag_context: List[str]
+    rag_context: List[Any]
+    # Detailed RAG telemetry including run_id, topk, decision, latencies, config snapshot
+    rag_telemetry: Optional[Dict[str, Any]] = None
     final_llm_prompt: str
 
 

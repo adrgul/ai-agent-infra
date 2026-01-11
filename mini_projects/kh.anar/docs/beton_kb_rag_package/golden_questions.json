@@ -1,0 +1,6 @@
+
+[
+  {"question": "Mi a beton legfontosabb tulajdonsága?", "expected_doc": "beton_alapok.pdf"},
+  {"question": "Milyen betonfajták léteznek?", "expected_doc": "beton_tipusok.pdf"},
+  {"question": "Miért fontos az utókezelés?", "expected_doc": "beton_utokezeles.pdf"}
+]

@@ -29,3 +29,12 @@ Minimal LangGraph-orchestrated chat foundation for the AI Internal Knowledge Rou
 ## Development
 - Backend dev server: `uvicorn app.main:app --reload --host 0.0.0.0 --port 8000`
 - Frontend dev server (Vite): `npm install && npm run dev -- --host --port 3000`
+
+## RAG (Hybrid Retrieval) notes
+- Optional dependencies installed via `backend/requirements.txt`: `chromadb`, `rank-bm25`, `sentence-transformers`.
+- Configure via env vars (see `.env.example`):
+  - `CHROMA_DIR` (default `.chroma`), `CHROMA_COLLECTION`, `CHROMA_PERSIST` (true/false)
+  - `RAG_TOP_K`, `RAG_THRESHOLD`, `RAG_W_DENSE`, `RAG_W_SPARSE`
+  - `CHUNK_SIZE`, `CHUNK_OVERLAP`
+- To enable persistent Chroma: set `CHROMA_PERSIST=true` and ensure `CHROMA_DIR` is writable.
+- Tests use a deterministic `HashEmbedder` for quick, reproducible validation (see `rag/embeddings/embedder.py`).

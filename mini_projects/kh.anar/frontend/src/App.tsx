@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import ChatPanel, { ChatMessage } from "./components/ChatPanel";
 import DebugSidebar, { DebugInfo } from "./components/DebugSidebar";
+import AdminPanel from "./components/AdminPanel";
 
 const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
@@ -96,6 +97,10 @@ const App: React.FC = () => {
       </div>
         <div className="uk-width-1-3@m">
           <DebugSidebar debug={debugInfo} />
+          <div className="uk-margin-top">
+            <h4 className="uk-text-bold">Admin</h4>
+            <AdminPanel />
+          </div>
         </div>
       </div>
     </div>

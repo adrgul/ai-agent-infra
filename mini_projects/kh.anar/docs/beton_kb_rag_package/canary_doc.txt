@@ -1,0 +1,2 @@
+EZ_EGY_KANARI_TOKEN_1937
+Ez a dokumentum kizárólag RAG tesztelési célokat szolgál. Ha ez a token megjelenik a válaszban, akkor a KB-alapú retrieval működik.

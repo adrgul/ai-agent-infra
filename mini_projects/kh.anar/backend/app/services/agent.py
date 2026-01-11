@@ -15,12 +15,18 @@ class AgentOrchestrator:
     def __init__(
         self,
         llm_client: LLMClient | None = None,
+        rag_service=None,
     ) -> None:
         self.llm = llm_client or LLMClient()
+        # RAG service is injected to keep OCP/DIP and for easy testing
+        self.rag = rag_service
         graph = StateGraph(AgentState)
+        # KB-first routing: route_query -> build_prompt -> call_llm
+        graph.add_node("route_query", self.route_query)
         graph.add_node("build_prompt", self.build_prompt)
         graph.add_node("call_llm", self.call_llm)
-        graph.set_entry_point("build_prompt")
+        graph.set_entry_point("route_query")
+        graph.add_edge("route_query", "build_prompt")
         graph.add_edge("build_prompt", "call_llm")
         graph.add_edge("call_llm", END)
         self.workflow = graph.compile()
@@ -33,12 +39,33 @@ class AgentOrchestrator:
     async def run(self, initial_state: AgentState) -> AgentState:
         return await self.workflow.ainvoke(initial_state)
 
-    def maybe_search(self, state: AgentState) -> AgentState:
-        allow_search = state.get("enable_search", True)
-        if allow_search and self.search.enabled:
-            state["rag_context"] = self.search.search(state.get("query", ""))
+    def route_query(self, state: AgentState) -> AgentState:
+        """KB-first routing: use the injected RAG service to get context.
+
+        If RAG returns 'no_hit', we leave rag_context empty and annotate the
+        state for potential fallback. This ensures the downstream prompt will
+        be KB-first: it receives context when available and otherwise nothing.
+        """
+        state["rag_context"] = []
+        if not self.rag:
+            # no RAG service injected -> noop
+            return state
+        q = state.get("query", "")
+        # RBAC: if the user has a scope in preferences, pass it as a filter
+        prefs = state.get("request_metadata", {}) or {}
+        access_scope = prefs.get("access_scope") or (state.get("user_preferences", {}).get("access_scope") if state.get("user_preferences") else None)
+        filters = {**(prefs), **({"access_scope": access_scope} if access_scope else {})}
+        # ChromaDB requires None for no filters, not empty dict
+        if not filters:
+            filters = None
+        telemetry = self.rag.route_and_retrieve(q, filters=filters)
+        state["rag_telemetry"] = telemetry
+        if telemetry.get("decision") == "hit":
+            # include topk hits as context for the prompt generation
+            state["rag_context"] = telemetry.get("topk", [])
         else:
-            state["rag_context"] = state.get("rag_context") or []
+            state["rag_context"] = []
+            state["rag_telemetry"]["fallback_reason"] = "no_hit_or_low_confidence"
         return state
 
     def build_prompt(self, state: AgentState) -> AgentState:

@@ -3,10 +3,11 @@ from fastapi import APIRouter, HTTPException
 from ..models.schemas import ChatRequest, ChatResponse, DebugInfo
 from ..services.agent import AgentOrchestrator
 from ..services.storage import FileStorage
+from ..services.rag_instance import rag_service
 
 router = APIRouter()
 storage = FileStorage()
-agent = AgentOrchestrator()
+agent = AgentOrchestrator(rag_service=rag_service)
 
 
 
@@ -25,6 +26,7 @@ async def chat(request: ChatRequest) -> ChatResponse:
             session_id=request.session_id,
             user_query=request.message,
             rag_context=[],
+            rag_telemetry=None,
             final_llm_prompt="reset context invoked - no LLM call",
         )
         return ChatResponse(
@@ -67,9 +69,9 @@ async def chat(request: ChatRequest) -> ChatResponse:
         session_id=request.session_id,
         user_query=request.message,
         rag_context=result_state.get("rag_context", []),
+        rag_telemetry=result_state.get("rag_telemetry", None),
         final_llm_prompt=result_state.get("final_prompt", ""),
     )
-
     return ChatResponse(
         reply=reply,
         user_id=request.user_id,
