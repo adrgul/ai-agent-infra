@@ -71,13 +71,9 @@
         </mxCell>
         
         <!-- Agent Decide No(Updated) -->
+        <!-- Route Decision -->
         <mxCell id="route-decision" value="&lt;b&gt;_route_decision()&lt;/b&gt;&lt;br&gt;agent.py&lt;br&gt;&lt;br&gt;Check iteration_count (&lt; 20)&lt;br&gt;Route to:&lt;br&gt;- tool_* (single tool)&lt;br&gt;- parallel_tool_execution&lt;br&gt;- mcp_tool_execution&lt;br&gt;- agent_finalize" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
           <mxGeometry x="520" y="540" width="220" height="140" as="geometry" />
-        </mxCell>
-        
-        <!-- Route Decision -->
-        <mxCell id="route-decision" value="&lt;b&gt;_route_decision()&lt;/b&gt;&lt;br&gt;agent.py&lt;br&gt;&lt;br&gt;Check iteration_count&lt;br&gt;Route to:&lt;br&gt;- tool_* node, OR&lt;br&gt;- agent_finalize" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="340" y="540" width="200" height="120" as="geometry" />
         </mxCell>
         
         <!-- Arrow: ChatService to RAG -->
@@ -168,11 +164,6 @@
         <!-- PHASE 4: MEMORY(Updated) -->
         <mxCell id="agent-finalize" value="&lt;b&gt;agent_finalize_node()&lt;/b&gt;&lt;br&gt;agent.py&lt;br&gt;&lt;br&gt;Generate final response:&lt;br&gt;- Integrate all tool results&lt;br&gt;- Include RAG citations&lt;br&gt;- Return AIMessage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
           <mxGeometry x="520" y="800" width="220" height="120" as="geometry" />
-        </mxCell>
-        
-        <!-- Arrow: Route to Finalize -->
-        <mxCell id="arrow12" value="final_answer OR&lt;br&gt;iteration &gt;= 20py&lt;br&gt;&lt;br&gt;Generates final response&lt;br&gt;with all tool results&lt;br&gt;integrated" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="340" y="780" width="200" height="100" as="geometry" />
         </mxCell>
         
         <!-- Arrow: Route to Finalize -->

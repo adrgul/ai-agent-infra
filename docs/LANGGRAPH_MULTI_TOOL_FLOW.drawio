@@ -1,276 +1,214 @@
-<mxfile host="app.diagrams.net" modified="2026-01-14T00:00:00.000Z" agent="Draw.io" version="22.1.0">
-  <diagram name="LangGraph Multi-Tool Flow" id="langgraph-flow">
-    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1600" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        
-        <!-- Title -->
-        <mxCell id="title" value="LangGraph Multi-Tool Execution Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="400" y="20" width="600" height="40" as="geometry" />
-        </mxCell>
-        
-        <!-- Legend -->
-        <mxCell id="legend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="40" y="80" width="280" height="200" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-title" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="40" y="85" width="280" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-state" value="AgentState (TypedDict)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="60" y="120" width="240" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-node" value="LangGraph Node (async function)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-          <mxGeometry x="60" y="160" width="240" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-tool" value="Tool Execution" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
-          <mxGeometry x="60" y="200" width="240" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="legend-decision" value="Conditional Edge (routing)" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
-          <mxGeometry x="90" y="235" width="180" height="35" as="geometry" />
-        </mxCell>
-        
-        <!-- State Box (Top) -->
-        <mxCell id="state-box" value="AgentState" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;align=left;verticalAlign=top;" vertex="1" parent="1">
-          <mxGeometry x="400" y="80" width="900" height="200" as="geometry" />
-        </mxCell>
-        <mxCell id="state-content" value="• messages: Sequence[BaseMessage]&#xa;• memory: Memory (chat_history, preferences, workflow_state)&#xa;• tools_called: List[ToolCall] (prevents duplicate calls)&#xa;• current_user_id: str&#xa;• next_action: str (routing decision)&#xa;• tool_decision: Dict[str, Any] (action, tool_name, arguments, reasoning)&#xa;• iteration_count: int (prevents infinite loops, MAX=20)&#xa;• rag_context: Dict (rewritten_query, chunks, citations)&#xa;• deepwiki_tools: List[Dict] (from MCP server)&#xa;• alphavantage_tools: List[Dict] (from MCP server)&#xa;• parallel_tasks: List[Dict] (tools to execute in parallel)&#xa;• parallel_results: List[Dict] (results from parallel execution)&#xa;• request_id: str (for observability/tracing)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontFamily=Courier New;" vertex="1" parent="1">
-          <mxGeometry x="410" y="110" width="880" height="160" as="geometry" />
-        </mxCell>
-        
-        <!-- User Input -->
-        <mxCell id="user-input" value="User Prompt&#xa;&quot;Get weather in Budapest and crypto price for BTC&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="100" y="320" width="200" height="60" as="geometry" />
-        </mxCell>
-        
-        <!-- RAG Pipeline -->
-        <mxCell id="rag-node" value="rag_pipeline&#xa;(RAG Subgraph)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="100" y="420" width="200" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="rag-details" value="• Rewrite query&#xa;• Fetch relevant docs&#xa;• Build citations" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
-          <mxGeometry x="310" y="420" width="150" height="60" as="geometry" />
-        </mxCell>
-        
-        <!-- Fetch AlphaVantage Tools -->
-        <mxCell id="fetch-av-node" value="fetch_alphavantage_tools" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="100" y="520" width="200" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="fetch-av-details" value="• Connect to MCP server&#xa;• List available tools&#xa;• Store in state" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
-          <mxGeometry x="310" y="520" width="150" height="60" as="geometry" />
-        </mxCell>
-        
-        <!-- Fetch DeepWiki Tools -->
-        <mxCell id="fetch-dw-node" value="fetch_deepwiki_tools" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="100" y="620" width="200" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="fetch-dw-details" value="• Connect to MCP server&#xa;• List available tools&#xa;• Store in state" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
-          <mxGeometry x="310" y="620" width="150" height="60" as="geometry" />
-        </mxCell>
-        
-        <!-- Agent Decide Node -->
-        <mxCell id="agent-decide" value="agent_decide&#xa;(LLM Decision)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="100" y="720" width="200" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="agent-decide-details" value="LLM analyzes:&#xa;• User prompt&#xa;• Chat history&#xa;• Available tools (local + MCP)&#xa;• Previous tool results&#xa;&#xa;Returns JSON:&#xa;{&#xa;  &quot;action&quot;: &quot;call_tool&quot; | &quot;final_answer&quot;,&#xa;  &quot;tool_name&quot;: &quot;weather&quot;,&#xa;  &quot;arguments&quot;: {&quot;city&quot;: &quot;Budapest&quot;},&#xa;  &quot;reasoning&quot;: &quot;...&quot;&#xa;}" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Courier New;" vertex="1" parent="1">
-          <mxGeometry x="310" y="720" width="280" height="180" as="geometry" />
-        </mxCell>
-        
-        <!-- Route Decision -->
-        <mxCell id="route-decision" value="Route Decision&#xa;(conditional edge)" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="110" y="840" width="180" height="100" as="geometry" />
-        </mxCell>
-        
-        <!-- Tool Execution Branches -->
-        <mxCell id="tool-weather" value="tool_weather" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="600" y="720" width="140" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tool-crypto" value="tool_crypto_price" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="600" y="790" width="140" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tool-geocode" value="tool_geocode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="600" y="860" width="140" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tool-fx" value="tool_fx_rates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="600" y="930" width="140" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tool-file" value="tool_create_file" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="600" y="1000" width="140" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="tool-history" value="tool_search_history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="600" y="1070" width="140" height="50" as="geometry" />
-        </mxCell>
-        
-        <!-- MCP Tool Execution -->
-        <mxCell id="mcp-tool" value="mcp_tool_execution&#xa;(DeepWiki/AlphaVantage)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="600" y="1140" width="140" height="60" as="geometry" />
-        </mxCell>
-        
-        <!-- Parallel Tool Execution -->
-        <mxCell id="parallel-tool" value="parallel_tool_execution&#xa;(Multiple tools simultaneously)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="600" y="1220" width="180" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="parallel-details" value="Executes multiple tools concurrently:&#xa;• weather + crypto_price&#xa;• geocode + ip_geolocation&#xa;&#xa;Uses asyncio.gather() for efficiency" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
-          <mxGeometry x="790" y="1220" width="250" height="80" as="geometry" />
-        </mxCell>
-        
-        <!-- Tool Results -->
-        <mxCell id="tool-results" value="Tool Results&#xa;(SystemMessage added to state)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
-          <mxGeometry x="600" y="1320" width="180" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="tool-results-details" value="Each tool returns:&#xa;{&#xa;  &quot;success&quot;: true,&#xa;  &quot;data&quot;: {...},&#xa;  &quot;system_message&quot;: &quot;...&quot;&#xa;}&#xa;&#xa;SystemMessage appended to state.messages" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Courier New;" vertex="1" parent="1">
-          <mxGeometry x="790" y="1320" width="280" height="100" as="geometry" />
-        </mxCell>
-        
-        <!-- Loop Back -->
-        <mxCell id="loop-back" value="Loop back to agent_decide&#xa;(multi-step workflow)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="350" y="1340" width="200" height="60" as="geometry" />
-        </mxCell>
-        
-        <!-- Agent Finalize -->
-        <mxCell id="agent-finalize" value="agent_finalize&#xa;(Final Response)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="100" y="1020" width="200" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="finalize-details" value="• Generate final answer&#xa;• Include citations (if RAG)&#xa;• Return AIMessage" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" vertex="1" parent="1">
-          <mxGeometry x="310" y="1020" width="200" height="60" as="geometry" />
-        </mxCell>
-        
-        <!-- END -->
-        <mxCell id="end-node" value="END" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="140" y="1120" width="120" height="60" as="geometry" />
-        </mxCell>
-        
-        <!-- Edges -->
-        <!-- User to RAG -->
-        <mxCell id="edge1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="1" source="user-input" target="rag-node">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- RAG to Fetch AV -->
-        <mxCell id="edge2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="1" source="rag-node" target="fetch-av-node">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Fetch AV to Fetch DW -->
-        <mxCell id="edge3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="1" source="fetch-av-node" target="fetch-dw-node">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Fetch DW to Agent Decide -->
-        <mxCell id="edge4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="1" source="fetch-dw-node" target="agent-decide">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Agent Decide to Route -->
-        <mxCell id="edge5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="1" source="agent-decide" target="route-decision">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Route to Tools -->
-        <mxCell id="edge6" value="action=call_tool" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;fontSize=9;strokeColor=#82b366;" edge="1" parent="1" source="route-decision" target="tool-weather">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="route-decision" target="tool-crypto">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="route-decision" target="tool-geocode">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="route-decision" target="tool-fx">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="route-decision" target="tool-file">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="route-decision" target="tool-history">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" edge="1" parent="1" source="route-decision" target="mcp-tool">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge13" value="multiple tools" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=classic;endFill=1;strokeColor=#b85450;fontSize=9;" edge="1" parent="1" source="route-decision" target="parallel-tool">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Tools to Results -->
-        <mxCell id="edge14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="tool-weather" target="tool-results">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="tool-crypto" target="tool-results">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="tool-geocode" target="tool-results">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="tool-fx" target="tool-results">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="tool-file" target="tool-results">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="tool-history" target="tool-results">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" edge="1" parent="1" source="mcp-tool" target="tool-results">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="edge21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#b85450;" edge="1" parent="1" source="parallel-tool" target="tool-results">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Results to Loop -->
-        <mxCell id="edge22" value="iteration_count &lt; MAX_ITERATIONS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#d79b00;fontSize=9;" edge="1" parent="1" source="tool-results" target="loop-back">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Loop to Agent Decide -->
-        <mxCell id="edge23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#d79b00;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="loop-back" target="agent-decide">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="450" y="760" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="450" y="1370" />
-              <mxPoint x="450" y="760" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        
-        <!-- Route to Finalize -->
-        <mxCell id="edge24" value="action=final_answer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;fontSize=9;strokeColor=#6c8ebf;" edge="1" parent="1" source="route-decision" target="agent-finalize">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Finalize to END -->
-        <mxCell id="edge25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" edge="1" parent="1" source="agent-finalize" target="end-node">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        
-        <!-- Example Flow Annotation -->
-        <mxCell id="example-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="900" y="720" width="400" height="280" as="geometry" />
-        </mxCell>
-        <mxCell id="example-title" value="Example: Multi-Tool Request" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="900" y="725" width="400" height="25" as="geometry" />
-        </mxCell>
-        <mxCell id="example-content" value="User: &quot;Get weather in Budapest and BTC price&quot;&#xa;&#xa;Flow:&#xa;1. RAG pipeline: Rewrite query, fetch context&#xa;2. Fetch tools: AlphaVantage + DeepWiki MCP servers&#xa;3. Agent decide: Identify need for weather + crypto tools&#xa;4. Routing: action=&quot;parallel_tool_execution&quot;&#xa;5. Parallel execution:&#xa;   - Execute weather(city=&quot;Budapest&quot;) &#xa;   - Execute crypto_price(symbol=&quot;BTC&quot;)&#xa;   - Both run concurrently via asyncio.gather()&#xa;6. Tool results: SystemMessages added to state&#xa;7. Loop back: Agent decide with new context&#xa;8. Agent decide: All data collected, action=&quot;final_answer&quot;&#xa;9. Finalize: Generate response with citations&#xa;10. END: Return AIMessage to user&#xa;&#xa;State updates throughout:&#xa;• tools_called: [weather, crypto_price] (prevents re-call)&#xa;• iteration_count: 0 → 1 → 2&#xa;• messages: [HumanMessage, SystemMessage, SystemMessage, AIMessage]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontFamily=Courier New;" vertex="1" parent="1">
-          <mxGeometry x="910" y="755" width="380" height="235" as="geometry" />
-        </mxCell>
-        
-        <!-- Key Features Box -->
-        <mxCell id="features-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="900" y="1020" width="400" height="200" as="geometry" />
-        </mxCell>
-        <mxCell id="features-title" value="Key Features" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" vertex="1" parent="1">
-          <mxGeometry x="900" y="1025" width="400" height="25" as="geometry" />
-        </mxCell>
-        <mxCell id="features-content" value="✓ RAG Integration: Query rewriting + document retrieval&#xa;✓ MCP Tool Discovery: Dynamic tool fetching from servers&#xa;✓ Parallel Execution: Multiple tools run concurrently&#xa;✓ Loop Prevention: MAX_ITERATIONS = 20&#xa;✓ Duplicate Detection: tools_called tracks usage&#xa;✓ Observability: request_id for tracing&#xa;✓ Conditional Routing: Smart decision based on context&#xa;✓ State Management: TypedDict ensures type safety&#xa;✓ Memory: Chat history + preferences + workflow state&#xa;✓ Tool Variety: Local (7) + MCP (DeepWiki, AlphaVantage)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="910" y="1055" width="380" height="155" as="geometry" />
-        </mxCell>
-        
-        <!-- State Flow Annotation -->
-        <mxCell id="state-flow" value="State flows through all nodes ↓" style="text;html=1;strokeColor=none;fillColor=#fff2cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=2;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="40" y="380" width="200" height="30" as="geometry" />
-        </mxCell>
-        
-      </root>
-    </mxGraphModel>
-  </diagram>
+<mxfile host="65bd71144e">
+    <diagram name="LangGraph Multi-Tool Flow" id="langgraph-flow">
+        <mxGraphModel dx="670" dy="388" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1600" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="title" value="LangGraph Multi-Tool Execution Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=24;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="400" y="20" width="600" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="80" width="280" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-title" value="Legend" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=16;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="40" y="85" width="280" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-state" value="AgentState (TypedDict)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="120" width="240" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-node" value="LangGraph Node (async function)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="160" width="240" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-tool" value="Tool Execution" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
+                    <mxGeometry x="60" y="200" width="240" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="legend-decision" value="Conditional Edge (routing)" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+                    <mxGeometry x="90" y="235" width="180" height="35" as="geometry"/>
+                </mxCell>
+                <mxCell id="state-box" value="AgentState" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;align=left;verticalAlign=top;" parent="1" vertex="1">
+                    <mxGeometry x="400" y="80" width="900" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="state-content" value="• messages: Sequence[BaseMessage]&#xa;• memory: Memory (chat_history, preferences, workflow_state)&#xa;• tools_called: List[ToolCall] (prevents duplicate calls)&#xa;• current_user_id: str&#xa;• next_action: str (routing decision)&#xa;• tool_decision: Dict[str, Any] (action, tool_name, arguments, reasoning)&#xa;• iteration_count: int (prevents infinite loops, MAX=20)&#xa;• rag_context: Dict (rewritten_query, chunks, citations)&#xa;• deepwiki_tools: List[Dict] (from MCP server)&#xa;• alphavantage_tools: List[Dict] (from MCP server)&#xa;• parallel_tasks: List[Dict] (tools to execute in parallel)&#xa;• parallel_results: List[Dict] (results from parallel execution)&#xa;• request_id: str (for observability/tracing)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontFamily=Courier New;" parent="1" vertex="1">
+                    <mxGeometry x="410" y="110" width="880" height="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="user-input" value="User Prompt&#xa;&quot;Get weather in Budapest and crypto price for BTC&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="100" y="320" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="rag-node" value="rag_pipeline&#xa;(RAG Subgraph)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="420" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="rag-details" value="• Rewrite query&#xa;• Fetch relevant docs&#xa;• Build citations" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="420" width="150" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="fetch-av-node" value="fetch_alphavantage_tools" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="520" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="fetch-av-details" value="• Connect to MCP server&#xa;• List available tools&#xa;• Store in state" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="520" width="150" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="fetch-dw-node" value="fetch_deepwiki_tools" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" parent="1" vertex="1">
+                    <mxGeometry x="100" y="620" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="fetch-dw-details" value="• Connect to MCP server&#xa;• List available tools&#xa;• Store in state" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="620" width="150" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="agent-decide" value="agent_decide&#xa;(LLM Decision)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="100" y="720" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="agent-decide-details" value="LLM analyzes:&#xa;• User prompt&#xa;• Chat history&#xa;• Available tools (local + MCP)&#xa;• Previous tool results&#xa;&#xa;Returns JSON:&#xa;{&#xa;  &quot;action&quot;: &quot;call_tool&quot; | &quot;final_answer&quot;,&#xa;  &quot;tool_name&quot;: &quot;weather&quot;,&#xa;  &quot;arguments&quot;: {&quot;city&quot;: &quot;Budapest&quot;},&#xa;  &quot;reasoning&quot;: &quot;...&quot;&#xa;}" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Courier New;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="720" width="280" height="180" as="geometry"/>
+                </mxCell>
+                <mxCell id="route-decision" value="Route Decision&#xa;(conditional edge)" style="shape=rhombus;perimeter=rhombusPerimeter;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="110" y="840" width="180" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="tool-weather" value="tool_weather" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="720" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="tool-crypto" value="tool_crypto_price" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="790" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="tool-geocode" value="tool_geocode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="860" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="tool-fx" value="tool_fx_rates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="930" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="tool-file" value="tool_create_file" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="1000" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="tool-history" value="tool_search_history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="1070" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="mcp-tool" value="mcp_tool_execution&#xa;(DeepWiki/AlphaVantage)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="1140" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="parallel-tool" value="parallel_tool_execution&#xa;(Multiple tools simultaneously)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="440" y="1060" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="parallel-details" value="Executes multiple tools concurrently:&#xa;• weather + crypto_price&#xa;• geocode + ip_geolocation&#xa;&#xa;Uses asyncio.gather() for efficiency" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="790" y="1220" width="250" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="tool-results" value="Tool Results&#xa;(SystemMessage added to state)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="1320" width="180" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="tool-results-details" value="Each tool returns:&#xa;{&#xa;  &quot;success&quot;: true,&#xa;  &quot;data&quot;: {...},&#xa;  &quot;system_message&quot;: &quot;...&quot;&#xa;}&#xa;&#xa;SystemMessage appended to state.messages" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;fontFamily=Courier New;" parent="1" vertex="1">
+                    <mxGeometry x="790" y="1320" width="280" height="100" as="geometry"/>
+                </mxCell>
+                <mxCell id="loop-back" value="Loop back to agent_decide&#xa;(multi-step workflow)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="1340" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="agent-finalize" value="agent_finalize&#xa;(Final Response)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="100" y="1020" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="finalize-details" value="• Generate final answer&#xa;• Include citations (if RAG)&#xa;• Return AIMessage" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=9;" parent="1" vertex="1">
+                    <mxGeometry x="310" y="1020" width="200" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="end-node" value="END" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="140" y="1120" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" parent="1" source="user-input" target="rag-node" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" parent="1" source="rag-node" target="fetch-av-node" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" parent="1" source="fetch-av-node" target="fetch-dw-node" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" parent="1" source="fetch-dw-node" target="agent-decide" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" parent="1" source="agent-decide" target="route-decision" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge6" value="action=call_tool" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;fontSize=9;strokeColor=#82b366;" parent="1" source="route-decision" target="tool-weather" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" parent="1" source="route-decision" target="tool-crypto" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" parent="1" source="route-decision" target="tool-geocode" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" parent="1" source="route-decision" target="tool-fx" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" parent="1" source="route-decision" target="tool-file" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge11" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" parent="1" source="route-decision" target="tool-history" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge12" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#82b366;" parent="1" source="route-decision" target="mcp-tool" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge13" value="multiple tools" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=3;endArrow=classic;endFill=1;strokeColor=#b85450;fontSize=9;" parent="1" source="route-decision" target="parallel-tool" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" parent="1" source="tool-weather" target="tool-results" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" parent="1" source="tool-crypto" target="tool-results" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" parent="1" source="tool-geocode" target="tool-results" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" parent="1" source="tool-fx" target="tool-results" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" parent="1" source="tool-file" target="tool-results" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" parent="1" source="tool-history" target="tool-results" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;endArrow=classic;endFill=1;dashed=1;" parent="1" source="mcp-tool" target="tool-results" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#b85450;" parent="1" source="parallel-tool" target="tool-results" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge22" value="iteration_count &lt; MAX_ITERATIONS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#d79b00;fontSize=9;" parent="1" source="tool-results" target="loop-back" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;strokeColor=#d79b00;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="loop-back" target="agent-decide" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="450" y="760" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="450" y="1370"/>
+                            <mxPoint x="450" y="760"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="edge24" value="action=final_answer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;fontSize=9;strokeColor=#6c8ebf;" parent="1" source="route-decision" target="agent-finalize" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="edge25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;endArrow=classic;endFill=1;" parent="1" source="agent-finalize" target="end-node" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="example-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="720" width="400" height="280" as="geometry"/>
+                </mxCell>
+                <mxCell id="example-title" value="Example: Multi-Tool Request" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="900" y="725" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="example-content" value="User: &quot;Get weather in Budapest and BTC price&quot;&#xa;&#xa;Flow:&#xa;1. RAG pipeline: Rewrite query, fetch context&#xa;2. Fetch tools: AlphaVantage + DeepWiki MCP servers&#xa;3. Agent decide: Identify need for weather + crypto tools&#xa;4. Routing: action=&quot;parallel_tool_execution&quot;&#xa;5. Parallel execution:&#xa;   - Execute weather(city=&quot;Budapest&quot;) &#xa;   - Execute crypto_price(symbol=&quot;BTC&quot;)&#xa;   - Both run concurrently via asyncio.gather()&#xa;6. Tool results: SystemMessages added to state&#xa;7. Loop back: Agent decide with new context&#xa;8. Agent decide: All data collected, action=&quot;final_answer&quot;&#xa;9. Finalize: Generate response with citations&#xa;10. END: Return AIMessage to user&#xa;&#xa;State updates throughout:&#xa;• tools_called: [weather, crypto_price] (prevents re-call)&#xa;• iteration_count: 0 → 1 → 2&#xa;• messages: [HumanMessage, SystemMessage, SystemMessage, AIMessage]" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;fontFamily=Courier New;" parent="1" vertex="1">
+                    <mxGeometry x="910" y="755" width="380" height="235" as="geometry"/>
+                </mxCell>
+                <mxCell id="features-box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="900" y="1020" width="400" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="features-title" value="Key Features" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=14;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="900" y="1025" width="400" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="features-content" value="✓ RAG Integration: Query rewriting + document retrieval&#xa;✓ MCP Tool Discovery: Dynamic tool fetching from servers&#xa;✓ Parallel Execution: Multiple tools run concurrently&#xa;✓ Loop Prevention: MAX_ITERATIONS = 20&#xa;✓ Duplicate Detection: tools_called tracks usage&#xa;✓ Observability: request_id for tracing&#xa;✓ Conditional Routing: Smart decision based on context&#xa;✓ State Management: TypedDict ensures type safety&#xa;✓ Memory: Chat history + preferences + workflow state&#xa;✓ Tool Variety: Local (7) + MCP (DeepWiki, AlphaVantage)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=10;" parent="1" vertex="1">
+                    <mxGeometry x="910" y="1055" width="380" height="155" as="geometry"/>
+                </mxCell>
+                <mxCell id="state-flow" value="State flows through all nodes ↓" style="text;html=1;strokeColor=none;fillColor=#fff2cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=11;fontStyle=2;strokeColor=#d6b656;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="380" width="200" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
 </mxfile>
