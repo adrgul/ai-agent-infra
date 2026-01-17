@@ -105,35 +105,63 @@ class AgentGraphFactory:
         # Conditional routing after triage
         def route_after_triage(state: AgentState) -> Literal["retrieval", "reasoning", "summary"]:
             """
-            BAD PRACTICE: Ignoring classification - always go to retrieval.
-            This ensures ALL nodes run for EVERY request, regardless of actual need.
+            GOOD PRACTICE: Intelligent routing based on classification.
             
-            Original logic was:
-            - simple: go directly to summary
-            - retrieval: do retrieval first
-            - complex: do reasoning first
+            This workflow optimization dramatically reduces costs:
+            - simple: skip retrieval and reasoning, go straight to summary
+            - retrieval: do retrieval, skip reasoning, then summary
+            - complex: do retrieval and reasoning, then summary
             
-            Now: ALWAYS start with retrieval, then reasoning will run, then summary.
+            Graph-level caching opportunity:
+            LangGraph supports graph-level persistence/checkpointing which could
+            cache entire workflow executions. This would be configured via
+            MemorySaver or SqliteSaver when compiling the graph.
+            Example: app = workflow.compile(checkpointer=MemorySaver())
             """
             classification = state.get("classification")
-            logger.info(f"Routing decision (ignored): {classification} - ALWAYS routing to retrieval")
+            logger.info(f"Routing based on classification: {classification}")
             
-            # BAD PRACTICE: Always route to retrieval to ensure all nodes execute
-            return "retrieval"
+            # GOOD PRACTICE: Route intelligently to skip unnecessary nodes
+            if classification == "simple":
+                # Simple queries: skip all intermediate steps
+                return "summary"
+            elif classification == "retrieval":
+                # Retrieval queries: get context, then summarize
+                return "retrieval"
+            else:  # complex
+                # Complex queries: full pipeline with retrieval and reasoning
+                return "retrieval"
         
         workflow.add_conditional_edges(
             "triage",
             route_after_triage,
             {
                 "retrieval": "retrieval",
-                "reasoning": "retrieval",  # BAD PRACTICE: Changed to always go to retrieval
-                "summary": "retrieval"     # BAD PRACTICE: Changed to always go to retrieval
+                "reasoning": "retrieval",
+                "summary": "summary"
             }
         )
         
-        # BAD PRACTICE: Chain all nodes together - retrieval → reasoning → summary
-        # This ensures EVERY node runs for EVERY request
-        workflow.add_edge("retrieval", "reasoning")
+        # GOOD PRACTICE: Conditional routing after retrieval
+        def route_after_retrieval(state: AgentState) -> Literal["reasoning", "summary"]:
+            """
+            Route to reasoning only for complex queries, otherwise summarize.
+            """
+            classification = state.get("classification")
+            if classification == "complex":
+                return "reasoning"
+            return "summary"
+        
+        workflow.add_conditional_edges(
+            "retrieval",
+            route_after_retrieval,
+            {
+                "reasoning": "reasoning",
+                "summary": "summary"
+            }
+        )
+        
+        # Reasoning always goes to summary
         workflow.add_edge("reasoning", "summary")
         
         # Summary is the final node

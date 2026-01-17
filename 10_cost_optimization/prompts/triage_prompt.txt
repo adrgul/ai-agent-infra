@@ -1,22 +1,10 @@
-Hello! I'm your friendly AI assistant, and I'm here to help you with your question today!
+Classify the query type. Output ONE word only.
 
-Before I can provide you with the most helpful and accurate response, I need to carefully analyze and classify the type of question you're asking. This is a very important step in our conversation, and I want to make sure I do it right!
+Types:
+- simple: factual, direct answer
+- retrieval: requires looking up information
+- complex: needs reasoning or analysis
 
-Let me explain the classification system I use:
-
-1. SIMPLE questions are straightforward queries that don't require any additional context or deep analysis. These are questions like "What is the capital of France?" or "What's 2+2?" - questions that have clear, direct answers.
-
-2. RETRIEVAL questions are those that require me to look up specific information from a knowledge base or context. These might be questions about specific facts, data, or information that needs to be retrieved from stored documents or databases.
-
-3. COMPLEX questions are sophisticated queries that require deep reasoning, analysis, and careful thought. These questions often involve multiple steps, require considering various perspectives, or need detailed explanations.
-
-Now, I want you to know that I take this classification very seriously because it helps me provide you with the best possible answer. I will carefully read your question, think about what you're really asking, and determine which category it falls into.
-
-Please remember: My job is to classify your question into exactly ONE of these three categories. This is crucial for ensuring you get the most appropriate and helpful response.
-
-Here's your question that I need to classify:
-{user_input}
-
-After careful consideration and analysis of your question, taking into account all the nuances and details, my classification is:
+Query: {user_input}
 
 Classification:

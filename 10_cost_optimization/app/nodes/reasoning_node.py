@@ -44,19 +44,23 @@ class ReasoningNode:
         """Execute reasoning node."""
         logger.info(f"Executing {self.NODE_NAME} node")
         
-        # BAD PRACTICE: Always run reasoning, even for simple queries
-        # Removed: if state.get("classification") != "complex": return {}
+        # GOOD PRACTICE: Only run expensive reasoning for complex queries
+        if state.get("classification") != "complex":
+            logger.info("Skipping reasoning - not a complex query")
+            return {
+                "nodes_executed": state.get("nodes_executed", []) + [f"{self.NODE_NAME}_skipped"],
+            }
         
         async with async_timer() as timer_ctx:
             # Build detailed reasoning prompt
             prompt = self._build_prompt(state["user_input"], state.get("retrieval_context"))
             
             try:
-                # BAD PRACTICE: Unnecessarily high max_tokens
+                # GOOD PRACTICE: Reasonable max_tokens for complex reasoning
                 response = await self.llm_client.complete(
                     prompt=prompt,
                     model=self.model_name,
-                    max_tokens=3000,  # Wastefully high
+                    max_tokens=1000,  # Sufficient for most complex queries
                     temperature=0.3  # Lower for more focused reasoning
                 )
                 
@@ -115,16 +119,21 @@ class ReasoningNode:
         
         Note: This is longer than triage prompt, justifying the expensive model.
         """
-        prompt = f"""You are an expert analyst. Provide a thorough, well-reasoned response to the following complex question.
-
-Use step-by-step reasoning and consider multiple perspectives.
+        # Load optimized prompt template
+        try:
+            with open("prompts/reasoning_prompt.txt", "r") as f:
+                template = f.read()
+            
+            context_str = f"\n\nContext:\n{context}" if context else ""
+            return template.replace("{user_input}", user_input) \
+                          .replace("{context}", context_str)
+        except FileNotFoundError:
+            # Fallback to inline prompt
+            prompt = f"""Analyze this complex question using step-by-step reasoning.
 
 Question: {user_input}
 """
-        
-        if context:
-            prompt += f"\nContext:\n{context}\n"
-        
-        prompt += "\nDetailed Analysis:"
-        
-        return prompt
+            if context:
+                prompt += f"\nContext:\n{context}\n"
+            prompt += "\nAnalysis:"
+            return prompt

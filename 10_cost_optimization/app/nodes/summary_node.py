@@ -39,8 +39,8 @@ class SummaryNode:
         self.llm_client = llm_client
         self.cost_tracker = cost_tracker
         self.model_selector = model_selector
-        # BAD PRACTICE: Using expensive model for summary instead of medium
-        self.model_name = model_selector.get_model_name(ModelTier.EXPENSIVE)
+        # GOOD PRACTICE: Use medium model for summary - balance quality and cost
+        self.model_name = model_selector.get_model_name(ModelTier.MEDIUM)
     
     async def execute(self, state: AgentState) -> Dict:
         """Execute summary node."""
@@ -51,11 +51,11 @@ class SummaryNode:
             prompt = self._build_prompt(state)
             
             try:
-                # BAD PRACTICE: Unnecessarily high max_tokens for summary
+                # GOOD PRACTICE: Reasonable max_tokens for concise summary
                 response = await self.llm_client.complete(
                     prompt=prompt,
                     model=self.model_name,
-                    max_tokens=2000,  # Wastefully high for summary
+                    max_tokens=500,  # Enough for quality summary
                     temperature=0.5  # Balanced creativity
                 )
                 
@@ -113,17 +113,25 @@ class SummaryNode:
         Build summary prompt from available state.
         
         Optimization: Keep prompt concise but informative.
-        """
-        prompt = f"Provide a clear, concise answer to the following question.\n\nQuestion: {state['user_input']}\n"
-        
-        # Include retrieval context if available
-        if state.get("retrieval_context"):
-            prompt += f"\nRelevant Information:\n{state['retrieval_context']}\n"
-        
-        # Include reasoning if available
-        if state.get("reasoning_output"):
-            prompt += f"\nAnalysis:\n{state['reasoning_output']}\n"
-        
-        prompt += "\nAnswer:"
-        
-        return prompt
+        ""
+        # Load optimized prompt template
+        try:
+            with open("prompts/summary_prompt.txt", "r") as f:
+                template = f.read()
+            
+            # Build context strings
+            retrieval_ctx = f"\n\nRelevant Information:\n{state['retrieval_context']}" if state.get("retrieval_context") else ""
+            reasoning_out = f"\n\nAnalysis:\n{state['reasoning_output']}" if state.get("reasoning_output") else ""
+            
+            return template.replace("{user_input}", state['user_input']) \
+                          .replace("{retrieval_context}", retrieval_ctx) \
+                          .replace("{reasoning_output}", reasoning_out)
+        except FileNotFoundError:
+            # Fallback to inline prompt
+            prompt = f"Provide a clear, concise answer.\n\nQuestion: {state['user_input']}\n"
+            if state.get("retrieval_context"):
+                prompt += f"\nRelevant Information:\n{state['retrieval_context']}\n"
+            if state.get("reasoning_output"):
+                prompt += f"\nAnalysis:\n{state['reasoning_output']}\n"
+            prompt += "\nAnswer:"
+            return prompt

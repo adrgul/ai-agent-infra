@@ -53,8 +53,8 @@ class TriageNode:
         self.cost_tracker = cost_tracker
         self.model_selector = model_selector
         self.cache = cache
-        # BAD PRACTICE: Using expensive model for simple classification task
-        self.model_name = model_selector.get_model_name(ModelTier.EXPENSIVE)
+        # GOOD PRACTICE: Use cheapest model for simple classification
+        self.model_name = model_selector.get_model_name(ModelTier.CHEAP)
     
     async def execute(self, state: AgentState) -> Dict:
         """
@@ -70,9 +70,9 @@ class TriageNode:
             # Check cache first
             cache_key = generate_cache_key(self.NODE_NAME, state["user_input"])
             
-            # BAD PRACTICE: Caching disabled - every request hits the LLM
+            # GOOD PRACTICE: Enable node-level caching for triage
             cache_lookup_start = time.time()
-            cached_result = None  # Force cache miss
+            cached_result = await self.cache.get(cache_key)
             cache_lookup_time = time.time() - cache_lookup_start
             
             if cached_result is not None:
@@ -101,11 +101,11 @@ class TriageNode:
                 
                 # Call LLM
                 try:
-                    # BAD PRACTICE: Unnecessarily high max_tokens for simple classification
+                    # GOOD PRACTICE: Strict max_tokens limit for one-word classification
                     response = await self.llm_client.complete(
                         prompt=prompt,
                         model=self.model_name,
-                        max_tokens=2000,  # Wastefully high for one-word answer
+                        max_tokens=10,  # Only need one word
                         temperature=0.0  # Deterministic
                     )
                     
@@ -143,8 +143,8 @@ class TriageNode:
                         status="success"
                     )
                     
-                    # BAD PRACTICE: Caching disabled - don't save results
-                    # await self.cache.set(cache_key, classification)
+                    # GOOD PRACTICE: Cache triage results for repeated queries
+                    await self.cache.set(cache_key, classification)
                     
                 except Exception as e:
                     logger.error(f"Error in {self.NODE_NAME}: {e}")
@@ -178,7 +178,19 @@ class TriageNode:
         
         Cost optimization: Very short prompt to minimize input tokens.
         """
-        return f"""Classify query type. Answer with ONE word only: simple, retrieval, or complex.
+        # Load optimized prompt from file
+        try:
+            with open("prompts/triage_prompt.txt", "r") as f:
+                template = f.read()
+            return template.replace("{user_input}", user_input)
+        except FileNotFoundError:
+            # Fallback to inline prompt
+            return f"""Classify query type. Output ONE word only.
+
+Types:
+- simple: factual, direct answer
+- retrieval: requires looking up information
+- complex: needs reasoning or analysis
 
 Query: {user_input}
 
