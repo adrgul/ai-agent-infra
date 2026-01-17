@@ -113,7 +113,7 @@ class SummaryNode:
         Build summary prompt from available state.
         
         Optimization: Keep prompt concise but informative.
-        ""
+        """
         # Load optimized prompt template
         try:
             with open("prompts/summary_prompt.txt", "r") as f:
