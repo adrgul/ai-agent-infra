@@ -62,16 +62,15 @@ class RetrievalNode:
         self.cost_tracker = cost_tracker
         self.model_selector = model_selector
         self.embedding_cache = embedding_cache
-        self.model_name = model_selector.get_model_name(ModelTier.CHEAP)
+        # BAD PRACTICE: Using expensive model for retrieval
+        self.model_name = model_selector.get_model_name(ModelTier.EXPENSIVE)
     
     async def execute(self, state: AgentState) -> Dict:
         """Execute retrieval node."""
         logger.info(f"Executing {self.NODE_NAME} node")
         
-        # Only run if classification is 'retrieval'
-        if state.get("classification") != "retrieval":
-            logger.info(f"Skipping {self.NODE_NAME} - classification is {state.get('classification')}")
-            return {}
+        # BAD PRACTICE: Always run retrieval, even when not needed
+        # Removed: if state.get("classification") != "retrieval": return {}
         
         async with async_timer() as timer_ctx:
             # Get query embedding (cached)
@@ -112,8 +111,9 @@ class RetrievalNode:
         """
         cache_key = generate_cache_key(self.CACHE_NAME, text)
         
+        # BAD PRACTICE: Embedding cache disabled
         cache_lookup_start = time.time()
-        cached_embedding = await self.embedding_cache.get(cache_key)
+        cached_embedding = None  # Force cache miss
         cache_lookup_time = time.time() - cache_lookup_start
         
         if cached_embedding is not None:
@@ -138,8 +138,8 @@ class RetrievalNode:
         # Simulate embedding as deterministic hash
         embedding = hashlib.sha256(text.encode()).hexdigest()
         
-        # Cache it
-        await self.embedding_cache.set(cache_key, embedding)
+        # BAD PRACTICE: Don't cache embeddings
+        # await self.embedding_cache.set(cache_key, embedding)
         
         return embedding
     

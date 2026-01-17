@@ -105,34 +105,35 @@ class AgentGraphFactory:
         # Conditional routing after triage
         def route_after_triage(state: AgentState) -> Literal["retrieval", "reasoning", "summary"]:
             """
-            Route based on classification.
+            BAD PRACTICE: Ignoring classification - always go to retrieval.
+            This ensures ALL nodes run for EVERY request, regardless of actual need.
             
+            Original logic was:
             - simple: go directly to summary
             - retrieval: do retrieval first
             - complex: do reasoning first
+            
+            Now: ALWAYS start with retrieval, then reasoning will run, then summary.
             """
             classification = state.get("classification")
-            logger.info(f"Routing decision: {classification}")
+            logger.info(f"Routing decision (ignored): {classification} - ALWAYS routing to retrieval")
             
-            if classification == "simple":
-                return "summary"
-            elif classification == "retrieval":
-                return "retrieval"
-            else:  # complex
-                return "reasoning"
+            # BAD PRACTICE: Always route to retrieval to ensure all nodes execute
+            return "retrieval"
         
         workflow.add_conditional_edges(
             "triage",
             route_after_triage,
             {
                 "retrieval": "retrieval",
-                "reasoning": "reasoning",
-                "summary": "summary"
+                "reasoning": "retrieval",  # BAD PRACTICE: Changed to always go to retrieval
+                "summary": "retrieval"     # BAD PRACTICE: Changed to always go to retrieval
             }
         )
         
-        # Both retrieval and reasoning lead to summary
-        workflow.add_edge("retrieval", "summary")
+        # BAD PRACTICE: Chain all nodes together - retrieval → reasoning → summary
+        # This ensures EVERY node runs for EVERY request
+        workflow.add_edge("retrieval", "reasoning")
         workflow.add_edge("reasoning", "summary")
         
         # Summary is the final node

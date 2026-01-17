@@ -44,21 +44,19 @@ class ReasoningNode:
         """Execute reasoning node."""
         logger.info(f"Executing {self.NODE_NAME} node")
         
-        # Only run if classification is 'complex'
-        if state.get("classification") != "complex":
-            logger.info(f"Skipping {self.NODE_NAME} - classification is {state.get('classification')}")
-            return {}
+        # BAD PRACTICE: Always run reasoning, even for simple queries
+        # Removed: if state.get("classification") != "complex": return {}
         
         async with async_timer() as timer_ctx:
             # Build detailed reasoning prompt
             prompt = self._build_prompt(state["user_input"], state.get("retrieval_context"))
             
             try:
-                # Call expensive model with higher max_tokens
+                # BAD PRACTICE: Unnecessarily high max_tokens
                 response = await self.llm_client.complete(
                     prompt=prompt,
                     model=self.model_name,
-                    max_tokens=1000,  # Much higher than cheap model
+                    max_tokens=3000,  # Wastefully high
                     temperature=0.3  # Lower for more focused reasoning
                 )
                 

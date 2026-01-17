@@ -53,7 +53,8 @@ class TriageNode:
         self.cost_tracker = cost_tracker
         self.model_selector = model_selector
         self.cache = cache
-        self.model_name = model_selector.get_model_name(ModelTier.CHEAP)
+        # BAD PRACTICE: Using expensive model for simple classification task
+        self.model_name = model_selector.get_model_name(ModelTier.EXPENSIVE)
     
     async def execute(self, state: AgentState) -> Dict:
         """
@@ -69,8 +70,9 @@ class TriageNode:
             # Check cache first
             cache_key = generate_cache_key(self.NODE_NAME, state["user_input"])
             
+            # BAD PRACTICE: Caching disabled - every request hits the LLM
             cache_lookup_start = time.time()
-            cached_result = await self.cache.get(cache_key)
+            cached_result = None  # Force cache miss
             cache_lookup_time = time.time() - cache_lookup_start
             
             if cached_result is not None:
@@ -99,10 +101,11 @@ class TriageNode:
                 
                 # Call LLM
                 try:
+                    # BAD PRACTICE: Unnecessarily high max_tokens for simple classification
                     response = await self.llm_client.complete(
                         prompt=prompt,
                         model=self.model_name,
-                        max_tokens=20,  # Very low - just need one word
+                        max_tokens=2000,  # Wastefully high for one-word answer
                         temperature=0.0  # Deterministic
                     )
                     
@@ -140,8 +143,8 @@ class TriageNode:
                         status="success"
                     )
                     
-                    # Cache result
-                    await self.cache.set(cache_key, classification)
+                    # BAD PRACTICE: Caching disabled - don't save results
+                    # await self.cache.set(cache_key, classification)
                     
                 except Exception as e:
                     logger.error(f"Error in {self.NODE_NAME}: {e}")

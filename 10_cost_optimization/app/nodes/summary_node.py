@@ -39,7 +39,8 @@ class SummaryNode:
         self.llm_client = llm_client
         self.cost_tracker = cost_tracker
         self.model_selector = model_selector
-        self.model_name = model_selector.get_model_name(ModelTier.MEDIUM)
+        # BAD PRACTICE: Using expensive model for summary instead of medium
+        self.model_name = model_selector.get_model_name(ModelTier.EXPENSIVE)
     
     async def execute(self, state: AgentState) -> Dict:
         """Execute summary node."""
@@ -50,11 +51,11 @@ class SummaryNode:
             prompt = self._build_prompt(state)
             
             try:
-                # Call medium model with controlled max_tokens
+                # BAD PRACTICE: Unnecessarily high max_tokens for summary
                 response = await self.llm_client.complete(
                     prompt=prompt,
                     model=self.model_name,
-                    max_tokens=300,  # Moderate limit for summary
+                    max_tokens=2000,  # Wastefully high for summary
                     temperature=0.5  # Balanced creativity
                 )
                 

@@ -451,7 +451,142 @@ uvicorn app.main:app --reload
    - Use LangGraph checkpointing
    - Show graph-level caching benefits
 
-## 🐛 Troubleshooting
+## � Bad Version – What NOT to Do
+
+> **⚠️ WARNING**: The `bad-version` branch contains intentionally inefficient code for teaching purposes. **DO NOT use in production!**
+
+### Viewing the Bad Version
+
+```bash
+git checkout bad-version
+docker compose up --build
+# Then run test queries and observe Grafana
+```
+
+### What's Wrong with the Bad Version?
+
+The `bad-version` branch demonstrates common anti-patterns that cause **excessive costs and poor performance**:
+
+#### 1. **Verbose, Wasteful Prompts**
+- ❌ Long, friendly, narrative prompts with repeated instructions
+- ❌ Explains the same rules in every single node
+- ❌ No token budget constraints
+
+**Impact**: 
+- Input tokens increase 5-10x per request
+- Higher `llm_cost_total_usd` for no quality gain
+- Metrics show: high `llm_input_tokens_total`
+
+#### 2. **Wrong Model Selection**
+- ❌ Uses expensive model (GPT-4) for EVERYTHING
+- ❌ Classification uses expensive model (should be cheap)
+- ❌ Summary uses expensive model (should be medium)
+- ❌ No model routing or tiering strategy
+
+**Impact**:
+- Cost per request increases 10-20x
+- `llm_inference_count` shows all calls use expensive model
+- No cost savings from simple queries
+
+#### 3. **Caching Completely Disabled**
+- ❌ Node cache disabled (every query hits LLM)
+- ❌ Embedding cache disabled (recompute every time)
+- ❌ Results never reused
+
+**Impact**:
+- `cache_hit_total` remains at 0 (flat line in Grafana)
+- Duplicate queries cost the same as first query
+- Linear cost scaling with request volume
+
+#### 4. **All Nodes Run for Every Request**
+- ❌ Triage result is ignored
+- ❌ Simple queries run retrieval + reasoning + summary
+- ❌ No conditional routing
+
+**Impact**:
+- `nodes_executed` shows 4 nodes for all queries (should be 2-3)
+- `llm_inference_count` is 4x higher than necessary
+- p95 latency increases 3-5x
+
+#### 5. **Unnecessarily High `max_tokens`**
+- ❌ Triage: 2000 tokens (needs ~10)
+- ❌ Reasoning: 3000 tokens (was 1000)
+- ❌ Summary: 2000 tokens (was 300)
+
+**Impact**:
+- `llm_output_tokens_total` spikes unnecessarily
+- Output token costs dominate (often 2x input cost)
+- Slower response times (generating unused tokens)
+
+### Expected Metrics (Bad Version vs Good Version)
+
+| Metric | Good Version | Bad Version | Factor |
+|--------|--------------|-------------|--------|
+| **Cost per simple query** | $0.0015 | $0.025 | **16x higher** |
+| **LLM calls per query** | 2-3 | 4 | **2x higher** |
+| **Cache hit rate** | 40-60% | 0% | **No caching** |
+| **p95 latency** | 1.2s | 4-6s | **4x slower** |
+| **Input tokens** | 150-300 | 800-1500 | **5x higher** |
+| **Output tokens** | 100-200 | 1500-3000 | **10x higher** |
+
+### What the Grafana Dashboard Reveals
+
+When running the bad version, you'll see:
+
+1. **llm_cost_total_usd** - Steep upward curve (even for simple queries)
+2. **cache_hit_total** - Flat at zero (no cache utilization)
+3. **llm_inference_count** by model - All requests use expensive model
+4. **nodes_executed** - Always 4 nodes (triage + retrieval + reasoning + summary)
+5. **p95_latency** - Much higher than good version
+6. **llm_output_tokens_total** - Wastefully high due to excessive `max_tokens`
+
+### Why This Would Be Unacceptable in Production
+
+1. **Financial Impact**:
+   - With 10,000 queries/day: ~$250/day vs $15/day (good version)
+   - Monthly cost: **$7,500** vs **$450**
+   - Annual waste: **$84,600**
+
+2. **Performance Degradation**:
+   - Users experience 4-6s response times
+   - Poor UX leads to abandonment
+   - Cannot scale to high traffic
+
+3. **Resource Waste**:
+   - Generates tokens that are never read
+   - Computes embeddings repeatedly
+   - Executes unnecessary reasoning
+
+4. **Technical Debt**:
+   - No caching infrastructure used
+   - Routing logic broken/ignored
+   - Prompt engineering neglected
+
+### Key Lessons
+
+✅ **DO**: 
+- Use the cheapest model that meets quality requirements
+- Cache aggressively (node results, embeddings, classifications)
+- Constrain `max_tokens` based on actual needs
+- Route queries intelligently (don't run unnecessary nodes)
+- Keep prompts minimal and focused
+
+❌ **DON'T**:
+- Use expensive models for simple tasks
+- Write verbose prompts with repeated instructions
+- Ignore caching opportunities
+- Execute all nodes regardless of query type
+- Set `max_tokens` higher than necessary
+
+### Returning to Good Version
+
+```bash
+git checkout main
+docker compose down
+docker compose up --build
+```
+
+## �🐛 Troubleshooting
 
 ### Services won't start
 
