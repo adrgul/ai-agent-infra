@@ -103,7 +103,7 @@ class AgentGraphFactory:
         workflow.set_entry_point("triage")
         
         # Conditional routing after triage
-        def route_after_triage(state: AgentState) -> Literal["retrieval", "reasoning", "summary"]:
+        def route_after_triage(state: AgentState) -> Literal["retrieval", "summary"]:
             """
             GOOD PRACTICE: Intelligent routing based on classification.
             
@@ -137,7 +137,6 @@ class AgentGraphFactory:
             route_after_triage,
             {
                 "retrieval": "retrieval",
-                "reasoning": "retrieval",
                 "summary": "summary"
             }
         )
