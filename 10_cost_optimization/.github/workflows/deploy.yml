@@ -69,14 +69,31 @@ jobs:
 
       - name: Terraform Init
         working-directory: ${{ env.TERRAFORM_DIR }}
-        run: terraform init
+        run: terraform init -reconfigure
+
+      - name: Import Existing Resources (if any)
+        working-directory: ${{ env.TERRAFORM_DIR }}
+        run: |
+          chmod +x import_resources.sh
+          ./import_resources.sh || echo "Some imports failed, continuing with plan..."
+        continue-on-error: true
+
+      - name: Terraform Refresh
+        working-directory: ${{ env.TERRAFORM_DIR }}
+        run: terraform refresh
+        env:
+          TF_VAR_openai_api_key: ${{ secrets.OPENAI_API_KEY }}
 
       - name: Terraform Plan
         working-directory: ${{ env.TERRAFORM_DIR }}
+        env:
+          TF_VAR_openai_api_key: ${{ secrets.OPENAI_API_KEY }}
         run: terraform plan -out=tfplan
 
       - name: Terraform Apply
         working-directory: ${{ env.TERRAFORM_DIR }}
+        env:
+          TF_VAR_openai_api_key: ${{ secrets.OPENAI_API_KEY }}
         run: terraform apply -auto-approve tfplan
 
       - name: Login to Amazon ECR
@@ -99,41 +116,16 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
-      - name: Update ECS Service with new image
-        env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
+      - name: Force ECS Service Deployment
         run: |
-          # Get current task definition
-          TASK_DEFINITION=$(aws ecs describe-task-definition \
-            --task-definition ai-agent-tutorial-task \
-            --query 'taskDefinition' \
-            --region $AWS_REGION)
-          
-          # Update image in task definition
-          NEW_TASK_DEF=$(echo $TASK_DEFINITION | jq --arg IMAGE "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" \
-            '.containerDefinitions[0].image = $IMAGE | 
-             del(.taskDefinitionArn, .revision, .status, .requiresAttributes, .compatibilities, .registeredAt, .registeredBy)')
-          
-          # Register new task definition with OPENAI_API_KEY
-          NEW_TASK_DEF_WITH_SECRET=$(echo $NEW_TASK_DEF | jq --arg KEY "${{ secrets.OPENAI_API_KEY }}" \
-            '.containerDefinitions[0].environment += [{"name": "OPENAI_API_KEY", "value": $KEY}]')
-          
-          # Register new task definition
-          NEW_REVISION=$(echo $NEW_TASK_DEF_WITH_SECRET | \
-            aws ecs register-task-definition \
-              --cli-input-json file:///dev/stdin \
-              --region $AWS_REGION \
-              --query 'taskDefinition.revision' \
-              --output text)
-          
-          # Update ECS service to use new task definition
+          # Simply force a new deployment - Terraform already created task definition with OPENAI_API_KEY
           aws ecs update-service \
             --cluster $ECS_CLUSTER \
             --service $ECS_SERVICE \
-            --task-definition ai-agent-tutorial-task:$NEW_REVISION \
             --force-new-deployment \
             --region $AWS_REGION
+          
+          echo "✅ Triggered ECS service deployment"
 
       - name: Wait for deployment to complete
         run: |

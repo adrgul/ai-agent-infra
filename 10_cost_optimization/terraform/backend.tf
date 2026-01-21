@@ -1,10 +1,6 @@
 # Terraform Remote Backend Configuration
 # Stores state in S3 with DynamoDB locking
 # Note: This backend configuration references resources created by main.tf
-# 
-# Terraform Remote Backend Configuration
-# Stores state in S3 with DynamoDB locking
-# Note: This backend configuration references resources created by main.tf
 
 terraform {
   backend "s3" {

@@ -26,7 +26,7 @@ variable "project_name" {
 variable "state_bucket_name" {
   description = "Name of the S3 bucket for Terraform state storage"
   type        = string
-  default     = "terraform-state-ai-agent-tutorial"
+  default     = "terraform-state-021580456215-ai-agent-infra"
 
   validation {
     condition     = can(regex("^[a-z0-9][a-z0-9-]*[a-z0-9]$", var.state_bucket_name))
@@ -110,4 +110,12 @@ variable "ecs_desired_count" {
   description = "Desired number of ECS tasks"
   type        = number
   default     = 1
+}
+
+# OpenAI API Key - passed via environment variable TF_VAR_openai_api_key
+variable "openai_api_key" {
+  description = "OpenAI API key for the application"
+  type        = string
+  sensitive   = true
+  default     = ""
 }

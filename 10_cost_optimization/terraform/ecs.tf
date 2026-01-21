@@ -164,11 +164,14 @@ resource "aws_ecs_task_definition" "app" {
         {
           name  = "ENVIRONMENT"
           value = var.environment
+        },
+        {
+          name  = "OPENAI_API_KEY"
+          value = var.openai_api_key
         }
       ]
 
-      # OpenAI API key will be passed via GitHub Actions during deployment
-      # Format: { "name": "OPENAI_API_KEY", "value": "sk-..." }
+      # OpenAI API key now passed via Terraform variable from GitHub Actions
 
       logConfiguration = {
         logDriver = "awslogs"
