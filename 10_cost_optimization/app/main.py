@@ -139,6 +139,15 @@ class RunResponse(BaseModel):
 # ENDPOINTS
 # ============================================================================
 
+@app.get("/health")
+async def health_check():
+    """
+    Health check endpoint for ALB/ECS health checks.
+    Returns 200 OK if the service is running.
+    """
+    return {"status": "healthy", "service": "ai-agent-api"}
+
+
 @app.get("/healthz")
 async def healthz():
     """Health check endpoint."""
