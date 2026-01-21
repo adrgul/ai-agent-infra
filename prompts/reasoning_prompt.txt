@@ -1,0 +1,5 @@
+Analyze this complex question using step-by-step reasoning.
+
+Question: {user_input}
+{context}
+Analysis:

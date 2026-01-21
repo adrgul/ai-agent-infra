@@ -1,0 +1,10 @@
+Classify the query type. Output ONE word only.
+
+Types:
+- simple: factual, direct answer
+- retrieval: requires looking up information
+- complex: needs reasoning or analysis
+
+Query: {user_input}
+
+Classification:

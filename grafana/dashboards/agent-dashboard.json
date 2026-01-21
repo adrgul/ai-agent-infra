@@ -1,0 +1,242 @@
+{
+  "title": "AI Agent Cost & Performance Dashboard",
+  "tags": ["agent", "cost", "llm", "performance"],
+  "timezone": "browser",
+  "schemaVersion": 16,
+  "version": 0,
+  "refresh": "10s",
+  "panels": [
+      {
+        "id": 1,
+        "title": "LLM Inference Latency (p50/p95) by Model",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(llm_inference_latency_seconds_bucket[5m])) by (le, model))",
+            "legendFormat": "{{model}} p95",
+            "refId": "A"
+          },
+          {
+            "expr": "histogram_quantile(0.50, sum(rate(llm_inference_latency_seconds_bucket[5m])) by (le, model))",
+            "legendFormat": "{{model}} p50",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {"format": "s", "label": "Latency"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Total Cost by Model (Last 1h)",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+        "targets": [
+          {
+            "expr": "sum(increase(llm_cost_total_usd_total[1h])) by (model)",
+            "legendFormat": "{{model}}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {"format": "currencyUSD", "label": "Cost", "decimals": 6},
+          {"format": "short"}
+        ],
+        "nullPointMode": "connected"
+      },
+      {
+        "id": 3,
+        "title": "Cache Hit Ratio (Triage Node)",
+        "type": "singlestat",
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 8},
+        "targets": [
+          {
+            "expr": "(sum(rate(cache_hit_total{cache=\"node_cache\"}[5m])) / (sum(rate(cache_hit_total{cache=\"node_cache\"}[5m])) + sum(rate(cache_miss_total{cache=\"node_cache\"}[5m])) + 0.0001)) or vector(0)",
+            "refId": "A"
+          }
+        ],
+        "format": "percentunit",
+        "sparkline": {"show": true},
+        "valueName": "current",
+        "nullPointMode": "connected"
+      },
+      {
+        "id": 4,
+        "title": "Agent Execution Latency (p95)",
+        "type": "singlestat",
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 8},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(increase(agent_execution_latency_seconds_bucket[1h])) by (le)) or (agent_execution_latency_seconds_sum / agent_execution_latency_seconds_count)",
+            "refId": "A"
+          }
+        ],
+        "format": "s",
+        "sparkline": {"show": true},
+        "valueName": "current",
+        "nullPointMode": "connected"
+      },
+      {
+        "id": 5,
+        "title": "Total Agent Executions",
+        "type": "singlestat",
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 8},
+        "targets": [
+          {
+            "expr": "sum(increase(agent_execution_count_total[1h]))",
+            "refId": "A"
+          }
+        ],
+        "format": "short",
+        "sparkline": {"show": true}
+      },
+      {
+        "id": 6,
+        "title": "Total Cost (Last 1h)",
+        "type": "singlestat",
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 8},
+        "targets": [
+          {
+            "expr": "sum(increase(llm_cost_total_usd_total[1h]))",
+            "refId": "A"
+          }
+        ],
+        "valueName": "current",
+        "decimals": 6,
+        "format": "currencyUSD",
+        "sparkline": {"show": true},
+        "valueFontSize": "120%"
+      },
+      {
+        "id": 7,
+        "title": "Node Execution Latency (p95)",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(node_execution_latency_seconds_bucket[5m])) by (le, node))",
+            "legendFormat": "{{node}}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {"format": "s", "label": "Latency"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 8,
+        "title": "Error Rate by Node",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+        "targets": [
+          {
+            "expr": "sum(rate(agent_error_count_total[5m])) by (node, error_type)",
+            "legendFormat": "{{node}} - {{error_type}}",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {"format": "short", "label": "Errors/sec"},
+          {"format": "short"}
+        ],
+        "alert": {
+          "conditions": [
+            {
+              "evaluator": {"params": [0.1], "type": "gt"},
+              "operator": {"type": "and"},
+              "query": {"params": ["A", "5m", "now"]},
+              "reducer": {"params": [], "type": "avg"},
+              "type": "query"
+            }
+          ],
+          "name": "High Error Rate"
+        }
+      },
+      {
+        "id": 9,
+        "title": "Token Usage by Model",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 20},
+        "targets": [
+          {
+            "expr": "sum(rate(llm_inference_token_input_total[5m])) by (model)",
+            "legendFormat": "{{model}} input",
+            "refId": "A"
+          },
+          {
+            "expr": "sum(rate(llm_inference_token_output_total[5m])) by (model)",
+            "legendFormat": "{{model}} output",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {"format": "short", "label": "Tokens/sec"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 10,
+        "title": "Cache Performance",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 20},
+        "targets": [
+          {
+            "expr": "sum(rate(cache_hit_total[5m])) by (cache, node)",
+            "legendFormat": "{{cache}} - {{node}} hits",
+            "refId": "A"
+          },
+          {
+            "expr": "sum(rate(cache_miss_total[5m])) by (cache, node)",
+            "legendFormat": "{{cache}} - {{node}} misses",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {"format": "short", "label": "Operations/sec"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 11,
+        "title": "RAG Metrics - Documents Retrieved",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 28},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(rag_docs_returned_bucket[5m])) by (le))",
+            "legendFormat": "p95 docs returned",
+            "refId": "A"
+          },
+          {
+            "expr": "histogram_quantile(0.50, sum(rate(rag_docs_returned_bucket[5m])) by (le))",
+            "legendFormat": "p50 docs returned",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {"format": "short", "label": "Document Count"},
+          {"format": "short"}
+        ]
+      },
+      {
+        "id": 12,
+        "title": "HTTP Request Latency",
+        "type": "graph",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 28},
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, sum(rate(http_request_latency_seconds_bucket[5m])) by (le, path))",
+            "legendFormat": "{{path}} p95",
+            "refId": "A"
+          }
+        ],
+        "yaxes": [
+          {"format": "s", "label": "Latency"},
+          {"format": "short"}
+        ]
+      }
+    ]
+  }
