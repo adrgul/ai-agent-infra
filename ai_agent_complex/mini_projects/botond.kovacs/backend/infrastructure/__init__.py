@@ -1,3 +1,0 @@
-"""
-Infrastructure package - External implementations.
-"""

@@ -1,3 +1,0 @@
-# FAQ
-- Hol a KB? /kb
-- Security ticket: security@...

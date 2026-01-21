@@ -1,1 +1,0 @@
-"""Application package for homework-01."""
