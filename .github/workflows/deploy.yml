@@ -11,15 +11,60 @@ env:
   ECS_CLUSTER: ai-agent-tutorial-cluster
   ECS_SERVICE: ai-agent-tutorial-service
   TERRAFORM_DIR: terraform
+  TERRAFORM_BOOTSTRAP_DIR: terraform-bootstrap
 
 permissions:
   id-token: write  # Required for OIDC authentication
   contents: read
 
 jobs:
+  bootstrap-state:
+    name: Bootstrap Terraform Remote State Backend
+    runs-on: ubuntu-latest
+    # Only run on manual workflow dispatch
+    if: github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::021580456215:role/terraform-github-deployer
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+
+      - name: Terraform Init (Bootstrap)
+        working-directory: ${{ env.TERRAFORM_BOOTSTRAP_DIR }}
+        run: terraform init
+
+      - name: Terraform Plan (Bootstrap)
+        working-directory: ${{ env.TERRAFORM_BOOTSTRAP_DIR }}
+        run: terraform plan
+
+      - name: Terraform Apply (Bootstrap)
+        working-directory: ${{ env.TERRAFORM_BOOTSTRAP_DIR }}
+        run: terraform apply -auto-approve
+
+      - name: Bootstrap Complete
+        run: |
+          echo "✅ Remote state backend infrastructure created successfully!"
+          echo "📦 S3 Bucket: terraform-state-021580456215-ai-agent-infra"
+          echo "🔒 DynamoDB Table: terraform-state-lock"
+          echo ""
+          echo "You can now run the main deployment workflow."
+
   build-and-deploy:
     name: Build & Deploy to AWS
     runs-on: ubuntu-latest
+    # Run after bootstrap completes (on workflow_dispatch) or directly on push to main
+    needs: [bootstrap-state]
+    if: always() && (needs.bootstrap-state.result == 'success' || needs.bootstrap-state.result == 'skipped')
 
     steps:
       - name: Checkout code
@@ -52,6 +97,29 @@ jobs:
           echo ""
           echo "=== backend.tf content ==="
           head -n 20 backend.tf || true
+
+      - name: Safety Check - Verify Remote State Backend Exists
+        run: |
+          echo "🔍 Checking if remote state backend infrastructure exists..."
+          if aws s3api head-bucket --bucket terraform-state-021580456215-ai-agent-infra 2>/dev/null; then
+            echo "✅ S3 bucket exists"
+          else
+            echo "❌ ERROR: S3 bucket 'terraform-state-021580456215-ai-agent-infra' does not exist!"
+            echo ""
+            echo "Please run the bootstrap job first:"
+            echo "1. Go to Actions tab"
+            echo "2. Select 'Deploy AI Agent to AWS ECS' workflow"
+            echo "3. Click 'Run workflow'"
+            echo "4. This will create the S3 bucket and DynamoDB table for remote state"
+            exit 1
+          fi
+          
+          if aws dynamodb describe-table --table-name terraform-state-lock --region eu-central-1 2>/dev/null; then
+            echo "✅ DynamoDB table exists"
+          else
+            echo "⚠️  WARNING: DynamoDB table 'terraform-state-lock' does not exist!"
+            echo "State locking will not work. Please run the bootstrap job."
+          fi
 
       - name: Terraform Init
         working-directory: ${{ env.TERRAFORM_DIR }}
