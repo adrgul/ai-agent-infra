@@ -1,8 +1,0 @@
-# Database tárolás a data/ mappában
-# MEGJEGYZÉS: Az oktatási verzióban a data/ mappa NEM van .gitignore-ban,
-# hogy a seed adatok Git-ben maradjanak és a diákok is megkapják őket.
-
-# Ha NEM akarod, hogy a data/ Git-ben legyen, add hozzá ezt a sort a .gitignore-hoz:
-# data/
-
-# Jelenleg: data/ mappát commitálhatod seed adatokkal
