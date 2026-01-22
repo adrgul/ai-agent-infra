@@ -82,34 +82,9 @@ resource "aws_subnet" "private_2" {
 }
 
 # -----------------------------------------------------------------------------
-# Elastic IP for NAT Gateway (single NAT for cost optimization)
+# NAT Gateway removed for teaching/demo app simplicity
+# ECS tasks run in public subnets with public IPs (simpler, cheaper)
 # -----------------------------------------------------------------------------
-
-resource "aws_eip" "nat" {
-  domain = "vpc"
-
-  tags = {
-    Name = "${var.project_name}-nat-eip"
-  }
-
-  depends_on = [aws_internet_gateway.main]
-}
-
-# -----------------------------------------------------------------------------
-# NAT Gateway (single NAT for cost optimization)
-# Both private subnets route through this single NAT Gateway
-# -----------------------------------------------------------------------------
-
-resource "aws_nat_gateway" "nat" {
-  allocation_id = aws_eip.nat.id
-  subnet_id     = aws_subnet.public_1.id
-
-  tags = {
-    Name = "${var.project_name}-nat-gw"
-  }
-
-  depends_on = [aws_internet_gateway.main]
-}
 
 # -----------------------------------------------------------------------------
 # Route Tables
@@ -129,19 +104,8 @@ resource "aws_route_table" "public" {
   }
 }
 
-# Private route table (shared by both private subnets)
-resource "aws_route_table" "private" {
-  vpc_id = aws_vpc.main.id
-
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat.id
-  }
-
-  tags = {
-    Name = "${var.project_name}-private-rt"
-  }
-}
+# Private subnets use public route table (no NAT Gateway for demo app)
+# This allows ECS tasks to get public IPs and access internet directly
 
 # -----------------------------------------------------------------------------
 # Route Table Associations
@@ -157,14 +121,15 @@ resource "aws_route_table_association" "public_2" {
   route_table_id = aws_route_table.public.id
 }
 
+# Private subnets also route through Internet Gateway for demo simplicity
 resource "aws_route_table_association" "private_1" {
   subnet_id      = aws_subnet.private_1.id
-  route_table_id = aws_route_table.private.id
+  route_table_id = aws_route_table.public.id
 }
 
 resource "aws_route_table_association" "private_2" {
   subnet_id      = aws_subnet.private_2.id
-  route_table_id = aws_route_table.private.id
+  route_table_id = aws_route_table.public.id
 }
 
 # -----------------------------------------------------------------------------

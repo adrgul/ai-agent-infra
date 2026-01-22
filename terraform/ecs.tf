@@ -285,7 +285,7 @@ resource "aws_ecs_service" "app" {
   network_configuration {
     subnets          = [aws_subnet.private_1.id, aws_subnet.private_2.id]
     security_groups  = [aws_security_group.ecs_tasks.id]
-    assign_public_ip = false
+    assign_public_ip = true  # Required since we removed NAT Gateway for demo simplicity
   }
 
   load_balancer {

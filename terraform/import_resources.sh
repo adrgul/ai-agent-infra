@@ -6,15 +6,9 @@ set -e
 
 echo "🔄 Importing existing AWS resources into Terraform state..."
 
+# NOTE: S3 bucket and DynamoDB table are managed by terraform-bootstrap, not imported here
+
 # Import resources one by one, ignoring errors if already imported
-terraform import -input=false aws_s3_bucket.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
-terraform import -input=false aws_s3_bucket_versioning.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
-terraform import -input=false aws_s3_bucket_server_side_encryption_configuration.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
-terraform import -input=false aws_s3_bucket_public_access_block.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
-terraform import -input=false aws_s3_bucket_logging.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
-
-terraform import -input=false aws_dynamodb_table.terraform_locks terraform-state-lock 2>&1 | grep -v "already managed" || true
-
 terraform import -input=false aws_ecr_repository.app ai-agent-app 2>&1 | grep -v "already managed" || true
 
 terraform import -input=false aws_cloudwatch_log_group.app /ecs/ai-agent-tutorial/app 2>&1 | grep -v "already managed" || true
