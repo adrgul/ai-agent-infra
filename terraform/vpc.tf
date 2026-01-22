@@ -82,50 +82,30 @@ resource "aws_subnet" "private_2" {
 }
 
 # -----------------------------------------------------------------------------
-# Elastic IPs for NAT Gateways
+# Elastic IP for NAT Gateway (single NAT for cost optimization)
 # -----------------------------------------------------------------------------
 
-resource "aws_eip" "nat_1" {
+resource "aws_eip" "nat" {
   domain = "vpc"
 
   tags = {
-    Name = "${var.project_name}-nat-eip-1"
-  }
-
-  depends_on = [aws_internet_gateway.main]
-}
-
-resource "aws_eip" "nat_2" {
-  domain = "vpc"
-
-  tags = {
-    Name = "${var.project_name}-nat-eip-2"
+    Name = "${var.project_name}-nat-eip"
   }
 
   depends_on = [aws_internet_gateway.main]
 }
 
 # -----------------------------------------------------------------------------
-# NAT Gateways (for private subnet internet access)
+# NAT Gateway (single NAT for cost optimization)
+# Both private subnets route through this single NAT Gateway
 # -----------------------------------------------------------------------------
 
-resource "aws_nat_gateway" "nat_1" {
-  allocation_id = aws_eip.nat_1.id
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat.id
   subnet_id     = aws_subnet.public_1.id
 
   tags = {
-    Name = "${var.project_name}-nat-gw-1"
-  }
-
-  depends_on = [aws_internet_gateway.main]
-}
-
-resource "aws_nat_gateway" "nat_2" {
-  allocation_id = aws_eip.nat_2.id
-  subnet_id     = aws_subnet.public_2.id
-
-  tags = {
-    Name = "${var.project_name}-nat-gw-2"
+    Name = "${var.project_name}-nat-gw"
   }
 
   depends_on = [aws_internet_gateway.main]
@@ -149,31 +129,17 @@ resource "aws_route_table" "public" {
   }
 }
 
-# Private route table 1
-resource "aws_route_table" "private_1" {
+# Private route table (shared by both private subnets)
+resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
 
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat_1.id
+    nat_gateway_id = aws_nat_gateway.nat.id
   }
 
   tags = {
-    Name = "${var.project_name}-private-rt-1"
-  }
-}
-
-# Private route table 2
-resource "aws_route_table" "private_2" {
-  vpc_id = aws_vpc.main.id
-
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.nat_2.id
-  }
-
-  tags = {
-    Name = "${var.project_name}-private-rt-2"
+    Name = "${var.project_name}-private-rt"
   }
 }
 
@@ -193,12 +159,12 @@ resource "aws_route_table_association" "public_2" {
 
 resource "aws_route_table_association" "private_1" {
   subnet_id      = aws_subnet.private_1.id
-  route_table_id = aws_route_table.private_1.id
+  route_table_id = aws_route_table.private.id
 }
 
 resource "aws_route_table_association" "private_2" {
   subnet_id      = aws_subnet.private_2.id
-  route_table_id = aws_route_table.private_2.id
+  route_table_id = aws_route_table.private.id
 }
 
 # -----------------------------------------------------------------------------
