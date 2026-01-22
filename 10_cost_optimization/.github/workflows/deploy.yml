@@ -32,7 +32,7 @@ jobs:
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::021580456215:role/terraform-github-deployer
+          role-to-assume: arn:aws:iam::168250216705:role/terraform-github-deployer
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Check if S3 backend exists
@@ -84,7 +84,7 @@ jobs:
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::021580456215:role/terraform-github-deployer
+          role-to-assume: arn:aws:iam::168250216705:role/terraform-github-deployer
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to Amazon ECR
