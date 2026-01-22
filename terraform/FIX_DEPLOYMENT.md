@@ -104,7 +104,7 @@ git push origin main
 
 Check if bucket name in backend.tf matches terraform.tfvars:
 ```bash
-# Should both show: terraform-state-adriangulyas-ai-agent
+# Should both show: terraform-state-021580456215-ai-agent-infra
 grep bucket backend.tf
 grep state_bucket_name terraform.tfvars
 ```

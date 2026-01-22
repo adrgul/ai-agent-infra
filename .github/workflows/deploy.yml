@@ -38,9 +38,17 @@ jobs:
         with:
           terraform_version: 1.6.0
 
-      - name: Terraform Init (Local State)
+      - name: Debug - Verify No Old Backend References
         working-directory: ${{ env.TERRAFORM_DIR }}
-        run: terraform init
+        run: |
+          echo "=== Checking for old bucket references ==="
+          grep -R "terraform-state-adriangulyas-ai-agent" -n . || true
+          echo "=== backend.tf content ==="
+          cat backend.tf
+
+      - name: Terraform Init (Local State - no backend)
+        working-directory: ${{ env.TERRAFORM_DIR }}
+        run: terraform init -backend=false
 
       - name: Terraform Apply (Create State Resources)
         working-directory: ${{ env.TERRAFORM_DIR }}
@@ -67,9 +75,32 @@ jobs:
         with:
           terraform_version: 1.6.0
 
+      - name: Debug - Verify AWS Identity
+        run: |
+          echo "=== AWS Caller Identity ==="
+          aws sts get-caller-identity
+
+      - name: Debug - Check Terraform Backend Configuration
+        working-directory: ${{ env.TERRAFORM_DIR }}
+        run: |
+          echo "=== Checking for old bucket references ==="
+          grep -R "terraform-state-adriangulyas-ai-agent" -n . || true
+          echo ""
+          echo "=== Terraform files that mention terraform-state ==="
+          grep -R "terraform-state" -n . || true
+          echo ""
+          echo "=== backend.tf content ==="
+          head -n 20 backend.tf || true
+
       - name: Terraform Init
         working-directory: ${{ env.TERRAFORM_DIR }}
-        run: terraform init -reconfigure
+        run: |
+          terraform init -reconfigure \
+            -backend-config="bucket=terraform-state-021580456215-ai-agent-infra" \
+            -backend-config="key=cost-optimization/terraform.tfstate" \
+            -backend-config="region=eu-central-1" \
+            -backend-config="dynamodb_table=terraform-state-lock" \
+            -backend-config="encrypt=true"
 
       - name: Import Existing Resources (if any)
         working-directory: ${{ env.TERRAFORM_DIR }}

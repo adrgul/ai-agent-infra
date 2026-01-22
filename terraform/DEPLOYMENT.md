@@ -53,7 +53,7 @@ terraform plan
 terraform apply
 
 # Expected output:
-# - S3 bucket: terraform-state-adriangulyas-ai-agent
+# - S3 bucket: terraform-state-021580456215-ai-agent-infra
 # - DynamoDB table: terraform-state-lock
 ```
 

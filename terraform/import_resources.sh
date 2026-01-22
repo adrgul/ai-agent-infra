@@ -7,11 +7,11 @@ set -e
 echo "🔄 Importing existing AWS resources into Terraform state..."
 
 # Import resources one by one, ignoring errors if already imported
-terraform import -input=false aws_s3_bucket.terraform_state terraform-state-adriangulyas-ai-agent 2>&1 | grep -v "already managed" || true
-terraform import -input=false aws_s3_bucket_versioning.terraform_state terraform-state-adriangulyas-ai-agent 2>&1 | grep -v "already managed" || true
-terraform import -input=false aws_s3_bucket_server_side_encryption_configuration.terraform_state terraform-state-adriangulyas-ai-agent 2>&1 | grep -v "already managed" || true
-terraform import -input=false aws_s3_bucket_public_access_block.terraform_state terraform-state-adriangulyas-ai-agent 2>&1 | grep -v "already managed" || true
-terraform import -input=false aws_s3_bucket_logging.terraform_state terraform-state-adriangulyas-ai-agent 2>&1 | grep -v "already managed" || true
+terraform import -input=false aws_s3_bucket.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
+terraform import -input=false aws_s3_bucket_versioning.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
+terraform import -input=false aws_s3_bucket_server_side_encryption_configuration.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
+terraform import -input=false aws_s3_bucket_public_access_block.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
+terraform import -input=false aws_s3_bucket_logging.terraform_state terraform-state-021580456215-ai-agent-infra 2>&1 | grep -v "already managed" || true
 
 terraform import -input=false aws_dynamodb_table.terraform_locks terraform-state-lock 2>&1 | grep -v "already managed" || true
 
