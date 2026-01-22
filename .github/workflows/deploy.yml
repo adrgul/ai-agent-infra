@@ -17,48 +17,9 @@ permissions:
   contents: read
 
 jobs:
-  terraform-state-setup:
-    name: Setup Terraform State (Bootstrap)
-    runs-on: ubuntu-latest
-    # Only run this job if backend is not configured (first deployment)
-    if: github.event_name == 'workflow_dispatch'
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::021580456215:role/terraform-github-deployer
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.6.0
-
-      - name: Debug - Verify No Old Backend References
-        working-directory: ${{ env.TERRAFORM_DIR }}
-        run: |
-          echo "=== Checking for old bucket references ==="
-          grep -R "terraform-state-adriangulyas-ai-agent" -n . || true
-          echo "=== backend.tf content ==="
-          cat backend.tf
-
-      - name: Terraform Init (Local State - no backend)
-        working-directory: ${{ env.TERRAFORM_DIR }}
-        run: terraform init -backend=false
-
-      - name: Terraform Apply (Create State Resources)
-        working-directory: ${{ env.TERRAFORM_DIR }}
-        run: terraform apply -auto-approve -target=aws_s3_bucket.terraform_state -target=aws_dynamodb_table.terraform_locks
-
   build-and-deploy:
     name: Build & Deploy to AWS
     runs-on: ubuntu-latest
-    # Skip if running state setup
-    if: github.event_name != 'workflow_dispatch' || github.event_name == 'push'
 
     steps:
       - name: Checkout code
