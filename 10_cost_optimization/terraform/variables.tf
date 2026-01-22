@@ -17,7 +17,7 @@ variable "aws_region" {
 variable "state_bucket_name" {
   description = "Name of the S3 bucket for Terraform state storage"
   type        = string
-  default     = "terraform-state-adriangulyas-ai-agent"
+  default     = "terraform-state-021580456215-ai-agent-infra"
 }
 
 variable "dynamodb_table_name" {

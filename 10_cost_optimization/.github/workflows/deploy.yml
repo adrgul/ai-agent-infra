@@ -35,10 +35,13 @@ jobs:
           role-to-assume: arn:aws:iam::021580456215:role/terraform-github-deployer
           aws-region: ${{ env.AWS_REGION }}
 
+      - name: Verify AWS credentials
+        run: aws sts get-caller-identity
+
       - name: Check if S3 backend exists
         id: check_backend
         run: |
-          if aws s3api head-bucket --bucket terraform-state-adriangulyas-ai-agent 2>/dev/null; then
+          if aws s3api head-bucket --bucket terraform-state-021580456215-ai-agent-infra 2>/dev/null; then
             echo "needs_bootstrap=false" >> $GITHUB_OUTPUT
             echo "✅ S3 backend exists"
           else
@@ -56,21 +59,14 @@ jobs:
         if: steps.check_backend.outputs.needs_bootstrap == 'true'
         working-directory: ./terraform
         run: |
-          # Temporarily remove backend configuration
-          mv backend.tf backend.tf.bak || true
+          # Initialize without backend (local state only)
+          terraform init -backend=false
           
-          # Initialize without backend
-          terraform init
-          
-          # Create state bucket and IAM resources
+          # Create state bucket and DynamoDB table
           terraform apply -auto-approve \
+            -target=aws_s3_bucket.terraform_state \
+            -target=aws_dynamodb_table.terraform_locks \
             -var="openai_api_key=${{ secrets.OPENAI_API_KEY }}"
-          
-          # Restore backend configuration
-          mv backend.tf.bak backend.tf || true
-          
-          # Reinitialize with backend and migrate state
-          terraform init -migrate-state -force-copy
 
   deploy:
     name: Deploy Application
@@ -86,6 +82,9 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::021580456215:role/terraform-github-deployer
           aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS credentials
+        run: aws sts get-caller-identity
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -110,7 +109,13 @@ jobs:
 
       - name: Terraform Init
         working-directory: ./terraform
-        run: terraform init
+        run: |
+          terraform init -reconfigure \
+            -backend-config="bucket=terraform-state-021580456215-ai-agent-infra" \
+            -backend-config="key=cost-optimization/terraform.tfstate" \
+            -backend-config="region=eu-central-1" \
+            -backend-config="dynamodb_table=terraform-state-lock" \
+            -backend-config="encrypt=true"
 
       - name: Terraform Validate
         working-directory: ./terraform

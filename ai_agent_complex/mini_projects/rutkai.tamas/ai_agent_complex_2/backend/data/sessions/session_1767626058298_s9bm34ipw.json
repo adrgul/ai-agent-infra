@@ -1,0 +1,14 @@
+{
+  "session_id": "session_1767626058298_s9bm34ipw",
+  "messages": [
+    {
+      "role": "user",
+      "content": "what's the weather in budapest?",
+      "timestamp": "2026-01-05T15:14:37.066524",
+      "metadata": null
+    }
+  ],
+  "summary": null,
+  "created_at": "2026-01-05T15:14:37.063763",
+  "updated_at": "2026-01-05T15:14:37.073602"
+}

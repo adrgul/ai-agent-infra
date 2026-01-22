@@ -1,0 +1,236 @@
+{
+  "session_id": "session_1767293689699_gqyrlx2qj",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Find radio stations in Hungary",
+      "timestamp": "2026-01-01T18:54:49.315711",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Found 10 radio stations:\n\n1. 📻 **Dance Wave!**\n   🌍 Hungary | 🗣️ english\n   🏷️ club dance electronic house trance\n   🎧 MP3 @ 128kbps\n   ⭐ 523417 votes | 👆 925 clicks\n   🔗 http://stream.dancewave.online:8080/dance.mp3\n\n2. 📻 **Dance Wave Retro!**\n   🌍 Hungary | 🗣️ english\n   🏷️ 90s dance\n   🎧 MP3 @ 128kbps\n   ⭐ 52053 votes | 👆 52 clicks\n   🔗 http://onair.dancewave.online:8080/retrodance.mp3\n\n3. 📻 **Rádió 1 - Budapest**\n   🌍 Hungary\n   🎧 MP3 @ 128kbps\n   ⭐ 14703 votes | 👆 64 clicks\n   🔗 http://icast.connectmedia.hu/5201/live.mp3\n\n4. 📻 **Kossuth Rádió**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ duna média,news,public radio,talk\n   🎧 AAC+ @ 96kbps\n   ⭐ 13886 votes | 👆 57 clicks\n   🔗 http://mr-stream.mediaconnect.hu/4734/mr1.aac\n\n5. 📻 **Mercy Rádió - Kabaré**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ comedy,talk\n   🎧 MP3 @ 160kbps\n   ⭐ 12529 votes | 👆 62 clicks\n   🔗 http://stream.mercyradio.eu/kabare.mp3\n\n6. 📻 **Petőfi Rádió**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ alternative,duna média,pop,public radio\n   🎧 AAC+ @ 112kbps\n   ⭐ 10309 votes | 👆 11 clicks\n   🔗 http://mr-stream.mediaconnect.hu/4737/mr2.aac\n\n7. 📻 **MegaDance Rádió**\n   🌍 Hungary | 🗣️ hungarian\n   🎧 MP3 @ 192kbps\n   ⭐ 8391 votes | 👆 69 clicks\n   🔗 http://megadanceradio.hopto.org:8000/livemega.mp3\n\n8. 📻 **Oxygen The 80s Hits**\n   🌍 Hungary\n   🏷️ 80's,80s,classic hits\n   🎧 MP3 @ 320kbps\n   ⭐ 8297 votes | 👆 54 clicks\n   🔗 https://oxygenmusic.hu:8443/oxygenthe80shits\n\n9. 📻 **Sláger FM**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ 80s,90s,classic hits\n   🎧 MP3 @ 256kbps\n   ⭐ 7883 votes | 👆 49 clicks\n   🔗 http://92.61.114.159:7812/slagerfm256.mp3\n\n10. 📻 **Inforádió**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ news,talk\n   🎧 MP3 @ 96kbps\n   ⭐ 7741 votes | 👆 23 clicks\n   🔗 http://stream.infostart.hu/lejatszo/index.html?sid=1\n\n",
+      "timestamp": "2026-01-01T18:55:02.483978",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Here's a diverse selection of radio stations from Hungary, catering to various tastes! Whether you're into dance music or prefer news and talk shows, there's something for everyone:\n\n1. **Dance Wave!** - Perfect for fans of club, dance, electronic, house, and trance music. Tune in via [stream](http://stream.dancewave.online:8080/dance.mp3).\n\n2. **Dance Wave Retro!** - Get your fix of 90s dance hits here. Click [here to listen](http://onair.dancewave.online:8080/retrodance.mp3).\n\n3. **Rádió 1 - Budapest** - A popular choice in Budapest, known for its variety. Stream it [here](http://icast.connectmedia.hu/5201/live.mp3).\n\n4. **Kossuth Rádió** - Offers news, public radio, and talk in Hungarian. Available [here](http://mr-stream.mediaconnect.hu/4734/mr1.aac).\n\n5. **Mercy Rádió - Kabaré** - For a mix of comedy and talk, tune in [here](http://stream.mercyradio.eu/kabare.mp3).\n\n6. **Petőfi Rádió** - Features alternative, pop, and public radio content in Hungarian. Listen [here](http://mr-stream.mediaconnect.hu/4737/mr2.aac).\n\n7. **MegaDance Rádió** - Bringing you a mix of dance music. Available at [this link](http://megadanceradio.hopto.org:8000/livemega.mp3).\n\n8. **Oxygen The 80s Hits** - A haven for 80s classic hits. Stream via [this link](https://oxygenmusic.hu:8443/oxygenthe80shits).\n\n9. **Sláger FM** - Enjoy 80s, 90s, and classic hits. Tune in [here](http://92.61.114.159:7812/slagerfm256.mp3).\n\n10. **Inforádió** - For the latest news and talk shows in Hungarian, listen [here](http://stream.infostart.hu/lejatszo/index.html?sid=1).\n\nEach station offers a unique listening experience, so you might find your new favorite among them!",
+      "timestamp": "2026-01-01T18:55:02.497463",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Search for jazz radio stations",
+      "timestamp": "2026-01-01T18:55:56.022566",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Found 10 radio stations:\n\n1. 📻 **Bartók Rádió**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ classical,cultural,duna média,jazz,public radio\n   🎧 MP3 @ 320kbps\n   ⭐ 2894 votes | 👆 16 clicks\n   🔗 http://mr-stream.mediaconnect.hu/4742/mr3hq.mp3\n\n2. 📻 **Jazzy**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ jazz\n   🎧 MP3 @ 192kbps\n   ⭐ 689 votes | 👆 32 clicks\n   🔗 https://radio.musorok.org/listen/jazzy/jazzy.mp3\n\n3. 📻 **Tilos Rádió 32 kbit/sec**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ jazz rock\n   🎧 MP3 @ 32kbps\n   ⭐ 465 votes | 👆 6 clicks\n   🔗 http://stream.tilos.hu/tilos_32.mp3\n\n4. 📻 **Jazzy Groove**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ groove,smooth jazz\n   🎧 MP3 @ 192kbps\n   ⭐ 404 votes | 👆 13 clicks\n   🔗 https://radio.musorok.org/listen/jazzygroove/jazzygroove.mp3\n\n5. 📻 **COOLFM Jazz**\n   🌍 Hungary\n   🏷️ jazz,smooth jazz\n   🎧 MP3 @ 128kbps\n   ⭐ 209 votes | 👆 11 clicks\n   🔗 https://mediagw.e-tiger.net/stream/zc13\n\n6. 📻 **Jazzy Soul**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ jazz,smooth jazz,soul\n   🎧 MP3\n   ⭐ 142 votes | 👆 20 clicks\n   🔗 https://radio.musorok.org/listen/jazzysoul/jazzysoul.mp3\n\n7. 📻 **Jazzy Cool**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ jazz,smooth jazz\n   🎧 MP3 @ 192kbps\n   ⭐ 116 votes | 👆 9 clicks\n   🔗 https://radio.musorok.org/listen/jazzycool/jazzycool.mp3\n\n8. 📻 **Jazzradio.hu**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ jazz\n   🎧 OGG\n   ⭐ 92 votes | 👆 3 clicks\n   🔗 https://www.jazzradio.hu:8000/jazzradio_192.ogg\n\n9. 📻 **MR5 - Parlamenti Adások**\n   🌍 Hungary | 🗣️ hungarian\n   🏷️ jazz,news,politics,public radio\n   🎧 MP3 @ 64kbps\n   ⭐ 14 votes | 👆 1 clicks\n   🔗 https://mr-stream.connectmedia.hu/4746/mr5.mp3\n\n10. 📻 **Diveky-radio-swing**\n   🌍 Hungary\n   🏷️ jazz\n   🎧 MP3 @ 128kbps\n   ⭐ 14 votes | 👆 0 clicks\n   🔗 http://178.238.223.39:8000/swing\n\n",
+      "timestamp": "2026-01-01T18:56:13.448817",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Here are some jazz radio stations in Hungary you might enjoy:\n\n1. **Bartók Rádió** - Offers a mix of classical, cultural content, and jazz. It's a part of Duna Média, broadcasting in Hungarian. Quality streaming at 320kbps. [Listen here](http://mr-stream.mediaconnect.hu/4742/mr3hq.mp3)\n\n2. **Jazzy** - A dedicated jazz station with a focus on the genre, streaming at 192kbps. A favorite among listeners. [Listen here](https://radio.musorok.org/listen/jazzy/jazzy.mp3)\n\n3. **Tilos Rádió 32 kbit/sec** - Known for its eclectic mix, including jazz and rock. It has a low bitrate stream at 32kbps. [Listen here](http://stream.tilos.hu/tilos_32.mp3)\n\n4. **Jazzy Groove** - Offers a blend of groove and smooth jazz, streaming at a clear 192kbps. [Listen here](https://radio.musorok.org/listen/jazzygroove/jazzygroove.mp3)\n\n5. **COOLFM Jazz** - Features jazz and smooth jazz tunes, available at 128kbps. [Stream link](https://mediagw.e-tiger.net/stream/zc13)\n\n6. **Jazzy Soul** - A mix of jazz, smooth jazz, and soul, promising a rich listening experience. [Listen here](https://radio.musorok.org/listen/jazzysoul/jazzysoul.mp3)\n\n7. **Jazzy Cool** - Focusing on jazz and smooth jazz, streaming at 192kbps for a crisp sound. [Listen here](https://radio.musorok.org/listen/jazzycool/jazzycool.mp3)\n\n8. **Jazzradio.hu** - A Hungarian jazz station, offering a diverse playlist. Streams in OGG format. [Listen here](https://www.jazzradio.hu:8000/jazzradio_192.ogg)\n\n9. **MR5 - Parlamenti Adások** - While mainly focusing on news and politics, it also includes jazz in its programming, streaming at 64kbps. [Listen here](https://mr-stream.connectmedia.hu/4746/mr5.mp3)\n\n10. **Diveky-radio-swing** - Dedicated to jazz music, streaming at 128kbps for fans of the genre. [Stream link](http://178.238.223.39:8000/swing)\n\nThese stations offer a variety of jazz music, from classic tunes to contemporary beats, catering to different tastes. Enjoy exploring the vibrant jazz scene of Hungary!",
+      "timestamp": "2026-01-01T18:56:13.463503",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Find radio stations with 'BBC' in the name",
+      "timestamp": "2026-01-01T18:57:04.940986",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Found 10 radio stations:\n\n1. 📻 **BBC World Service**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland | 🗣️ english\n   🏷️ news,talk\n   🎧 MP3 @ 56kbps\n   ⭐ 143058 votes | 👆 1405 clicks\n   🔗 http://stream.live.vc.bbcmedia.co.uk/bbc_world_service\n\n2. 📻 **BBC World Service**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland | 🗣️ english\n   🏷️ bbc\n   🎧 MP3 @ 56kbps\n   ⭐ 14433 votes | 👆 58 clicks\n   🔗 https://stream.live.vc.bbcmedia.co.uk/bbc_world_service\n\n3. 📻 **BBC Afrique Radio**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland | 🗣️ english,french\n   🏷️ africa,afrique,news,talk\n   🎧 AAC+ @ 101kbps\n   ⭐ 5992 votes | 👆 21 clicks\n   🔗 http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_afrique_radio.m3u8\n\n4. 📻 **BBC Nepali**\n   🌍 Nepal | 🗣️ nepali\n   🏷️ news\n   🎧 MP3 @ 56kbps\n   ⭐ 5687 votes | 👆 13 clicks\n   🔗 https://stream.live.vc.bbcmedia.co.uk/bbc_nepali_radio\n\n5. 📻 **BBC Arabic Radio**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland | 🗣️ arabic,english\n   🏷️ arabic,news,talk\n   🎧 AAC+ @ 101kbps\n   ⭐ 4477 votes | 👆 25 clicks\n   🔗 http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_arabic_radio.m3u8\n\n6. 📻 **BBC Radio 4 (128k)**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland | 🗣️ english\n   🏷️ comedy,drama,news,talk\n   🎧 UNKNOWN\n   ⭐ 3381 votes | 👆 615 clicks\n   🔗 http://as-hls-ww-live.akamaized.net/pool_55057080/live/ww/bbc_radio_fourfm/bbc_radio_fourfm.isml/bbc_radio_fourfm-audio%3d128000.norewind.m3u8\n\n7. 📻 **BBC World Service**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland | 🗣️ english\n   🏷️ news\n   🎧 AAC+ @ 101kbps\n   ⭐ 2706 votes | 👆 12 clicks\n   🔗 http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_world_service.m3u8\n\n8. 📻 **BBC News HD (720P)**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland | 🗣️ english\n   🏷️ england,english,london,news,uk,world news\n   🎧 UNKNOWN\n   ⭐ 2512 votes | 👆 145 clicks\n   🔗 https://vs-hls-push-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_news_channel_hd/t=3840/v=pv14/b=5070016/main.m3u8\n\n9. 📻 **BBC World Service**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland\n   🏷️ news\n   🎧 AAC+ @ 50kbps\n   ⭐ 2363 votes | 👆 13 clicks\n   🔗 http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_vlow/ak/bbc_world_service.m3u8\n\n10. 📻 **BBC UNHCR**\n   🌍 Afghanistan\n   🎧 MP3 @ 56kbps\n   ⭐ 2334 votes | 👆 28 clicks\n   🔗 http://stream.live.vc.bbcmedia.co.uk/bbc_pashto_radio\n\n",
+      "timestamp": "2026-01-01T18:57:17.689262",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Here's a list of radio stations with \"BBC\" in their name, offering a wide range of content from news and talk to cultural programs in various languages:\n\n1. **BBC World Service** - A global news and talk station broadcasting worldwide in English. It's one of the most renowned sources for international news.\n   \n2. Another stream of the **BBC World Service** is available, also focusing on news and BBC content in English.\n\n3. **BBC Afrique Radio** - Targeting audiences interested in Africa, this station offers news and talk in both English and French, focusing on African affairs.\n\n4. **BBC Nepali** - Broadcasting in Nepal, this station provides news content in Nepali, catering to the Nepali-speaking audience.\n\n5. **BBC Arabic Radio** - Offers news and talk in Arabic and English, focusing on the Arab world and broader global issues.\n\n6. **BBC Radio 4 (128k)** - Known for its comedy, drama, news, and talk shows, this station is a staple of British radio, broadcasting in English.\n\n7. Another stream of the **BBC World Service** is available, emphasizing news content in English but at a different bitrate.\n\n8. **BBC News HD (720P)** - This is a high-definition news service broadcasting in English, focusing on England, the UK, and international news.\n\n9. A lower bitrate stream of the **BBC World Service** for news content in English, catering to listeners with limited internet bandwidth.\n\n10. **BBC UNHCR** - Broadcasting in Afghanistan, this station focuses on news and content related to the UNHCR's work in the region, in MP3 format at 56kbps.\n\nEach of these stations offers unique content catering to different interests and languages, making the BBC a versatile broadcaster with a global reach.",
+      "timestamp": "2026-01-01T18:57:17.703255",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Find radio stations in German language",
+      "timestamp": "2026-01-01T18:58:11.593759",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Found 10 radio stations:\n\n1. 📻 **MANGORADIO**\n   🌍 Germany | 🗣️ german\n   🏷️ music,variety\n   🎧 MP3 @ 128kbps\n   ⭐ 771599 votes | 👆 1753 clicks\n   🔗 https://mangoradio.stream.laut.fm/mangoradio\n\n2. 📻 **Rock Antenne - Heavy Metal**\n   🌍 Germany | 🗣️ german\n   🏷️ heavy metal,metal\n   🎧 MP3 @ 128kbps\n   ⭐ 30288 votes | 👆 198 clicks\n   🔗 http://s3-webradio.rockantenne.de/heavy-metal\n\n3. 📻 **1LIVE**\n   🌍 Germany | 🗣️ german\n   🏷️ ard,public radio,rock,top 40,wdr\n   🎧 MP3 @ 128kbps\n   ⭐ 29283 votes | 👆 933 clicks\n   🔗 http://f111.rndfnk.com/ard/wdr/1live/live/mp3/128/stream.mp3?cid=01FBRZTS1K1TCD4KA2YZ1ND8X3&sid=37exYg2PqQ0ppaPIgAflGYkz9hp&token=lIcr6lAxT7TUFbA_MkBdGxftszTbj4ytF7yZ0qX4SZg&tvf=GzwJdBC1hhhmMTExLnJuZGZuay5jb20\n\n4. 📻 **80s80s**\n   🌍 Germany | 🗣️ german\n   🏷️ 80s\n   🎧 MP3\n   ⭐ 26758 votes | 👆 333 clicks\n   🔗 http://regiocast.streamabc.net/regc-80s80smweb2517500-mp3-192-1672667?sABC=69560470%230%23q7s809s74070n543n7p5213q6qr39235%23fgernzf.80f80f.qr&aw_0_1st.playerid=streams.80s80s.de&amsparams=playerid:streams.80s80s.de;skey:1767244912\n\n5. 📻 **Sunshine Live - Die 90er**\n   🌍 Germany | 🗣️ german\n   🏷️ 90s,dance,electronica,eurodance\n   🎧 MP3\n   ⭐ 24100 votes | 👆 107 clicks\n   🔗 http://sunsl.streamabc.net/sunsl-90er-mp3-192-9697679?sABC=69569r3s%230%23q7s809s74070n543n7p5213q6qr39235%23fgernz.fhafuvar-yvir.qr&aw_0_1st.playerid=stream.sunshine-live.de&amsparams=playerid:stream.sunshine-live.de;skey:1767284287\n\n6. 📻 **90s90s Hits**\n   🌍 Germany | 🗣️ german\n   🏷️ 90s,hits,pop\n   🎧 MP3\n   ⭐ 23574 votes | 👆 210 clicks\n   🔗 http://regiocast.streamabc.net/regc-90s90spop4760822-mp3-192-9403761?sABC=695652r2%230%234313or3p195706q13n90589o7061s597%23fgernzf.90f90f.qr&aw_0_1st.playerid=streams.90s90s.de&amsparams=playerid:streams.90s90s.de;skey:1767264994\n\n7. 📻 **Rock Antenne**\n   🌍 Germany | 🗣️ german\n   🏷️ rock\n   🎧 MP3 @ 128kbps\n   ⭐ 22800 votes | 👆 456 clicks\n   🔗 http://s2-webradio.rockantenne.de/rockantenne\n\n8. 📻 **WDR 5**\n   🌍 Germany | 🗣️ german\n   🏷️ information,news,news talk,political talk,talk\n   🎧 MP3 @ 128kbps\n   ⭐ 22243 votes | 👆 580 clicks\n   🔗 http://f131.rndfnk.com/ard/wdr/wdr5/live/mp3/128/ct/stream.mp3?cid=01FBS0E239W9R7GR1S5Q7RTQRC&sid=37ezUs522H7gRphwSBlgWpkKvHC&token=Q0XkG_2vLvM7tUIqLX_GKZmQLNIO6WW9k1_oiJUjtEc&tvf=1_hlZu-1hhhmMTMxLnJuZGZuay5jb20\n\n9. 📻 **Antenne Bayern**\n   🌍 Germany | 🗣️ german\n   🏷️ top 40\n   🎧 MP3 @ 128kbps\n   ⭐ 19829 votes | 👆 325 clicks\n   🔗 http://s5-webradio.antenne.de/antenne\n\n10. 📻 **TranceBase.FM - AAC HD 256k**\n   🌍 Germany | 🗣️ german\n   🏷️ electronic,techno,trance\n   🎧 AAC @ 256kbps\n   ⭐ 18835 votes | 👆 49 clicks\n   🔗 http://listener2.aachd.tb-group.fm:80/trb-hd.aac\n\n",
+      "timestamp": "2026-01-01T18:58:37.220435",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Here are some German language radio stations you might enjoy:\n\n1. **MANGORADIO** - A variety station with a wide range of music genres to suit different tastes. [Listen here](https://mangoradio.stream.laut.fm/mangoradio)\n\n2. **Rock Antenne - Heavy Metal** - Perfect for fans of heavy metal and metal music. [Tune in](http://s3-webradio.rockantenne.de/heavy-metal)\n\n3. **1LIVE** - Offers a mix of public radio content, rock, top 40, and more from the WDR. [Listen live](http://f111.rndfnk.com/ard/wdr/1live/live/mp3/128/stream.mp3?cid=01FBRZTS1K1TCD4KA2YZ1ND8X3&sid=37exYg2PqQ0ppaPIgAflGYkz9hp&token=lIcr6lAxT7TUFbA_MkBdGxftszTbj4ytF7yZ0qX4SZg&tvf=GzwJdBC1hhhmMTExLnJuZGZuay5jb20)\n\n4. **80s80s** - For lovers of 80s music, this station brings back the classics. [Stream here](http://regiocast.streamabc.net/regc-80s80smweb2517500-mp3-192-1672667?sABC=69560470%230%23q7s809s74070n543n7p5213q6qr39235%23fgernzf.80f80f.qr&aw_0_1st.playerid=streams.80s80s.de&amsparams=playerid:streams.80s80s.de;skey:1767244912)\n\n5. **Sunshine Live - Die 90er** - A go-to station for 90s dance, electronica, and eurodance hits. [Tune in](http://sunsl.streamabc.net/sunsl-90er-mp3-192-9697679?sABC=69569r3s%230%23q7s809s74070n543n7p5213q6qr39235%23fgernz.fhafuvar-yvir.qr&aw_0_1st.playerid=stream.sunshine-live.de&amsparams=playerid:stream.sunshine-live.de;skey:1767284287)\n\n6. **90s90s Hits** - If you're into 90s hits and pop music, this station will keep you entertained. [Stream here](http://regiocast.streamabc.net/regc-90s90spop4760822-mp3-192-9403761?sABC=695652r2%230%234313or3p195706q13n90589o7061s597%23fgernzf.90f90f.qr&aw_0_1st.playerid=streams.90s90s.de&amsparams=playerid:streams.90s90s.de;skey:1767264994)\n\n7. **Rock Antenne** - Offers a solid rock music lineup for enthusiasts of the genre. [Listen here](http://s2-webradio.rockantenne.de/rockantenne)\n\n8. **WDR 5** - This station focuses on information, news, news talk, and political talk, catering to those interested in current events and discussions. [Tune in](http://f131.rndfnk.com/ard/wdr/wdr5/live/mp3/128/ct/stream.mp3?cid=01FBS0E239W9R7GR1S5Q7RTQRC&sid=37ezUs522H7gRphwSBlgWpkKvHC&token=Q0XkG_2vLvM7tUIqLX_GKZmQLNIO6WW9k1_oiJUjtEc&tvf=1_hlZu-1hhhmMTMxLnJuZGZuay5jb20)\n\n9. **Antenne Bayern** - A top 40 station that plays a mix of current hits, perfect for keeping up with the latest music trends. [Listen live](http://s5-webradio.antenne.de/antenne)\n\n10. **TranceBase.FM - AAC HD 256k** - For electronic, techno, and trance music fans, offering high-quality audio. [Stream here](http://listener2.aachd.tb-group.fm:80/trb-hd.aac)\n\nEach of these stations offers a unique listening experience, whether you're into rock, pop, electronic music, or news and talk shows. Enjoy exploring them!",
+      "timestamp": "2026-01-01T18:58:37.258419",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "What are the most popular radio stations?",
+      "timestamp": "2026-01-01T18:59:20.650319",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Top 10 radio stations by clicks:\n\n1. 📻 **NPO Radio 2**\n   🌍 The Netherlands | 🗣️ dutch\n   🏷️ evergreens,talk\n   🎧 MP3 @ 192kbps\n   ⭐ 11096 votes | 👆 3795 clicks\n   🔗 http://icecast.omroep.nl/radio2-bb-mp3\n\n2. 📻 **MANGORADIO**\n   🌍 Germany | 🗣️ german\n   🏷️ music,variety\n   🎧 MP3 @ 128kbps\n   ⭐ 771599 votes | 👆 1753 clicks\n   🔗 https://mangoradio.stream.laut.fm/mangoradio\n\n3. 📻 **Classic Vinyl HD**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ 1930,1940,1950,1960,beautiful music,big band,classic hits,crooners,easy,easy listening,hd,jazz,light orchestral,lounge,oldies,orchestral,otr,relaxation,strings,swing,unwind,walm\n   🎧 MP3 @ 320kbps\n   ⭐ 235142 votes | 👆 1597 clicks\n   🔗 https://icecast.walmradio.com:8443/classic\n\n4. 📻 **Radio Paradise Main Mix (EU) 320k AAC**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ california,eclectic,free,internet,non-commercial,paradise,radio\n   🎧 AAC @ 320kbps\n   ⭐ 265312 votes | 👆 1428 clicks\n   🔗 http://stream-uk1.radioparadise.com/aac-320\n\n5. 📻 **BBC World Service**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland | 🗣️ english\n   🏷️ news,talk\n   🎧 MP3 @ 56kbps\n   ⭐ 143058 votes | 👆 1406 clicks\n   🔗 http://stream.live.vc.bbcmedia.co.uk/bbc_world_service\n\n6. 📻 **101 SMOOTH JAZZ**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ easy listening,jazz,smooth jazz\n   🎧 MP3 @ 128kbps\n   ⭐ 79202 votes | 👆 1322 clicks\n   🔗 http://jking.cdnstream1.com/b22139_128mp3\n\n7. 📻 **Deutschlandfunk | DLF | MP3 128k**\n   🌍 Germany | 🗣️ german\n   🏷️ culture,news,public service,information\n   🎧 MP3 @ 128kbps\n   ⭐ 8711 votes | 👆 1178 clicks\n   🔗 https://f111.rndfnk.com/ard/dlf/01/mp3/128/stream.mp3?aggregator=web&cid=01FBPWZ12X2XN8SDSMBZ7X0ZTT&sid=37dUCRclA4i9ovzndBDSUHjNuLO&token=3bMpHr0br1KLxYIK3-pUv-crrBydMJ_fc6hQuaPAvZg&tvf=keyYORKMhhhmMTExLnJuZGZuay5jb20\n\n8. 📻 **Ukhozi FM S.A**\n   🌍 South Africa\n   🎧 AAC+ @ 48kbps\n   ⭐ 1527 votes | 👆 1146 clicks\n   🔗 https://28553.live.streamtheworld.com:443/UKHOZIFMAAC_SC?dist=triton-widget&pname=tdwidgets\n\n9. 📻 **iraninternational**\n   🌍 Islamic Republic Of Iran | 🗣️ persian\n   🏷️ iran,news,persian\n   🎧 MP3\n   ⭐ 86619 votes | 👆 1103 clicks\n   🔗 http://n10.radiojar.com/dfnrphnr5f0uv?rj-ttl=5&rj-tok=AAABm3h9e7IAkrXxDSc9RWcALA\n\n10. 📻 **SWR3**\n   🌍 Germany | 🗣️ german\n   🏷️ news,pop,rock\n   🎧 MP3 @ 128kbps\n   ⭐ 16576 votes | 👆 1102 clicks\n   🔗 https://f141.rndfnk.com/ard/swr/swr3/live/mp3/128/stream.mp3?aggregator=web&cid=01FC1X5J7PN2N3YQPZYT8YDM9M&sid=37f5lrgf59FiLpahvfbemfacZR6&token=o2FCLELzhaFoVEu-ldTIfu8tOrnYNaBrh89oXk2EQIs&tvf=E-iA6L-4hhhmMTQxLnJuZGZuay5jb20\n\n",
+      "timestamp": "2026-01-01T18:59:29.676276",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Among the most popular radio stations based on clicks, you have a diverse selection to explore. **NPO Radio 2** from The Netherlands leads the pack, known for its mix of evergreens and talk, followed closely by **MANGORADIO** from Germany, which offers a variety of music genres. If you're into classic hits and jazz, **Classic Vinyl HD** from the USA might catch your interest with its selection from the 1930s to the 1960s. For a more eclectic taste, **Radio Paradise Main Mix (EU)** provides a non-commercial, free internet radio experience. News seekers might prefer the **BBC World Service**, offering global news and talk. Jazz enthusiasts have **101 SMOOTH JAZZ** as an option, and those looking for culture and news in German can tune into **Deutschlandfunk**. **Ukhozi FM S.A.** offers a South African perspective, while **iraninternational** provides news and content in Persian. Lastly, **SWR3** from Germany offers a mix of news, pop, and rock. Each station offers unique content, ensuring listeners can find something that suits their preferences.",
+      "timestamp": "2026-01-01T18:59:29.691618",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Which radio stations have the most clicks?",
+      "timestamp": "2026-01-01T19:00:27.422136",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Top 10 radio stations by clicks:\n\n1. 📻 **NPO Radio 2**\n   🌍 The Netherlands | 🗣️ dutch\n   🏷️ evergreens,talk\n   🎧 MP3 @ 192kbps\n   ⭐ 11096 votes | 👆 3795 clicks\n   🔗 http://icecast.omroep.nl/radio2-bb-mp3\n\n2. 📻 **MANGORADIO**\n   🌍 Germany | 🗣️ german\n   🏷️ music,variety\n   🎧 MP3 @ 128kbps\n   ⭐ 771599 votes | 👆 1753 clicks\n   🔗 https://mangoradio.stream.laut.fm/mangoradio\n\n3. 📻 **Classic Vinyl HD**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ 1930,1940,1950,1960,beautiful music,big band,classic hits,crooners,easy,easy listening,hd,jazz,light orchestral,lounge,oldies,orchestral,otr,relaxation,strings,swing,unwind,walm\n   🎧 MP3 @ 320kbps\n   ⭐ 235142 votes | 👆 1597 clicks\n   🔗 https://icecast.walmradio.com:8443/classic\n\n4. 📻 **Radio Paradise Main Mix (EU) 320k AAC**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ california,eclectic,free,internet,non-commercial,paradise,radio\n   🎧 AAC @ 320kbps\n   ⭐ 265312 votes | 👆 1428 clicks\n   🔗 http://stream-uk1.radioparadise.com/aac-320\n\n5. 📻 **BBC World Service**\n   🌍 The United Kingdom Of Great Britain And Northern Ireland | 🗣️ english\n   🏷️ news,talk\n   🎧 MP3 @ 56kbps\n   ⭐ 143058 votes | 👆 1406 clicks\n   🔗 http://stream.live.vc.bbcmedia.co.uk/bbc_world_service\n\n6. 📻 **101 SMOOTH JAZZ**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ easy listening,jazz,smooth jazz\n   🎧 MP3 @ 128kbps\n   ⭐ 79202 votes | 👆 1322 clicks\n   🔗 http://jking.cdnstream1.com/b22139_128mp3\n\n7. 📻 **Deutschlandfunk | DLF | MP3 128k**\n   🌍 Germany | 🗣️ german\n   🏷️ culture,news,public service,information\n   🎧 MP3 @ 128kbps\n   ⭐ 8711 votes | 👆 1178 clicks\n   🔗 https://f111.rndfnk.com/ard/dlf/01/mp3/128/stream.mp3?aggregator=web&cid=01FBPWZ12X2XN8SDSMBZ7X0ZTT&sid=37dUCRclA4i9ovzndBDSUHjNuLO&token=3bMpHr0br1KLxYIK3-pUv-crrBydMJ_fc6hQuaPAvZg&tvf=keyYORKMhhhmMTExLnJuZGZuay5jb20\n\n8. 📻 **Ukhozi FM S.A**\n   🌍 South Africa\n   🎧 AAC+ @ 48kbps\n   ⭐ 1527 votes | 👆 1146 clicks\n   🔗 https://28553.live.streamtheworld.com:443/UKHOZIFMAAC_SC?dist=triton-widget&pname=tdwidgets\n\n9. 📻 **iraninternational**\n   🌍 Islamic Republic Of Iran | 🗣️ persian\n   🏷️ iran,news,persian\n   🎧 MP3\n   ⭐ 86619 votes | 👆 1103 clicks\n   🔗 http://n10.radiojar.com/dfnrphnr5f0uv?rj-ttl=5&rj-tok=AAABm3h9e7IAkrXxDSc9RWcALA\n\n10. 📻 **SWR3**\n   🌍 Germany | 🗣️ german\n   🏷️ news,pop,rock\n   🎧 MP3 @ 128kbps\n   ⭐ 16576 votes | 👆 1102 clicks\n   🔗 https://f141.rndfnk.com/ard/swr/swr3/live/mp3/128/stream.mp3?aggregator=web&cid=01FC1X5J7PN2N3YQPZYT8YDM9M&sid=37f5lrgf59FiLpahvfbemfacZR6&token=o2FCLELzhaFoVEu-ldTIfu8tOrnYNaBrh89oXk2EQIs&tvf=E-iA6L-4hhhmMTQxLnJuZGZuay5jb20\n\n",
+      "timestamp": "2026-01-01T19:00:37.100680",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "The most clicked radio stations offer a diverse range of content and genres from various parts of the world. Leading the pack is **NPO Radio 2** from The Netherlands, known for its evergreen and talk content, and it's quite popular with 3795 clicks. Following closely is **MANGORADIO** from Germany, offering a variety of music genres, and it has garnered 1753 clicks. Then there's **Classic Vinyl HD** from the USA, catering to fans of classic hits and jazz from the mid-20th century, with 1597 clicks. These stations, along with others like **BBC World Service** and **101 SMOOTH JAZZ**, highlight the global diversity in radio preferences, ranging from news and talk to smooth jazz and eclectic mixes. Each station has a unique flavor, appealing to different audiences worldwide.",
+      "timestamp": "2026-01-01T19:00:37.116470",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Which countries have the most radio stations?",
+      "timestamp": "2026-01-01T19:01:36.419107",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Top 50 countries with radio stations (of 242 total):\n\n• **The United States Of America** (US): 6433 stations\n• **Germany** (DE): 5339 stations\n• **The Russian Federation** (RU): 2960 stations\n• **France** (FR): 2261 stations\n• **Greece** (GR): 1877 stations\n• **China** (CN): 1829 stations\n• **Australia** (AU): 1808 stations\n• **The United Kingdom Of Great Britain And Northern Ireland** (GB): 1799 stations\n• **Mexico** (MX): 1693 stations\n• **Italy** (IT): 1535 stations\n• **Canada** (CA): 1426 stations\n• **Spain** (ES): 1175 stations\n• **The Netherlands** (NL): 1118 stations\n• **Brazil** (BR): 1103 stations\n• **India** (IN): 1079 stations\n• **Poland** (PL): 1048 stations\n• **Argentina** (AR): 759 stations\n• **The United Arab Emirates** (AE): 754 stations\n• **The Philippines** (PH): 564 stations\n• **Switzerland** (CH): 557 stations\n\n... and 30 more countries",
+      "timestamp": "2026-01-01T19:01:44.823554",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "The countries with the most radio stations are quite diverse, covering various continents. At the top is the United States of America, boasting a massive 6433 stations, followed closely by Germany with 5339 stations. The Russian Federation comes in third place with 2960 stations. Other countries with a high number of radio stations include France, Greece, China, Australia, the United Kingdom, Mexico, and Italy, showing a global appreciation and demand for radio broadcasting. Whether for music, news, talk shows, or cultural programs, these countries offer a rich spectrum of radio content catering to diverse audiences.",
+      "timestamp": "2026-01-01T19:01:44.840382",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "What languages are available for radio stations?",
+      "timestamp": "2026-01-01T19:02:45.535771",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Top 50 languages with radio stations (of 594 total):\n\n• **english**: 10700 stations\n• **german**: 3904 stations\n• **spanish**: 3850 stations\n• **french**: 1944 stations\n• **chinese**: 1865 stations\n• **russian**: 1667 stations\n• **italian**: 1196 stations\n• **greek**: 1059 stations\n• **polish**: 767 stations\n• **dutch**: 677 stations\n• **portuguese**: 527 stations\n• **arabic**: 487 stations\n• **hindi**: 471 stations\n• **american english**: 359 stations\n• **brazilian portuguese**: 331 stations\n• **tamil**: 320 stations\n• **romanian**: 275 stations\n• **serbian**: 264 stations\n• **hungarian**: 225 stations\n• **croatian**: 206 stations\n\n... and 30 more languages",
+      "timestamp": "2026-01-01T19:02:53.994256",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "The variety of languages available for radio stations is vast, catering to a global audience. The top languages for radio broadcasts include English, leading with 10700 stations, followed closely by German, Spanish, French, and Chinese. This diversity not only highlights the global reach of radio as a medium but also showcases the rich cultural tapestry of our world. Whether you're looking for music, news, or cultural programs, there's likely a station in your preferred language. With over 594 languages represented, radio continues to be a powerful tool for connecting people across different geographies and linguistic backgrounds.",
+      "timestamp": "2026-01-01T19:02:54.012309",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "What radio genres are available?",
+      "timestamp": "2026-01-01T19:03:52.298680",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Top 100 radio genres/tags (of 10504 total):\n\n• **pop**: 4784 stations\n• **music**: 3744 stations\n• **rock**: 2528 stations\n• **news**: 2449 stations\n• **classical**: 1511 stations\n• **talk**: 1314 stations\n• **radio**: 1282 stations\n• **entretenimiento**: 1247 stations\n• **dance**: 1200 stations\n• **hits**: 1176 stations\n• **estación**: 1172 stations\n• **oldies**: 1096 stations\n• **méxico**: 1050 stations\n• **80s**: 999 stations\n• **fm**: 995 stations\n• **jazz**: 939 stations\n• **public radio**: 907 stations\n• **norteamérica**: 899 stations\n• **música**: 887 stations\n• **christian**: 884 stations\n• **pop music**: 861 stations\n• **moi merino**: 838 stations\n• **top 40**: 814 stations\n• **90s**: 788 stations\n• **adult contemporary**: 771 stations\n• **latinoamérica**: 763 stations\n• **classic hits**: 755 stations\n• **electronic**: 755 stations\n• **community radio**: 746 stations\n• **español**: 745 stations\n\n... and 70 more tags",
+      "timestamp": "2026-01-01T19:04:02.634882",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "The range of radio genres available is quite broad, ensuring there's something for everyone's taste. At the top of the list, pop music leads with 4784 stations, making it the most widespread genre. Following closely are stations dedicated to music in general, rock, and news, each offering a vast array of options for listeners. For those with a love for the classics, both classical music and oldies have a strong presence. Talk radio and entertainment genres are also well-represented, catering to those who enjoy engaging discussions and diverse programming. Dance, hits, and various specific music decades like the 80s and 90s have their dedicated stations, demonstrating the wide appeal of different eras in music. Additionally, genres such as jazz, Christian music, electronic, and even community radio show the depth and diversity of radio broadcasting available globally. Whether you're into the latest pop hits, classic rock anthems, thoughtful news discussions, or the soothing sounds of classical music, there's certainly a radio station out there to match your preferences.",
+      "timestamp": "2026-01-01T19:04:02.653864",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Find rock stations from the USA",
+      "timestamp": "2026-01-01T19:05:01.251295",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Found 10 radio stations:\n\n1. 📻 **Rockabilly-radio.net**\n   🌍 The United States Of America\n   🏷️ rockabilly\n   🎧 MP3 @ 128kbps\n   ⭐ 46131 votes | 👆 97 clicks\n   🔗 http://lin3.ash.fast-serv.com:6026/stream_96\n\n2. 📻 **Big R Radio - 80s Metal FM**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ 80s,aor,glam metal,hair metal,hard rock,heavy metal,metal\n   🎧 MP3 @ 128kbps\n   ⭐ 35681 votes | 👆 150 clicks\n   🔗 http://bigrradio.cdnstream1.com/5186_128\n\n3. 📻 **Hard Rock Heaven**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ 80s,glam metal,hair metal,hard rock,heavy metal,overland park\n   🎧 MP3 @ 128kbps\n   ⭐ 30326 votes | 👆 109 clicks\n   🔗 http://hydra.cdnstream.com/1521_128\n\n4. 📻 **Radio Paradise Rock Mix 320k AAC**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ california,alternative,eclectic,rock,free,internet,non-commercial\n   🎧 AAC @ 320kbps\n   ⭐ 12744 votes | 👆 158 clicks\n   🔗 http://stream.radioparadise.com/rock-320\n\n5. 📻 **Soft Classic Rock Radio**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ classic rock,soft rock\n   🎧 MP3 @ 128kbps\n   ⭐ 9982 votes | 👆 136 clicks\n   🔗 http://64.71.133.122:8000/;\n\n6. 📻 **WEOW FM 92.7**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ rock\n   🎧 AAC+ @ 64kbps\n   ⭐ 9828 votes | 👆 8 clicks\n   🔗 http://ice42.securenetsystems.net/WEOW\n\n7. 📻 **181.FM - Kickin' Country**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ country,pop,rock,waynesboro\n   🎧 MP3 @ 128kbps\n   ⭐ 7662 votes | 👆 50 clicks\n   🔗 http://listen.181fm.com/181-kickincountry_128k.mp3\n\n8. 📻 **Nostalgie New York**\n   🌍 The United States Of America\n   🏷️ 60s,70s,80s,90s,classic hits,classic rock,disco,music,nostalgie,pop,rock and roll,smooth jazz,world music,worlds best classic hits\n   🎧 MP3 @ 128kbps\n   ⭐ 6697 votes | 👆 81 clicks\n   🔗 http://c32.radioboss.fm:8139/stream\n\n9. 📻 **metal rock radio**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ classic rock,metal,rock\n   🎧 MP3 @ 128kbps\n   ⭐ 6581 votes | 👆 66 clicks\n   🔗 https://kathy.torontocast.com:2800/;\n\n10. 📻 **1980s.FM**\n   🌍 The United States Of America | 🗣️ english\n   🏷️ 80s,classic hits,classic rock,richmond\n   🎧 MP3 @ 128kbps\n   ⭐ 6452 votes | 👆 19 clicks\n   🔗 http://hi5.1980s.fm/;stream.mp3\n\n",
+      "timestamp": "2026-01-01T19:05:10.053799",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "Here's a list of rock stations from the USA catering to various sub-genres of rock music. Whether you're into classic rock, hard rock, or even rockabilly, there's something for you:\n\n1. **Rockabilly-radio.net** - Specializes in rockabilly music.\n2. **Big R Radio - 80s Metal FM** - Offers a mix of 80s, glam metal, hair metal, and heavy metal.\n3. **Hard Rock Heaven** - Focuses on 80s glam metal, hair metal, hard rock, and heavy metal.\n4. **Radio Paradise Rock Mix 320k AAC** - Features an eclectic mix of alternative and rock music.\n5. **Soft Classic Rock Radio** - Plays classic rock and soft rock tunes.\n6. **WEOW FM 92.7** - A general rock station.\n7. **181.FM - Kickin' Country** - Mixes country with pop and rock elements.\n8. **Nostalgie New York** - Offers a variety of genres including classic rock and rock and roll.\n9. **metal rock radio** - Combines classic rock with metal.\n10. **1980s.FM** - Plays 80s classic hits and classic rock.\n\nEach station has its unique flavor and style, providing a rich listening experience for rock enthusiasts. Whether you're looking to relive the golden era of rock or explore its modern evolution, these stations have got you covered.",
+      "timestamp": "2026-01-01T19:05:10.073919",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Find 5 jazz stations from France",
+      "timestamp": "2026-01-01T19:06:07.911945",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "Found 5 radio stations:\n\n1. 📻 **Jazz Radio Blues**\n   🌍 France | 🗣️ french\n   🏷️ blues,jazz\n   🎧 MP3 @ 128kbps\n   ⭐ 57341 votes | 👆 337 clicks\n   🔗 http://jazzblues.ice.infomaniak.ch/jazzblues-high.mp3\n\n2. 📻 **Jazz Radio**\n   🌍 France | 🗣️ french\n   🏷️ jazz,soul\n   🎧 MP3 @ 192kbps\n   ⭐ 44061 votes | 👆 194 clicks\n   🔗 http://jazzradio.ice.infomaniak.ch/jazzradio-high.mp3\n\n3. 📻 **Jazz Radio Classic Jazz**\n   🌍 France | 🗣️ french\n   🏷️ classical,jazz\n   🎧 MP3 @ 128kbps\n   ⭐ 24559 votes | 👆 140 clicks\n   🔗 http://jazz-wr01.ice.infomaniak.ch/jazz-wr01-128.mp3\n\n4. 📻 **France Musique**\n   🌍 France | 🗣️ french\n   🏷️ classical,jazz,music,public radio,radio france\n   🎧 MP3 @ 128kbps\n   ⭐ 19228 votes | 👆 40 clicks\n   🔗 http://icecast.radiofrance.fr/francemusique-midfi.mp3\n\n5. 📻 **ABC Lounge Radio**\n   🌍 France | 🗣️ english,french\n   🏷️ ambient,chillout,easy listening,lounge,smooth jazz\n   🎧 MP3 @ 128kbps\n   ⭐ 14534 votes | 👆 131 clicks\n   🔗 https://eu1.fastcast4u.com/proxy/kpmxz?mp=/1\n\n",
+      "timestamp": "2026-01-01T19:06:20.117112",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "I found 5 jazz stations from France that you might enjoy:\n\n1. **Jazz Radio Blues** - This station blends jazz with blues and broadcasts in French. It's quite popular, with over 57,000 votes. You can listen to it [here](http://jazzblues.ice.infomaniak.ch/jazzblues-high.mp3).\n\n2. **Jazz Radio** - Offering a mix of jazz and soul, this station also broadcasts in French and has a high-quality stream. Check it out [here](http://jazzradio.ice.infomaniak.ch/jazzradio-high.mp3).\n\n3. **Jazz Radio Classic Jazz** - For a more classical jazz experience, tune into this station. It's another French-language option with a solid listener base. Listen [here](http://jazz-wr01.ice.infomaniak.ch/jazz-wr01-128.mp3).\n\n4. **France Musique** - This station provides a rich variety of classical music and jazz. It's part of Radio France and offers content in French. You can listen to it [here](http://icecast.radiofrance.fr/francemusique-midfi.mp3).\n\n5. **ABC Lounge Radio** - Broadcasting in both English and French, this station offers a chill mix of ambient, easy listening, and smooth jazz music. A perfect choice for relaxing. Tune in [here](https://eu1.fastcast4u.com/proxy/kpmxz?mp=/1).\n\nEach of these stations has something unique to offer for jazz lovers, from classic jazz tunes to blends with blues and soul. Enjoy exploring the sounds of jazz from France!",
+      "timestamp": "2026-01-01T19:06:20.138075",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "Find radio stations in XYZNonExistentCountry123",
+      "timestamp": "2026-01-01T19:07:16.956187",
+      "metadata": null
+    },
+    {
+      "role": "system",
+      "content": "No stations found matching criteria",
+      "timestamp": "2026-01-01T19:07:22.866777",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "It looks like we couldn't find any radio stations in \"XYZNonExistentCountry123,\" which, as the name suggests, might not be an actual country. If you're looking for radio stations from a specific country or genre, feel free to give me more details, and I'd be happy to help search for you. Whether you're interested in rock from the USA, jazz from France, or any other genre from around the world, I'm here to assist!",
+      "timestamp": "2026-01-01T19:07:22.885827",
+      "metadata": null
+    },
+    {
+      "role": "user",
+      "content": "radio",
+      "timestamp": "2026-01-01T19:08:23.664704",
+      "metadata": null
+    },
+    {
+      "role": "assistant",
+      "content": "I noticed you've been exploring various radio stations across different genres and countries. Is there a specific genre or country you're interested in right now? Whether it's finding more rock stations in the USA, jazz in France, or any other preference, I'm here to help. Let me know how I can assist you further!",
+      "timestamp": "2026-01-01T19:08:29.756595",
+      "metadata": null
+    }
+  ],
+  "summary": null,
+  "created_at": "2026-01-01T18:54:49.307508",
+  "updated_at": "2026-01-01T19:08:29.781473"
+}
